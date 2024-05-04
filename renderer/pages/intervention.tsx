@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography'
 import Link from '../components/Link'
 import { styled } from '@mui/material'
 import DateTimeIntervention from '../components/form/time'
+import People from '../components/form/people'
 
 const Root = styled('div')(({ theme }) => {
   return {
@@ -21,6 +22,8 @@ export default function NextPage() {
       </Head>
       <Root>
         <DateTimeIntervention/>
+        <People labelText='Pilote' />
+        <People labelText='Equipiers' />
       </Root>
     </React.Fragment>
   )
