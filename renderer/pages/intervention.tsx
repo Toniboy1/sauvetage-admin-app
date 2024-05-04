@@ -4,6 +4,7 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Link from '../components/Link'
 import { styled } from '@mui/material'
+import DateTimeIntervention from '../components/form/time'
 
 const Root = styled('div')(({ theme }) => {
   return {
@@ -19,18 +20,7 @@ export default function NextPage() {
         <title>Rapport d'intervention</title>
       </Head>
       <Root>
-        <Typography variant="h4" gutterBottom>
-          Material-UI
-        </Typography>
-        <Typography variant="subtitle1" gutterBottom>
-          with Nextron
-        </Typography>
-        <Typography gutterBottom>
-          <Link href="/home">Go to the home page</Link>
-        </Typography>
-        <Button variant="contained" color="primary">
-          Do nothing button
-        </Button>
+        <DateTimeIntervention/>
       </Root>
     </React.Fragment>
   )
