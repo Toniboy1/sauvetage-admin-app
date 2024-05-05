@@ -1,12 +1,12 @@
 import React from 'react'
 import Head from 'next/head'
-import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
-import Link from '../components/Link'
 import { styled } from '@mui/material'
-import DateTimeIntervention from '../components/form/time'
-import People from '../components/form/people'
+import DateTimeIntervention from '../components/time'
+import People from '../components/people'
 
+/**
+ * Root component for the intervention page.
+ */
 const Root = styled('div')(({ theme }) => {
   return {
     textAlign: 'center',
@@ -14,7 +14,12 @@ const Root = styled('div')(({ theme }) => {
   }
 })
 
-export default function NextPage() {
+/**
+ * Renders the Intervention page.
+ * 
+ * @returns The JSX element representing the Intervention page.
+ */
+export default function Intervention() {
   return (
     <React.Fragment>
       <Head>

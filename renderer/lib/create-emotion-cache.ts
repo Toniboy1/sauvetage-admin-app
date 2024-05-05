@@ -2,6 +2,10 @@ import createCache from '@emotion/cache'
 
 const isBrowser = typeof window !== 'undefined'
 
+/**
+ * Creates an Emotion cache for styling in the application.
+ * @returns The Emotion cache.
+ */
 export default function createEmotionCache() {
   let insertionPoint: HTMLElement
 

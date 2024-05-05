@@ -30,6 +30,9 @@ if (isProd) {
     mainWindow.webContents.openDevTools()
   }
 })()
+app.on('ready', async function () {
+
+});
 
 app.on('window-all-closed', () => {
   app.quit()
