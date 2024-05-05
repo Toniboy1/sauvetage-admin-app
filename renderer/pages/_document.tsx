@@ -14,6 +14,12 @@ import {
 } from '@mui/material-nextjs/v14-pagesRouter'
 import theme, { roboto } from '../lib/theme'
 
+/**
+ * Renders the custom document for the Next.js application.
+ *
+ * @param props - The props for the document component.
+ * @returns The rendered document component.
+ */
 export default function MyDocument(
   props: DocumentProps & DocumentHeadTagsProps
 ) {
@@ -32,7 +38,14 @@ export default function MyDocument(
     </Html>
   )
 }
-
+/**
+ * Retrieves the initial props for the document component.
+ *
+ * @static
+ * @async
+ * @param {DocumentContext} ctx - The document context.
+ * @returns {Promise<DocumentProps>} The final props for the document component.
+ */
 MyDocument.getInitialProps = async (ctx: DocumentContext) => {
   const finalProps = await documentGetInitialProps(ctx)
   return finalProps

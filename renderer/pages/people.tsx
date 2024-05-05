@@ -3,6 +3,9 @@ import Head from 'next/head'
 import { styled } from '@mui/material'
 import People from '../components/form/people'
 
+/**
+ * Root component for the People page.
+ */
 const Root = styled('div')(({ theme }) => {
   return {
     textAlign: 'center',
@@ -10,7 +13,12 @@ const Root = styled('div')(({ theme }) => {
   }
 })
 
-export default function NextPage() {
+/**
+ * Renders the PeoplePage component.
+ * 
+ * @returns The rendered PeoplePage component.
+ */
+export default function PeoplePage() {
   return (
     <React.Fragment>
       <Head>

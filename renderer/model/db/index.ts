@@ -1,5 +1,5 @@
-// db.js
 import Dexie from 'dexie';
+import { IPeople } from '../../components/people/types';
 
 /**
  * Sets up and manages the database using Dexie.js.
@@ -8,29 +8,25 @@ class Database extends Dexie {
     people: any;
     constructor() {
         super("local-storage");
-
-        // Define the database schema
         this.version(1).stores({
-            people: '++id, name' // Primary key 'id' is auto-incremented.
+            people: '++id, name' 
         });
 
-        // Define a more complex schema for future versions here
-        // this.version(2).stores({...});
-
-        // You can also define hooks if needed, for example, for logging:
         this.people.hook('creating', (primaryKey, obj, transaction) => {
             console.log(`A new person is being added: ${obj.name}`);
         });
     }
 
-    // Add methods to interact with your database more easily
-
     /**
      * Fetches all people from the database.
      * @returns {Promise<Array>} A promise that resolves with the list of all people.
      */
-    async getAllPeople(): Promise<Array<any>> {
+    async getAllPeople(): Promise<Array<IPeople>> {
         return this.people.toArray();
+    }
+
+    async getPerson(id: number): Promise<IPeople> {
+        return this.people.get(id);
     }
 
     /**

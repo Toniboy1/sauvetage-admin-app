@@ -1,16 +1,25 @@
 import { useAutocomplete } from '@mui/base/useAutocomplete';
-import  { StyledTag } from './Tag';
-import {  IPeopleExtended, IPropsPeople } from "./types";
+import { StyledTag } from './Tag';
+import { IPeopleExtended, IPropsPeople } from "./types";
 import Label from "./Label";
 import InputWrapper from "./InputWrapper";
 import Listbox from "./Listbox";
 import CheckIcon from '@mui/icons-material/Check';
 import CircularProgress from '@mui/material/CircularProgress';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import db from "../../model/db";
-const people = ({labelText}:IPropsPeople) => {
+import { Button } from '@mui/material';
+/**
+ * Renders a component for managing people.
+ * 
+ * @param {IPropsPeople} props - The component props.
+ * @returns {JSX.Element} The rendered component.
+ */
+const people = ({ labelText }: IPropsPeople) => {
     const [open, setOpen] = useState(false);
     const [options, setOptions] = useState<readonly IPeopleExtended[]>([]);
+    const [inputValue, setInputValue] = useState('');
+    const inputRef = useRef<HTMLInputElement>(null);
     const loading = open && options.length === 0;
     const {
         getRootProps,
@@ -29,10 +38,13 @@ const people = ({labelText}:IPropsPeople) => {
         multiple: true,
         options: options,
         getOptionLabel: (option) => option.name,
+        onInputChange: (event, newInputValue) => {
+            setInputValue(newInputValue);
+        },
         open,
         onClose: () => { setOpen(false) },
         onOpen: () => { setOpen(true); },
-        
+
     }
 
     );
@@ -41,11 +53,11 @@ const people = ({labelText}:IPropsPeople) => {
             return;
         }
         const fetchPeople = async () => {
-            const allPeople = await db.getAllPeople(); // Fetch all people from the database
+            const allPeople = await db.getAllPeople();
             const extendedOptions: IPeopleExtended[] = allPeople.map(person => ({
                 id: person.id,
                 name: person.name,
-                firstLetter: person.name.charAt(0) // Assuming you have names
+                firstLetter: person.name.charAt(0) 
             }));
             setOptions(extendedOptions);
         };
@@ -53,9 +65,26 @@ const people = ({labelText}:IPropsPeople) => {
         fetchPeople();
 
         return () => {
-            setOptions([]); // Optionally clear options when not open
+            setOptions([]);
         };
     }, [open]);
+
+    /**
+     * Handles the creation of a new person.
+     * 
+     * @returns {Promise<void>} A promise that resolves when the new person is created.
+     */
+    const handleCreateNew = async (): Promise<void> => {
+        const newName = inputValue.trim();
+        if (!newName) return;  
+        if (options.find(option => option.name.toLowerCase() === newName.toLowerCase())) return;
+        const idNewPerson = await db.addPerson(newName);
+        const newPerson = { id: idNewPerson, name: newName, firstLetter: newName.charAt(0) };
+        value.push(newPerson);
+        setOptions(prevOptions => [...prevOptions, { id: newPerson.id, name: newPerson.name, firstLetter: newName.charAt(0) }]);
+        setInputValue('');
+        if (inputRef.current) inputRef.current.value = '';
+    };
 
     return (
         <div>
@@ -69,16 +98,20 @@ const people = ({labelText}:IPropsPeople) => {
                 </InputWrapper>
             </div>
             {loading ? <CircularProgress /> : null}
-            {groupedOptions.length > 0 ? (
-                <Listbox {...getListboxProps()}>
-                    {(groupedOptions as typeof options).map((option, index) => (
-                        <li {...getOptionProps({ option, index })}>
-                            <span>{option.name}</span>
-                            <CheckIcon fontSize="small" />
-                        </li>
-                    ))}
-                </Listbox>
-            ) : null}
+
+            <Listbox {...getListboxProps()}>
+                {groupedOptions.map((option, index) => (
+                    <li {...getOptionProps({ option, index })}>
+                        <span>{option.name}</span>
+                        <CheckIcon fontSize="small" />
+                    </li>
+                ))}
+                {inputValue && (
+                    <li>
+                        <Button onClick={handleCreateNew} >Create "{inputValue}"</Button>
+                    </li>
+                )}
+            </Listbox>
         </div>
     )
 }

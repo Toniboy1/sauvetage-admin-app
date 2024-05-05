@@ -11,6 +11,9 @@ import Typography from '@mui/material/Typography'
 import Link from '../components/Link'
 import { styled } from '@mui/material'
 
+/**
+ * Root component for the home page.
+ */
 const Root = styled('div')(({ theme }) => {
   return {
     textAlign: 'center',
@@ -18,6 +21,11 @@ const Root = styled('div')(({ theme }) => {
   }
 })
 
+/**
+ * Renders the home page component.
+ *
+ * @returns The rendered home page component.
+ */
 export default function HomePage() {
   const [open, setOpen] = React.useState(false)
   const handleClose = () => setOpen(false)
@@ -56,7 +64,7 @@ export default function HomePage() {
           <Link href="/intervention">Go to the intervention form</Link>
         </Typography>
         <Typography gutterBottom>
-          <Link href="/people">Go to teh people form</Link>
+          <Link href="/people">Go to the people form</Link>
         </Typography>
         <Button variant="contained" color="secondary" onClick={handleClick}>
           Super Secret Password

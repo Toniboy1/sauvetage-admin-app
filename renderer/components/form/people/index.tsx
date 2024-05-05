@@ -6,7 +6,7 @@ import { IPeople } from '../../people/types';
 /**
  * Represents a component that displays a list of people and allows adding, editing, and deleting people.
  */
-const  PeopleComponent = ()=> {
+const PeopleComponent = ()=> {
     const [people, setPeople] = useState([]);
     const [open, setOpen] = useState(false);
     const [currentPerson, setCurrentPerson] = useState<IPeople>({ id: 0, name: ""});
@@ -98,7 +98,7 @@ const  PeopleComponent = ()=> {
                                 <TableCell>{person.name}</TableCell>
                                 <TableCell>
                                     <Button color="primary" onClick={() => handleClickOpen(person)}>Edit</Button>
-                                    <Button color="secondary" onClick={() => handleDeletePerson(person.id)}>Delete</Button>
+                                    <Button color="error" onClick={() => handleDeletePerson(person.id)}>Delete</Button>
                                 </TableCell>
                             </TableRow>
                         ))}
