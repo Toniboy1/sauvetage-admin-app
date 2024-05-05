@@ -4,8 +4,8 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Link from '../components/Link'
 import { styled } from '@mui/material'
-import DateTimeIntervention from '../components/form/time'
-import People from '../components/form/people'
+import DateTimeIntervention from '../components/time'
+import People from '../components/people'
 
 const Root = styled('div')(({ theme }) => {
   return {

@@ -1,6 +1,15 @@
 import { styled } from "@mui/material";
 import { autocompleteClasses } from '@mui/material/Autocomplete';
 
+/**
+ * Represents a styled unordered list component used as a listbox.
+ *
+ * @remarks
+ * The `ListBox` component is used to display a list of items in a dropdown-like interface.
+ * It provides styling for the list items and handles selection and focus states.
+ *
+ * @public
+ */
 const ListBox =  styled('ul')(
         ({ theme }) => `
         width: 300px;

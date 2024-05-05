@@ -7,6 +7,7 @@ import CssBaseline from '@mui/material/CssBaseline'
 import theme from '../lib/theme'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import AppNavBar from '../components/appbar'
 
 export default function MyApp(props: AppProps) {
   const { Component, pageProps } = props
@@ -18,6 +19,7 @@ export default function MyApp(props: AppProps) {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <AppNavBar />
         <Component {...pageProps} />
       </ThemeProvider>
       </LocalizationProvider>
