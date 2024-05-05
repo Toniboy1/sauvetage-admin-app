@@ -1,13 +1,19 @@
 import { AutocompleteGetTagProps } from "@mui/material";
 
+
 /**
- * Represents a person.
+ * Represents a person's data.
  */
-export interface IPeople {
-    id: number;
+export interface IPeopleData {
     name: string;
 }
 
+/**
+ * Represents a person.
+ */
+export interface IPeople extends IPeopleData {
+    id?: number;
+}
 /**
  * Represents an extended version of the IPeople interface.
  */

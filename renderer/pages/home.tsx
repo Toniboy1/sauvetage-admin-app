@@ -1,35 +1,34 @@
-import React from 'react'
-import Head from 'next/head'
-import Image from 'next/image'
-import Button from '@mui/material/Button'
-import Dialog from '@mui/material/Dialog'
-import DialogTitle from '@mui/material/DialogTitle'
-import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
-import DialogActions from '@mui/material/DialogActions'
-import Typography from '@mui/material/Typography'
-import Link from '../components/Link'
-import { styled } from '@mui/material'
+import React from "react";
+import Head from "next/head";
+import Image from "next/image";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
+import Typography from "@mui/material/Typography";
+import Link from "../components/Link";
+import { styled } from "@mui/material";
 
 /**
  * Root component for the home page.
  */
-const Root = styled('div')(({ theme }) => {
+const Root = styled("div")(({ theme }) => {
   return {
-    textAlign: 'center',
+    textAlign: "center",
     paddingTop: theme.spacing(4),
-  }
-})
+  };
+});
 
 /**
  * Renders the home page component.
- *
  * @returns The rendered home page component.
  */
 export default function HomePage() {
-  const [open, setOpen] = React.useState(false)
-  const handleClose = () => setOpen(false)
-  const handleClick = () => setOpen(true)
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => setOpen(false);
+  const handleClick = () => setOpen(true);
 
   return (
     <React.Fragment>
@@ -71,5 +70,5 @@ export default function HomePage() {
         </Button>
       </Root>
     </React.Fragment>
-  )
+  );
 }

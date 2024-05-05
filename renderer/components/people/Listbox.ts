@@ -1,23 +1,17 @@
 import { styled } from "@mui/material";
-import { autocompleteClasses } from '@mui/material/Autocomplete';
+import { autocompleteClasses } from "@mui/material/Autocomplete";
 
 /**
  * Represents a styled unordered list component used as a listbox.
- *
- * @remarks
- * The `ListBox` component is used to display a list of items in a dropdown-like interface.
- * It provides styling for the list items and handles selection and focus states.
- *
- * @public
  */
-const ListBox =  styled('ul')(
-        ({ theme }) => `
+const ListBox = styled("ul")(
+  ({ theme }) => `
         width: 300px;
         margin: 2px 0 0;
         padding: 0;
         position: absolute;
         list-style: none;
-        background-color: ${theme.palette.mode === 'dark' ? '#141414' : '#fff'};
+        background-color: ${theme.palette.mode === "dark" ? "#141414" : "#fff"};
         overflow: auto;
         max-height: 250px;
         border-radius: 4px;
@@ -38,7 +32,7 @@ const ListBox =  styled('ul')(
         }
       
         & li[aria-selected='true'] {
-          background-color: ${theme.palette.mode === 'dark' ? '#2b2b2b' : '#fafafa'};
+          background-color: ${theme.palette.mode === "dark" ? "#2b2b2b" : "#fafafa"};
           font-weight: 600;
       
           & svg {
@@ -47,7 +41,7 @@ const ListBox =  styled('ul')(
         }
       
         & li.${autocompleteClasses.focused} {
-          background-color: ${theme.palette.mode === 'dark' ? '#003b57' : '#e6f7ff'};
+          background-color: ${theme.palette.mode === "dark" ? "#003b57" : "#e6f7ff"};
           cursor: pointer;
       
           & svg {
@@ -55,5 +49,5 @@ const ListBox =  styled('ul')(
           }
         }
       `,
-      );
-export default ListBox
+);
+export default ListBox;

@@ -1,0 +1,43 @@
+{
+    "plugins": [
+        "jest",
+        "jsdoc",
+        "@saswatb/eslint-plugin-sort-sx-prop",
+        "tss-unused-classes",
+        "tss-unused-makestyles",
+        "mui-unused-classes"
+
+    ],
+    "rules": {
+        "jest/no-disabled-tests": "warn",
+        "jest/no-focused-tests": "error",
+        "jest/no-identical-title": "error",
+        "jest/prefer-to-have-length": "warn",
+        "jest/valid-expect": "error",
+        "tss-unused-classes/unused-classes": "warn",
+        "tss-unused-makestyles/unused-makestyles": "warn"
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "sourceType": "module",
+        "ecmaVersion": 2020,
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "env": {
+        "jest/globals": true
+    },
+    "extends": [
+        "plugin:jsdoc/recommended-typescript"
+    ],
+    "overrides": [
+        {
+          "files": ["tests/**/*"],
+          "plugins": ["jest"],
+          "env": {
+            "jest/globals": true
+          }
+        }
+      ]
+}

@@ -1,22 +1,21 @@
-import React from 'react'
-import Head from 'next/head'
-import Typography from '@mui/material/Typography'
-import { styled } from '@mui/material'
-import Link from '../components/Link'
+import React from "react";
+import Head from "next/head";
+import Typography from "@mui/material/Typography";
+import { styled } from "@mui/material";
+import Link from "../components/Link";
 
 /**
  * Root component for the error page.
  */
-const Root = styled('div')(({ theme }) => {
+const Root = styled("div")(({ theme }) => {
   return {
-    textAlign: 'center',
+    textAlign: "center",
     paddingTop: theme.spacing(4),
-  }
-})
+  };
+});
 
 /**
  * Renders the error page.
- *
  * @returns The JSX element representing the error page.
  */
 export default function ErrorPage() {
@@ -31,5 +30,5 @@ export default function ErrorPage() {
         </Typography>
       </Root>
     </React.Fragment>
-  )
+  );
 }
