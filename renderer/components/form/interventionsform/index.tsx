@@ -29,7 +29,6 @@ const FormInterventionsComponent = () => {
    */
   const loadFormInterventions = async () => {
     const allFormInterventions = await db.getAllFormInterventions();
-    console.log(allFormInterventions);
     setFormInterventions(allFormInterventions);
   };
 
@@ -56,9 +55,8 @@ const FormInterventionsComponent = () => {
    * @param formintervention - The formintervention data.
    */
   function handleEdit(formintervention: IInterventionFormData): void {
-    throw new Error("Function not implemented.");
+    document.location.href = "/intervention/" + formintervention.id;
   }
-  console.log(forminterventions);
   return (
     <div>
       <h1>FormInterventions</h1>
@@ -80,9 +78,6 @@ const FormInterventionsComponent = () => {
           </TableHead>
           <TableBody>
             {forminterventions.map((formintervention) => {
-              console.log(typeof formintervention.startedAt, formintervention.startedAt);
-              console.log(typeof formintervention.endedAt, formintervention.endedAt);
-              console.log(typeof formintervention.date, formintervention.date);
               return (
                 <TableRow key={formintervention.id}>
                   <TableCell>{formintervention.id}</TableCell>

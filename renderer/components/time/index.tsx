@@ -1,25 +1,29 @@
-import * as React from "react";
-
 import dayjs from "dayjs";
-
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { Card, CardContent, Grid, Stack, Typography } from "@mui/material";
 import { Controller, useFormContext } from "react-hook-form";
-import { useState } from "react";
+import { useEffect } from "react";
 
 /**
  * Component for the date and time of the intervention.
  * @returns The JSX element representing the date and time of the intervention.
  */
 const DateTimeIntervention = () => {
-  const { control } = useFormContext()
-  const valueStartedAt = dayjs();
-  const valueEndedAt = dayjs();
-  const valueDate = dayjs();
-  const [startedAt, setStartedAt] = useState(valueStartedAt);
-  const [endedAt, setEndedAt] = useState(valueEndedAt);
-  const [date, setDate] = useState(valueDate);
+  const { control, getValues, setValue } = useFormContext();
+
+  // Fetch initial values from form context and set them using setValue
+  useEffect(() => {
+    const initialStartedAt = getValues('startedAt');
+    const initialEndedAt = getValues('endedAt');
+    const initialDate = getValues('date');
+
+    if (initialStartedAt) setValue('startedAt', dayjs(initialStartedAt));
+    if (initialEndedAt) setValue('endedAt', dayjs(initialEndedAt));
+    if (initialDate) setValue('date', dayjs(initialDate));
+
+  }, [getValues, setValue]);
+
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
@@ -33,11 +37,7 @@ const DateTimeIntervention = () => {
                 control={control}
                 name="startedAt"
                 rules={{ required: true }}
-                defaultValue={valueStartedAt}
-                render={({ field }) => {
-                  return <TimePicker {...field} value={startedAt} onChange={setStartedAt} />;
-                }
-                }
+                render={({ field }) => <TimePicker {...field} />}
               />
             </Stack>
           </Grid>
@@ -50,11 +50,7 @@ const DateTimeIntervention = () => {
                 control={control}
                 name="endedAt"
                 rules={{ required: true }}
-                defaultValue={valueEndedAt}
-                render={({ field }) => {
-                  return <TimePicker {...field} value={endedAt} onChange={setEndedAt} />;
-                }
-                }
+                render={({ field }) => <TimePicker {...field} />}
               />
             </Stack>
           </Grid>
@@ -67,11 +63,7 @@ const DateTimeIntervention = () => {
                 control={control}
                 name="date"
                 rules={{ required: true }}
-                defaultValue={valueDate}
-                render={({ field }) => {
-                  return <DatePicker {...field} value={date} onChange={setDate} />;
-                }
-                }
+                render={({ field }) => <DatePicker {...field} />}
               />
             </Stack>
           </Grid>
@@ -79,5 +71,6 @@ const DateTimeIntervention = () => {
       </CardContent>
     </Card>
   );
-}
+};
+
 export default DateTimeIntervention;

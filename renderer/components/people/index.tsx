@@ -1,21 +1,22 @@
-import { IPeopleExtended, IPropsPeople } from "./types";
 import React, { useCallback, useEffect, useState } from "react";
 import db from "../../model/db";
 import { Autocomplete, TextField, Button } from "@mui/material";
-import { useFieldArray, useFormContext } from "react-hook-form";;
+import { useFieldArray, useFormContext } from "react-hook-form";
 import { debounce } from "lodash";
-
+import { IPeopleExtended, IPropsPeople } from "./types";
 
 const People = ({ peopleType }: IPropsPeople) => {
   const { control } = useFormContext();
   const { fields, append, remove } = useFieldArray({
     control,
     name: peopleType,
-    rules: {required: "Ce champ est requis", minLength: {value: 1, message: "Veuillez sélectionner au moins une personne"}}
+    keyName: "_id",
+    rules: {required: "Ce champ est requis", minLength: {value: 1, message: "Veuillez sélectionner au moins une personne"}},
   });
   const [options, setOptions] = useState<IPeopleExtended[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const fetchPeople = async () => {
       const people = await db.getAllPeople();
@@ -27,6 +28,7 @@ const People = ({ peopleType }: IPropsPeople) => {
     };
     fetchPeople();
   }, []);
+
   const debounceSearch = useCallback(debounce(async (input) => {
     setLoading(true);
     try {
@@ -40,61 +42,57 @@ const People = ({ peopleType }: IPropsPeople) => {
       setLoading(false);
     }
   }, 500), []);
-  const handleInputChange = (event, newInputValue) => {
+
+  const handleInputChange = useCallback((event, newInputValue) => {
     setInputValue(newInputValue);
     if (newInputValue) {
       debounceSearch(newInputValue);
     }
-  };
+  }, [debounceSearch]);
 
-  const handleAddPerson = async () => {
+  const handleAddPerson = useCallback(async () => {
     if (inputValue) {
       const newId = await db.addPerson(inputValue);
-      append({ id: newId, name: inputValue, firstLetter: inputValue.charAt(0) });
-      setInputValue("");  // Clear input after addition
-      setOptions(prev => [...prev, { id: newId, name: inputValue, firstLetter: inputValue.charAt(0) }]);
+      const newPerson = { id: newId, name: inputValue, firstLetter: inputValue.charAt(0) };
+      append(newPerson);
+      setInputValue("");
+      setOptions(prev => [...prev, newPerson]);
     }
-  };
+  }, [append, inputValue]);
 
   return (
     <Autocomplete
       multiple
       id={`${peopleType}-autocomplete`}
       options={options}
-      getOptionLabel={(option) => option.name}
+      getOptionLabel={(option) => option ? option.name : ''}
       loading={loading}
       inputValue={inputValue}
       onInputChange={handleInputChange}
+      value={fields.map(field => options.find(option => option.id === parseInt(field.id))).filter(option => option !== undefined)}
       onChange={(event, newValue) => {
-        if (newValue.length > fields.length) {
-          append(newValue[newValue.length - 1]);
-        } else {
-          const removedPerson = fields.find(field => !newValue.some(value => Number(field.id) === value.id));
-          if (removedPerson) {
-            remove(fields.findIndex(field => field.id === removedPerson.id));
+        const newValueSet = new Set(newValue.map(item => item.id));
+        fields.forEach((field, index) => {
+          if (!newValueSet.has(parseInt(field.id))) {
+            remove(index);
           }
-        }
+        });
+        newValue.forEach(item => {
+          if (!fields.some(field => parseInt(field.id) === item.id)) {
+            append(item);
+          }
+        });
       }}
       filterOptions={(options, params) => {
         const filtered = options.filter(option => option.name.toLowerCase().includes(params.inputValue.toLowerCase()));
         if (params.inputValue !== '' && !filtered.some(option => option.name === params.inputValue)) {
-          filtered.push({
-            id: 0,
-            name: params.inputValue,
-            firstLetter: params.inputValue.charAt(0)
-          });
+          filtered.push({ id: 0, name: params.inputValue, firstLetter: params.inputValue.charAt(0) });
         }
         return filtered;
       }}
       renderOption={(props, option) => (
         option.id === 0
-          ? (
-            <li {...props}>
-              <Button fullWidth onClick={handleAddPerson}>
-                Ajouter "{option.name}"
-              </Button>
-            </li>
-          )
+          ? <li {...props}><Button fullWidth onClick={handleAddPerson}>Ajouter "{option.name}"</Button></li>
           : <li {...props}>{option.name}</li>
       )}
       sx={{ width: 300 }}

@@ -530,7 +530,6 @@ export class Database extends Dexie {
      */
     async getAllFormInterventions(): Promise<Array<IInterventionFormData>> {
         const data = await  this.forminterventions.toArray()
-        console.log(data);
         return data.map(data => {
             return {
                 ...data,

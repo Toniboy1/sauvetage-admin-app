@@ -54,8 +54,6 @@ describe("Database", () => {
     }
     await db.updateFormIntervention(id, update);
     const updatedFormIntervention = await db.getFormIntervention(id);
-    console.log("updatedFormIntervention",updatedFormIntervention);
-    console.log("update",update);
     expect(updatedFormIntervention).toEqual({id: id,...update});
   });
 
