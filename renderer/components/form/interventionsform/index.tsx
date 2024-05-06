@@ -75,6 +75,7 @@ const FormInterventionsComponent = () => {
               <TableCell>Date</TableCell>
               <TableCell>Pilote</TableCell>
               <TableCell>Equipage</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -83,29 +84,30 @@ const FormInterventionsComponent = () => {
               console.log(typeof formintervention.endedAt, formintervention.endedAt);
               console.log(typeof formintervention.date, formintervention.date);
               return (
-              <TableRow key={formintervention.id}>
-                <TableCell>{formintervention.id}</TableCell>
-                <TableCell>{dayjs(formintervention.startedAt).tz("Europe/Zurich").format('YYYY-MM-DD HH:mm:ss')}</TableCell>
-                <TableCell>{dayjs(formintervention.endedAt).tz("Europe/Zurich").format('YYYY-MM-DD HH:mm:ss')}</TableCell>
-                <TableCell>{dayjs(formintervention.date).tz("Europe/Zurich").format('YYYY-MM-DD HH:mm:ss')}</TableCell>
-                <TableCell>{formintervention.pilote.map((p) => p.name).join(", ")}</TableCell>
-                <TableCell>{formintervention.crew.map((p) => p.name).join(", ")}</TableCell>
-                <TableCell>
-                  <Button
-                    color="primary"
-                    onClick={() => handleEdit(formintervention)}
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    color="error"
-                    onClick={() => handleDeleteFormIntervention(formintervention.id)}
-                  >
-                    Delete
-                  </Button>
-                </TableCell>
-              </TableRow>
-            )})}
+                <TableRow key={formintervention.id}>
+                  <TableCell>{formintervention.id}</TableCell>
+                  <TableCell>{formintervention.startedAt.tz("Europe/Zurich").format('HH:mm')}</TableCell>
+                  <TableCell>{formintervention.endedAt.tz("Europe/Zurich").format('HH:mm')}</TableCell>
+                  <TableCell>{formintervention.date.tz("Europe/Zurich").format('DD-MM-YYYY')}</TableCell>
+                  <TableCell>{formintervention.pilote.map((p) => p.name).join(", ")}</TableCell>
+                  <TableCell>{formintervention.crew.map((p) => p.name).join(", ")}</TableCell>
+                  <TableCell>
+                    <Button
+                      color="primary"
+                      onClick={() => handleEdit(formintervention)}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      color="error"
+                      onClick={() => handleDeleteFormIntervention(formintervention.id)}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              )
+            })}
 
           </TableBody>
         </Table>

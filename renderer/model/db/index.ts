@@ -7,7 +7,8 @@ import { IOtherMean } from "../../components/otherMeans/types";
 import { ICause } from "../../components/causes/types";
 import { IAction } from "../../components/actions/types";
 import { ICommonLocation } from "../../components/location/types";
-import { IInterventionFormData } from "../../components/reports/intervention/types";
+import { IInterventionData, IInterventionFormData } from "../../components/reports/intervention/types";
+import dayjs from "dayjs";
 
 /**
  * Sets up and manages the database using Dexie.js.
@@ -22,7 +23,7 @@ export class Database extends Dexie {
     causes: Dexie.Table<ICause, number>;
     actions: Dexie.Table<IAction, number>;
     commonlocations: Dexie.Table<ICommonLocation, number>;
-    forminterventions: Dexie.Table<IInterventionFormData, number>;
+    forminterventions: Dexie.Table<IInterventionData, number>;
     /**
      * Represents the database index.
      * @param isTest - Indicates whether the database is for testing purposes.
@@ -38,7 +39,7 @@ export class Database extends Dexie {
             causes: '++id, &name',
             actions: '++id, &name',
             commonlocations: '++id, &name',
-            forminterventions: '++id, startedAt, endedAt, date, pilote, crew'
+            forminterventions: '++id, date'
         });
 
     }
@@ -528,7 +529,17 @@ export class Database extends Dexie {
      * @returns A promise that resolves with the list of all forminterventions.
      */
     async getAllFormInterventions(): Promise<Array<IInterventionFormData>> {
-        return this.forminterventions.toArray() as Promise<Array<IInterventionFormData>>;
+        const data = await  this.forminterventions.toArray()
+        console.log(data);
+        return data.map(data => {
+            return {
+                ...data,
+                startedAt: dayjs(data.startedAt),
+                endedAt: dayjs(data.endedAt),
+                date: dayjs(data.date),
+            }
+        }
+        );
     }
 
     /**
@@ -551,7 +562,16 @@ export class Database extends Dexie {
      * @returns A promise that resolves with the formintervention.
      */
     async getFormIntervention(id: number): Promise<IInterventionFormData> {
-        return this.forminterventions.get(id);
+        const data =  await  this.forminterventions.get(id);
+        if (!data) {
+            return undefined
+        }
+        return {
+            ...data,
+            startedAt: dayjs(data.startedAt),
+            endedAt: dayjs(data.endedAt),
+            date: dayjs(data.date),
+        };
     }
 
     /**
@@ -560,7 +580,12 @@ export class Database extends Dexie {
      * @returns A promise that resolves with the new formintervention's ID.
      */
     async addFormIntervention(formintervention: IInterventionFormData): Promise<number> {
-        return this.forminterventions.add(formintervention);
+        return this.forminterventions.add({
+            ...formintervention,
+            startedAt: formintervention.startedAt.toISOString(), // Convert Day.js object to ISO string
+            endedAt: formintervention.endedAt.toISOString(),
+            date: formintervention.date.toISOString(),
+        });
     }
 
     /**
@@ -570,8 +595,20 @@ export class Database extends Dexie {
      * @returns A promise that resolves with the formintervention's ID.
      */
     async updateFormIntervention(id: number, formintervention: IInterventionFormData): Promise<number> {
-        const changes: UpdateSpec<IInterventionFormData> = { ...formintervention };
-        return this.forminterventions.update(id, changes);
+        const changes: UpdateSpec<IInterventionData> = {
+            pilote: formintervention.pilote,
+            crew: formintervention.crew,
+        }
+        if (formintervention.startedAt) {
+            changes.startedAt = formintervention.startedAt.toISOString();
+        }
+        if (formintervention.endedAt) {
+            changes.endedAt = formintervention.endedAt.toISOString();
+        }
+        if (formintervention.date) {
+            changes.date = formintervention.date.toISOString();
+        }
+        return await this.forminterventions.update(id, changes);
     }
 
     /**

@@ -1,6 +1,8 @@
 import dayjs from "dayjs";
 import { Database } from "./index";
 import { describe, expect, test, beforeEach } from "@jest/globals";
+import { IIntervention } from "../../components/interventions/types";
+import { IInterventionFormData } from "../../components/reports/intervention/types";
 /**
  * Test suite for the Database module.
  */
@@ -22,9 +24,9 @@ describe("Database", () => {
       startedAt: dayjs(),
       endedAt: dayjs(),
       date: dayjs(),
-      pilote: [{id: 1, name: "John Doe"}],
-      crew: [{id: 2, name: "Jane Smith"}, {id: 3, name: "Bob Johnson"}]
-    
+      pilote: [{ id: 1, name: "John Doe" }],
+      crew: [{ id: 2, name: "Jane Smith" }, { id: 3, name: "Bob Johnson" }]
+
     }
     const id = await db.addFormIntervention(input);
     const formintervention = await db.getFormIntervention(id);
@@ -39,17 +41,22 @@ describe("Database", () => {
       startedAt: dayjs(),
       endedAt: dayjs(),
       date: dayjs(),
-      pilote: [{id: 1, name: "John Doe"}],
-      crew: [{id: 2, name: "Jane Smith"}, {id: 3, name: "Bob Johnson"}]
-    
+      pilote: [{ id: 1, name: "John Doe" }],
+      crew: [{ id: 2, name: "Jane Smith" }, { id: 3, name: "Bob Johnson" }]
     }
     const id = await db.addFormIntervention(input);
-    input.pilote= [{id: 6, name: "John Doe6"}],
-    input.crew= [{id: 4, name: "Jane Smith4"}, {id: 5, name: "Bob Johnson5"}]
-    await db.updateFormIntervention(id, input);
+    const update = {
+      startedAt: input.startedAt,
+      endedAt: input.endedAt,
+      date: input.date,
+      pilote: [{ id: 6, name: "John Doe6" }],
+      crew: [{ id: 4, name: "Jane Smith4" }, { id: 5, name: "Bob Johnson5" }]
+    }
+    await db.updateFormIntervention(id, update);
     const updatedFormIntervention = await db.getFormIntervention(id);
-
-    expect(updatedFormIntervention).toEqual(input);
+    console.log("updatedFormIntervention",updatedFormIntervention);
+    console.log("update",update);
+    expect(updatedFormIntervention).toEqual({id: id,...update});
   });
 
   /**
@@ -60,9 +67,9 @@ describe("Database", () => {
       startedAt: dayjs(),
       endedAt: dayjs(),
       date: dayjs(),
-      pilote: [{id: 1, name: "John Doe"}],
-      crew: [{id: 2, name: "Jane Smith"}, {id: 3, name: "Bob Johnson"}]
-    
+      pilote: [{ id: 1, name: "John Doe" }],
+      crew: [{ id: 2, name: "Jane Smith" }, { id: 3, name: "Bob Johnson" }]
+
     }
     const id = await db.addFormIntervention(input);
     await db.deleteFormIntervention(id);
@@ -79,30 +86,32 @@ describe("Database", () => {
         startedAt: dayjs(),
         endedAt: dayjs(),
         date: dayjs(),
-        pilote: [{id: 1, name: "John Doe"}],
-        crew: [{id: 2, name: "Jane Smith"}, {id: 3, name: "Bob Johnson"}]
+        pilote: [{ id: 1, name: "John Doe" }],
+        crew: [{ id: 2, name: "Jane Smith" }, { id: 3, name: "Bob Johnson" }]
       },
       {
         startedAt: dayjs(),
         endedAt: dayjs(),
         date: dayjs(),
-        pilote: [{id: 4, name: "John Doe4"}],
-        crew: [{id: 5, name: "Jane Smith5"}, {id: 6, name: "Bob Johnson6"}]
+        pilote: [{ id: 4, name: "John Doe4" }],
+        crew: [{ id: 5, name: "Jane Smith5" }, { id: 6, name: "Bob Johnson6" }]
       },
       {
         startedAt: dayjs(),
         endedAt: dayjs(),
         date: dayjs(),
-        pilote: [{id: 7, name: "John Doe7"}],
-        crew: [{id: 8, name: "Jane Smith8"}, {id: 9, name: "Bob Johnson9"}]
+        pilote: [{ id: 7, name: "John Doe7" }],
+        crew: [{ id: 8, name: "Jane Smith8" }, { id: 9, name: "Bob Johnson9" }]
       }
     ];
-    for (const formintervention of forminterventions) {
-      await db.addFormIntervention(formintervention);
+    let result: IInterventionFormData[] = [];
+    for (let i = 0; i < forminterventions.length; i++) {
+      const id = await db.addFormIntervention(forminterventions[i]);
+      result.push( { id, ...forminterventions[i] });
     }
     const allFormInterventions = await db.getAllFormInterventions();
     expect(allFormInterventions).toHaveLength(forminterventions.length);
-    expect(allFormInterventions).toEqual(expect.arrayContaining(forminterventions));
+    expect(allFormInterventions).toEqual(expect.arrayContaining(result));
   });
   /**
    * Test case for clearing all forminterventions from the database.
@@ -113,22 +122,22 @@ describe("Database", () => {
         startedAt: dayjs(),
         endedAt: dayjs(),
         date: dayjs(),
-        pilote: [{id: 1, name: "John Doe"}],
-        crew: [{id: 2, name: "Jane Smith"}, {id: 3, name: "Bob Johnson"}]
+        pilote: [{ id: 1, name: "John Doe" }],
+        crew: [{ id: 2, name: "Jane Smith" }, { id: 3, name: "Bob Johnson" }]
       },
       {
         startedAt: dayjs(),
         endedAt: dayjs(),
         date: dayjs(),
-        pilote: [{id: 4, name: "John Doe4"}],
-        crew: [{id: 5, name: "Jane Smith5"}, {id: 6, name: "Bob Johnson6"}]
+        pilote: [{ id: 4, name: "John Doe4" }],
+        crew: [{ id: 5, name: "Jane Smith5" }, { id: 6, name: "Bob Johnson6" }]
       },
       {
         startedAt: dayjs(),
         endedAt: dayjs(),
         date: dayjs(),
-        pilote: [{id: 7, name: "John Doe7"}],
-        crew: [{id: 8, name: "Jane Smith8"}, {id: 9, name: "Bob Johnson9"}]
+        pilote: [{ id: 7, name: "John Doe7" }],
+        crew: [{ id: 8, name: "Jane Smith8" }, { id: 9, name: "Bob Johnson9" }]
       }
     ];
     for (const formintervention of forminterventions) {
@@ -147,9 +156,9 @@ describe("Database", () => {
       startedAt: dayjs(),
       endedAt: dayjs(),
       date: dayjs(),
-      pilote: [{id: 1, name: "John Doe"}],
-      crew: [{id: 2, name: "Jane Smith"}, {id: 3, name: "Bob Johnson"}]
-    
+      pilote: [{ id: 1, name: "John Doe" }],
+      crew: [{ id: 2, name: "Jane Smith" }, { id: 3, name: "Bob Johnson" }]
+
     }
     const id = await db.addFormIntervention(input);
     const formintervention = await db.getFormIntervention(id);
