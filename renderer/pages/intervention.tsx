@@ -6,6 +6,7 @@ import People from "../components/people";
 import Alarm from "../components/alarm";
 import Severity from "../components/severities";
 import InterventionTypes from "../components/interventions";
+import RescuedData from "../components/recuscued";
 
 /**
  * Root component for the intervention page.
@@ -52,6 +53,7 @@ export default function Intervention() {
           <Typography variant="h5">Type d'intervention : </Typography>
           <InterventionTypes labelText=""></InterventionTypes>
         </Stack>
+        <RescuedData />
       </Root>
     </React.Fragment>
   );
