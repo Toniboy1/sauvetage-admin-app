@@ -47,6 +47,10 @@ const pages = [
   {
     name: "Lieux communs",
     href: "/common_locations"
+  },
+  {
+    name: "Liste des rapports d'interventions",
+    href: "/forms_interventions"
   }
 ];
 

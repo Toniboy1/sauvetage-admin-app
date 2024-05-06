@@ -2,17 +2,16 @@ import { IPeopleExtended, IPropsPeople } from "./types";
 import React, { useCallback, useEffect, useState } from "react";
 import db from "../../model/db";
 import { Autocomplete, TextField, Button } from "@mui/material";
-import { useFieldArray, useFormContext } from "react-hook-form";
-import { createFilterOptions } from "@mui/material/Autocomplete";
-import {debounce } from "lodash";
+import { useFieldArray, useFormContext } from "react-hook-form";;
+import { debounce } from "lodash";
 
-const filter = createFilterOptions<IPeopleExtended>();
 
 const People = ({ peopleType }: IPropsPeople) => {
   const { control } = useFormContext();
-  const { fields, append ,remove} = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
-    name: peopleType
+    name: peopleType,
+    rules: {required: "Ce champ est requis", minLength: {value: 1, message: "Veuillez sélectionner au moins une personne"}}
   });
   const [options, setOptions] = useState<IPeopleExtended[]>([]);
   const [inputValue, setInputValue] = useState("");
@@ -27,7 +26,7 @@ const People = ({ peopleType }: IPropsPeople) => {
       })));
     };
     fetchPeople();
-  },[]);
+  }, []);
   const debounceSearch = useCallback(debounce(async (input) => {
     setLoading(true);
     try {
@@ -67,7 +66,14 @@ const People = ({ peopleType }: IPropsPeople) => {
       inputValue={inputValue}
       onInputChange={handleInputChange}
       onChange={(event, newValue) => {
-        append(newValue[newValue.length - 1]);
+        if (newValue.length > fields.length) {
+          append(newValue[newValue.length - 1]);
+        } else {
+          const removedPerson = fields.find(field => !newValue.some(value => Number(field.id) === value.id));
+          if (removedPerson) {
+            remove(fields.findIndex(field => field.id === removedPerson.id));
+          }
+        }
       }}
       filterOptions={(options, params) => {
         const filtered = options.filter(option => option.name.toLowerCase().includes(params.inputValue.toLowerCase()));
@@ -91,6 +97,7 @@ const People = ({ peopleType }: IPropsPeople) => {
           )
           : <li {...props}>{option.name}</li>
       )}
+      sx={{ width: 300 }}
       renderInput={(params) => (
         <TextField {...params} label={peopleType} placeholder="Select or add people" variant="outlined" />
       )}

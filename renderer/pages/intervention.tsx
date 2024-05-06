@@ -16,7 +16,9 @@ import CommonLocation from "../components/location/commons";
 import dynamic from "next/dynamic";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form"
 import { IInterventionFormData } from "../components/reports/intervention/types";
-import { ErrorMessage } from "@hookform/error-message"
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
+import db from "../model/db";
 const Remark = dynamic(() => import("../components/remark"), { ssr: false });
 /**
  * Root component for the intervention page.
@@ -28,14 +30,17 @@ const Root = styled("div")(({ theme }) => {
   };
 });
 
+
+
 /**
  * Renders the Intervention page.
  * @returns The JSX element representing the Intervention page.
  */
 export default function Intervention() {
   const methods = useForm<IInterventionFormData>()
-  const onSubmit: SubmitHandler<IInterventionFormData> = (data) => {
+  const onSubmit: SubmitHandler<IInterventionFormData> = async (data) => {
     console.log("Submitting data", data);
+    await db.addFormIntervention(data);
   }
   return (
     <React.Fragment>
@@ -45,11 +50,7 @@ export default function Intervention() {
       <Root>
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
-            <ErrorMessage
-              errors={methods.formState.errors}
-              name="singleErrorInput"
-              render={({ message }) => <p>{message}</p>}
-            />
+          {methods.formState.errors && JSON.stringify(methods.formState.errors)}
             <DateTimeIntervention />
             <Stack
               spacing={2}

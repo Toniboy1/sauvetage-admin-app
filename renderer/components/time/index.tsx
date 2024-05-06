@@ -6,6 +6,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { Card, CardContent, Grid, Stack, Typography } from "@mui/material";
 import { Controller, useFormContext } from "react-hook-form";
+import { useState } from "react";
 
 /**
  * Component for the date and time of the intervention.
@@ -16,9 +17,9 @@ const DateTimeIntervention = () => {
   const valueStartedAt = dayjs();
   const valueEndedAt = dayjs();
   const valueDate = dayjs();
-  const [startedAt, setStartedAt] = React.useState(valueStartedAt);
-  const [endedAt, setEndedAt] = React.useState(valueEndedAt);
-  const [date, setDate] = React.useState(valueDate);
+  const [startedAt, setStartedAt] = useState(valueStartedAt);
+  const [endedAt, setEndedAt] = useState(valueEndedAt);
+  const [date, setDate] = useState(valueDate);
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>

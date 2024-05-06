@@ -1,4 +1,4 @@
-import Dexie from "dexie";
+import Dexie, { UpdateSpec } from "dexie";
 import { IPeople } from "../../components/people/types";
 import { IAlarm } from "../../components/alarm/types";
 import { ISeverity } from "../../components/severities/types";
@@ -7,6 +7,7 @@ import { IOtherMean } from "../../components/otherMeans/types";
 import { ICause } from "../../components/causes/types";
 import { IAction } from "../../components/actions/types";
 import { ICommonLocation } from "../../components/location/types";
+import { IInterventionFormData } from "../../components/reports/intervention/types";
 
 /**
  * Sets up and manages the database using Dexie.js.
@@ -21,6 +22,7 @@ export class Database extends Dexie {
     causes: Dexie.Table<ICause, number>;
     actions: Dexie.Table<IAction, number>;
     commonlocations: Dexie.Table<ICommonLocation, number>;
+    forminterventions: Dexie.Table<IInterventionFormData, number>;
     /**
      * Represents the database index.
      * @param isTest - Indicates whether the database is for testing purposes.
@@ -36,6 +38,7 @@ export class Database extends Dexie {
             causes: '++id, &name',
             actions: '++id, &name',
             commonlocations: '++id, &name',
+            forminterventions: '++id, startedAt, endedAt, date, pilote, crew'
         });
 
     }
@@ -520,6 +523,67 @@ export class Database extends Dexie {
             throw error;
         }
     }
+    /**
+     * Fetches all forminterventions from the database.
+     * @returns A promise that resolves with the list of all forminterventions.
+     */
+    async getAllFormInterventions(): Promise<Array<IInterventionFormData>> {
+        return this.forminterventions.toArray() as Promise<Array<IInterventionFormData>>;
+    }
+
+    /**
+     * Deletes all forminterventions from the database.
+     */
+    async clearFormInterventions() {
+        try {
+            await this.transaction('rw', this.forminterventions, async () => {
+                await this.forminterventions.clear();
+            });
+        } catch (error) {
+            console.error("Failed to clear the forminterventions table:", error);
+            throw error;
+        }
+    }
+
+    /**
+     * Fetches a formintervention from the database.
+     * @param id The ID of the formintervention to fetch.
+     * @returns A promise that resolves with the formintervention.
+     */
+    async getFormIntervention(id: number): Promise<IInterventionFormData> {
+        return this.forminterventions.get(id);
+    }
+
+    /**
+     * Adds a new formintervention to the database.
+     * @param formintervention The formintervention to add.
+     * @returns A promise that resolves with the new formintervention's ID.
+     */
+    async addFormIntervention(formintervention: IInterventionFormData): Promise<number> {
+        return this.forminterventions.add(formintervention);
+    }
+
+    /**
+     * Updates a formintervention in the database.
+     * @param id The ID of the formintervention to update.
+     * @param formintervention The new formintervention data.
+     * @returns A promise that resolves with the formintervention's ID.
+     */
+    async updateFormIntervention(id: number, formintervention: IInterventionFormData): Promise<number> {
+        const changes: UpdateSpec<IInterventionFormData> = { ...formintervention };
+        return this.forminterventions.update(id, changes);
+    }
+
+    /**
+     * Deletes a formintervention from the database.
+     * @param id The ID of the formintervention to delete.
+     * @returns A promise that resolves when the formintervention is deleted.
+     */
+    async deleteFormIntervention(id: number): Promise<void> {
+        return this.forminterventions.delete(id);
+    }
+
+
 
     /**
      * Deletes all data from the database.
@@ -533,6 +597,7 @@ export class Database extends Dexie {
         await this.clearCauses();
         await this.clearActions();
         await this.clearCommonLocations();
+        await this.clearFormInterventions();
     }
 }
 
