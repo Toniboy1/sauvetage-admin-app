@@ -13,7 +13,7 @@
     "fix": "eslint . --ext .ts,.tsx --fix",
     "prettier": "prettier --write .",
     "postinstall": "electron-builder install-app-deps",
-    "doc": "npx typedoc --entryPointStrategy expand ./renderer"
+    "doc": "npx typedoc" 
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
