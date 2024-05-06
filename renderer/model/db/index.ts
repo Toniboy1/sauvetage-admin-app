@@ -4,6 +4,7 @@ import { IAlarm } from "../../components/alarm/types";
 import { ISeverity } from "../../components/severities/types";
 import { IIntervention } from "../../components/interventions/types";
 import { IOtherMean } from "../../components/otherMeans/types";
+import { ICause } from "../../components/causes/types";
 
 /**
  * Sets up and manages the database using Dexie.js.
@@ -14,6 +15,7 @@ export class Database extends Dexie {
     severities: Dexie.Table<ISeverity, number>;
     interventions: Dexie.Table<IIntervention, number>;
     otherMeans: Dexie.Table<IOtherMean, number>;
+    causes: Dexie.Table<ICause, number>;
     /**
      * Represents the database index.
      * @param isTest - Indicates whether the database is for testing purposes.
@@ -26,6 +28,7 @@ export class Database extends Dexie {
             severities: '++id, &name',
             interventions: '++id, &name',
             otherMeans: '++id, &name',
+            causes: '++id, &name',
         });
 
     }
@@ -328,6 +331,64 @@ export class Database extends Dexie {
             throw error;
         }
     }
+    /**
+     * Fetches an cause from the database.
+     * @param id The ID of the cause to fetch.
+     * @returns A promise that resolves with the cause.
+     */
+    async getCause(id: number): Promise<ICause> {
+        return this.causes.get(id);
+    }
+
+    /**
+     * Adds a new cause to the database.
+     * @param name The name of the cause to add.
+     * @returns A promise that resolves with the new cause's ID.
+     */
+    async addCause(name: string): Promise<number> {
+        return this.causes.add({
+            name: name
+        });
+    }
+
+    /**
+     * Updates an cause's name in the database.
+     * @param id The ID of the cause to update.
+     * @param name The new name for the cause.
+     * @returns A promise that resolves with the cause's ID.
+     */
+    async updateCause(id: number, name: string): Promise<number> {
+        return this.causes.update(id, { name });
+    }
+    /**
+     * Deletes an cause from the database.
+     * @param id The ID of the cause to delete.
+     * @returns A promise that resolves when the cause is deleted.
+     */
+    async deleteCause(id: number): Promise<void> {
+        return this.causes.delete(id);
+    }
+    /**
+     * Fetches all alarms from the database.
+     * @returns A promise that resolves with the list of all alarms.
+     */
+    async getAllCauses(): Promise<Array<ICause>> {
+        return this.causes.toArray() as Promise<Array<ICause>>;
+    }
+
+    /**
+     * Deletes all causes from the database.
+     */
+    async clearCauses() {
+        try {
+            await this.transaction('rw', this.causes, async () => {
+                await this.causes.clear();
+            });
+        } catch (error) {
+            console.error("Failed to clear the causes table:", error);
+            throw error;
+        }
+    }
 
     /**
      * Deletes all data from the database.
@@ -338,6 +399,7 @@ export class Database extends Dexie {
         await this.clearSeverities();
         await this.clearInterventions();
         await this.clearOtherMeans();
+        await this.clearCauses();
     }
 }
 

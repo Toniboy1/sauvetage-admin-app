@@ -35,6 +35,10 @@ const pages = [
   {
     name: "Types de moyens supplémentaires",
     href: "/other_means"
+  },
+  {
+    name: "Types de causes",
+    href: "/causes"
   }
 ];
 

@@ -8,6 +8,7 @@ import Severity from "../components/severities";
 import InterventionTypes from "../components/interventions";
 import OtherMean from "../components/otherMeans";
 import RescuedData from "../components/recuscued";
+import Causes from "../components/causes";
 
 /**
  * Root component for the intervention page.
@@ -61,6 +62,10 @@ export default function Intervention() {
           </div>
         </Stack>
         <RescuedData />
+        <Stack spacing={2} direction={"row"} justifyContent="center" alignItems="center">
+          <Typography variant="h5">Cause : </Typography>
+          <Causes labelText="" />
+        </Stack>
       </Root>
     </React.Fragment>
   );
