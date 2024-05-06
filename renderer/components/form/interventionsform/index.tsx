@@ -57,6 +57,14 @@ const FormInterventionsComponent = () => {
   function handleEdit(formintervention: IInterventionFormData): void {
     document.location.href = "/intervention/" + formintervention.id;
   }
+
+  /**
+   *  redirect to the view formintervention page
+   * @param formintervention - The formintervention data.
+   */
+  function handleView(formintervention: IInterventionFormData): void {
+    document.location.href = "/print/intervention/" + formintervention.id;
+  }
   return (
     <div>
       <h1>FormInterventions</h1>
@@ -87,6 +95,12 @@ const FormInterventionsComponent = () => {
                   <TableCell>{formintervention.pilote.map((p) => p.name).join(", ")}</TableCell>
                   <TableCell>{formintervention.crew.map((p) => p.name).join(", ")}</TableCell>
                   <TableCell>
+                  <Button
+                      color="primary"
+                      onClick={() => handleView(formintervention)}
+                    >
+                      View
+                    </Button>
                     <Button
                       color="primary"
                       onClick={() => handleEdit(formintervention)}
