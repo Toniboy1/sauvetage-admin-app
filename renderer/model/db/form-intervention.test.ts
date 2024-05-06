@@ -18,58 +18,53 @@ describe("Database", () => {
    * Test case for adding a new formintervention to the database.
    */
   test("addFormIntervention should add a new formintervention to the database", async () => {
-
-    const id = await db.addFormIntervention({ 
+    const input = {
       startedAt: dayjs(),
       endedAt: dayjs(),
       date: dayjs(),
       pilote: [{id: 1, name: "John Doe"}],
       crew: [{id: 2, name: "Jane Smith"}, {id: 3, name: "Bob Johnson"}]
-    });
+    
+    }
+    const id = await db.addFormIntervention(input);
     const formintervention = await db.getFormIntervention(id);
-    expect(formintervention).toEqual({ id, name });
+    expect(formintervention).toEqual({ id, ...input });
   });
 
   /**
    * Test case for updating a formintervention's name in the database.
    */
   test("updateFormIntervention should update a formintervention's name in the database", async () => {
-    const id = await db.addFormIntervention({
+    const input = {
       startedAt: dayjs(),
       endedAt: dayjs(),
       date: dayjs(),
       pilote: [{id: 1, name: "John Doe"}],
       crew: [{id: 2, name: "Jane Smith"}, {id: 3, name: "Bob Johnson"}]
     
-    });
-    const update = {
-
-      startedAt: dayjs(),
-      endedAt: dayjs(),
-      date: dayjs(),
-      pilote: [{id: 6, name: "John Doe6"}],
-      crew: [{id: 4, name: "Jane Smith4"}, {id: 5, name: "Bob Johnson5"}]
-    
     }
-    await db.updateFormIntervention(id, update);
+    const id = await db.addFormIntervention(input);
+    input.pilote= [{id: 6, name: "John Doe6"}],
+    input.crew= [{id: 4, name: "Jane Smith4"}, {id: 5, name: "Bob Johnson5"}]
+    await db.updateFormIntervention(id, input);
     const updatedFormIntervention = await db.getFormIntervention(id);
 
-    expect(updatedFormIntervention).toEqual(update);
+    expect(updatedFormIntervention).toEqual(input);
   });
 
   /**
    * Test case for deleting a formintervention from the database.
    */
   test("deleteFormIntervention should delete a formintervention from the database", async () => {
-
-    const id = await db.addFormIntervention({
+    const input = {
       startedAt: dayjs(),
       endedAt: dayjs(),
       date: dayjs(),
       pilote: [{id: 1, name: "John Doe"}],
       crew: [{id: 2, name: "Jane Smith"}, {id: 3, name: "Bob Johnson"}]
     
-    });
+    }
+    const id = await db.addFormIntervention(input);
     await db.deleteFormIntervention(id);
     const deletedFormIntervention = await db.getFormIntervention(id);
     expect(deletedFormIntervention).toBeUndefined();
@@ -148,21 +143,18 @@ describe("Database", () => {
    * Test case for fetching a formintervention from the database.
    */
   test("getFormIntervention should fetch a formintervention from the database", async () => {
-    const id = await db.addFormIntervention({
+    const input = {
       startedAt: dayjs(),
       endedAt: dayjs(),
       date: dayjs(),
       pilote: [{id: 1, name: "John Doe"}],
       crew: [{id: 2, name: "Jane Smith"}, {id: 3, name: "Bob Johnson"}]
     
-    });
+    }
+    const id = await db.addFormIntervention(input);
     const formintervention = await db.getFormIntervention(id);
     expect(formintervention).toEqual({
-      startedAt: dayjs(),
-      endedAt: dayjs(),
-      date: dayjs(),
-      pilote: [{id: 1, name: "John Doe"}],
-      crew: [{id: 2, name: "Jane Smith"}, {id: 3, name: "Bob Johnson"}],
+      ...input,
       id: id
     })
   });
