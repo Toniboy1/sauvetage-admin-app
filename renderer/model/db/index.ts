@@ -2,6 +2,7 @@ import Dexie from "dexie";
 import { IPeople } from "../../components/people/types";
 import { IAlarm } from "../../components/alarm/types";
 import { ISeverity } from "../../components/severities/types";
+import { IIntervention } from "../../components/interventions/types";
 
 /**
  * Sets up and manages the database using Dexie.js.
@@ -10,6 +11,7 @@ export class Database extends Dexie {
     people: Dexie.Table<IPeople, number>;
     alarms: Dexie.Table<IAlarm, number>;
     severities: Dexie.Table<ISeverity, number>;
+    interventions: Dexie.Table<IIntervention, number>;
     /**
      * Represents the database index.
      * @param isTest - Indicates whether the database is for testing purposes.
@@ -19,7 +21,8 @@ export class Database extends Dexie {
         this.version(1).stores({
             people: '++id, &name',
             alarms: '++id, &name',
-            severities: '++id, &name'
+            severities: '++id, &name',
+            interventions: '++id, &name',
         });
 
     }
@@ -142,14 +145,7 @@ export class Database extends Dexie {
         return this.alarms.delete(id);
     }
 
-    /**
-     * Deletes all data from the database.
-     */
-    async clearAll() {
-        await this.clearPeople();
-        await this.clearAlarms();
-        await this.clearSeverities();
-    }
+
 
     /**
      * Fetches all severities from the database.
@@ -210,7 +206,75 @@ export class Database extends Dexie {
     async deleteSeverity(id: number): Promise<void> {
         return this.severities.delete(id);
     }
-    
+    /**
+     * Fetches all alarms from the database.
+     * @returns A promise that resolves with the list of all alarms.
+     */
+    async getAllInterventions(): Promise<Array<IIntervention>> {
+        return this.interventions.toArray() as Promise<Array<IIntervention>>;
+    }
+
+    /**
+     * Deletes all interventions from the database.
+     */
+    async clearInterventions() {
+        try {
+            await this.transaction('rw', this.interventions, async () => {
+                await this.interventions.clear();
+            });
+        } catch (error) {
+            console.error("Failed to clear the interventions table:", error);
+            throw error;
+        }
+    }
+
+    /**
+     * Fetches an intervention from the database.
+     * @param id The ID of the intervention to fetch.
+     * @returns A promise that resolves with the intervention.
+     */
+    async getIntervention(id: number): Promise<IIntervention> {
+        return this.interventions.get(id);
+    }
+
+    /**
+     * Adds a new intervention to the database.
+     * @param name The name of the intervention to add.
+     * @returns A promise that resolves with the new intervention's ID.
+     */
+    async addIntervention(name: string): Promise<number> {
+        return this.interventions.add({
+            name: name
+        });
+    }
+
+    /**
+     * Updates an intervention's name in the database.
+     * @param id The ID of the intervention to update.
+     * @param name The new name for the intervention.
+     * @returns A promise that resolves with the intervention's ID.
+     */
+    async updateIntervention(id: number, name: string): Promise<number> {
+        return this.interventions.update(id, { name });
+    }
+    /**
+     * Deletes an intervention from the database.
+     * @param id The ID of the intervention to delete.
+     * @returns A promise that resolves when the intervention is deleted.
+     */
+    async deleteIntervention(id: number): Promise<void> {
+        return this.interventions.delete(id);
+    }
+
+    /**
+     * Deletes all data from the database.
+     */
+    async clearAll() {
+        await this.clearPeople();
+        await this.clearAlarms();
+        await this.clearSeverities();
+        await this.clearInterventions();
+    }
 }
 
 const db = new Database();

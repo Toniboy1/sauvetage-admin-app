@@ -28,6 +28,10 @@ const pages = [
     name: "Gravité",
     href: "/severities",
   },
+  {
+    name: "Types d'interventions",
+    href: "/interventions",
+  },
 ];
 
 const AppNavBar = () => {

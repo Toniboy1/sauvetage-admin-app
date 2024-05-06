@@ -5,6 +5,7 @@ import DateTimeIntervention from "../components/time";
 import People from "../components/people";
 import Alarm from "../components/alarm";
 import Severity from "../components/severities";
+import InterventionTypes from "../components/interventions";
 
 /**
  * Root component for the intervention page.
@@ -35,7 +36,7 @@ export default function Intervention() {
           alignItems="center"
         >
           <Typography variant="h5">Equipage : </Typography>
-          <People labelText="Pilote"  />
+          <People labelText="Pilote" />
           <People labelText="Equipiers" />
 
         </Stack>
@@ -44,7 +45,12 @@ export default function Intervention() {
           <Typography variant="h5">Alarmé par : </Typography>
           <Alarm labelText="" />
           <Typography variant="h5">Gravité de l'intervention : </Typography>
-          <Severity/>
+          <Severity />
+        </Stack>
+        <Divider />
+        <Stack spacing={2} direction={"row"} justifyContent="center" alignItems="center">
+          <Typography variant="h5">Type d'intervention : </Typography>
+          <InterventionTypes labelText=""></InterventionTypes>
         </Stack>
       </Root>
     </React.Fragment>
