@@ -5,13 +5,14 @@ import { ISeverity } from "../../components/severities/types";
 import { IIntervention } from "../../components/interventions/types";
 import { IOtherMean } from "../../components/otherMeans/types";
 import { ICause } from "../../components/causes/types";
-import { IAction} from "../../components/actions/types";
+import { IAction } from "../../components/actions/types";
 import { ICommonLocation } from "../../components/location/types";
 
 /**
  * Sets up and manages the database using Dexie.js.
  */
 export class Database extends Dexie {
+
     people: Dexie.Table<IPeople, number>;
     alarms: Dexie.Table<IAlarm, number>;
     severities: Dexie.Table<ISeverity, number>;
@@ -93,8 +94,16 @@ export class Database extends Dexie {
      * @param id The ID of the person to delete.
      * @returns A promise that resolves when the person is deleted.
      */
-    async deletePerson(id: number): Promise<void> {
+    deletePerson(id: number) {
         return this.people.delete(id);
+    }
+    /**
+     *  Search people by name
+     * @param input search people by name
+     * @returns  A promise that resolves with the list of people.
+     */
+    searchPeople(input: string): Promise<IPeople[]> {
+        return this.people.where('name').startsWithIgnoreCase(input).toArray();
     }
 
     /**

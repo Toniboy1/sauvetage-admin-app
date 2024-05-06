@@ -5,12 +5,14 @@ import dayjs from "dayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { Card, CardContent, Grid, Stack, Typography } from "@mui/material";
+import { Controller, useFormContext } from "react-hook-form";
 
 /**
  * Component for the date and time of the intervention.
  * @returns The JSX element representing the date and time of the intervention.
  */
-export default function DateTimeIntervention() {
+const DateTimeIntervention = () => {
+  const { control } = useFormContext()
   const valueStartedAt = dayjs();
   const valueEndedAt = dayjs();
   const valueDate = dayjs();
@@ -26,10 +28,15 @@ export default function DateTimeIntervention() {
               <Typography variant="h6" gutterBottom>
                 Heure alarme
               </Typography>
-              <TimePicker
+              <Controller
+                control={control}
+                name="startedAt"
+                rules={{ required: true }}
                 defaultValue={valueStartedAt}
-                value={startedAt}
-                onChange={setStartedAt}
+                render={({ field }) => {
+                  return <TimePicker {...field} value={startedAt} onChange={setStartedAt} />;
+                }
+                }
               />
             </Stack>
           </Grid>
@@ -38,10 +45,15 @@ export default function DateTimeIntervention() {
               <Typography variant="h6" gutterBottom>
                 Heure de fin
               </Typography>
-              <TimePicker
+              <Controller
+                control={control}
+                name="endedAt"
+                rules={{ required: true }}
                 defaultValue={valueEndedAt}
-                value={endedAt}
-                onChange={setEndedAt}
+                render={({ field }) => {
+                  return <TimePicker {...field} value={endedAt} onChange={setEndedAt} />;
+                }
+                }
               />
             </Stack>
           </Grid>
@@ -50,7 +62,16 @@ export default function DateTimeIntervention() {
               <Typography variant="h6" gutterBottom>
                 Date
               </Typography>
-              <DatePicker value={date} onChange={setDate} />
+              <Controller
+                control={control}
+                name="date"
+                rules={{ required: true }}
+                defaultValue={valueDate}
+                render={({ field }) => {
+                  return <DatePicker {...field} value={date} onChange={setDate} />;
+                }
+                }
+              />
             </Stack>
           </Grid>
         </Grid>
@@ -58,3 +79,4 @@ export default function DateTimeIntervention() {
     </Card>
   );
 }
+export default DateTimeIntervention;

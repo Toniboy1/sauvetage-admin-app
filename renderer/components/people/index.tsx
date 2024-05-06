@@ -1,134 +1,101 @@
-import { useAutocomplete } from "@mui/base/useAutocomplete";
-import { StyledTag } from "./Tag";
 import { IPeopleExtended, IPropsPeople } from "./types";
-import Label from "./Label";
-import InputWrapper from "./InputWrapper";
-import Listbox from "./Listbox";
-import CheckIcon from "@mui/icons-material/Check";
-import CircularProgress from "@mui/material/CircularProgress";
-import { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import db from "../../model/db";
-import { Button } from "@mui/material";
-/**
- * Renders a component for managing people.
- * @param props - The component props.
- * @param props.labelText - The label text for the component.
- * @returns The rendered component.
- */
-const people = ({ labelText }: IPropsPeople) => {
-  const [open, setOpen] = useState(false);
-  const [options, setOptions] = useState<readonly IPeopleExtended[]>([]);
-  const [inputValue, setInputValue] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
-  const loading = open && options.length === 0;
-  const {
-    getRootProps,
-    getInputLabelProps,
-    getInputProps,
-    getTagProps,
-    getListboxProps,
-    getOptionProps,
-    groupedOptions,
-    value,
-    focused,
-    setAnchorEl,
-  } = useAutocomplete({
-    id: "customized-hook-demo",
-    defaultValue: [],
-    multiple: true,
-    options: options,
-    getOptionLabel: (option) => option.name,
-    onInputChange: (event, newInputValue) => {
-      setInputValue(newInputValue);
-    },
-    open,
-    onClose: () => {
-      setOpen(false);
-    },
-    onOpen: () => {
-      setOpen(true);
-    },
+import { Autocomplete, TextField, Button } from "@mui/material";
+import { useFieldArray, useFormContext } from "react-hook-form";
+import { createFilterOptions } from "@mui/material/Autocomplete";
+import {debounce } from "lodash";
+
+const filter = createFilterOptions<IPeopleExtended>();
+
+const People = ({ peopleType }: IPropsPeople) => {
+  const { control } = useFormContext();
+  const { fields, append ,remove} = useFieldArray({
+    control,
+    name: peopleType
   });
+  const [options, setOptions] = useState<IPeopleExtended[]>([]);
+  const [inputValue, setInputValue] = useState("");
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
-    if (!open) {
-      return;
-    }
     const fetchPeople = async () => {
-      const allPeople = await db.getAllPeople();
-      const extendedOptions: IPeopleExtended[] = allPeople.map((person) => ({
+      const people = await db.getAllPeople();
+      setOptions(people.map(person => ({
         id: person.id,
         name: person.name,
-        firstLetter: person.name.charAt(0),
-      }));
-      setOptions(extendedOptions);
+        firstLetter: person.name.charAt(0)
+      })));
     };
-
     fetchPeople();
+  },[]);
+  const debounceSearch = useCallback(debounce(async (input) => {
+    setLoading(true);
+    try {
+      const searchResults = await db.searchPeople(input);
+      setOptions(searchResults.map(person => ({
+        id: person.id,
+        name: person.name,
+        firstLetter: person.name.charAt(0)
+      })));
+    } finally {
+      setLoading(false);
+    }
+  }, 500), []);
+  const handleInputChange = (event, newInputValue) => {
+    setInputValue(newInputValue);
+    if (newInputValue) {
+      debounceSearch(newInputValue);
+    }
+  };
 
-    return () => {
-      setOptions([]);
-    };
-  }, [open]);
-
-  /**
-   * Handles the creation of a new person.
-   * @returns A promise that resolves when the new person is created.
-   */
-  const handleCreateNew = async (): Promise<void> => {
-    const newName = inputValue.trim();
-    if (!newName) return;
-    if (
-      options.find(
-        (option) => option.name.toLowerCase() === newName.toLowerCase(),
-      )
-    )
-      return;
-    const idNewPerson = await db.addPerson(newName);
-    const newPerson = {
-      id: idNewPerson,
-      name: newName,
-      firstLetter: newName.charAt(0),
-    };
-    value.push(newPerson);
-    setOptions((prevOptions) => [
-      ...prevOptions,
-      {
-        id: newPerson.id,
-        name: newPerson.name,
-        firstLetter: newName.charAt(0),
-      },
-    ]);
-    setInputValue("");
-    if (inputRef.current) inputRef.current.value = "";
+  const handleAddPerson = async () => {
+    if (inputValue) {
+      const newId = await db.addPerson(inputValue);
+      append({ id: newId, name: inputValue, firstLetter: inputValue.charAt(0) });
+      setInputValue("");  // Clear input after addition
+      setOptions(prev => [...prev, { id: newId, name: inputValue, firstLetter: inputValue.charAt(0) }]);
+    }
   };
 
   return (
-    <div>
-      <div {...getRootProps()}>
-        <Label {...getInputLabelProps()}>{labelText}</Label>
-        <InputWrapper ref={setAnchorEl} className={focused ? "focused" : ""}>
-          {value.map((option: IPeopleExtended, index: number) => (
-            <StyledTag label={option.name} {...getTagProps({ index })} />
-          ))}
-          <input {...getInputProps()} />
-        </InputWrapper>
-      </div>
-      {loading ? <CircularProgress /> : null}
-
-      <Listbox {...getListboxProps()}>
-        {groupedOptions.map((option, index) => (
-          <li {...getOptionProps({ option, index })}>
-            <span>{option.name}</span>
-            <CheckIcon fontSize="small" />
-          </li>
-        ))}
-        {inputValue && (
-          <li>
-            <Button onClick={handleCreateNew}>Create "{inputValue}"</Button>
-          </li>
-        )}
-      </Listbox>
-    </div>
+    <Autocomplete
+      multiple
+      id={`${peopleType}-autocomplete`}
+      options={options}
+      getOptionLabel={(option) => option.name}
+      loading={loading}
+      inputValue={inputValue}
+      onInputChange={handleInputChange}
+      onChange={(event, newValue) => {
+        append(newValue[newValue.length - 1]);
+      }}
+      filterOptions={(options, params) => {
+        const filtered = options.filter(option => option.name.toLowerCase().includes(params.inputValue.toLowerCase()));
+        if (params.inputValue !== '' && !filtered.some(option => option.name === params.inputValue)) {
+          filtered.push({
+            id: 0,
+            name: params.inputValue,
+            firstLetter: params.inputValue.charAt(0)
+          });
+        }
+        return filtered;
+      }}
+      renderOption={(props, option) => (
+        option.id === 0
+          ? (
+            <li {...props}>
+              <Button fullWidth onClick={handleAddPerson}>
+                Ajouter "{option.name}"
+              </Button>
+            </li>
+          )
+          : <li {...props}>{option.name}</li>
+      )}
+      renderInput={(params) => (
+        <TextField {...params} label={peopleType} placeholder="Select or add people" variant="outlined" />
+      )}
+    />
   );
 };
-export default people;
+
+export default People;

@@ -31,5 +31,5 @@ export interface TagProps extends ReturnType<AutocompleteGetTagProps> {
  * Represents the props for the People component.
  */
 export interface IPropsPeople {
-    labelText: string;
+    peopleType: "pilote"| "crew"
 }
