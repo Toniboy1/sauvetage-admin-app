@@ -1,8 +1,10 @@
 import React from "react";
 import Head from "next/head";
-import { Stack, styled, Typography } from "@mui/material";
+import { Divider, Stack, styled, Typography } from "@mui/material";
 import DateTimeIntervention from "../components/time";
 import People from "../components/people";
+import Alarm from "../components/alarm";
+import Severity from "../components/severities";
 
 /**
  * Root component for the intervention page.
@@ -33,8 +35,16 @@ export default function Intervention() {
           alignItems="center"
         >
           <Typography variant="h5">Equipage : </Typography>
-          <People labelText="Pilote" />
+          <People labelText="Pilote"  />
           <People labelText="Equipiers" />
+
+        </Stack>
+        <Divider />
+        <Stack spacing={2} direction={"row"} justifyContent="center" alignItems="center">
+          <Typography variant="h5">Alarmé par : </Typography>
+          <Alarm labelText="" />
+          <Typography variant="h5">Gravité de l'intervention : </Typography>
+          <Severity/>
         </Stack>
       </Root>
     </React.Fragment>

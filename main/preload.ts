@@ -13,7 +13,7 @@ const handler = {
     };
   },
   postMessage(channel: string, message: any, transfer?: Transferable[]) {
-    ipcRenderer.send(channel, message); // Assuming `send` can be used as a substitute for `postMessage`
+    ipcRenderer.send(channel, message);
   },
   answerTo(channel: string, callback: (...args: unknown[]) => void) {
     ipcRenderer.on(channel, (_event: IpcRendererEvent, ...args: unknown[]) => {

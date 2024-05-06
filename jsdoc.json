@@ -1,21 +1,11 @@
 {
-  "opts": {
-    "template": "node_modules/tui-jsdoc-template"
-  },
-  "templates": {
-    "logo": {
-      "url": "http://nhnent.github.io/tui.component.tree/latest/styles/logo.png",
-      "width": "150px",
-      "height": "13px",
-      "link": "https://github.com/nhnent/tui.jsdoc-template"
-    },
-    "name": "Tui JSDoc Template",
-    "footerText": "My awesome footer text"
-  },
+  "name": "sauvetage-admin-app",
+  "version": "1.0.0",
+  "description": "Sauvetage Admin App",
   "source": {
     "include": ["renderer", "main"],
     "includePattern": ".+\\.ts(doc|x)?$",
     "excludePattern": "(^|\\/|\\\\)_",
-    "exclude": ["renderer/.next"]
+    "exclude": ["renderer/.next","renderer/next.config.ts","renderer/preload.d.ts","main/preload.ts"]
   }
 }

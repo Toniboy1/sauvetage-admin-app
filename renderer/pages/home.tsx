@@ -59,12 +59,6 @@ export default function HomePage() {
           width={256}
           height={256}
         />
-        <Typography gutterBottom>
-          <Link href="/intervention">Go to the intervention form</Link>
-        </Typography>
-        <Typography gutterBottom>
-          <Link href="/people">Go to the people form</Link>
-        </Typography>
         <Button variant="contained" color="secondary" onClick={handleClick}>
           Super Secret Password
         </Button>
