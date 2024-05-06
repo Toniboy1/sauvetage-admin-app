@@ -4,9 +4,10 @@ import { Autocomplete, TextField, Button } from "@mui/material";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { debounce } from "lodash";
 import { IPeopleExtended, IPropsPeople } from "./types";
+import { IInterventionFormData } from "../reports/intervention/types";
 
 const People = ({ peopleType }: IPropsPeople) => {
-  const { control } = useFormContext();
+  const { control } = useFormContext<IInterventionFormData>();
   const { fields, append, remove } = useFieldArray({
     control,
     name: peopleType,
@@ -69,16 +70,18 @@ const People = ({ peopleType }: IPropsPeople) => {
       loading={loading}
       inputValue={inputValue}
       onInputChange={handleInputChange}
-      value={fields.map(field => options.find(option => option.id === parseInt(field.id))).filter(option => option !== undefined)}
+      value={fields.map(field => options.find(option => option.id === field.id)).filter(option => option !== undefined)}
       onChange={(event, newValue) => {
         const newValueSet = new Set(newValue.map(item => item.id));
         fields.forEach((field, index) => {
-          if (!newValueSet.has(parseInt(field.id))) {
+          
+          if (!newValueSet.has(field.id)) {
             remove(index);
           }
         });
         newValue.forEach(item => {
-          if (!fields.some(field => parseInt(field.id) === item.id)) {
+          
+          if (!fields.some(field => field.id === item.id)) {
             append(item);
           }
         });
