@@ -3,6 +3,7 @@ import { IPeople } from "../../components/people/types";
 import { IAlarm } from "../../components/alarm/types";
 import { ISeverity } from "../../components/severities/types";
 import { IIntervention } from "../../components/interventions/types";
+import { IOtherMean } from "../../components/otherMeans/types";
 
 /**
  * Sets up and manages the database using Dexie.js.
@@ -12,6 +13,7 @@ export class Database extends Dexie {
     alarms: Dexie.Table<IAlarm, number>;
     severities: Dexie.Table<ISeverity, number>;
     interventions: Dexie.Table<IIntervention, number>;
+    otherMeans: Dexie.Table<IOtherMean, number>;
     /**
      * Represents the database index.
      * @param isTest - Indicates whether the database is for testing purposes.
@@ -23,6 +25,7 @@ export class Database extends Dexie {
             alarms: '++id, &name',
             severities: '++id, &name',
             interventions: '++id, &name',
+            otherMeans: '++id, &name',
         });
 
     }
@@ -206,27 +209,7 @@ export class Database extends Dexie {
     async deleteSeverity(id: number): Promise<void> {
         return this.severities.delete(id);
     }
-    /**
-     * Fetches all alarms from the database.
-     * @returns A promise that resolves with the list of all alarms.
-     */
-    async getAllInterventions(): Promise<Array<IIntervention>> {
-        return this.interventions.toArray() as Promise<Array<IIntervention>>;
-    }
 
-    /**
-     * Deletes all interventions from the database.
-     */
-    async clearInterventions() {
-        try {
-            await this.transaction('rw', this.interventions, async () => {
-                await this.interventions.clear();
-            });
-        } catch (error) {
-            console.error("Failed to clear the interventions table:", error);
-            throw error;
-        }
-    }
 
     /**
      * Fetches an intervention from the database.
@@ -265,6 +248,86 @@ export class Database extends Dexie {
     async deleteIntervention(id: number): Promise<void> {
         return this.interventions.delete(id);
     }
+    /**
+     * Fetches all alarms from the database.
+     * @returns A promise that resolves with the list of all alarms.
+     */
+    async getAllInterventions(): Promise<Array<IIntervention>> {
+        return this.interventions.toArray() as Promise<Array<IIntervention>>;
+    }
+
+    /**
+     * Deletes all interventions from the database.
+     */
+    async clearInterventions() {
+        try {
+            await this.transaction('rw', this.interventions, async () => {
+                await this.interventions.clear();
+            });
+        } catch (error) {
+            console.error("Failed to clear the interventions table:", error);
+            throw error;
+        }
+    }
+
+    /**
+     * Fetches an othermean from the database.
+     * @param id The ID of the othermean to fetch.
+     * @returns A promise that resolves with the othermean.
+     */
+    async getOtherMean(id: number): Promise<IOtherMean> {
+        return this.otherMeans.get(id);
+    }
+
+    /**
+     * Adds a new othermean to the database.
+     * @param name The name of the othermean to add.
+     * @returns A promise that resolves with the new othermean's ID.
+     */
+    async addOtherMean(name: string): Promise<number> {
+        return this.otherMeans.add({
+            name: name
+        });
+    }
+
+    /**
+     * Updates an othermean's name in the database.
+     * @param id The ID of the othermean to update.
+     * @param name The new name for the othermean.
+     * @returns A promise that resolves with the othermean's ID.
+     */
+    async updateOtherMean(id: number, name: string): Promise<number> {
+        return this.otherMeans.update(id, { name });
+    }
+    /**
+     * Deletes an othermean from the database.
+     * @param id The ID of the othermean to delete.
+     * @returns A promise that resolves when the othermean is deleted.
+     */
+    async deleteOtherMean(id: number): Promise<void> {
+        return this.otherMeans.delete(id);
+    }
+    /**
+     * Fetches all alarms from the database.
+     * @returns A promise that resolves with the list of all alarms.
+     */
+    async getAllOtherMeans(): Promise<Array<IOtherMean>> {
+        return this.otherMeans.toArray() as Promise<Array<IOtherMean>>;
+    }
+
+    /**
+     * Deletes all othermeans from the database.
+     */
+    async clearOtherMeans() {
+        try {
+            await this.transaction('rw', this.otherMeans, async () => {
+                await this.otherMeans.clear();
+            });
+        } catch (error) {
+            console.error("Failed to clear the othermeans table:", error);
+            throw error;
+        }
+    }
 
     /**
      * Deletes all data from the database.
@@ -274,6 +337,7 @@ export class Database extends Dexie {
         await this.clearAlarms();
         await this.clearSeverities();
         await this.clearInterventions();
+        await this.clearOtherMeans();
     }
 }
 

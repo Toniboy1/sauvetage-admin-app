@@ -32,20 +32,13 @@ const pages = [
     name: "Types d'interventions",
     href: "/interventions",
   },
+  {
+    name: "Types de moyens supplémentaires",
+    href: "/other_means"
+  }
 ];
 
 const AppNavBar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null,
-  );
-
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
 
   return (
     <AppBar position="static">

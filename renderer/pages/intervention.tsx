@@ -6,6 +6,7 @@ import People from "../components/people";
 import Alarm from "../components/alarm";
 import Severity from "../components/severities";
 import InterventionTypes from "../components/interventions";
+import OtherMean from "../components/otherMeans";
 import RescuedData from "../components/recuscued";
 
 /**
@@ -50,8 +51,14 @@ export default function Intervention() {
         </Stack>
         <Divider />
         <Stack spacing={2} direction={"row"} justifyContent="center" alignItems="center">
-          <Typography variant="h5">Type d'intervention : </Typography>
-          <InterventionTypes labelText=""></InterventionTypes>
+          <div>
+            <Typography variant="h5">Type d'intervention : </Typography>
+            <InterventionTypes labelText=""></InterventionTypes>
+          </div>
+          <div>
+            <Typography variant="h5">Autre moyens engagés : </Typography>
+            <OtherMean labelText=""></OtherMean>
+          </div>
         </Stack>
         <RescuedData />
       </Root>
