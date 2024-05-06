@@ -5,6 +5,8 @@ import { ISeverity } from "../../components/severities/types";
 import { IIntervention } from "../../components/interventions/types";
 import { IOtherMean } from "../../components/otherMeans/types";
 import { ICause } from "../../components/causes/types";
+import { IAction} from "../../components/actions/types";
+import { ICommonLocation } from "../../components/location/types";
 
 /**
  * Sets up and manages the database using Dexie.js.
@@ -16,6 +18,8 @@ export class Database extends Dexie {
     interventions: Dexie.Table<IIntervention, number>;
     otherMeans: Dexie.Table<IOtherMean, number>;
     causes: Dexie.Table<ICause, number>;
+    actions: Dexie.Table<IAction, number>;
+    commonlocations: Dexie.Table<ICommonLocation, number>;
     /**
      * Represents the database index.
      * @param isTest - Indicates whether the database is for testing purposes.
@@ -29,6 +33,8 @@ export class Database extends Dexie {
             interventions: '++id, &name',
             otherMeans: '++id, &name',
             causes: '++id, &name',
+            actions: '++id, &name',
+            commonlocations: '++id, &name',
         });
 
     }
@@ -389,6 +395,122 @@ export class Database extends Dexie {
             throw error;
         }
     }
+    /**
+     * Fetches an action from the database.
+     * @param id The ID of the action to fetch.
+     * @returns A promise that resolves with the action.
+     */
+    async getAction(id: number): Promise<IAction> {
+        return this.actions.get(id);
+    }
+
+    /**
+     * Adds a new action to the database.
+     * @param name The name of the action to add.
+     * @returns A promise that resolves with the new action's ID.
+     */
+    async addAction(name: string): Promise<number> {
+        return this.actions.add({
+            name: name
+        });
+    }
+
+    /**
+     * Updates an action's name in the database.
+     * @param id The ID of the action to update.
+     * @param name The new name for the action.
+     * @returns A promise that resolves with the action's ID.
+     */
+    async updateAction(id: number, name: string): Promise<number> {
+        return this.actions.update(id, { name });
+    }
+    /**
+     * Deletes an action from the database.
+     * @param id The ID of the action to delete.
+     * @returns A promise that resolves when the action is deleted.
+     */
+    async deleteAction(id: number): Promise<void> {
+        return this.actions.delete(id);
+    }
+    /**
+     * Fetches all alarms from the database.
+     * @returns A promise that resolves with the list of all alarms.
+     */
+    async getAllActions(): Promise<Array<IAction>> {
+        return this.actions.toArray() as Promise<Array<IAction>>;
+    }
+
+    /**
+     * Deletes all actions from the database.
+     */
+    async clearActions() {
+        try {
+            await this.transaction('rw', this.actions, async () => {
+                await this.actions.clear();
+            });
+        } catch (error) {
+            console.error("Failed to clear the actions table:", error);
+            throw error;
+        }
+    }
+    /**
+     * Fetches an commonlocation from the database.
+     * @param id The ID of the commonlocation to fetch.
+     * @returns A promise that resolves with the commonlocation.
+     */
+    async getCommonLocation(id: number): Promise<ICommonLocation> {
+        return this.commonlocations.get(id);
+    }
+
+    /**
+     * Adds a new commonlocation to the database.
+     * @param name The name of the commonlocation to add.
+     * @returns A promise that resolves with the new commonlocation's ID.
+     */
+    async addCommonLocation(name: string): Promise<number> {
+        return this.commonlocations.add({
+            name: name
+        });
+    }
+
+    /**
+     * Updates an commonlocation's name in the database.
+     * @param id The ID of the commonlocation to update.
+     * @param name The new name for the commonlocation.
+     * @returns A promise that resolves with the commonlocation's ID.
+     */
+    async updateCommonLocation(id: number, name: string): Promise<number> {
+        return this.commonlocations.update(id, { name });
+    }
+    /**
+     * Deletes an commonlocation from the database.
+     * @param id The ID of the commonlocation to delete.
+     * @returns A promise that resolves when the commonlocation is deleted.
+     */
+    async deleteCommonLocation(id: number): Promise<void> {
+        return this.commonlocations.delete(id);
+    }
+    /**
+     * Fetches all alarms from the database.
+     * @returns A promise that resolves with the list of all alarms.
+     */
+    async getAllCommonLocations(): Promise<Array<ICommonLocation>> {
+        return this.commonlocations.toArray() as Promise<Array<ICommonLocation>>;
+    }
+
+    /**
+     * Deletes all commonlocations from the database.
+     */
+    async clearCommonLocations() {
+        try {
+            await this.transaction('rw', this.commonlocations, async () => {
+                await this.commonlocations.clear();
+            });
+        } catch (error) {
+            console.error("Failed to clear the commonlocations table:", error);
+            throw error;
+        }
+    }
 
     /**
      * Deletes all data from the database.
@@ -400,6 +522,8 @@ export class Database extends Dexie {
         await this.clearInterventions();
         await this.clearOtherMeans();
         await this.clearCauses();
+        await this.clearActions();
+        await this.clearCommonLocations();
     }
 }
 

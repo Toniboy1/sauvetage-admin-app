@@ -9,6 +9,9 @@ import InterventionTypes from "../components/interventions";
 import OtherMean from "../components/otherMeans";
 import RescuedData from "../components/recuscued";
 import Causes from "../components/causes";
+import Actions from "../components/actions";
+import LocationData from "../components/location/coordinates";
+import CommonLocation from "../components/location/commons";
 
 /**
  * Root component for the intervention page.
@@ -63,8 +66,22 @@ export default function Intervention() {
         </Stack>
         <RescuedData />
         <Stack spacing={2} direction={"row"} justifyContent="center" alignItems="center">
-          <Typography variant="h5">Cause : </Typography>
-          <Causes labelText="" />
+          <div>
+            <Typography variant="h5">Cause : </Typography>
+            <Causes labelText="" />
+          </div>
+          <div>
+            <Typography variant="h5">Mesure prises : </Typography>
+            <Actions labelText="" />
+          </div>
+        </Stack>
+
+        <Stack spacing={2} direction={"column"} justifyContent="center" alignItems="center">
+          <Typography variant="h5">Localisation : </Typography>
+          <LocationData />
+          <CommonLocation labelText="" />
+          <Typography variant="h5">Ramené à/au : </Typography>
+          <CommonLocation labelText="" />
         </Stack>
       </Root>
     </React.Fragment>

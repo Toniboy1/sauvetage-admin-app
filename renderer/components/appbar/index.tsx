@@ -39,6 +39,14 @@ const pages = [
   {
     name: "Types de causes",
     href: "/causes"
+  },
+  {
+    name: "Actions",
+    href: "/actions"
+  },
+  {
+    name: "Lieux communs",
+    href: "/common_locations"
   }
 ];
 
