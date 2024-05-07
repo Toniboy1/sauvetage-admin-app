@@ -606,9 +606,6 @@ export class Database extends Dexie {
     return data.map((data) => {
       return {
         ...data,
-        remark: data.remark
-          ? (JSON.parse(data.remark) as Block[])
-          : undefined,
         startedAt: dayjs(data.startedAt),
         endedAt: dayjs(data.endedAt),
         date: dayjs(data.date),
@@ -642,9 +639,6 @@ export class Database extends Dexie {
     }
     return {
       ...data,
-      remark: data.remark
-        ? (JSON.parse(data.remark) as Block[])
-        : undefined,
       startedAt: dayjs(data.startedAt),
       endedAt: dayjs(data.endedAt),
       date: dayjs(data.date),
@@ -661,7 +655,6 @@ export class Database extends Dexie {
   ): Promise<number> {
     return this.forminterventions.add({
       ...formintervention,
-      remark: JSON.stringify(formintervention.remark),
       startedAt: formintervention.startedAt.toISOString(), // Convert Day.js object to ISO string
       endedAt: formintervention.endedAt.toISOString(),
       date: formintervention.date.toISOString(),

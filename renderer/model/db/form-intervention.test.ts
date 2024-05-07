@@ -36,6 +36,7 @@ describe("Database", () => {
       actionsTaken: [{ id: 1, name: "Action" }],
       interventionLocation: [{ id: 1, name: "Location" }],
       interventionDestination: [{ id: 1, name: "Destination" }],
+      remark: "remark",
     };
     const id = await db.addFormIntervention(input);
     const formintervention = await db.getFormIntervention(id);
@@ -63,6 +64,7 @@ describe("Database", () => {
       actionsTaken: [{ id: 1, name: "Action" }],
       interventionLocation: [{ id: 1, name: "Location" }],
       interventionDestination: [{ id: 1, name: "Destination" }],
+      remark: "remark",
     };
     const id = await db.addFormIntervention(input);
     const update = {
@@ -82,6 +84,7 @@ describe("Database", () => {
       actionsTaken: [{ id: 1, name: "Action" }],
       interventionLocation: [{ id: 1, name: "Location" }],
       interventionDestination: [{ id: 1, name: "Destination" }],
+      remark: "remark",
     };
     await db.updateFormIntervention(id, update);
     const updatedFormIntervention = await db.getFormIntervention(id);
@@ -109,6 +112,7 @@ describe("Database", () => {
       actionsTaken: [{ id: 1, name: "Action" }],
       interventionLocation: [{ id: 1, name: "Location" }],
       interventionDestination: [{ id: 1, name: "Destination" }],
+      remark: "remark",
     };
     const id = await db.addFormIntervention(input);
     await db.deleteFormIntervention(id);
@@ -138,6 +142,7 @@ describe("Database", () => {
         actionsTaken: [{ id: 1, name: "Action" }],
         interventionLocation: [{ id: 1, name: "Location" }],
         interventionDestination: [{ id: 1, name: "Destination" }],
+        remark: "remark",
       },
       {
         startedAt: dayjs(),
@@ -156,6 +161,7 @@ describe("Database", () => {
         actionsTaken: [{ id: 1, name: "Action" }],
         interventionLocation: [{ id: 1, name: "Location" }],
         interventionDestination: [{ id: 1, name: "Destination" }],
+        remark: "remark",
       },
       {
         startedAt: dayjs(),
@@ -174,6 +180,7 @@ describe("Database", () => {
         actionsTaken: [{ id: 1, name: "Action" }],
         interventionLocation: [{ id: 1, name: "Location" }],
         interventionDestination: [{ id: 1, name: "Destination" }],
+        remark: "remark",
       },
 
     ];
@@ -208,6 +215,7 @@ describe("Database", () => {
         actionsTaken: [{ id: 1, name: "Action" }],
         interventionLocation: [{ id: 1, name: "Location" }],
         interventionDestination: [{ id: 1, name: "Destination" }],
+        remark: "remark",
       },
       {
         startedAt: dayjs(),
@@ -226,6 +234,7 @@ describe("Database", () => {
         actionsTaken: [{ id: 1, name: "Action" }],
         interventionLocation: [{ id: 1, name: "Location" }],
         interventionDestination: [{ id: 1, name: "Destination" }],
+        remark: "remark",
       },
       {
         startedAt: dayjs(),
@@ -244,6 +253,7 @@ describe("Database", () => {
         actionsTaken: [{ id: 1, name: "Action" }],
         interventionLocation: [{ id: 1, name: "Location" }],
         interventionDestination: [{ id: 1, name: "Destination" }],
+        remark: "remark",
       },
     ];
     for (const formintervention of forminterventions) {
@@ -274,6 +284,7 @@ describe("Database", () => {
       actionsTaken: [{ id: 1, name: "Action" }],
       interventionLocation: [{ id: 1, name: "Location" }],
       interventionDestination: [{ id: 1, name: "Destination" }],
+      remark: "remark",
     };
     const id = await db.addFormIntervention(input);
     const formintervention = await db.getFormIntervention(id);

@@ -7,7 +7,6 @@ import { IOtherMean } from "../../otherMeans/types";
 import {ICause} from "../../causes/types";
 import { IAction } from "../../actions/types";
 import { ICommonLocation } from "../../location/types";
-import { Block } from "@blocknote/core";
 
 export interface IInterventionFormData {
   id?: number;
