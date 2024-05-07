@@ -312,6 +312,17 @@ export class Database extends Dexie {
   }
 
   /**
+   *  Search interventions by name
+   * @param input search params
+   * @returns  matched interventions
+   */
+  async searchInterventions(input: string): Promise<IInterventionType[]> {
+    return this.interventions
+      .where("name")
+      .startsWithIgnoreCase(input)
+      .toArray();
+  }
+  /**
    * Fetches an othermean from the database.
    * @param id The ID of the othermean to fetch.
    * @returns A promise that resolves with the othermean.

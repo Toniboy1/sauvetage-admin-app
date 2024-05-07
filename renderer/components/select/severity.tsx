@@ -7,6 +7,9 @@ const SeveritySelect = ({allowCreate = false}: {allowCreate:boolean})=>{
         getAllOptions={async () =>  await db.getAllSeverities()} // Ensure proper method binding
         searchOptions={async (searchTerm) => await db.searchSeverities(searchTerm)}
         addOption={async (name) => await db.addSeverity(name)}
+        placeholder="Rechercher une sévérité"
+        multiple={false}
+        label='Sévérité'
          />)
 }
 export default SeveritySelect;

@@ -7,6 +7,9 @@ export interface IPropsSelect<T extends GenericProperties,TExt extends GenericPr
     getAllOptions: () => Promise<T[]>;
     searchOptions: (input: string) => Promise<T[]>;
     addOption: (name:string) => Promise<number>;
+    placeholder: string;
+    multiple: boolean;
+    label: string;
 }
 
 export type GenericProperties = {

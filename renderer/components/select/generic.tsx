@@ -5,7 +5,7 @@ import { debounce } from "lodash";
 import { IInterventionFormData } from "../reports/intervention/types";
 import { GenericProperties, IPropsSelect,GenericPropertiesExtended } from "./types";
 
-const Select = <T extends GenericProperties,TExt extends GenericPropertiesExtended>({ allowCreate = true, formField,getAllOptions,searchOptions,addOption}: IPropsSelect<T,TExt>) => {
+const Select = <T extends GenericProperties,TExt extends GenericPropertiesExtended>({ multiple,allowCreate = true, formField,getAllOptions,searchOptions,addOption, placeholder,label}: IPropsSelect<T,TExt>) => {
   const { control } = useFormContext<IInterventionFormData>();
   const { fields, append, remove } = useFieldArray({
     control,
@@ -17,6 +17,12 @@ const Select = <T extends GenericProperties,TExt extends GenericPropertiesExtend
         value: 1,
         message: "Veuillez sélectionner au moins une alarmne",
       },
+      ...(multiple ? {
+        maxLength:{
+          value: 1,
+          message: "maximum 1"
+        }
+      } : undefined)
     },
   });
   const [options, setOptions] = useState<TExt[]>([]);
@@ -139,8 +145,8 @@ const handleAddOption = useCallback(async () => {
       renderInput={(params) => (
         <TextField
           {...params}
-          label={formField}
-          placeholder="Chercher"
+          label={label}
+          placeholder={placeholder}
           variant="outlined"
         />
       )}

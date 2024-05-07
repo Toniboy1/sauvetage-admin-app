@@ -7,6 +7,9 @@ const OtherMeansSelect = ({allowCreate = false}: {allowCreate:boolean})=>{
         getAllOptions={async () =>  await db.getAllOtherMeans()} // Ensure proper method binding
         searchOptions={async (searchTerm) => await db.searchOtherMeans(searchTerm)}
         addOption={async (name) => await db.addOtherMean(name)}
+        placeholder="Rechercher un autre moyen"
+        multiple={true}
+        label="Autres moyens"
          />)
 }
 export default OtherMeansSelect;

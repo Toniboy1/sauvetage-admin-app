@@ -7,6 +7,9 @@ const CrewSelect = ({allowCreate = false}: {allowCreate:boolean})=>{
         getAllOptions={async () =>  await db.getAllPeople()} // Ensure proper method binding
         searchOptions={async (searchTerm) => await db.searchPeople(searchTerm)}
         addOption={async (name) => await db.addPerson(name)}
+        placeholder="Rechercher un membre d'équipage"
+        multiple={true}
+        label="Membre d'équipage"
          />)
 }
 export default CrewSelect;
