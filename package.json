@@ -16,7 +16,8 @@
     "doc": "npx typedoc",
     "prepare": "husky install",
     "release": "grunt bump && electron-builder",
-    "publish": "electron-builder"
+    "publish": "electron-builder",
+    "test-ci": "jest --ci --coverage"
   },
   "build": {
     "appId": "com.anthonyfasano.sauvetage-admin-app",

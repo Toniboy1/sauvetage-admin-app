@@ -1,3 +1,4 @@
+![Jest coverage](./badges/coverage-jest%20coverage.svg)
 # Sauvetage Admin App
 
 ## Description
