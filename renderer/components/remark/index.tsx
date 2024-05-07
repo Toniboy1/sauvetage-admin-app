@@ -20,7 +20,7 @@ const Remark = (): JSX.Element => {
           <TextField
             {...field}
             id="outlined-multiline-static"
-            label="Multiline"
+            label="Remarques"
             multiline
             rows={4}
             variant="outlined"

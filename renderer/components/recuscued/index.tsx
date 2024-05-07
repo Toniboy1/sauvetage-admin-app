@@ -1,71 +1,62 @@
-import { Typography, TextField, Grid, Stack } from "@mui/material";
+import { Typography, TextField, Grid } from "@mui/material";
 import { useState } from "react";
+import { useFormContext } from "react-hook-form";
 
 /**
  * Renders the rescued data.
  * @returns The JSX element representing the rescued data.
  */
 const RescuedData = () => {
-  const [rescued, setRescued] = useState(0);
-  const [medicalized, setMedicalized] = useState(0);
-  const [deceased, setDeceased] = useState(0);
-  const [boatRegistration, setBoatRegistration] = useState("");
+  const { control, getValues, setValue, register } = useFormContext();
+  const initialRescued = getValues("rescued");
+  const initialMedicalized = getValues("medicalized");
+  const initialDeceased = getValues("deceased");
+  const initialBoatRegistration = getValues("boatRegistration");
+
+  if (initialRescued) setValue("rescued",initialRescued);
+  if (initialMedicalized) setValue("medicalized",initialMedicalized);
+  if (initialDeceased) setValue("deceased",initialDeceased);
+  if (initialBoatRegistration) setValue("boatRegistration",initialBoatRegistration);
   return (
     <Grid container spacing={1}>
       <Grid container item spacing={3}>
         <Grid item xs={3}>
-          <Typography>Nombre de personnes assistées </Typography>
+          <Typography variant="h6">Nombre de personnes assistées </Typography>
         </Grid>
         <Grid item xs={3}>
           <TextField
             type="number"
             InputProps={{ inputProps: { min: 0 } }}
-            name="rescued"
-            value={rescued}
-            onChange={(event) => {
-              setRescued(parseInt(event.target.value));
-            }}
+            {...register("rescued")}
           />
         </Grid>
         <Grid item xs={3}>
-          <Typography>Nombre de personnes médicalisées </Typography>
+          <Typography variant="h6">Nombre de personnes médicalisées </Typography>
         </Grid>
         <Grid item xs={3}>
           <TextField
             type="number"
             InputProps={{ inputProps: { min: 0 } }}
-            name="medicalized"
-            value={medicalized}
-            onChange={(event) => {
-              setMedicalized(parseInt(event.target.value));
-            }}
+            {...register("medicalized")}
           />
         </Grid>
         <Grid item xs={3}>
-          <Typography>Nombre de personnes décédées </Typography>
+          <Typography variant="h6">Nombre de personnes décédées </Typography>
         </Grid>
         <Grid item xs={3}>
           <TextField
             type="number"
             InputProps={{ inputProps: { min: 0 } }}
-            name="deceased"
-            value={deceased}
-            onChange={(event) => {
-              setDeceased(parseInt(event.target.value));
-            }}
+            {...register("deceased")}
           />
         </Grid>
         <Grid item xs={3}>
-          <Typography>Immatriculation du bateau </Typography>
+          <Typography variant="h6">Immatriculation du bateau </Typography>
         </Grid>
         <Grid item xs={3}>
           <TextField
             type="text"
-            name="boatRegistration"
-            value={boatRegistration}
-            onChange={(event) => {
-              setBoatRegistration(event.target.value);
-            }}
+            {...register("boatRegistration")}
           />
         </Grid>
       </Grid>

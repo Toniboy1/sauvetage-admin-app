@@ -7,6 +7,7 @@ import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { IInterventionFormData } from "../../components/reports/intervention/types";
 import db from "../../model/db";
 import InterventionForm from "../../components/reports/intervention/form";
+import dayjs from "dayjs";
 /**
  * Root component for the intervention page.
  */
@@ -24,9 +25,31 @@ const EditIntervention = () => {
   const router = useRouter();
   const { id } = router.query;
   const formId = parseInt(id as string);
-  const methods = useForm<IInterventionFormData>();
+  const methods = useForm<IInterventionFormData>({
+    defaultValues: {
+      startedAt: dayjs(),
+      endedAt: dayjs(),
+      date: dayjs(),
+      pilote: [],
+      crew: [],
+      alarmedBy: [],
+      severity: [],
+      inteverntionType: [],
+      otherMeans: [],
+      causes: [],
+      actionsTaken: [],
+      interventionLocation: [],
+      interventionDestination: [],
+      remark: "",
+      rescued: 0,
+      medicalized: 0,
+      deceased: 0,
+      boatRegistration: "",
+    },
+  });
   const onSubmit: SubmitHandler<IInterventionFormData> = async (data) => {
     await db.updateFormIntervention(formId, data);
+    window.location.href = "/forms_interventions";
   };
   useEffect(() => {
     if (id) {
@@ -47,8 +70,6 @@ const EditIntervention = () => {
       <Root>
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
-            {methods.formState.errors &&
-              JSON.stringify(methods.formState.errors)}
             <InterventionForm />
           </form>
         </FormProvider>

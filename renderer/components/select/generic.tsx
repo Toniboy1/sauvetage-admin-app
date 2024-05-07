@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Autocomplete, TextField, Button, Typography } from "@mui/material";
-import { useFieldArray, useFormContext, Path } from "react-hook-form";
+import { useFieldArray, useFormContext } from "react-hook-form";
 import { debounce } from "lodash";
 import { IInterventionFormData } from "../reports/intervention/types";
 import { GenericProperties, IPropsSelect, GenericPropertiesExtended } from "./types";

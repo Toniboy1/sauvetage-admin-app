@@ -24,6 +24,10 @@ export interface IInterventionFormData {
   interventionLocation: Array<ICommonLocation>;
   interventionDestination: Array<ICommonLocation>;
   remark: string;
+  rescued: number;
+  medicalized: number;
+  deceased: number;
+  boatRegistration: string;
 }
 export interface IInterventionData {
   id?: number;
@@ -41,10 +45,14 @@ export interface IInterventionData {
   interventionLocation: Array<ICommonLocation>;
   interventionDestination: Array<ICommonLocation>;
   remark: string;
+  rescued: number;
+  medicalized: number;
+  deceased: number;
+  boatRegistration: string;
 }
 
 export type ArrayPropertyNames<T> = {
-  [K in keyof T]: K extends 'remark' ? never : T[K] extends Array<any> ? K : never
+  [K in keyof T]: T[K] extends Array<any> ? K : never
 }[keyof T];
 
 

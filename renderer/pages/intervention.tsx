@@ -37,10 +37,16 @@ export default function Intervention() {
       interventionLocation: [],
       interventionDestination: [],
       remark: "",
+      rescued: 0,
+      medicalized: 0,
+      deceased: 0,
+      boatRegistration: "",
+
     },
   });
   const onSubmit: SubmitHandler<IInterventionFormData> = async (data) => {
     await db.addFormIntervention(data);
+    window.location.href = "/forms_interventions";
   };
   return (
     <React.Fragment>

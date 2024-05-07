@@ -29,7 +29,8 @@
         "jest/globals": true
     },
     "extends": [
-        "plugin:jsdoc/recommended-typescript"
+        "plugin:jsdoc/recommended-typescript",
+        "plugin:@next/next/recommended"
     ],
     "overrides": [
         {

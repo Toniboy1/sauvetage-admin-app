@@ -37,6 +37,10 @@ describe("Database", () => {
       interventionLocation: [{ id: 1, name: "Location" }],
       interventionDestination: [{ id: 1, name: "Destination" }],
       remark: "remark",
+      rescued: 0,
+      medicalized: 0,
+      deceased: 0,
+      boatRegistration: "",
     };
     const id = await db.addFormIntervention(input);
     const formintervention = await db.getFormIntervention(id);
@@ -65,6 +69,10 @@ describe("Database", () => {
       interventionLocation: [{ id: 1, name: "Location" }],
       interventionDestination: [{ id: 1, name: "Destination" }],
       remark: "remark",
+      rescued: 0,
+      medicalized: 0,
+      deceased: 0,
+      boatRegistration: "",
     };
     const id = await db.addFormIntervention(input);
     const update = {
@@ -85,6 +93,10 @@ describe("Database", () => {
       interventionLocation: [{ id: 1, name: "Location" }],
       interventionDestination: [{ id: 1, name: "Destination" }],
       remark: "remark",
+      rescued: 0,
+      medicalized: 0,
+      deceased: 0,
+      boatRegistration: "",
     };
     await db.updateFormIntervention(id, update);
     const updatedFormIntervention = await db.getFormIntervention(id);
@@ -113,6 +125,10 @@ describe("Database", () => {
       interventionLocation: [{ id: 1, name: "Location" }],
       interventionDestination: [{ id: 1, name: "Destination" }],
       remark: "remark",
+      rescued: 0,
+      medicalized: 0,
+      deceased: 0,
+      boatRegistration: "",
     };
     const id = await db.addFormIntervention(input);
     await db.deleteFormIntervention(id);
@@ -143,6 +159,10 @@ describe("Database", () => {
         interventionLocation: [{ id: 1, name: "Location" }],
         interventionDestination: [{ id: 1, name: "Destination" }],
         remark: "remark",
+        rescued: 0,
+        medicalized: 0,
+        deceased: 0,
+        boatRegistration: "",
       },
       {
         startedAt: dayjs(),
@@ -162,6 +182,10 @@ describe("Database", () => {
         interventionLocation: [{ id: 1, name: "Location" }],
         interventionDestination: [{ id: 1, name: "Destination" }],
         remark: "remark",
+        rescued: 0,
+        medicalized: 0,
+        deceased: 0,
+        boatRegistration: "",
       },
       {
         startedAt: dayjs(),
@@ -181,6 +205,10 @@ describe("Database", () => {
         interventionLocation: [{ id: 1, name: "Location" }],
         interventionDestination: [{ id: 1, name: "Destination" }],
         remark: "remark",
+        rescued: 0,
+        medicalized: 0,
+        deceased: 0,
+        boatRegistration: "",
       },
 
     ];
@@ -216,6 +244,10 @@ describe("Database", () => {
         interventionLocation: [{ id: 1, name: "Location" }],
         interventionDestination: [{ id: 1, name: "Destination" }],
         remark: "remark",
+        rescued: 0,
+        medicalized: 0,
+        deceased: 0,
+        boatRegistration: "",
       },
       {
         startedAt: dayjs(),
@@ -235,6 +267,10 @@ describe("Database", () => {
         interventionLocation: [{ id: 1, name: "Location" }],
         interventionDestination: [{ id: 1, name: "Destination" }],
         remark: "remark",
+        rescued: 0,
+        medicalized: 0,
+        deceased: 0,
+        boatRegistration: "",
       },
       {
         startedAt: dayjs(),
@@ -254,6 +290,10 @@ describe("Database", () => {
         interventionLocation: [{ id: 1, name: "Location" }],
         interventionDestination: [{ id: 1, name: "Destination" }],
         remark: "remark",
+        rescued: 0,
+        medicalized: 0,
+        deceased: 0,
+        boatRegistration: "",
       },
     ];
     for (const formintervention of forminterventions) {
@@ -285,6 +325,10 @@ describe("Database", () => {
       interventionLocation: [{ id: 1, name: "Location" }],
       interventionDestination: [{ id: 1, name: "Destination" }],
       remark: "remark",
+      rescued: 0,
+      medicalized: 0,
+      deceased: 0,
+      boatRegistration: "",
     };
     const id = await db.addFormIntervention(input);
     const formintervention = await db.getFormIntervention(id);

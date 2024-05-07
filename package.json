@@ -50,6 +50,7 @@
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.15",
     "@mui/material-nextjs": "^5.15.11",
+    "@next/eslint-plugin-next": "^14.2.3",
     "@saswatb/eslint-plugin-sort-sx-prop": "^0.2.0",
     "@types/node": "^20.11.16",
     "@types/react": "^18.2.52",
