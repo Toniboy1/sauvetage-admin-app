@@ -1,6 +1,7 @@
 import Select from './generic';
 import db from '../../model/db';
-const InterventionDestinationSelect = ({ allowCreate = false }: { allowCreate: boolean }) => {
+import { IPropsSelectGereric } from './types';
+const InterventionDestinationSelect = ({allowCreate = false,required}:  IPropsSelectGereric) => {
     return (<Select
         formField={'interventionDestination'}
         allowCreate={allowCreate}
@@ -10,6 +11,7 @@ const InterventionDestinationSelect = ({ allowCreate = false }: { allowCreate: b
         multiple={false}
         placeholder="Rechercher une destination"
         label='Destination'
+        required={required}
     />)
 }
 export default InterventionDestinationSelect;

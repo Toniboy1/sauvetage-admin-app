@@ -1,6 +1,7 @@
 import Select from './generic';
 import db from '../../model/db';
-const OtherMeansSelect = ({allowCreate = false}: {allowCreate:boolean})=>{
+import { IPropsSelectGereric } from './types';
+const OtherMeansSelect = ({allowCreate = false,required}:  IPropsSelectGereric)=>{
     return (<Select 
         formField={'otherMeans'} 
         allowCreate={allowCreate} 
@@ -10,6 +11,7 @@ const OtherMeansSelect = ({allowCreate = false}: {allowCreate:boolean})=>{
         placeholder="Rechercher un autre moyen"
         multiple={true}
         label="Autres moyens"
+        required={required}
          />)
 }
 export default OtherMeansSelect;

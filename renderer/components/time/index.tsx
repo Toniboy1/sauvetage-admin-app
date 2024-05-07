@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
-import { Card, CardContent, Grid, Stack, Typography } from "@mui/material";
+import { Card, CardContent, CardHeader, Grid, Stack, Typography } from "@mui/material";
 import { Controller, useFormContext } from "react-hook-form";
 import { useEffect } from "react";
 
@@ -25,6 +25,7 @@ const DateTimeIntervention = () => {
 
   return (
     <Card sx={{ minWidth: 275 }}>
+      <CardHeader title="Date et heure de l'intervention" />
       <CardContent>
         <Grid container spacing={3}>
           <Grid item xs>

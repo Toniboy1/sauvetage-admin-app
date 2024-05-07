@@ -12,14 +12,13 @@ const LocationData = () => {
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={6}>
+      <Grid item>
         <Stack
           spacing={2}
-          direction={"row"}
+          direction={"column"}
           justifyContent="center"
           alignItems="center"
         >
-          <Typography>Coordonnées :</Typography>
           <InputMask
             mask={"9'999'999°N"}
             value={nCoordinate}

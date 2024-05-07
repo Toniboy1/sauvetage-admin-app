@@ -50,8 +50,6 @@ export default function Intervention() {
       <Root>
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
-            {methods.formState.errors &&
-              JSON.stringify(methods.formState.errors)}
             <InterventionForm />
           </form>
         </FormProvider>

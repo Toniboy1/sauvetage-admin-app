@@ -9,7 +9,7 @@ const RescuedData = () => {
   const [rescued, setRescued] = useState(0);
   const [medicalized, setMedicalized] = useState(0);
   const [deceased, setDeceased] = useState(0);
-  const [boatRegistration, setBoatRegistration] = useState("VD");
+  const [boatRegistration, setBoatRegistration] = useState("");
   return (
     <Grid container spacing={1}>
       <Grid container item spacing={3}>

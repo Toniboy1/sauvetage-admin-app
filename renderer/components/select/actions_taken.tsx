@@ -1,6 +1,7 @@
 import Select from './generic';
 import db from '../../model/db';
-const ActionTakenSelect = ({allowCreate = false}: {allowCreate:boolean})=>{
+import { IPropsSelectGereric } from './types';
+const ActionTakenSelect = ({allowCreate = false, required = false}: IPropsSelectGereric)=>{
     return (<Select 
         formField={'actionsTaken'} 
         allowCreate={allowCreate} 
@@ -10,6 +11,8 @@ const ActionTakenSelect = ({allowCreate = false}: {allowCreate:boolean})=>{
         placeholder="Rechercher une mesure"
         multiple={true}
         label='Mesures prises'
+        required={required}
+
          />)
 }
 export default ActionTakenSelect;

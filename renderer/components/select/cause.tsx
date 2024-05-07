@@ -1,6 +1,7 @@
 import Select from './generic';
 import db from '../../model/db';
-const CauseSelect = ({allowCreate = false}: {allowCreate:boolean})=>{
+import { IPropsSelectGereric } from './types';
+const CauseSelect = ({allowCreate = false,required}:  IPropsSelectGereric)=>{
     return (<Select 
         formField={'causes'} 
         allowCreate={allowCreate} 
@@ -10,6 +11,7 @@ const CauseSelect = ({allowCreate = false}: {allowCreate:boolean})=>{
         placeholder="Rechercher une cause"
         multiple={true}
         label='Causes'
+        required={required}
          />)
 }
 export default CauseSelect;

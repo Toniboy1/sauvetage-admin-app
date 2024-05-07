@@ -1,6 +1,7 @@
 import Select from './generic';
 import db from '../../model/db';
-const AlarmedBySelect = ({allowCreate = false}: {allowCreate:boolean})=>{
+import { IPropsSelectGereric } from './types';
+const AlarmedBySelect = ({allowCreate = false,required}:  IPropsSelectGereric)=>{
     return (<Select 
         formField={'alarmedBy'} 
         allowCreate={allowCreate} 
@@ -10,6 +11,7 @@ const AlarmedBySelect = ({allowCreate = false}: {allowCreate:boolean})=>{
         placeholder="Rechercher un type d'alarme"
         multiple={true}
         label='Alarmé par'
+        required={required}
          />)
 }
 export default AlarmedBySelect;

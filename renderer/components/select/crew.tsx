@@ -1,6 +1,7 @@
 import Select from './generic';
 import db from '../../model/db';
-const CrewSelect = ({allowCreate = false}: {allowCreate:boolean})=>{
+import { IPropsSelectGereric } from './types';
+const CrewSelect = ({allowCreate = false,required}:  IPropsSelectGereric)=>{
     return (<Select 
         formField={'crew'} 
         allowCreate={allowCreate} 
@@ -10,6 +11,7 @@ const CrewSelect = ({allowCreate = false}: {allowCreate:boolean})=>{
         placeholder="Rechercher un membre d'équipage"
         multiple={true}
         label="Membre d'équipage"
+        required
          />)
 }
 export default CrewSelect;

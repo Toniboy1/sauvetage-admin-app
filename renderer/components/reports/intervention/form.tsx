@@ -1,4 +1,4 @@
-import { Typography, Button, Grid, Stack } from "@mui/material";
+import { Typography, Button, Grid, Stack, Box, Card, CardContent, CardHeader } from "@mui/material";
 import LocationData from "../../location/coordinates";
 import RescuedData from "../../recuscued";
 import DateTimeIntervention from "../../time";
@@ -14,90 +14,102 @@ import ActionTakenSelect from "../../select/actions_taken";
 import InterventionDestinationSelect from "../../select/intervention_destination";
 import InterventionLocationSelect from "../../select/intervention_location";
 const Remark = dynamic(() => import("../../remark"), { ssr: false });
+
 const InterventionForm = () => {
   return (
-    <div>
-      <DateTimeIntervention />
-      <Grid container spacing={1} marginY={2}>
-        <Grid container item spacing={3}>
-          <Grid item xs={4}>
-            <Typography variant="h5">Equipage : </Typography>
-          </Grid>
-          <Grid item xs={4}>
-            <PiloteSelect allowCreate={true} />
-          </Grid>
-          <Grid item xs={4}>
-            <CrewSelect allowCreate={true} />
-          </Grid>
-        </Grid>
-        <Grid container item spacing={4} marginY={1}>
-          <Grid item xs={3}>
-            <Typography variant="h5">Alarmé par : </Typography>
-          </Grid>
-          <Grid item xs={3}>
-            <AlarmedBySelect allowCreate={true} />
-          </Grid>
-          <Grid item xs={3}>
-            <Typography variant="h5">Gravité de l'intervention : </Typography>
-          </Grid>
-          <Grid item xs={3}>
-            <SeveritySelect allowCreate={false} />
-          </Grid>
-        </Grid>
-        <Grid container item spacing={4}>
-          <Grid item xs={3}>
-            <Typography variant="h5">Type d'intervention : </Typography>
-          </Grid>
-          <Grid item xs={3}>
-            <InterventionTypeSelect allowCreate={false} />
-          </Grid>
-          <Grid item xs={3}>
-            <Typography variant="h5">Autre moyens engagés : </Typography>
-          </Grid>
-          <Grid item xs={3}>
-            <OtherMeansSelect allowCreate={true}></OtherMeansSelect>
-          </Grid>
-        </Grid>
-      </Grid>
-      <RescuedData />
-      <Grid container spacing={1} marginY={2}>
-        <Grid container item spacing={4} marginY={1}>
-          <Grid item xs={3}>
-            <Typography variant="h5">Cause : </Typography>
-          </Grid>
-          <Grid item xs={3}>
-            <CauseSelect allowCreate={true} />
-          </Grid>
-          <Grid item xs={3}>
-            <Typography variant="h5">Mesure prises : </Typography>
-          </Grid>
-          <Grid item xs={3}>
-            <ActionTakenSelect allowCreate={true} />
-          </Grid>
-          <Grid item xs={3}>
-            <Typography variant="h5">Localisation : </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <LocationData />
-          </Grid>
-          <Grid item xs={3}>
-            <InterventionLocationSelect allowCreate={true} />
-          </Grid>
-          <Grid item xs={3}>
-            <Typography variant="h5">Ramené à/au : </Typography>
-          </Grid>
-          <Grid item xs={3}>
-            <InterventionDestinationSelect allowCreate={true} />
-          </Grid>
-        </Grid>
-      </Grid>
-      <Typography variant="h5">Remarque : </Typography>
-      <Remark />
-      <Button variant="contained" color="primary" type="submit">
-        {" "}
-        Soummettre
-      </Button>
-    </div>
+    <Box component="section" sx={{ p: 2, border: '1px dashed grey' }} padding={6} >
+      <Stack spacing={2}>
+        <DateTimeIntervention />
+        <Card>
+          <CardHeader title="Personnel engagé" />
+          <CardContent>
+            <Stack spacing={12} direction={"row"} alignItems={"center"} justifyContent={"center"}>
+              <Stack spacing={4} direction="row">
+                <Typography variant="h6">Pilote:</Typography>
+                <PiloteSelect allowCreate={true} required={true} />
+              </Stack>
+              <Stack spacing={4} direction="row">
+                <Typography variant="h6">Equipage:</Typography>
+                <CrewSelect allowCreate={true} required={false} />
+              </Stack>
+            </Stack>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader title="Déroulement" />
+          <CardContent>
+            <Stack spacing={12} direction={"row"} alignItems={"center"} justifyContent={"center"}>
+              <Stack spacing={4} direction="column">
+                <Stack spacing={4} direction="row">
+                  <Typography variant="h6">Alarmé par:</Typography>
+                  <AlarmedBySelect allowCreate={true} required={true} />
+                </Stack>
+                <Stack spacing={4} direction="row">
+                  <Typography variant="h6">Gravité de l'intervention:</Typography>
+                  <SeveritySelect allowCreate={false} required={true} />
+                </Stack>
+              </Stack>
+              <Stack spacing={4} direction="column">
+                <Stack spacing={4} direction="row">
+                  <Typography variant="h6">Type d'intervention:</Typography>
+                  <InterventionTypeSelect allowCreate={false} required={true} />
+                </Stack>
+                <Stack spacing={4} direction="row">
+                  <Typography variant="h6">Cause:</Typography>
+                  <CauseSelect allowCreate={true} required={true} />
+                </Stack>
+              </Stack>
+              <Stack spacing={4} direction="column">
+                <Stack spacing={4} direction="row">
+                  <Typography variant="h6">Mesure prises:</Typography>
+                  <ActionTakenSelect allowCreate={true} required={true} />
+                </Stack>
+                <Stack spacing={4} direction="row">
+                  <Typography variant="h6">Autre moyens engagés:</Typography>
+                  <OtherMeansSelect allowCreate={true} required={false} />
+                </Stack>
+              </Stack>
+            </Stack>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader title="Personnes secourues" />
+          <CardContent>
+            <RescuedData />
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader title="Localisation" />
+          <CardContent >
+            <Stack spacing={12} direction={"row"} alignItems={"center"} justifyContent={"center"}>
+              <Stack spacing={4} direction="row">
+                <Stack spacing={4} direction="row" justifyContent={"center"} alignItems={"center"}>
+                  <Typography variant="h6">Coordonnées:</Typography>
+                  <LocationData />
+                </Stack>
+                <Stack spacing={4} direction="column">
+                  <Stack spacing={4} direction="row" justifyContent={"center"} alignItems={"center"}>
+                    <Typography variant="h6">Lieux d'intervention:</Typography>
+                    <InterventionLocationSelect allowCreate={true} required={true} />
+                  </Stack>
+                  <Stack spacing={4} direction="row" justifyContent={"center"} alignItems={"center"}>
+                    <Typography variant="h6">Ramené à/au:</Typography>
+                    <InterventionDestinationSelect allowCreate={true} required={false} />
+                  </Stack>
+                </Stack>
+              </Stack>
+            </Stack>
+          </CardContent>
+        </Card>
+        <Typography variant="h6">Remarque:</Typography>
+        <Remark />
+
+        {/* Submit Button */}
+        <Button variant="contained" color="primary" type="submit">
+          Soumettre
+        </Button>
+      </Stack>
+    </Box>
   );
 };
 export default InterventionForm;

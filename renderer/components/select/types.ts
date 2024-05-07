@@ -9,6 +9,13 @@ export interface IPropsSelect<T extends GenericProperties,TExt extends GenericPr
     placeholder: string;
     multiple: boolean;
     label: string;
+    required: boolean
+}
+
+export interface IPropsSelectGereric {
+    allowCreate:boolean, 
+    required:boolean
+    multiple?:boolean
 }
 
 export type GenericProperties = {

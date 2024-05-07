@@ -1,6 +1,7 @@
 import Select from './generic';
 import db from '../../model/db';
-const SeveritySelect = ({allowCreate = false}: {allowCreate:boolean})=>{
+import { IPropsSelectGereric } from './types';
+const SeveritySelect = ({allowCreate = false,required,multiple= false}:  IPropsSelectGereric)=>{
     return (<Select 
         formField={'severity'} 
         allowCreate={allowCreate} 
@@ -8,8 +9,9 @@ const SeveritySelect = ({allowCreate = false}: {allowCreate:boolean})=>{
         searchOptions={async (searchTerm) => await db.searchSeverities(searchTerm)}
         addOption={async (name) => await db.addSeverity(name)}
         placeholder="Rechercher une sévérité"
-        multiple={false}
         label='Sévérité'
+        required={required}
+        multiple={multiple}
          />)
 }
 export default SeveritySelect;
