@@ -16,7 +16,7 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
-import { IIntervention } from "../../interventions/types";
+import { IInterventionType } from "../../interventions/types";
 
 /**
  * Represents a component that displays a list of intervention and allows adding, editing, and deleting intervention.
@@ -25,7 +25,7 @@ import { IIntervention } from "../../interventions/types";
 const InterventionComponent = () => {
   const [intervention, setIntervention] = useState([]);
   const [open, setOpen] = useState(false);
-  const [currentIntervention, setCurrentIntervention] = useState<IIntervention>(
+  const [currentIntervention, setCurrentIntervention] = useState<IInterventionType>(
     {
       id: 0,
       name: "",
@@ -79,7 +79,7 @@ const InterventionComponent = () => {
    * Handles the click event when a intervention is clicked.
    * @param intervention - The intervention object that was clicked.
    */
-  const handleClickOpen = (intervention: IIntervention) => {
+  const handleClickOpen = (intervention: IInterventionType) => {
     setCurrentIntervention(intervention);
     setOpen(true);
   };
