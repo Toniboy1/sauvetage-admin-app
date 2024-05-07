@@ -1,4 +1,4 @@
-export interface ICommonLocation{
-    id?: number;
-    name: string;
+export interface ICommonLocation {
+  id?: number;
+  name: string;
 }

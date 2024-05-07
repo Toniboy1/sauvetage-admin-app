@@ -63,7 +63,9 @@ describe("Database", () => {
     }
     const allPeople = await db.getAllPeople();
     expect(allPeople).toHaveLength(people.length);
-    expect(allPeople.map(p => p.name)).toEqual(expect.arrayContaining(people.map(p => p.name)));
+    expect(allPeople.map((p) => p.name)).toEqual(
+      expect.arrayContaining(people.map((p) => p.name)),
+    );
   });
   /**
    * Test case for clearing all people from the database.
@@ -80,8 +82,7 @@ describe("Database", () => {
     await db.clearPeople();
     const allPeople = await db.getAllPeople();
     expect(allPeople).toHaveLength(0);
-  }
-  );
+  });
   /**
    * Test case for fetching a person from the database.
    */
@@ -106,6 +107,5 @@ describe("Database", () => {
     const name = "John Doe";
     await db.addPerson(name);
     await expect(db.addPerson(name)).rejects.toThrow();
-  }
-  );
+  });
 });

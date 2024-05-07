@@ -144,7 +144,8 @@ const SeverityComponent = () => {
         <DialogTitle id="form-dialog-title">Update Severity</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To update the name of the severity, please enter their new name here.
+            To update the name of the severity, please enter their new name
+            here.
           </DialogContentText>
           <TextField
             autoFocus

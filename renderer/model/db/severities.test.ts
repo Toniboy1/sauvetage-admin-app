@@ -63,7 +63,9 @@ describe("Database", () => {
     }
     const allSeverities = await db.getAllSeverities();
     expect(allSeverities).toHaveLength(severities.length);
-    expect(allSeverities.map(p => p.name)).toEqual(expect.arrayContaining(severities.map(p => p.name)));
+    expect(allSeverities.map((p) => p.name)).toEqual(
+      expect.arrayContaining(severities.map((p) => p.name)),
+    );
   });
   /**
    * Test case for clearing all severities from the database.
@@ -80,8 +82,7 @@ describe("Database", () => {
     await db.clearSeverities();
     const allSeverities = await db.getAllSeverities();
     expect(allSeverities).toHaveLength(0);
-  }
-  );
+  });
   /**
    * Test case for fetching a severity from the database.
    */
@@ -106,6 +107,5 @@ describe("Database", () => {
     const name = "John Doe";
     await db.addSeverity(name);
     await expect(db.addSeverity(name)).rejects.toThrow();
-  }
-  );
+  });
 });

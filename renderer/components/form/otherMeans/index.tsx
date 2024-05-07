@@ -144,7 +144,8 @@ const OtherMeanComponent = () => {
         <DialogTitle id="form-dialog-title">Update OtherMean</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To update the name of the othermean, please enter their new name here.
+            To update the name of the othermean, please enter their new name
+            here.
           </DialogContentText>
           <TextField
             autoFocus

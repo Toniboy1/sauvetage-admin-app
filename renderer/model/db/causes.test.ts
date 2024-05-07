@@ -63,7 +63,9 @@ describe("Database", () => {
     }
     const allCauses = await db.getAllCauses();
     expect(allCauses).toHaveLength(causes.length);
-    expect(allCauses.map(p => p.name)).toEqual(expect.arrayContaining(causes.map(p => p.name)));
+    expect(allCauses.map((p) => p.name)).toEqual(
+      expect.arrayContaining(causes.map((p) => p.name)),
+    );
   });
   /**
    * Test case for clearing all causes from the database.
@@ -80,8 +82,7 @@ describe("Database", () => {
     await db.clearCauses();
     const allCauses = await db.getAllCauses();
     expect(allCauses).toHaveLength(0);
-  }
-  );
+  });
   /**
    * Test case for fetching a cause from the database.
    */
@@ -106,6 +107,5 @@ describe("Database", () => {
     const name = "John Doe";
     await db.addCause(name);
     await expect(db.addCause(name)).rejects.toThrow();
-  }
-  );
+  });
 });

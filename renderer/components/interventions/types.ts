@@ -1,36 +1,35 @@
 import { AutocompleteGetTagProps } from "@mui/material";
 
-
 /**
  * Represents a person's data.
  */
-export interface IInterventionData {
-    name: string;
+export interface IInterventionTypeData {
+  name: string;
 }
 
 /**
  * Represents a person.
  */
-export interface IIntervention extends IInterventionData {
-    id?: number;
+export interface IInterventionType extends IInterventionTypeData {
+  id?: number;
 }
 /**
- * Represents an extended version of the IIntervention interface.
+ * Represents an extended version of the IInterventionType interface.
  */
-export interface IInterventionExtended extends IIntervention {
-    firstLetter: string;
+export interface IInterventionTypeExtended extends IInterventionType {
+  firstLetter: string;
 }
 
 /**
  * Represents the properties of a tag in an autocomplete component.
  */
 export interface TagProps extends ReturnType<AutocompleteGetTagProps> {
-    label: string;
+  label: string;
 }
 /**
  * Represents the props for the Intervention component.
  */
 export interface IPropsIntervention {
-    labelText: string;
-    allowCreate?: boolean;
+  labelText: string;
+  allowCreate?: boolean;
 }

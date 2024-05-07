@@ -67,7 +67,7 @@ export const NextLinkComposed = React.forwardRef<
 
 /**
  * Props for the Link component.
- * 
+ *
  */
 export type LinkProps = {
   activeClassName?: string;

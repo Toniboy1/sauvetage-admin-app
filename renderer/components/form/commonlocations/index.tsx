@@ -25,10 +25,11 @@ import { ICommonLocation } from "../../location/types";
 const CommonLocationsComponent = () => {
   const [commonlocations, setCommonLocations] = useState([]);
   const [open, setOpen] = useState(false);
-  const [currentCommonLocation, setCurrentCommonLocation] = useState<ICommonLocation>({
-    id: 0,
-    name: "",
-  });
+  const [currentCommonLocation, setCurrentCommonLocation] =
+    useState<ICommonLocation>({
+      id: 0,
+      name: "",
+    });
 
   useEffect(() => {
     loadCommonLocations();
@@ -65,7 +66,10 @@ const CommonLocationsComponent = () => {
    * Updates the commonlocation's name in the database, reloads the commonlocations list, and closes the form.
    */
   const handleUpdateCommonLocation = async () => {
-    await db.updateCommonLocation(currentCommonLocation.id, currentCommonLocation.name);
+    await db.updateCommonLocation(
+      currentCommonLocation.id,
+      currentCommonLocation.name,
+    );
     loadCommonLocations();
     handleClose();
   };
@@ -94,13 +98,20 @@ const CommonLocationsComponent = () => {
   const handleNameChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    setCurrentCommonLocation({ ...currentCommonLocation, name: event.target.value });
+    setCurrentCommonLocation({
+      ...currentCommonLocation,
+      name: event.target.value,
+    });
   };
 
   return (
     <div>
       <h1>CommonLocations</h1>
-      <Button variant="contained" color="primary" onClick={handleAddCommonLocation}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleAddCommonLocation}
+      >
         Add New CommonLocation
       </Button>
       <TableContainer component={Paper}>
@@ -126,7 +137,9 @@ const CommonLocationsComponent = () => {
                   </Button>
                   <Button
                     color="error"
-                    onClick={() => handleDeleteCommonLocation(commonlocation.id)}
+                    onClick={() =>
+                      handleDeleteCommonLocation(commonlocation.id)
+                    }
                   >
                     Delete
                   </Button>
@@ -144,7 +157,8 @@ const CommonLocationsComponent = () => {
         <DialogTitle id="form-dialog-title">Update CommonLocation</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To update the name of the commonlocation, please enter their new name here.
+            To update the name of the commonlocation, please enter their new
+            name here.
           </DialogContentText>
           <TextField
             autoFocus

@@ -63,7 +63,9 @@ describe("Database", () => {
     }
     const allActions = await db.getAllActions();
     expect(allActions).toHaveLength(actions.length);
-    expect(allActions.map(p => p.name)).toEqual(expect.arrayContaining(actions.map(p => p.name)));
+    expect(allActions.map((p) => p.name)).toEqual(
+      expect.arrayContaining(actions.map((p) => p.name)),
+    );
   });
   /**
    * Test case for clearing all actions from the database.
@@ -80,8 +82,7 @@ describe("Database", () => {
     await db.clearActions();
     const allActions = await db.getAllActions();
     expect(allActions).toHaveLength(0);
-  }
-  );
+  });
   /**
    * Test case for fetching a action from the database.
    */
@@ -106,6 +107,5 @@ describe("Database", () => {
     const name = "John Doe";
     await db.addAction(name);
     await expect(db.addAction(name)).rejects.toThrow();
-  }
-  );
+  });
 });

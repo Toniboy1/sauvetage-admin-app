@@ -63,7 +63,9 @@ describe("Database", () => {
     }
     const allOtherMeans = await db.getAllOtherMeans();
     expect(allOtherMeans).toHaveLength(othermeans.length);
-    expect(allOtherMeans.map(p => p.name)).toEqual(expect.arrayContaining(othermeans.map(p => p.name)));
+    expect(allOtherMeans.map((p) => p.name)).toEqual(
+      expect.arrayContaining(othermeans.map((p) => p.name)),
+    );
   });
   /**
    * Test case for clearing all othermeans from the database.
@@ -80,8 +82,7 @@ describe("Database", () => {
     await db.clearOtherMeans();
     const allOtherMeans = await db.getAllOtherMeans();
     expect(allOtherMeans).toHaveLength(0);
-  }
-  );
+  });
   /**
    * Test case for fetching a othermean from the database.
    */
@@ -106,6 +107,5 @@ describe("Database", () => {
     const name = "John Doe";
     await db.addOtherMean(name);
     await expect(db.addOtherMean(name)).rejects.toThrow();
-  }
-  );
+  });
 });

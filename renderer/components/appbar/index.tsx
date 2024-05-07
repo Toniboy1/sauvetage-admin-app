@@ -34,28 +34,27 @@ const pages = [
   },
   {
     name: "Types de moyens supplémentaires",
-    href: "/other_means"
+    href: "/other_means",
   },
   {
     name: "Types de causes",
-    href: "/causes"
+    href: "/causes",
   },
   {
     name: "Actions",
-    href: "/actions"
+    href: "/actions",
   },
   {
     name: "Lieux communs",
-    href: "/common_locations"
+    href: "/common_locations",
   },
   {
     name: "Liste des rapports d'interventions",
-    href: "/forms_interventions"
-  }
+    href: "/forms_interventions",
+  },
 ];
 
 const AppNavBar = () => {
-
   return (
     <AppBar position="static">
       <Container maxWidth="xl">

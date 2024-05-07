@@ -1,13 +1,11 @@
 {
-    "$schema": "https://typedoc.org/schema.json",
-    "entryPointStrategy": "expand",
-    "entryPoints": [
-        "./renderer"
-    ],
-    "out": "./docs",
-    "exclude": [
-        "./renderer/.next/**",
-        "**/*.test.ts",
-        "./renderer/next.config.js"
-    ]
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPointStrategy": "expand",
+  "entryPoints": ["./renderer"],
+  "out": "./docs",
+  "exclude": [
+    "./renderer/.next/**",
+    "**/*.test.ts",
+    "./renderer/next.config.js"
+  ]
 }

@@ -1,8 +1,8 @@
-"use client"
+"use client";
 import React from "react";
 import Head from "next/head";
 import { styled } from "@mui/material";
-import { useForm, SubmitHandler, FormProvider } from "react-hook-form"
+import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { IInterventionFormData } from "../components/reports/intervention/types";
 import db from "../model/db";
 import InterventionForm from "../components/reports/intervention/form";
@@ -22,17 +22,18 @@ const Root = styled("div")(({ theme }) => {
  */
 export default function Intervention() {
   const methods = useForm<IInterventionFormData>({
-    defaultValues:{
+    defaultValues: {
       startedAt: dayjs(),
       endedAt: dayjs(),
       date: dayjs(),
-      pilote:[],
-      crew:[],
-    }
-  })
+      pilote: [],
+      crew: [],
+      alarmedBy: [],
+    },
+  });
   const onSubmit: SubmitHandler<IInterventionFormData> = async (data) => {
     await db.addFormIntervention(data);
-  }
+  };
   return (
     <React.Fragment>
       <Head>
@@ -41,7 +42,8 @@ export default function Intervention() {
       <Root>
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
-          {methods.formState.errors && JSON.stringify(methods.formState.errors)}
+            {methods.formState.errors &&
+              JSON.stringify(methods.formState.errors)}
             <InterventionForm />
           </form>
         </FormProvider>

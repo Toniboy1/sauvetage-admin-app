@@ -1,4 +1,1 @@
-
-
-export interface ITimeProps {
-}
+export interface ITimeProps {}

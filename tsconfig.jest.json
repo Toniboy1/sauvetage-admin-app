@@ -1,8 +1,7 @@
 {
-    "extends": "./tsconfig.json",
-    "compilerOptions": {
-      "module": "commonjs"
-    },
-    "include": ["src/**/*", "tests/**/*"]
-  }
-  
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs"
+  },
+  "include": ["src/**/*", "tests/**/*"]
+}

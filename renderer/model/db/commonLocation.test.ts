@@ -63,7 +63,9 @@ describe("Database", () => {
     }
     const allCommonLocations = await db.getAllCommonLocations();
     expect(allCommonLocations).toHaveLength(commonlocations.length);
-    expect(allCommonLocations.map(p => p.name)).toEqual(expect.arrayContaining(commonlocations.map(p => p.name)));
+    expect(allCommonLocations.map((p) => p.name)).toEqual(
+      expect.arrayContaining(commonlocations.map((p) => p.name)),
+    );
   });
   /**
    * Test case for clearing all commonlocations from the database.
@@ -80,8 +82,7 @@ describe("Database", () => {
     await db.clearCommonLocations();
     const allCommonLocations = await db.getAllCommonLocations();
     expect(allCommonLocations).toHaveLength(0);
-  }
-  );
+  });
   /**
    * Test case for fetching a commonlocation from the database.
    */
@@ -106,6 +107,5 @@ describe("Database", () => {
     const name = "John Doe";
     await db.addCommonLocation(name);
     await expect(db.addCommonLocation(name)).rejects.toThrow();
-  }
-  );
+  });
 });

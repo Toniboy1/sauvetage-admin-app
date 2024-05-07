@@ -14,14 +14,13 @@ const DateTimeIntervention = () => {
 
   // Fetch initial values from form context and set them using setValue
   useEffect(() => {
-    const initialStartedAt = getValues('startedAt');
-    const initialEndedAt = getValues('endedAt');
-    const initialDate = getValues('date');
+    const initialStartedAt = getValues("startedAt");
+    const initialEndedAt = getValues("endedAt");
+    const initialDate = getValues("date");
 
-    if (initialStartedAt) setValue('startedAt', dayjs(initialStartedAt));
-    if (initialEndedAt) setValue('endedAt', dayjs(initialEndedAt));
-    if (initialDate) setValue('date', dayjs(initialDate));
-
+    if (initialStartedAt) setValue("startedAt", dayjs(initialStartedAt));
+    if (initialEndedAt) setValue("endedAt", dayjs(initialEndedAt));
+    if (initialDate) setValue("date", dayjs(initialDate));
   }, [getValues, setValue]);
 
   return (

@@ -63,7 +63,9 @@ describe("Database", () => {
     }
     const allInterventions = await db.getAllInterventions();
     expect(allInterventions).toHaveLength(interventions.length);
-    expect(allInterventions.map(p => p.name)).toEqual(expect.arrayContaining(interventions.map(p => p.name)));
+    expect(allInterventions.map((p) => p.name)).toEqual(
+      expect.arrayContaining(interventions.map((p) => p.name)),
+    );
   });
   /**
    * Test case for clearing all interventions from the database.
@@ -80,8 +82,7 @@ describe("Database", () => {
     await db.clearInterventions();
     const allInterventions = await db.getAllInterventions();
     expect(allInterventions).toHaveLength(0);
-  }
-  );
+  });
   /**
    * Test case for fetching a intervention from the database.
    */
@@ -106,6 +107,5 @@ describe("Database", () => {
     const name = "John Doe";
     await db.addIntervention(name);
     await expect(db.addIntervention(name)).rejects.toThrow();
-  }
-  );
+  });
 });

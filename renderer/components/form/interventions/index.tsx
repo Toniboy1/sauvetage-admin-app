@@ -25,10 +25,12 @@ import { IIntervention } from "../../interventions/types";
 const InterventionComponent = () => {
   const [intervention, setIntervention] = useState([]);
   const [open, setOpen] = useState(false);
-  const [currentIntervention, setCurrentIntervention] = useState<IIntervention>({
-    id: 0,
-    name: "",
-  });
+  const [currentIntervention, setCurrentIntervention] = useState<IIntervention>(
+    {
+      id: 0,
+      name: "",
+    },
+  );
 
   useEffect(() => {
     loadIntervention();
@@ -65,7 +67,10 @@ const InterventionComponent = () => {
    * Updates the intervention's name in the database, reloads the intervention list, and closes the form.
    */
   const handleUpdateIntervention = async () => {
-    await db.updateIntervention(currentIntervention.id, currentIntervention.name);
+    await db.updateIntervention(
+      currentIntervention.id,
+      currentIntervention.name,
+    );
     loadIntervention();
     handleClose();
   };
@@ -94,13 +99,20 @@ const InterventionComponent = () => {
   const handleNameChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    setCurrentIntervention({ ...currentIntervention, name: event.target.value });
+    setCurrentIntervention({
+      ...currentIntervention,
+      name: event.target.value,
+    });
   };
 
   return (
     <div>
       <h1>Intervention</h1>
-      <Button variant="contained" color="primary" onClick={handleAddIntervention}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleAddIntervention}
+      >
         Add New Intervention
       </Button>
       <TableContainer component={Paper}>
@@ -144,7 +156,8 @@ const InterventionComponent = () => {
         <DialogTitle id="form-dialog-title">Update Intervention</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To update the name of the intervention, please enter their new name here.
+            To update the name of the intervention, please enter their new name
+            here.
           </DialogContentText>
           <TextField
             autoFocus

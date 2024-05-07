@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 import db from "../../../model/db";
 import {
   Table,
@@ -18,7 +18,9 @@ import { IInterventionFormData } from "../../reports/intervention/types";
  * @returns The JSX element representing the FormInterventions component.
  */
 const FormInterventionsComponent = () => {
-  const [forminterventions, setFormInterventions] = useState<IInterventionFormData[]>([]);
+  const [forminterventions, setFormInterventions] = useState<
+    IInterventionFormData[]
+  >([]);
 
   useEffect(() => {
     loadFormInterventions();
@@ -49,7 +51,6 @@ const FormInterventionsComponent = () => {
     loadFormInterventions();
   };
 
-
   /**
    * redirect to the edit formintervention page
    * @param formintervention - The formintervention data.
@@ -68,7 +69,11 @@ const FormInterventionsComponent = () => {
   return (
     <div>
       <h1>FormInterventions</h1>
-      <Button variant="contained" color="primary" onClick={handleAddFormIntervention}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleAddFormIntervention}
+      >
         Add New FormIntervention
       </Button>
       <TableContainer component={Paper}>
@@ -89,13 +94,29 @@ const FormInterventionsComponent = () => {
               return (
                 <TableRow key={formintervention.id}>
                   <TableCell>{formintervention.id}</TableCell>
-                  <TableCell>{formintervention.startedAt.tz("Europe/Zurich").format('HH:mm')}</TableCell>
-                  <TableCell>{formintervention.endedAt.tz("Europe/Zurich").format('HH:mm')}</TableCell>
-                  <TableCell>{formintervention.date.tz("Europe/Zurich").format('DD-MM-YYYY')}</TableCell>
-                  <TableCell>{formintervention.pilote.map((p) => p.name).join(", ")}</TableCell>
-                  <TableCell>{formintervention.crew.map((p) => p.name).join(", ")}</TableCell>
                   <TableCell>
-                  <Button
+                    {formintervention.startedAt
+                      .tz("Europe/Zurich")
+                      .format("HH:mm")}
+                  </TableCell>
+                  <TableCell>
+                    {formintervention.endedAt
+                      .tz("Europe/Zurich")
+                      .format("HH:mm")}
+                  </TableCell>
+                  <TableCell>
+                    {formintervention.date
+                      .tz("Europe/Zurich")
+                      .format("DD-MM-YYYY")}
+                  </TableCell>
+                  <TableCell>
+                    {formintervention.pilote.map((p) => p.name).join(", ")}
+                  </TableCell>
+                  <TableCell>
+                    {formintervention.crew.map((p) => p.name).join(", ")}
+                  </TableCell>
+                  <TableCell>
+                    <Button
                       color="primary"
                       onClick={() => handleView(formintervention)}
                     >
@@ -109,15 +130,16 @@ const FormInterventionsComponent = () => {
                     </Button>
                     <Button
                       color="error"
-                      onClick={() => handleDeleteFormIntervention(formintervention.id)}
+                      onClick={() =>
+                        handleDeleteFormIntervention(formintervention.id)
+                      }
                     >
                       Delete
                     </Button>
                   </TableCell>
                 </TableRow>
-              )
+              );
             })}
-
           </TableBody>
         </Table>
       </TableContainer>

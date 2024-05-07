@@ -63,7 +63,9 @@ describe("Database", () => {
     }
     const allAlarms = await db.getAllAlarms();
     expect(allAlarms).toHaveLength(alarms.length);
-    expect(allAlarms.map(p => p.name)).toEqual(expect.arrayContaining(alarms.map(p => p.name)));
+    expect(allAlarms.map((p) => p.name)).toEqual(
+      expect.arrayContaining(alarms.map((p) => p.name)),
+    );
   });
   /**
    * Test case for clearing all alarms from the database.
@@ -80,8 +82,7 @@ describe("Database", () => {
     await db.clearAlarms();
     const allAlarms = await db.getAllAlarms();
     expect(allAlarms).toHaveLength(0);
-  }
-  );
+  });
   /**
    * Test case for fetching a alarm from the database.
    */
@@ -106,6 +107,5 @@ describe("Database", () => {
     const name = "John Doe";
     await db.addAlarm(name);
     await expect(db.addAlarm(name)).rejects.toThrow();
-  }
-  );
+  });
 });

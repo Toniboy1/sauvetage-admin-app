@@ -1,4 +1,4 @@
-export interface ISeverity{
-    id?: number;
-    name: string;
+export interface ISeverity {
+  id?: number;
+  name: string;
 }
