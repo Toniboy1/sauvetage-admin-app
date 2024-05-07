@@ -1,38 +1,74 @@
-<p align="center"><img src="https://i.imgur.com/flcMvDC.png"></p>
+# Sauvetage Admin App
 
-## Usage
+## Description
 
-### Create an App
+Sauvetage Admin App is designed to handle various forms efficiently. With a focus on ease of use, this app integrates several advanced libraries and frameworks to ensure a smooth experience for administrators.
 
+## Version
+
+1.0.0
+
+## Author
+
+Anthony Fasano
+
+## Main Features
+
+- **Form Management:** Streamlined handling of multiple forms.
+- **Date Selection:** Integrated with MUI date pickers for effective date management.
+- **Data Persistence:** Uses Dexie for indexedDB support.
+- **Configuration Saving:** Electron-store is utilized for local storage solutions.
+
+## Installation
+
+To install the necessary dependencies, run the following command:
+
+```bash
+npm install
 ```
-# with npx
-$ npx create-nextron-app my-app --example with-material-ui
 
-# with yarn
-$ yarn create nextron-app my-app --example with-material-ui
+## Available Scripts
 
-# with pnpm
-$ pnpm dlx create-nextron-app my-app --example with-material-ui
+In the project directory, you can run:
+
+```bash
+npm run dev
 ```
 
-### Install Dependencies
+Runs the app in the development mode using Nextron.
 
-```
-$ cd my-app
-
-# using yarn or npm
-$ yarn (or `npm install`)
-
-# using pnpm
-$ pnpm install --shamefully-hoist
+```bash
+npm run build
 ```
 
-### Use it
+Builds the app for production to the dist folder using Nextron.
 
+```bash
+npm run test
 ```
-# development mode
-$ yarn dev (or `npm run dev` or `pnpm run dev`)
 
-# production build
-$ yarn build (or `npm run build` or `pnpm run build`)
+Launches the test runner in the interactive watch mode using Jest.
+
+```bash
+npm run lint
 ```
+
+Runs ESLint to check for JavaScript and TypeScript linting errors.
+
+```bash
+npm run fix
+```
+
+Automatically fixes format and linting issues found by ESLint.
+
+```bash
+npm run prettier
+```
+
+Formats code according to predefined styles.
+
+```bash
+npm run doc
+```
+
+Generates code documentation using Typedoc.

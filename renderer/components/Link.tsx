@@ -1,39 +1,41 @@
-import * as React from 'react'
-import clsx from 'clsx'
-import { useRouter } from 'next/router'
-import NextLink, { LinkProps as NextLinkProps } from 'next/link'
-import MuiLink, { LinkProps as MuiLinkProps } from '@mui/material/Link'
-import { styled } from '@mui/material/styles'
-import { forwardRef } from 'react'
+import * as React from "react";
+import clsx from "clsx";
+import { useRouter } from "next/router";
+import NextLink, { LinkProps as NextLinkProps } from "next/link";
+import MuiLink, { LinkProps as MuiLinkProps } from "@mui/material/Link";
+import { styled } from "@mui/material/styles";
+import { forwardRef } from "react";
 
 // Add support for the sx prop for consistency with the other branches.
-const Anchor = styled('a')({})
+const Anchor = styled("a")({});
 
 /**
  * Props for the NextLinkComposed component.
  */
 interface NextLinkComposedProps
-  extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'>,
+  extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">,
     Omit<
       NextLinkProps,
-      'href' | 'as' | 'passHref' | 'onMouseEnter' | 'onClick' | 'onTouchStart'
+      "href" | "as" | "passHref" | "onMouseEnter" | "onClick" | "onTouchStart"
     > {
-  to: NextLinkProps['href']
-  linkAs?: NextLinkProps['as']
+  to: NextLinkProps["href"];
+  linkAs?: NextLinkProps["as"];
 }
 
 /**
  * A composed link component that wraps the NextLink component.
- *
- * @component
  * @example
  * ```tsx
  * <NextLinkComposed to="/about" prefetch>
  *   About
  * </NextLinkComposed>
  * ```
+ * @returns The JSX element representing the composed link.
  */
-export const NextLinkComposed = React.forwardRef<HTMLAnchorElement, NextLinkComposedProps>(function NextLinkComposed(props, ref) {
+export const NextLinkComposed = React.forwardRef<
+  HTMLAnchorElement,
+  NextLinkComposedProps
+>(function NextLinkComposed(props, ref) {
   const {
     to,
     linkAs,
@@ -44,7 +46,7 @@ export const NextLinkComposed = React.forwardRef<HTMLAnchorElement, NextLinkComp
     legacyBehavior = true,
     locale,
     ...other
-  } = props
+  } = props;
 
   return (
     <NextLink
@@ -60,34 +62,34 @@ export const NextLinkComposed = React.forwardRef<HTMLAnchorElement, NextLinkComp
     >
       <Anchor ref={ref} {...other} />
     </NextLink>
-  )
-})
+  );
+});
 
 /**
  * Props for the Link component.
+ *
  */
 export type LinkProps = {
   activeClassName?: string;
-  as?: NextLinkProps['as'];
-  href: NextLinkProps['href'];
-  linkAs?: NextLinkProps['as']; // Useful when the as prop is shallow by styled().
+  as?: NextLinkProps["as"];
+  href: NextLinkProps["href"];
+  linkAs?: NextLinkProps["as"]; // Useful when the as prop is shallow by styled().
   noLinkStyle?: boolean;
-} & Omit<NextLinkComposedProps, 'to' | 'linkAs' | 'href'> &
-  Omit<MuiLinkProps, 'href'>;
+} & Omit<NextLinkComposedProps, "to" | "linkAs" | "href"> &
+  Omit<MuiLinkProps, "href">;
 
 /**
  * A custom link component that wraps Next.js Link and MUI Link.
- *
- * @component
  * @example
  * ```tsx
  * <Link href="/about">About</Link>
  * ```
+ * @returns The JSX element representing the link.
  */
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(
   function Link(props, ref) {
     const {
-      activeClassName = 'active',
+      activeClassName = "active",
       as,
       className: classNameProps,
       href,
@@ -97,20 +99,19 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       noLinkStyle,
       prefetch,
       replace,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      role, // Link don't have roles.
+      role,
       scroll,
       shallow,
       ...other
-    } = props
+    } = props;
 
-    const router = useRouter()
-    const pathname = typeof href === 'string' ? href : href.pathname
+    const router = useRouter();
+    const pathname = typeof href === "string" ? href : href.pathname;
     const className = clsx(classNameProps, {
       [activeClassName]: router.pathname === pathname && activeClassName,
-    })
+    });
 
-    const linkAs = linkAsProp || as
+    const linkAs = linkAsProp || as;
     const nextjsProps = {
       to: href,
       linkAs,
@@ -120,7 +121,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       prefetch,
       legacyBehavior,
       locale,
-    }
+    };
 
     if (noLinkStyle) {
       return (
@@ -130,7 +131,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
           {...nextjsProps}
           {...other}
         />
-      )
+      );
     }
 
     return (
@@ -141,8 +142,8 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
         {...nextjsProps}
         {...other}
       />
-    )
-  }
-)
+    );
+  },
+);
 
-export default Link
+export default Link;

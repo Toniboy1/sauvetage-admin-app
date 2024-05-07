@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import {
   Html,
   Head,
@@ -6,22 +6,21 @@ import {
   NextScript,
   DocumentProps,
   DocumentContext,
-} from 'next/document'
+} from "next/document";
 import {
   DocumentHeadTags,
   DocumentHeadTagsProps,
   documentGetInitialProps,
-} from '@mui/material-nextjs/v14-pagesRouter'
-import theme, { roboto } from '../lib/theme'
+} from "@mui/material-nextjs/v14-pagesRouter";
+import theme, { roboto } from "../lib/theme";
 
 /**
  * Renders the custom document for the Next.js application.
- *
  * @param props - The props for the document component.
  * @returns The rendered document component.
  */
 export default function MyDocument(
-  props: DocumentProps & DocumentHeadTagsProps
+  props: DocumentProps & DocumentHeadTagsProps,
 ) {
   return (
     <Html lang="en" className={roboto.className}>
@@ -36,17 +35,15 @@ export default function MyDocument(
         <NextScript />
       </body>
     </Html>
-  )
+  );
 }
 /**
  * Retrieves the initial props for the document component.
- *
- * @static
  * @async
- * @param {DocumentContext} ctx - The document context.
- * @returns {Promise<DocumentProps>} The final props for the document component.
+ * @param ctx - The document context.
+ * @returns The final props for the document component.
  */
 MyDocument.getInitialProps = async (ctx: DocumentContext) => {
-  const finalProps = await documentGetInitialProps(ctx)
-  return finalProps
-}
+  const finalProps = await documentGetInitialProps(ctx);
+  return finalProps;
+};

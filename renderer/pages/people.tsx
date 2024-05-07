@@ -1,21 +1,20 @@
-import React from 'react'
-import Head from 'next/head'
-import { styled } from '@mui/material'
-import People from '../components/form/people'
+import React from "react";
+import Head from "next/head";
+import { styled } from "@mui/material";
+import People from "../components/form/people";
 
 /**
  * Root component for the People page.
  */
-const Root = styled('div')(({ theme }) => {
+const Root = styled("div")(({ theme }) => {
   return {
-    textAlign: 'center',
+    textAlign: "center",
     paddingTop: theme.spacing(4),
-  }
-})
+  };
+});
 
 /**
  * Renders the PeoplePage component.
- * 
  * @returns The rendered PeoplePage component.
  */
 export default function PeoplePage() {
@@ -25,8 +24,8 @@ export default function PeoplePage() {
         <title>Sauveteurs</title>
       </Head>
       <Root>
-        <People/>
+        <People />
       </Root>
     </React.Fragment>
-  )
+  );
 }
