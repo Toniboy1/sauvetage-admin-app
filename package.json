@@ -15,7 +15,8 @@
     "postinstall": "electron-builder install-app-deps",
     "doc": "npx typedoc",
     "prepare": "husky install",
-    "release": "grunt bump && electron-builder"
+    "release": "grunt bump && electron-builder",
+    "publish": "electron-builder"
   },
   "build": {
     "appId": "com.anthonyfasano.sauvetage-admin-app",

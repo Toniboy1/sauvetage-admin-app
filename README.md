@@ -72,3 +72,9 @@ npm run doc
 ```
 
 Generates code documentation using Typedoc.
+
+
+## Generate a new release
+```bash
+grunt-bum && npm run release
+```
