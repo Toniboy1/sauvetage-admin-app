@@ -11,15 +11,12 @@ const RescuedData = () => {
   const [deceased, setDeceased] = useState(0);
   const [boatRegistration, setBoatRegistration] = useState("VD");
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={6}>
-        <Stack
-          spacing={2}
-          direction={"row"}
-          justifyContent="center"
-          alignItems="center"
-        >
+    <Grid container spacing={1}>
+      <Grid container item spacing={3}>
+        <Grid item xs={3}>
           <Typography>Nombre de personnes assistées </Typography>
+        </Grid>
+        <Grid item xs={3}>
           <TextField
             type="number"
             InputProps={{ inputProps: { min: 0 } }}
@@ -29,16 +26,11 @@ const RescuedData = () => {
               setRescued(parseInt(event.target.value));
             }}
           />
-        </Stack>
-      </Grid>
-      <Grid item xs={6}>
-        <Stack
-          spacing={2}
-          direction={"row"}
-          justifyContent="center"
-          alignItems="center"
-        >
+        </Grid>
+        <Grid item xs={3}>
           <Typography>Nombre de personnes médicalisées </Typography>
+        </Grid>
+        <Grid item xs={3}>
           <TextField
             type="number"
             InputProps={{ inputProps: { min: 0 } }}
@@ -48,16 +40,11 @@ const RescuedData = () => {
               setMedicalized(parseInt(event.target.value));
             }}
           />
-        </Stack>
-      </Grid>
-      <Grid item xs={6}>
-        <Stack
-          spacing={2}
-          direction={"row"}
-          justifyContent="center"
-          alignItems="center"
-        >
+        </Grid>
+        <Grid item xs={3}>
           <Typography>Nombre de personnes décédées </Typography>
+        </Grid>
+        <Grid item xs={3}>
           <TextField
             type="number"
             InputProps={{ inputProps: { min: 0 } }}
@@ -67,16 +54,11 @@ const RescuedData = () => {
               setDeceased(parseInt(event.target.value));
             }}
           />
-        </Stack>
-      </Grid>
-      <Grid item xs={6}>
-        <Stack
-          spacing={2}
-          direction={"row"}
-          justifyContent="center"
-          alignItems="center"
-        >
+        </Grid>
+        <Grid item xs={3}>
           <Typography>Immatriculation du bateau </Typography>
+        </Grid>
+        <Grid item xs={3}>
           <TextField
             type="text"
             name="boatRegistration"
@@ -85,7 +67,7 @@ const RescuedData = () => {
               setBoatRegistration(event.target.value);
             }}
           />
-        </Stack>
+        </Grid>
       </Grid>
     </Grid>
   );

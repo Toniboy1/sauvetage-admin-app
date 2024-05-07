@@ -7,6 +7,7 @@ import { IOtherMean } from "../../otherMeans/types";
 import {ICause} from "../../causes/types";
 import { IAction } from "../../actions/types";
 import { ICommonLocation } from "../../location/types";
+import { Block } from "@blocknote/core";
 
 export interface IInterventionFormData {
   id?: number;
@@ -23,6 +24,7 @@ export interface IInterventionFormData {
   actionsTaken: Array<IAction>;
   interventionLocation: Array<ICommonLocation>;
   interventionDestination: Array<ICommonLocation>;
+  remark: string;
 }
 export interface IInterventionData {
   id?: number;
@@ -39,10 +41,12 @@ export interface IInterventionData {
   actionsTaken: Array<IAction>;
   interventionLocation: Array<ICommonLocation>;
   interventionDestination: Array<ICommonLocation>;
+  remark: string;
 }
 
 export type ArrayPropertyNames<T> = {
-  [K in keyof T]: T[K] extends Array<any> ? K : never
+  [K in keyof T]: K extends 'remark' ? never : T[K] extends Array<any> ? K : never
 }[keyof T];
+
 
 export type ArrayProperties<T> = Pick<T, ArrayPropertyNames<T>>;

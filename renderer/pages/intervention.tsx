@@ -29,6 +29,14 @@ export default function Intervention() {
       pilote: [],
       crew: [],
       alarmedBy: [],
+      severity: [],
+      inteverntionType: [],
+      otherMeans: [],
+      causes: [],
+      actionsTaken: [],
+      interventionLocation: [],
+      interventionDestination: [],
+      remark: "",
     },
   });
   const onSubmit: SubmitHandler<IInterventionFormData> = async (data) => {

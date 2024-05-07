@@ -1,4 +1,3 @@
-import { Path } from "react-hook-form";
 import { ArrayPropertyNames, IInterventionFormData } from "../reports/intervention/types";
 
 export interface IPropsSelect<T extends GenericProperties,TExt extends GenericPropertiesExtended>{

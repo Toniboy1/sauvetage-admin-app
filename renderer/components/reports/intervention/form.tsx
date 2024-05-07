@@ -1,4 +1,4 @@
-import { Stack, Typography, Divider, Button } from "@mui/material";
+import { Typography, Button, Grid, Stack } from "@mui/material";
 import LocationData from "../../location/coordinates";
 import RescuedData from "../../recuscued";
 import DateTimeIntervention from "../../time";
@@ -18,81 +18,80 @@ const InterventionForm = () => {
   return (
     <div>
       <DateTimeIntervention />
-      <Stack
-        spacing={2}
-        direction={"row"}
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Typography variant="h5">Equipage : </Typography>
-        <PiloteSelect allowCreate={true} />
-        <CrewSelect allowCreate={true}/>
-      </Stack>
-      <Divider />
-      <Stack
-        spacing={2}
-        direction={"row"}
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Typography variant="h5">Alarmé par : </Typography>
-        <AlarmedBySelect allowCreate={true} />
-        <Typography variant="h5">Gravité de l'intervention : </Typography>
-        <SeveritySelect allowCreate={false} />
-      </Stack>
-      <Divider />
-      <Stack
-        spacing={2}
-        direction={"row"}
-        justifyContent="center"
-        alignItems="center"
-      >
-        <div>
-          <Typography variant="h5">Type d'intervention : </Typography>
-          <InterventionTypeSelect allowCreate={false}/>
-        </div>
-        <div>
-          <Typography variant="h5">Autre moyens engagés : </Typography>
-          <OtherMeansSelect allowCreate={true}></OtherMeansSelect>
-        </div>
-      </Stack>
+      <Grid container spacing={1} marginY={2}>
+        <Grid container item spacing={3}>
+          <Grid item xs={4}>
+            <Typography variant="h5">Equipage : </Typography>
+          </Grid>
+          <Grid item xs={4}>
+            <PiloteSelect allowCreate={true} />
+          </Grid>
+          <Grid item xs={4}>
+            <CrewSelect allowCreate={true} />
+          </Grid>
+        </Grid>
+        <Grid container item spacing={4} marginY={1}>
+          <Grid item xs={3}>
+            <Typography variant="h5">Alarmé par : </Typography>
+          </Grid>
+          <Grid item xs={3}>
+            <AlarmedBySelect allowCreate={true} />
+          </Grid>
+          <Grid item xs={3}>
+            <Typography variant="h5">Gravité de l'intervention : </Typography>
+          </Grid>
+          <Grid item xs={3}>
+            <SeveritySelect allowCreate={false} />
+          </Grid>
+        </Grid>
+        <Grid container item spacing={4}>
+          <Grid item xs={3}>
+            <Typography variant="h5">Type d'intervention : </Typography>
+          </Grid>
+          <Grid item xs={3}>
+            <InterventionTypeSelect allowCreate={false} />
+          </Grid>
+          <Grid item xs={3}>
+            <Typography variant="h5">Autre moyens engagés : </Typography>
+          </Grid>
+          <Grid item xs={3}>
+            <OtherMeansSelect allowCreate={true}></OtherMeansSelect>
+          </Grid>
+        </Grid>
+      </Grid>
       <RescuedData />
-      <Stack
-        spacing={2}
-        direction={"row"}
-        justifyContent="center"
-        alignItems="center"
-      >
-        <div>
-          <Typography variant="h5">Cause : </Typography>
-          <CauseSelect allowCreate={true} />
-        </div>
-        <div>
-          <Typography variant="h5">Mesure prises : </Typography>
-          <ActionTakenSelect allowCreate={true} />
-        </div>
-      </Stack>
-
-      <Stack
-        spacing={2}
-        direction={"column"}
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Typography variant="h5">Localisation : </Typography>
-        <LocationData />
-        <InterventionLocationSelect allowCreate={true} />
-        <Typography variant="h5">Ramené à/au : </Typography>
-        <InterventionDestinationSelect allowCreate={true} />
-      </Stack>
-      <Stack
-        spacing={2}
-        direction={"column"}
-        alignItems="center"
-        justifyContent="center"
-      >
-        <Typography variant="h5">Remarque : </Typography>
-      </Stack>
+      <Grid container spacing={1} marginY={2}>
+        <Grid container item spacing={4} marginY={1}>
+          <Grid item xs={3}>
+            <Typography variant="h5">Cause : </Typography>
+          </Grid>
+          <Grid item xs={3}>
+            <CauseSelect allowCreate={true} />
+          </Grid>
+          <Grid item xs={3}>
+            <Typography variant="h5">Mesure prises : </Typography>
+          </Grid>
+          <Grid item xs={3}>
+            <ActionTakenSelect allowCreate={true} />
+          </Grid>
+          <Grid item xs={3}>
+            <Typography variant="h5">Localisation : </Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <LocationData />
+          </Grid>
+          <Grid item xs={3}>
+            <InterventionLocationSelect allowCreate={true} />
+          </Grid>
+          <Grid item xs={3}>
+            <Typography variant="h5">Ramené à/au : </Typography>
+          </Grid>
+          <Grid item xs={3}>
+            <InterventionDestinationSelect allowCreate={true} />
+          </Grid>
+        </Grid>
+      </Grid>
+      <Typography variant="h5">Remarque : </Typography>
       <Remark />
       <Button variant="contained" color="primary" type="submit">
         {" "}
