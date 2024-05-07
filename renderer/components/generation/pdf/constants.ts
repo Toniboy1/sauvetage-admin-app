@@ -2,6 +2,7 @@ import jsPDF from "jspdf";
 
 const TEXT_FONT = (doc: jsPDF) => {
     doc.setTextColor(0, 0, 0);
+    doc.setFontSize(12);
     doc.setFont("calibri", "normal");
   };
   const SUBTITLE_FONT = (doc: jsPDF) => {
@@ -13,7 +14,7 @@ const TEXT_FONT = (doc: jsPDF) => {
   const TITLE = (doc: jsPDF) => {
     doc.setFontSize(15);
     doc.setFont("calibri", "bold");
-    doc.setTextColor(0, 0, 255);
+    doc.setTextColor(68, 114, 196);
   };
   const HEADER_TITLE = (doc: jsPDF) => {
     doc.setFontSize(28);

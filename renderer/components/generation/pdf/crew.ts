@@ -6,15 +6,16 @@ import { IInterventionFormData } from "../../reports/intervention/types";
  *  Setup the fonts for the pdfs
  * @param doc  - The jsPDF document
  * @param form - The form data
+ * @param startingY - The starting Y position
+ * @returns The new Y position
  */
-const crewComponent = (doc: jsPDF, form: IInterventionFormData) => {
+const crewComponent = (doc: jsPDF, form: IInterventionFormData, startingY:number): number => {
     TITLE(doc);
-    doc.text("Équipage:", 20, 90);
+    doc.text("Équipage:", 20,  10 + startingY);
     TEXT_FONT(doc);
-    doc.text(`Pilote: ${form.pilote.map((p) => p.name).join(", ")}`, 20, 100);
-    form.crew.forEach((p, index) => {
-      doc.text(`Equipier ${index + 1}: ${p.name}`, 20, 110 + index * 10);
-    });
+    doc.text(`Pilote: ${form.pilote.map((p) => p.name).join(", ")}`, 20, 20 + startingY);
+    doc.text(`Equipiers: ${form.crew.map((p) => p.name).join(", ")}`, 20, 30 + startingY);
+    return startingY + 30;
   };
 
 export default crewComponent;
