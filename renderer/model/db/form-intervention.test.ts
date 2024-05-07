@@ -1,7 +1,6 @@
 import dayjs from "dayjs";
 import { Database } from "./index";
 import { describe, expect, test, beforeEach } from "@jest/globals";
-import { IIntervention } from "../../components/interventions/types";
 import { IInterventionFormData } from "../../components/reports/intervention/types";
 /**
  * Test suite for the Database module.
@@ -29,6 +28,14 @@ describe("Database", () => {
         { id: 2, name: "Jane Smith" },
         { id: 3, name: "Bob Johnson" },
       ],
+      alarmedBy: [{ id: 1, name: "John Doe" }],
+      severity: [{ id: 1, name: "Big" }],
+      inteverntionType: [{ id: 1, name: "Type" }],
+      otherMeans: [{ id: 1, name: "Other" }],
+      causes: [{ id: 1, name: "Cause" }],
+      actionsTaken: [{ id: 1, name: "Action" }],
+      interventionLocation: [{ id: 1, name: "Location" }],
+      interventionDestination: [{ id: 1, name: "Destination" }],
     };
     const id = await db.addFormIntervention(input);
     const formintervention = await db.getFormIntervention(id);
@@ -48,6 +55,14 @@ describe("Database", () => {
         { id: 2, name: "Jane Smith" },
         { id: 3, name: "Bob Johnson" },
       ],
+      alarmedBy: [{ id: 1, name: "John Doe" }],
+      severity: [{ id: 1, name: "Big" }],
+      inteverntionType: [{ id: 1, name: "Type" }],
+      otherMeans: [{ id: 1, name: "Other" }],
+      causes: [{ id: 1, name: "Cause" }],
+      actionsTaken: [{ id: 1, name: "Action" }],
+      interventionLocation: [{ id: 1, name: "Location" }],
+      interventionDestination: [{ id: 1, name: "Destination" }],
     };
     const id = await db.addFormIntervention(input);
     const update = {
@@ -59,6 +74,14 @@ describe("Database", () => {
         { id: 4, name: "Jane Smith4" },
         { id: 5, name: "Bob Johnson5" },
       ],
+      alarmedBy: [{ id: 1, name: "John Doe" }],
+      severity: [{ id: 1, name: "Big" }],
+      inteverntionType: [{ id: 1, name: "Type" }],
+      otherMeans: [{ id: 1, name: "Other" }],
+      causes: [{ id: 1, name: "Cause" }],
+      actionsTaken: [{ id: 1, name: "Action" }],
+      interventionLocation: [{ id: 1, name: "Location" }],
+      interventionDestination: [{ id: 1, name: "Destination" }],
     };
     await db.updateFormIntervention(id, update);
     const updatedFormIntervention = await db.getFormIntervention(id);
@@ -78,6 +101,14 @@ describe("Database", () => {
         { id: 2, name: "Jane Smith" },
         { id: 3, name: "Bob Johnson" },
       ],
+      alarmedBy: [{ id: 1, name: "John Doe" }],
+      severity: [{ id: 1, name: "Big" }],
+      inteverntionType: [{ id: 1, name: "Type" }],
+      otherMeans: [{ id: 1, name: "Other" }],
+      causes: [{ id: 1, name: "Cause" }],
+      actionsTaken: [{ id: 1, name: "Action" }],
+      interventionLocation: [{ id: 1, name: "Location" }],
+      interventionDestination: [{ id: 1, name: "Destination" }],
     };
     const id = await db.addFormIntervention(input);
     await db.deleteFormIntervention(id);
@@ -99,6 +130,14 @@ describe("Database", () => {
           { id: 2, name: "Jane Smith" },
           { id: 3, name: "Bob Johnson" },
         ],
+        alarmedBy: [{ id: 1, name: "John Doe" }],
+        severity: [{ id: 1, name: "Big" }],
+        inteverntionType: [{ id: 1, name: "Type" }],
+        otherMeans: [{ id: 1, name: "Other" }],
+        causes: [{ id: 1, name: "Cause" }],
+        actionsTaken: [{ id: 1, name: "Action" }],
+        interventionLocation: [{ id: 1, name: "Location" }],
+        interventionDestination: [{ id: 1, name: "Destination" }],
       },
       {
         startedAt: dayjs(),
@@ -109,6 +148,14 @@ describe("Database", () => {
           { id: 5, name: "Jane Smith5" },
           { id: 6, name: "Bob Johnson6" },
         ],
+        alarmedBy: [{ id: 1, name: "John Doe" }],
+        severity: [{ id: 1, name: "Big" }],
+        inteverntionType: [{ id: 1, name: "Type" }],
+        otherMeans: [{ id: 1, name: "Other" }],
+        causes: [{ id: 1, name: "Cause" }],
+        actionsTaken: [{ id: 1, name: "Action" }],
+        interventionLocation: [{ id: 1, name: "Location" }],
+        interventionDestination: [{ id: 1, name: "Destination" }],
       },
       {
         startedAt: dayjs(),
@@ -119,7 +166,16 @@ describe("Database", () => {
           { id: 8, name: "Jane Smith8" },
           { id: 9, name: "Bob Johnson9" },
         ],
+        alarmedBy: [{ id: 1, name: "John Doe" }],
+        severity: [{ id: 1, name: "Big" }],
+        inteverntionType: [{ id: 1, name: "Type" }],
+        otherMeans: [{ id: 1, name: "Other" }],
+        causes: [{ id: 1, name: "Cause" }],
+        actionsTaken: [{ id: 1, name: "Action" }],
+        interventionLocation: [{ id: 1, name: "Location" }],
+        interventionDestination: [{ id: 1, name: "Destination" }],
       },
+
     ];
     let result: IInterventionFormData[] = [];
     for (let i = 0; i < forminterventions.length; i++) {
@@ -144,6 +200,14 @@ describe("Database", () => {
           { id: 2, name: "Jane Smith" },
           { id: 3, name: "Bob Johnson" },
         ],
+        alarmedBy: [{ id: 1, name: "John Doe" }],
+        severity: [{ id: 1, name: "Big" }],
+        inteverntionType: [{ id: 1, name: "Type" }],
+        otherMeans: [{ id: 1, name: "Other" }],
+        causes: [{ id: 1, name: "Cause" }],
+        actionsTaken: [{ id: 1, name: "Action" }],
+        interventionLocation: [{ id: 1, name: "Location" }],
+        interventionDestination: [{ id: 1, name: "Destination" }],
       },
       {
         startedAt: dayjs(),
@@ -154,6 +218,14 @@ describe("Database", () => {
           { id: 5, name: "Jane Smith5" },
           { id: 6, name: "Bob Johnson6" },
         ],
+        alarmedBy: [{ id: 1, name: "John Doe" }],
+        severity: [{ id: 1, name: "Big" }],
+        inteverntionType: [{ id: 1, name: "Type" }],
+        otherMeans: [{ id: 1, name: "Other" }],
+        causes: [{ id: 1, name: "Cause" }],
+        actionsTaken: [{ id: 1, name: "Action" }],
+        interventionLocation: [{ id: 1, name: "Location" }],
+        interventionDestination: [{ id: 1, name: "Destination" }],
       },
       {
         startedAt: dayjs(),
@@ -164,6 +236,14 @@ describe("Database", () => {
           { id: 8, name: "Jane Smith8" },
           { id: 9, name: "Bob Johnson9" },
         ],
+        alarmedBy: [{ id: 1, name: "John Doe" }],
+        severity: [{ id: 1, name: "Big" }],
+        inteverntionType: [{ id: 1, name: "Type" }],
+        otherMeans: [{ id: 1, name: "Other" }],
+        causes: [{ id: 1, name: "Cause" }],
+        actionsTaken: [{ id: 1, name: "Action" }],
+        interventionLocation: [{ id: 1, name: "Location" }],
+        interventionDestination: [{ id: 1, name: "Destination" }],
       },
     ];
     for (const formintervention of forminterventions) {
@@ -186,6 +266,14 @@ describe("Database", () => {
         { id: 2, name: "Jane Smith" },
         { id: 3, name: "Bob Johnson" },
       ],
+      alarmedBy: [{ id: 1, name: "John Doe" }],
+      severity: [{ id: 1, name: "Big" }],
+      inteverntionType: [{ id: 1, name: "Type" }],
+      otherMeans: [{ id: 1, name: "Other" }],
+      causes: [{ id: 1, name: "Cause" }],
+      actionsTaken: [{ id: 1, name: "Action" }],
+      interventionLocation: [{ id: 1, name: "Location" }],
+      interventionDestination: [{ id: 1, name: "Destination" }],
     };
     const id = await db.addFormIntervention(input);
     const formintervention = await db.getFormIntervention(id);
