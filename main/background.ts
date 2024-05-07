@@ -3,6 +3,14 @@ import { app, ipcMain, protocol } from "electron";
 import serve from "electron-serve";
 import { createWindow } from "./helpers";
 
+// const dockMenu = Menu.buildFromTemplate([
+//   {
+//     label: "Créer Nouveau Rapport d'intervention",
+//     click () { app = "/intervention"; }
+//   }
+// ])
+
+
 const isProd = process.env.NODE_ENV === "production";
 protocol.registerSchemesAsPrivileged([
   { scheme: 'http', privileges: { standard: true, bypassCSP: true, allowServiceWorkers: true, supportFetchAPI: true, corsEnabled: true, stream: true } },
@@ -16,13 +24,15 @@ if (isProd) {
 }
 
 (async () => {
-  await app.whenReady();
-
+   await app.whenReady();
+  //  app.dock.setMenu(dockMenu);
   const mainWindow = createWindow("main", {
     width: 1000,
     height: 600,
+    icon: path.join(__dirname,"ressources/", "icon.png"),
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
+      spellcheck: true
     },
   });
 
