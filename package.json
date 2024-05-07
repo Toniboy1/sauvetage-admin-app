@@ -2,7 +2,7 @@
   "private": true,
   "name": "sauvetage-admin-app",
   "description": "App to handle forms",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Anthony Fasano",
   "main": "app/background.js",
   "scripts": {
