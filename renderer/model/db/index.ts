@@ -12,7 +12,6 @@ import {
   IInterventionFormData,
 } from "../../components/reports/intervention/types";
 import dayjs from "dayjs";
-import { Block } from "@blocknote/core";
 
 /**
  * Sets up and manages the database using Dexie.js.
@@ -50,7 +49,7 @@ export class Database extends Dexie {
    * @returns A promise that resolves with the list of all people.
    */
   async getAllPeople(): Promise<Array<IPeople>> {
-    return this.people.toArray() as Promise<Array<IPeople>>;
+    return this.people.orderBy("name").toArray() as Promise<Array<IPeople>>;
   }
   /**
    * Deletes all people from the database.
@@ -117,7 +116,7 @@ export class Database extends Dexie {
    * @returns A promise that resolves with the list of all alarms.
    */
   async getAllAlarms(): Promise<Array<IAlarm>> {
-    return this.alarms.toArray() as Promise<Array<IAlarm>>;
+    return this.alarms.orderBy("name").toArray() as Promise<Array<IAlarm>>;
   }
 
   /**
@@ -186,7 +185,7 @@ export class Database extends Dexie {
    * @returns A promise that resolves with the list of all severities.
    */
   async getAllSeverities(): Promise<Array<ISeverity>> {
-    return this.severities.toArray() as Promise<Array<ISeverity>>;
+    return this.severities.orderBy("name").toArray() as Promise<Array<ISeverity>>;
   }
 
   /**
@@ -249,8 +248,7 @@ export class Database extends Dexie {
   async searchSeverities(input: string): Promise<ISeverity[]> {
     return this.severities
       .where("name")
-      .startsWithIgnoreCase(input)
-      .toArray();
+      .startsWithIgnoreCase(input).toArray();
   }
 
   /**
@@ -295,7 +293,7 @@ export class Database extends Dexie {
    * @returns A promise that resolves with the list of all alarms.
    */
   async getAllInterventions(): Promise<Array<IInterventionType>> {
-    return this.interventions.toArray() as Promise<Array<IInterventionType>>;
+    return this.interventions.orderBy("name").toArray() as Promise<Array<IInterventionType>>;
   }
 
   /**
@@ -320,8 +318,7 @@ export class Database extends Dexie {
   async searchInterventions(input: string): Promise<IInterventionType[]> {
     return this.interventions
       .where("name")
-      .startsWithIgnoreCase(input)
-      .toArray();
+      .startsWithIgnoreCase(input).toArray();
   }
   /**
    * Fetches an othermean from the database.
@@ -365,7 +362,7 @@ export class Database extends Dexie {
    * @returns A promise that resolves with the list of all alarms.
    */
   async getAllOtherMeans(): Promise<Array<IOtherMean>> {
-    return this.otherMeans.toArray() as Promise<Array<IOtherMean>>;
+    return this.otherMeans.orderBy("name").toArray() as Promise<Array<IOtherMean>>;
   }
 
   /**
@@ -390,8 +387,7 @@ export class Database extends Dexie {
   async searchOtherMeans(input: string): Promise<IOtherMean[]> {
     return this.otherMeans
       .where("name")
-      .startsWithIgnoreCase(input)
-      .toArray();
+      .startsWithIgnoreCase(input).toArray();
   }
   /**
    * Fetches an cause from the database.
@@ -435,7 +431,7 @@ export class Database extends Dexie {
    * @returns A promise that resolves with the list of all alarms.
    */
   async getAllCauses(): Promise<Array<ICause>> {
-    return this.causes.toArray() as Promise<Array<ICause>>;
+    return this.causes.orderBy("name").toArray() as Promise<Array<ICause>>;
   }
 
   /**
@@ -503,7 +499,7 @@ export class Database extends Dexie {
    * @returns A promise that resolves with the list of all alarms.
    */
   async getAllActions(): Promise<Array<IAction>> {
-    return this.actions.toArray() as Promise<Array<IAction>>;
+    return this.actions.orderBy("name").toArray() as Promise<Array<IAction>>;
   }
 
   /**
@@ -569,7 +565,7 @@ export class Database extends Dexie {
    * @returns A promise that resolves with the list of all alarms.
    */
   async getAllCommonLocations(): Promise<Array<ICommonLocation>> {
-    return this.commonlocations.toArray() as Promise<Array<ICommonLocation>>;
+    return this.commonlocations.orderBy("name").toArray() as Promise<Array<ICommonLocation>>;
   }
 
   /**
@@ -594,15 +590,14 @@ export class Database extends Dexie {
   async searchCommonLocation(input: string): Promise<ICommonLocation[]> {
     return this.commonlocations
       .where("name")
-      .startsWithIgnoreCase(input)
-      .toArray();
+      .startsWithIgnoreCase(input).toArray();
   }
   /**
    * Fetches all forminterventions from the database.
    * @returns A promise that resolves with the list of all forminterventions.
    */
   async getAllFormInterventions(): Promise<Array<IInterventionFormData>> {
-    const data = await this.forminterventions.toArray();
+    const data = await this.forminterventions.orderBy("date").toArray();
     return data.map((data) => {
       return {
         ...data,

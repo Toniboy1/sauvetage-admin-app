@@ -12,6 +12,8 @@ import {
   Button,
 } from "@mui/material";
 import { IInterventionFormData } from "../../reports/intervention/types";
+import Intervention from "../../generation/pdf/intervention";
+import jsPDF from "jspdf";
 
 /**
  * Represents a component that displays a list of forminterventions and allows adding, editing, and deleting forminterventions.
@@ -63,8 +65,17 @@ const FormInterventionsComponent = () => {
    *  redirect to the view formintervention page
    * @param formintervention - The formintervention data.
    */
-  function handleView(formintervention: IInterventionFormData): void {
-    document.location.href = "/print/intervention/" + formintervention.id;
+  async function handlPrint(formintervention: IInterventionFormData): Promise<void> {
+    const doc = new jsPDF();
+    const alarms = await db.getAllAlarms()
+    const severities = await db.getAllSeverities()
+    const interventionTypes = await db.getAllInterventions()
+    const causes = await db.getAllCauses()
+    const otherMeans = await db.getAllOtherMeans()
+    const actionsTaken = await db.getAllActions()
+    const commonLocations = await db.getAllCommonLocations()
+    Intervention(doc, formintervention,alarms,severities,interventionTypes,causes,otherMeans,actionsTaken,commonLocations);
+    doc.save("rapport-intervention.pdf");
   }
   return (
     <div>
@@ -118,9 +129,9 @@ const FormInterventionsComponent = () => {
                   <TableCell>
                     <Button
                       color="primary"
-                      onClick={() => handleView(formintervention)}
+                      onClick={() => handlPrint(formintervention)}
                     >
-                      View
+                      Print
                     </Button>
                     <Button
                       color="primary"
