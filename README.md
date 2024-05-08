@@ -78,10 +78,8 @@ Generates code documentation using Typedoc.
 
 ## Generate a new release
 ```bash
-export GH_TOKEN="$(gh auth token)"
-grunt-bum && npm run release
+grunt-bump
 ```
-
 
 ## Docs
 Technical documentation is availlable [here] https://toniboy1.github.io/sauvetage-admin-app/index.html
