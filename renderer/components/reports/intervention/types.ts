@@ -4,7 +4,7 @@ import { IAlarm } from "../../alarm/types";
 import { ISeverity } from "../../severities/types";
 import { IInterventionType } from "../../interventions/types";
 import { IOtherMean } from "../../otherMeans/types";
-import {ICause} from "../../causes/types";
+import { ICause } from "../../causes/types";
 import { IAction } from "../../actions/types";
 import { ICommonLocation } from "../../location/types";
 
@@ -17,7 +17,7 @@ export interface IInterventionFormData {
   crew: Array<IPeople>;
   alarmedBy: Array<IAlarm>;
   severity: Array<ISeverity>;
-  inteverntionType: Array<IInterventionType>
+  inteverntionType: Array<IInterventionType>;
   otherMeans: Array<IOtherMean>;
   causes: Array<ICause>;
   actionsTaken: Array<IAction>;
@@ -38,7 +38,7 @@ export interface IInterventionData {
   crew: Array<IPeople>;
   alarmedBy: Array<IAlarm>;
   severity: Array<ISeverity>;
-  inteverntionType: Array<IInterventionType>
+  inteverntionType: Array<IInterventionType>;
   otherMeans: Array<IOtherMean>;
   causes: Array<ICause>;
   actionsTaken: Array<IAction>;
@@ -52,8 +52,7 @@ export interface IInterventionData {
 }
 
 export type ArrayPropertyNames<T> = {
-  [K in keyof T]: T[K] extends Array<any> ? K : never
+  [K in keyof T]: T[K] extends Array<any> ? K : never;
 }[keyof T];
-
 
 export type ArrayProperties<T> = Pick<T, ArrayPropertyNames<T>>;

@@ -13,10 +13,11 @@ const RescuedData = () => {
   const initialDeceased = getValues("deceased");
   const initialBoatRegistration = getValues("boatRegistration");
 
-  if (initialRescued) setValue("rescued",initialRescued);
-  if (initialMedicalized) setValue("medicalized",initialMedicalized);
-  if (initialDeceased) setValue("deceased",initialDeceased);
-  if (initialBoatRegistration) setValue("boatRegistration",initialBoatRegistration);
+  if (initialRescued) setValue("rescued", initialRescued);
+  if (initialMedicalized) setValue("medicalized", initialMedicalized);
+  if (initialDeceased) setValue("deceased", initialDeceased);
+  if (initialBoatRegistration)
+    setValue("boatRegistration", initialBoatRegistration);
   return (
     <Grid container spacing={1}>
       <Grid container item spacing={3}>
@@ -31,7 +32,9 @@ const RescuedData = () => {
           />
         </Grid>
         <Grid item xs={3}>
-          <Typography variant="h6">Nombre de personnes médicalisées </Typography>
+          <Typography variant="h6">
+            Nombre de personnes médicalisées{" "}
+          </Typography>
         </Grid>
         <Grid item xs={3}>
           <TextField
@@ -54,10 +57,7 @@ const RescuedData = () => {
           <Typography variant="h6">Immatriculation du bateau </Typography>
         </Grid>
         <Grid item xs={3}>
-          <TextField
-            type="text"
-            {...register("boatRegistration")}
-          />
+          <TextField type="text" {...register("boatRegistration")} />
         </Grid>
       </Grid>
     </Grid>

@@ -11,8 +11,6 @@ const EditIntervention = () => {
   const formId = parseInt(id as string);
   const [form, setForm] = useState<IInterventionFormData>();
 
-
-
   useEffect(() => {
     if (id) {
       db.getFormIntervention(formId).then(setForm).catch(console.error);
@@ -22,9 +20,7 @@ const EditIntervention = () => {
   if (!form) {
     return <div>Loading...</div>;
   }
-  const generatePDF = () => {
-
-  };
+  const generatePDF = () => {};
   return (
     <div>
       <Fab color="primary" aria-label="add" onClick={generatePDF}>

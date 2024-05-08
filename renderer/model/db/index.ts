@@ -185,7 +185,9 @@ export class Database extends Dexie {
    * @returns A promise that resolves with the list of all severities.
    */
   async getAllSeverities(): Promise<Array<ISeverity>> {
-    return this.severities.orderBy("name").toArray() as Promise<Array<ISeverity>>;
+    return this.severities.orderBy("name").toArray() as Promise<
+      Array<ISeverity>
+    >;
   }
 
   /**
@@ -246,9 +248,7 @@ export class Database extends Dexie {
    * @returns matched severities
    */
   async searchSeverities(input: string): Promise<ISeverity[]> {
-    return this.severities
-      .where("name")
-      .startsWithIgnoreCase(input).toArray();
+    return this.severities.where("name").startsWithIgnoreCase(input).toArray();
   }
 
   /**
@@ -293,7 +293,9 @@ export class Database extends Dexie {
    * @returns A promise that resolves with the list of all alarms.
    */
   async getAllInterventions(): Promise<Array<IInterventionType>> {
-    return this.interventions.orderBy("name").toArray() as Promise<Array<IInterventionType>>;
+    return this.interventions.orderBy("name").toArray() as Promise<
+      Array<IInterventionType>
+    >;
   }
 
   /**
@@ -318,7 +320,8 @@ export class Database extends Dexie {
   async searchInterventions(input: string): Promise<IInterventionType[]> {
     return this.interventions
       .where("name")
-      .startsWithIgnoreCase(input).toArray();
+      .startsWithIgnoreCase(input)
+      .toArray();
   }
   /**
    * Fetches an othermean from the database.
@@ -362,7 +365,9 @@ export class Database extends Dexie {
    * @returns A promise that resolves with the list of all alarms.
    */
   async getAllOtherMeans(): Promise<Array<IOtherMean>> {
-    return this.otherMeans.orderBy("name").toArray() as Promise<Array<IOtherMean>>;
+    return this.otherMeans.orderBy("name").toArray() as Promise<
+      Array<IOtherMean>
+    >;
   }
 
   /**
@@ -385,9 +390,7 @@ export class Database extends Dexie {
    * @returns  matched other means
    */
   async searchOtherMeans(input: string): Promise<IOtherMean[]> {
-    return this.otherMeans
-      .where("name")
-      .startsWithIgnoreCase(input).toArray();
+    return this.otherMeans.where("name").startsWithIgnoreCase(input).toArray();
   }
   /**
    * Fetches an cause from the database.
@@ -565,7 +568,9 @@ export class Database extends Dexie {
    * @returns A promise that resolves with the list of all alarms.
    */
   async getAllCommonLocations(): Promise<Array<ICommonLocation>> {
-    return this.commonlocations.orderBy("name").toArray() as Promise<Array<ICommonLocation>>;
+    return this.commonlocations.orderBy("name").toArray() as Promise<
+      Array<ICommonLocation>
+    >;
   }
 
   /**
@@ -590,7 +595,8 @@ export class Database extends Dexie {
   async searchCommonLocation(input: string): Promise<ICommonLocation[]> {
     return this.commonlocations
       .where("name")
-      .startsWithIgnoreCase(input).toArray();
+      .startsWithIgnoreCase(input)
+      .toArray();
   }
   /**
    * Fetches all forminterventions from the database.

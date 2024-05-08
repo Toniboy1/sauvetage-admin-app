@@ -1,5 +1,6 @@
 ![Jest coverage](./badges/coverage-jest%20coverage.svg)
 ![builds](https://github.com/Toniboy1/sauvetage-admin-app/actions/workflows/build.yml/badge.svg)
+
 # Sauvetage Admin App
 
 ## Description
@@ -75,11 +76,12 @@ npm run doc
 
 Generates code documentation using Typedoc.
 
-
 ## Generate a new release
+
 ```bash
 grunt-bump
 ```
 
 ## Docs
+
 Technical documentation is availlable [here] https://toniboy1.github.io/sauvetage-admin-app/index.html

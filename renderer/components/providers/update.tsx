@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode } from "react";
 
 interface UpdateContextType {
   updateMessage: string;
@@ -7,8 +7,8 @@ interface UpdateContextType {
 
 // Creating a context with an initial dummy value
 const UpdateContext = createContext<UpdateContextType>({
-  updateMessage: '',
-  updateStatus: () => {}
+  updateMessage: "",
+  updateStatus: () => {},
 });
 
 // Context provider component
@@ -17,7 +17,7 @@ interface UpdateProviderProps {
 }
 
 export const UpdateProvider: React.FC<UpdateProviderProps> = ({ children }) => {
-  const [updateMessage, setUpdateMessage] = useState('');
+  const [updateMessage, setUpdateMessage] = useState("");
 
   const updateStatus = (message: string) => {
     setUpdateMessage(message);

@@ -12,7 +12,6 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import { UpdateProvider } from "../components/providers/update";
-import UpdaterComponent from "../components/updater";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -29,7 +28,6 @@ export default function App(props: AppProps) {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <UpdateProvider>
-        <UpdaterComponent />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <ThemeProvider theme={theme}>
             <CssBaseline />

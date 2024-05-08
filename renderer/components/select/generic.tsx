@@ -3,9 +3,16 @@ import { Autocomplete, TextField, Button, Typography } from "@mui/material";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { debounce } from "lodash";
 import { IInterventionFormData } from "../reports/intervention/types";
-import { GenericProperties, IPropsSelect, GenericPropertiesExtended } from "./types";
+import {
+  GenericProperties,
+  IPropsSelect,
+  GenericPropertiesExtended,
+} from "./types";
 
-const Select = <T extends GenericProperties, TExt extends GenericPropertiesExtended>({
+const Select = <
+  T extends GenericProperties,
+  TExt extends GenericPropertiesExtended,
+>({
   multiple,
   allowCreate = true,
   formField,
@@ -14,7 +21,8 @@ const Select = <T extends GenericProperties, TExt extends GenericPropertiesExten
   addOption,
   placeholder,
   required = false,
-  label }: IPropsSelect<T, TExt>) => {
+  label,
+}: IPropsSelect<T, TExt>) => {
   const { control, getFieldState } = useFormContext<IInterventionFormData>();
   const { fields, append, remove } = useFieldArray({
     control,
@@ -26,12 +34,14 @@ const Select = <T extends GenericProperties, TExt extends GenericPropertiesExten
         value: 1,
         message: "Veuillez sélectionner au moins une alarmne",
       },
-      ...(multiple ? {
-        maxLength: {
-          value: 1,
-          message: "Maximum 1"
-        }
-      } : undefined)
+      ...(multiple
+        ? {
+            maxLength: {
+              value: 1,
+              message: "Maximum 1",
+            },
+          }
+        : undefined),
     },
   });
   const [options, setOptions] = useState<TExt[]>([]);
@@ -78,8 +88,8 @@ const Select = <T extends GenericProperties, TExt extends GenericPropertiesExten
         debounceSearch(newInputValue);
       }
     },
-    [debounceSearch, setInputValue]
-  );;
+    [debounceSearch, setInputValue],
+  );
 
   const handleAddOption = useCallback(async () => {
     if (inputValue) {
@@ -92,15 +102,17 @@ const Select = <T extends GenericProperties, TExt extends GenericPropertiesExten
       append(newOption);
       setInputValue("");
       setOptions((prev: TExt[]) => [...prev, newOption] as TExt[]);
-
     }
   }, [append, inputValue]);
   return (
     <div>
-      {Boolean(getFieldState(formField)?.invalid) && <Typography color="error">{getFieldState(formField)?.error?.root?.message}</Typography>}
+      {Boolean(getFieldState(formField)?.invalid) && (
+        <Typography color="error">
+          {getFieldState(formField)?.error?.root?.message}
+        </Typography>
+      )}
       <Autocomplete
         size="medium"
-
         fullWidth={true}
         multiple
         id={`${formField}-autocomplete`}
@@ -158,7 +170,11 @@ const Select = <T extends GenericProperties, TExt extends GenericPropertiesExten
         renderInput={(params) => (
           <TextField
             error={Boolean(getFieldState(formField)?.invalid)}
-            helperText={getFieldState(formField)?.invalid ? getFieldState(formField)?.error?.message : ""}
+            helperText={
+              getFieldState(formField)?.invalid
+                ? getFieldState(formField)?.error?.message
+                : ""
+            }
             {...params}
             label={label}
             placeholder={placeholder}

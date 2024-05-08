@@ -65,16 +65,28 @@ const FormInterventionsComponent = () => {
    *  redirect to the view formintervention page
    * @param formintervention - The formintervention data.
    */
-  async function handlPrint(formintervention: IInterventionFormData): Promise<void> {
+  async function handlPrint(
+    formintervention: IInterventionFormData,
+  ): Promise<void> {
     const doc = new jsPDF();
-    const alarms = await db.getAllAlarms()
-    const severities = await db.getAllSeverities()
-    const interventionTypes = await db.getAllInterventions()
-    const causes = await db.getAllCauses()
-    const otherMeans = await db.getAllOtherMeans()
-    const actionsTaken = await db.getAllActions()
-    const commonLocations = await db.getAllCommonLocations()
-    Intervention(doc, formintervention,alarms,severities,interventionTypes,causes,otherMeans,actionsTaken,commonLocations);
+    const alarms = await db.getAllAlarms();
+    const severities = await db.getAllSeverities();
+    const interventionTypes = await db.getAllInterventions();
+    const causes = await db.getAllCauses();
+    const otherMeans = await db.getAllOtherMeans();
+    const actionsTaken = await db.getAllActions();
+    const commonLocations = await db.getAllCommonLocations();
+    Intervention(
+      doc,
+      formintervention,
+      alarms,
+      severities,
+      interventionTypes,
+      causes,
+      otherMeans,
+      actionsTaken,
+      commonLocations,
+    );
     doc.save("rapport-intervention.pdf");
   }
   return (

@@ -51,10 +51,10 @@ const pages = [
 ];
 
 const AppNavBar = () => {
-  const { updateMessage } = useUpdate()
-  console.log(updateMessage)
+  const { updateMessage } = useUpdate();
+  console.log(updateMessage);
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
@@ -70,7 +70,7 @@ const AppNavBar = () => {
               </Button>
             ))}
             {updateMessage && (
-              <Typography sx={{ mt: 4, mb: 2, color: 'secondary.main' }}>
+              <Typography sx={{ mt: 4, mb: 2, color: "secondary.main" }}>
                 {updateMessage}
               </Typography>
             )}

@@ -4,7 +4,10 @@ import {
   BrowserWindowConstructorOptions,
   Rectangle,
 } from "electron";
-import { setupTitlebar, attachTitlebarToWindow } from "custom-electron-titlebar/main";
+import {
+  setupTitlebar,
+  attachTitlebarToWindow,
+} from "custom-electron-titlebar/main";
 import Store from "electron-store";
 setupTitlebar();
 export const createWindow = (
@@ -79,7 +82,7 @@ export const createWindow = (
       contextIsolation: true,
       ...options.webPreferences,
     },
-    titleBarStyle: 'hidden',
+    titleBarStyle: "hidden",
     titleBarOverlay: true,
   });
   attachTitlebarToWindow(win);
