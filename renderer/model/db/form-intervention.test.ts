@@ -41,6 +41,8 @@ describe("Database", () => {
       medicalized: 0,
       deceased: 0,
       boatRegistration: "",
+      nCoordinate: "1138470",
+      eCoordinate: "2560250",
     };
     const id = await db.addFormIntervention(input);
     const formintervention = await db.getFormIntervention(id);
@@ -73,6 +75,8 @@ describe("Database", () => {
       medicalized: 0,
       deceased: 0,
       boatRegistration: "",
+      nCoordinate: "1138470",
+      eCoordinate: "2560250",
     };
     const id = await db.addFormIntervention(input);
     const update = {
@@ -97,6 +101,8 @@ describe("Database", () => {
       medicalized: 0,
       deceased: 0,
       boatRegistration: "",
+      nCoordinate: "1138470",
+      eCoordinate: "2560250",
     };
     await db.updateFormIntervention(id, update);
     const updatedFormIntervention = await db.getFormIntervention(id);
@@ -129,6 +135,8 @@ describe("Database", () => {
       medicalized: 0,
       deceased: 0,
       boatRegistration: "",
+      nCoordinate: "1138470",
+      eCoordinate: "2560250",
     };
     const id = await db.addFormIntervention(input);
     await db.deleteFormIntervention(id);
@@ -163,6 +171,8 @@ describe("Database", () => {
         medicalized: 0,
         deceased: 0,
         boatRegistration: "",
+        nCoordinate: "1138470",
+        eCoordinate: "2560250",
       },
       {
         startedAt: dayjs(),
@@ -186,6 +196,8 @@ describe("Database", () => {
         medicalized: 0,
         deceased: 0,
         boatRegistration: "",
+        nCoordinate: "1138470",
+        eCoordinate: "2560250",
       },
       {
         startedAt: dayjs(),
@@ -209,6 +221,8 @@ describe("Database", () => {
         medicalized: 0,
         deceased: 0,
         boatRegistration: "",
+        nCoordinate: "1138470",
+        eCoordinate: "2560250",
       },
     ];
     let result: IInterventionFormData[] = [];
@@ -247,6 +261,8 @@ describe("Database", () => {
         medicalized: 0,
         deceased: 0,
         boatRegistration: "",
+        nCoordinate: "1138470",
+        eCoordinate: "2560250",
       },
       {
         startedAt: dayjs(),
@@ -270,6 +286,8 @@ describe("Database", () => {
         medicalized: 0,
         deceased: 0,
         boatRegistration: "",
+        nCoordinate: "1138470",
+        eCoordinate: "2560250",
       },
       {
         startedAt: dayjs(),
@@ -293,6 +311,8 @@ describe("Database", () => {
         medicalized: 0,
         deceased: 0,
         boatRegistration: "",
+        nCoordinate: "1138470",
+        eCoordinate: "2560250",
       },
     ];
     for (const formintervention of forminterventions) {
@@ -328,6 +348,8 @@ describe("Database", () => {
       medicalized: 0,
       deceased: 0,
       boatRegistration: "",
+      nCoordinate: "1138470",
+      eCoordinate: "2560250",
     };
     const id = await db.addFormIntervention(input);
     const formintervention = await db.getFormIntervention(id);

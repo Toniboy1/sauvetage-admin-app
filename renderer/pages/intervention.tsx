@@ -41,8 +41,12 @@ export default function Intervention() {
       medicalized: 0,
       deceased: 0,
       boatRegistration: "",
+      eCoordinate: "2560250",
+      nCoordinate: "1138470",
     },
   });
+  console.log("InterventionForm");
+  console.log(methods.formState.errors)
   const onSubmit: SubmitHandler<IInterventionFormData> = async (data) => {
     await db.addFormIntervention(data);
     window.location.href = "/forms_interventions";
