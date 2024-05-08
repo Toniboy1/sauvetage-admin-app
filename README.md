@@ -1,4 +1,5 @@
 ![Jest coverage](./badges/coverage-jest%20coverage.svg)
+![builds](https://github.com/Toniboy1/sauvetage-admin-app/actions/workflows/build.yml/badge.svg)
 # Sauvetage Admin App
 
 ## Description
