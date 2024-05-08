@@ -2,7 +2,7 @@
   "private": true,
   "name": "sauvetage-admin-app",
   "description": "App to handle forms",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "author": "Anthony Fasano",
   "main": "app/background.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "postinstall": "electron-builder install-app-deps",
     "doc": "npx typedoc",
     "prepare": "husky install",
-    "release": "grunt bump && electron-builder",
+    "release": "electron-builder",
     "publish": "electron-builder",
     "test-ci": "jest --ci --coverage"
   },
@@ -28,7 +28,11 @@
       "category": "public.app-category.utilities",
       "target": "dmg",
       "publish": [
-        "github"
+        {
+          "provider": "github",
+          "owner": "Toniboy1",
+          "repo": "sauvetage-admin-app"
+        }
       ]
     },
     "win": {
