@@ -27,6 +27,8 @@ export interface IInterventionFormData {
   rescued: number;
   medicalized: number;
   deceased: number;
+  eCoordinate:string;
+  nCoordinate:string;
   boatRegistration: string;
 }
 export interface IInterventionData {
@@ -48,6 +50,8 @@ export interface IInterventionData {
   rescued: number;
   medicalized: number;
   deceased: number;
+  eCoordinate:string;
+  nCoordinate:string;
   boatRegistration: string;
 }
 

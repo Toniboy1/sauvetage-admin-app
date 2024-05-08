@@ -22,6 +22,8 @@ import CauseSelect from "../../select/cause";
 import ActionTakenSelect from "../../select/actions_taken";
 import InterventionDestinationSelect from "../../select/intervention_destination";
 import InterventionLocationSelect from "../../select/intervention_location";
+import { useFormContext } from "react-hook-form";
+import { IInterventionFormData } from "./types";
 const Remark = dynamic(() => import("../../remark"), { ssr: false });
 
 const InterventionForm = () => {

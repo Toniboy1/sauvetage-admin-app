@@ -45,6 +45,8 @@ const EditIntervention = () => {
       medicalized: 0,
       deceased: 0,
       boatRegistration: "",
+      eCoordinate: "",
+      nCoordinate: "",
     },
   });
   const onSubmit: SubmitHandler<IInterventionFormData> = async (data) => {

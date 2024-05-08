@@ -23,8 +23,8 @@ const Location = (
   TITLE(doc);
   doc.text("Localisation:", 20, startingY + 10);
   TEXT_FONT(doc);
-  doc.text(`Coordonnées: ojaijIaojias°N`, 20, startingY + 20);
-  doc.text(`jsaoijsoasdsaj°E`, 90, startingY + 20);
+  doc.text(`Coordonnées: ${form.nCoordinate}`, 20, startingY + 20);
+  doc.text(`${form.eCoordinate}`, 90, startingY + 20);
   let count = 0;
   let x = 0;
   options.forEach((p, index) => {
