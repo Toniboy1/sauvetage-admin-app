@@ -41,7 +41,6 @@ export default function Intervention() {
       medicalized: 0,
       deceased: 0,
       boatRegistration: "",
-
     },
   });
   const onSubmit: SubmitHandler<IInterventionFormData> = async (data) => {

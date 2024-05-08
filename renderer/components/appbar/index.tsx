@@ -51,8 +51,8 @@ const pages = [
 ];
 
 const AppNavBar = () => {
-  const { updateMessage } = useUpdate()
-  console.log(updateMessage)
+  const { updateMessage } = useUpdate();
+  console.log(updateMessage);
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -70,7 +70,7 @@ const AppNavBar = () => {
               </Button>
             ))}
             {updateMessage && (
-              <Typography sx={{ mt: 4, mb: 2, color: 'secondary.main' }}>
+              <Typography sx={{ mt: 4, mb: 2, color: "secondary.main" }}>
                 {updateMessage}
               </Typography>
             )}

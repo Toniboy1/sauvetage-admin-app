@@ -6,30 +6,35 @@ import log from "electron-log";
 import { autoUpdater } from "electron-updater";
 
 autoUpdater.logger = log;
-log.info('App starting...');
-let template = []
-if (process.platform === 'darwin') {
+log.info("App starting...");
+let template = [];
+if (process.platform === "darwin") {
   // OS X
   const name = app.getName();
   template.unshift({
     label: name,
     submenu: [
       {
-        label: 'About ' + name,
-        role: 'about'
+        label: "About " + name,
+        role: "about",
       },
       {
-        label: 'Quit',
-        accelerator: 'Command+Q',
-        click() { app.quit(); }
+        label: "Quit",
+        accelerator: "Command+Q",
+        click() {
+          app.quit();
+        },
       },
-    ]
-  })
+    ],
+  });
 }
 
 const isProd = process.env.NODE_ENV === "production";
 protocol.registerSchemesAsPrivileged([
-  { scheme: 'app', privileges: { standard: true, secure: true, supportFetchAPI: true } },
+  {
+    scheme: "app",
+    privileges: { standard: true, secure: true, supportFetchAPI: true },
+  },
 ]);
 if (isProd) {
   serve({ directory: "app" });
@@ -46,29 +51,28 @@ if (isProd) {
     icon: path.join(__dirname, "ressources/", "icon.png"),
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
-      spellcheck: true
+      spellcheck: true,
     },
   });
-  autoUpdater.on('checking-for-update', () => {
-    mainWindow.webContents.send('message', 'Checking for update...');
-  })
-  autoUpdater.on('update-available', (info) => {
-    mainWindow.webContents.send('message', info);
-  })
-  autoUpdater.on('update-not-available', (info) => {
-    mainWindow.webContents.send('message', info);
-  })
-  autoUpdater.on('error', (err) => {
-    mainWindow.webContents.send('message', err);
-  })
-  autoUpdater.on('download-progress', (progressObj) => {
-    mainWindow.webContents.send('message', progressObj);
-  })
-  autoUpdater.on('update-downloaded', (info) => {
-    mainWindow.webContents.send('message', info);
+  autoUpdater.on("checking-for-update", () => {
+    mainWindow.webContents.send("message", "Checking for update...");
+  });
+  autoUpdater.on("update-available", (info) => {
+    mainWindow.webContents.send("message", info);
+  });
+  autoUpdater.on("update-not-available", (info) => {
+    mainWindow.webContents.send("message", info);
+  });
+  autoUpdater.on("error", (err) => {
+    mainWindow.webContents.send("message", err);
+  });
+  autoUpdater.on("download-progress", (progressObj) => {
+    mainWindow.webContents.send("message", progressObj);
+  });
+  autoUpdater.on("update-downloaded", (info) => {
+    mainWindow.webContents.send("message", info);
     autoUpdater.quitAndInstall();
-  })
-
+  });
 
   if (isProd) {
     await mainWindow.loadURL("app://./forms_interventions");
@@ -86,7 +90,7 @@ app.on("ready", async function () {
 });
 
 app.on("window-all-closed", () => {
-  if (process.platform !== 'darwin') {
+  if (process.platform !== "darwin") {
     app.quit();
   }
 });

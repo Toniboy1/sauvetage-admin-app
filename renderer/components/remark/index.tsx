@@ -1,6 +1,6 @@
 import React from "react";
 import { useFormContext, Controller } from "react-hook-form";
-import TextField from '@mui/material/TextField';  // Import TextField from MUI
+import TextField from "@mui/material/TextField"; // Import TextField from MUI
 import { IInterventionFormData } from "../reports/intervention/types";
 import { FormControl } from "@mui/material";
 
@@ -9,7 +9,7 @@ import { FormControl } from "@mui/material";
  * @returns JSX.Element
  */
 const Remark = (): JSX.Element => {
-  const { control } = useFormContext<IInterventionFormData>();  // Using react-hook-form's useFormContext
+  const { control } = useFormContext<IInterventionFormData>(); // Using react-hook-form's useFormContext
 
   return (
     <Controller

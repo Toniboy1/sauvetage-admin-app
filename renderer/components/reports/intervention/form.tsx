@@ -1,4 +1,13 @@
-import { Typography, Button, Grid, Stack, Box, Card, CardContent, CardHeader } from "@mui/material";
+import {
+  Typography,
+  Button,
+  Grid,
+  Stack,
+  Box,
+  Card,
+  CardContent,
+  CardHeader,
+} from "@mui/material";
 import LocationData from "../../location/coordinates";
 import RescuedData from "../../recuscued";
 import DateTimeIntervention from "../../time";
@@ -17,13 +26,22 @@ const Remark = dynamic(() => import("../../remark"), { ssr: false });
 
 const InterventionForm = () => {
   return (
-    <Box component="section" sx={{ p: 2, border: '1px dashed grey' }} padding={6} >
+    <Box
+      component="section"
+      sx={{ p: 2, border: "1px dashed grey" }}
+      padding={6}
+    >
       <Stack spacing={2}>
         <DateTimeIntervention />
         <Card>
           <CardHeader title="Personnel engagé" />
           <CardContent>
-            <Stack spacing={12} direction={"row"} alignItems={"center"} justifyContent={"center"}>
+            <Stack
+              spacing={12}
+              direction={"row"}
+              alignItems={"center"}
+              justifyContent={"center"}
+            >
               <Stack spacing={4} direction="row">
                 <Typography variant="h6">Pilote:</Typography>
                 <PiloteSelect allowCreate={true} required={true} />
@@ -38,14 +56,21 @@ const InterventionForm = () => {
         <Card>
           <CardHeader title="Déroulement" />
           <CardContent>
-            <Stack spacing={12} direction={"row"} alignItems={"center"} justifyContent={"center"}>
+            <Stack
+              spacing={12}
+              direction={"row"}
+              alignItems={"center"}
+              justifyContent={"center"}
+            >
               <Stack spacing={4} direction="column">
                 <Stack spacing={4} direction="row">
                   <Typography variant="h6">Alarmé par:</Typography>
                   <AlarmedBySelect allowCreate={true} required={true} />
                 </Stack>
                 <Stack spacing={4} direction="row">
-                  <Typography variant="h6">Gravité de l'intervention:</Typography>
+                  <Typography variant="h6">
+                    Gravité de l'intervention:
+                  </Typography>
                   <SeveritySelect allowCreate={false} required={true} />
                 </Stack>
               </Stack>
@@ -80,21 +105,47 @@ const InterventionForm = () => {
         </Card>
         <Card>
           <CardHeader title="Localisation" />
-          <CardContent >
-            <Stack spacing={12} direction={"row"} alignItems={"center"} justifyContent={"center"}>
+          <CardContent>
+            <Stack
+              spacing={12}
+              direction={"row"}
+              alignItems={"center"}
+              justifyContent={"center"}
+            >
               <Stack spacing={4} direction="row">
-                <Stack spacing={4} direction="row" justifyContent={"center"} alignItems={"center"}>
+                <Stack
+                  spacing={4}
+                  direction="row"
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                >
                   <Typography variant="h6">Coordonnées:</Typography>
                   <LocationData />
                 </Stack>
                 <Stack spacing={4} direction="column">
-                  <Stack spacing={4} direction="row" justifyContent={"center"} alignItems={"center"}>
+                  <Stack
+                    spacing={4}
+                    direction="row"
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                  >
                     <Typography variant="h6">Lieux d'intervention:</Typography>
-                    <InterventionLocationSelect allowCreate={true} required={true} />
+                    <InterventionLocationSelect
+                      allowCreate={true}
+                      required={true}
+                    />
                   </Stack>
-                  <Stack spacing={4} direction="row" justifyContent={"center"} alignItems={"center"}>
+                  <Stack
+                    spacing={4}
+                    direction="row"
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                  >
                     <Typography variant="h6">Ramené à/au:</Typography>
-                    <InterventionDestinationSelect allowCreate={true} required={false} />
+                    <InterventionDestinationSelect
+                      allowCreate={true}
+                      required={false}
+                    />
                   </Stack>
                 </Stack>
               </Stack>

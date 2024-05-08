@@ -210,7 +210,6 @@ describe("Database", () => {
         deceased: 0,
         boatRegistration: "",
       },
-
     ];
     let result: IInterventionFormData[] = [];
     for (let i = 0; i < forminterventions.length; i++) {
