@@ -11,6 +11,8 @@ import AppNavBar from "../components/appbar";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import { UpdateProvider } from "../components/providers/update";
+import UpdaterComponent from "../components/updater";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -26,13 +28,16 @@ export default function App(props: AppProps) {
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <AppNavBar />
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </LocalizationProvider>
+      <UpdateProvider>
+        <UpdaterComponent />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <AppNavBar />
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </LocalizationProvider>
+      </UpdateProvider>
     </AppCacheProvider>
   );
 }

@@ -5,13 +5,9 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import AdbIcon from "@mui/icons-material/Adb";
+import { useUpdate } from "../providers/update";
 
 const pages = [
-  {
-    name: "Home",
-    href: "/home",
-  },
   {
     name: "Interventions",
     href: "/intervention",
@@ -55,47 +51,12 @@ const pages = [
 ];
 
 const AppNavBar = () => {
+  const { updateMessage } = useUpdate()
+  console.log(updateMessage)
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
@@ -108,6 +69,11 @@ const AppNavBar = () => {
                 {page.name}
               </Button>
             ))}
+            {updateMessage && (
+              <Typography sx={{ mt: 4, mb: 2, color: 'secondary.main' }}>
+                {updateMessage}
+              </Typography>
+            )}
           </Box>
         </Toolbar>
       </Container>
