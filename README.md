@@ -1,3 +1,7 @@
+![Branches](./badges/coverage-branches.svg)
+![Functions](./badges/coverage-functions.svg)
+![Jest coverage](./badges/coverage-lines.svg)
+![Statements](./badges/coverage-statements.svg)
 ![Jest coverage](./badges/coverage-jest%20coverage.svg)
 ![builds](https://github.com/Toniboy1/sauvetage-admin-app/actions/workflows/build.yml/badge.svg)
 
