@@ -1,0 +1,20 @@
+name: Generate badges
+on:
+  push:
+    tags:
+      - "v*"
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cypress tests
+        uses: ./
+        with:
+            working-directory: .
+            build: npm i
+            start: npm run dev
+            wait-on: 'http://localhost:8888'
+          
