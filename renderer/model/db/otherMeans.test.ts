@@ -9,8 +9,8 @@ describe("Database", () => {
    * Clear the database before each test.
    */
   beforeEach(async () => {
-    db = new Database(true);
-    await db.clearOtherMeans();
+    db = Database.getInstance(true);
+    await Database.getInstance().clearOtherMeans();
   });
 
   /**
@@ -18,8 +18,8 @@ describe("Database", () => {
    */
   test("addOtherMean should add a new othermean to the database", async () => {
     const name = "John Doe";
-    const id = await db.addOtherMean(name);
-    const othermean = await db.getOtherMean(id);
+    const id = await Database.getInstance().addOtherMean(name);
+    const othermean = await Database.getInstance().getOtherMean(id);
     expect(othermean).toEqual({ id, name });
   });
 
@@ -29,9 +29,9 @@ describe("Database", () => {
   test("updateOtherMean should update a othermean's name in the database", async () => {
     const name = "John Doe";
     const newName = "Jane Smith";
-    const id = await db.addOtherMean(name);
-    await db.updateOtherMean(id, newName);
-    const updatedOtherMean = await db.getOtherMean(id);
+    const id = await Database.getInstance().addOtherMean(name);
+    await Database.getInstance().updateOtherMean(id, newName);
+    const updatedOtherMean = await Database.getInstance().getOtherMean(id);
 
     expect(updatedOtherMean).toEqual({ id, name: newName });
   });
@@ -42,9 +42,9 @@ describe("Database", () => {
   test("deleteOtherMean should delete a othermean from the database", async () => {
     const name = "John Doe";
 
-    const id = await db.addOtherMean(name);
-    await db.deleteOtherMean(id);
-    const deletedOtherMean = await db.getOtherMean(id);
+    const id = await Database.getInstance().addOtherMean(name);
+    await Database.getInstance().deleteOtherMean(id);
+    const deletedOtherMean = await Database.getInstance().getOtherMean(id);
 
     expect(deletedOtherMean).toBeUndefined();
   });
@@ -59,9 +59,9 @@ describe("Database", () => {
       { name: "Bob Johnson" },
     ];
     for (const othermean of othermeans) {
-      await db.addOtherMean(othermean.name);
+      await Database.getInstance().addOtherMean(othermean.name);
     }
-    const allOtherMeans = await db.getAllOtherMeans();
+    const allOtherMeans = await Database.getInstance().getAllOtherMeans();
     expect(allOtherMeans).toHaveLength(othermeans.length);
     expect(allOtherMeans.map((p) => p.name)).toEqual(
       expect.arrayContaining(othermeans.map((p) => p.name)),
@@ -77,10 +77,10 @@ describe("Database", () => {
       { name: "Bob Johnson" },
     ];
     for (const othermean of othermeans) {
-      await db.addOtherMean(othermean.name);
+      await Database.getInstance().addOtherMean(othermean.name);
     }
-    await db.clearOtherMeans();
-    const allOtherMeans = await db.getAllOtherMeans();
+    await Database.getInstance().clearOtherMeans();
+    const allOtherMeans = await Database.getInstance().getAllOtherMeans();
     expect(allOtherMeans).toHaveLength(0);
   });
   /**
@@ -88,8 +88,8 @@ describe("Database", () => {
    */
   test("getOtherMean should fetch a othermean from the database", async () => {
     const name = "John Doe";
-    const id = await db.addOtherMean(name);
-    const othermean = await db.getOtherMean(id);
+    const id = await Database.getInstance().addOtherMean(name);
+    const othermean = await Database.getInstance().getOtherMean(id);
     expect(othermean).toEqual({ id, name });
   });
 
@@ -105,7 +105,7 @@ describe("Database", () => {
    */
   test("should throw an error if a othermean with the same name already exists", async () => {
     const name = "John Doe";
-    await db.addOtherMean(name);
+    await Database.getInstance().addOtherMean(name);
     await expect(db.addOtherMean(name)).rejects.toThrow();
   });
 });

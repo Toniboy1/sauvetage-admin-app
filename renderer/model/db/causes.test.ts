@@ -9,8 +9,8 @@ describe("Database", () => {
    * Clear the database before each test.
    */
   beforeEach(async () => {
-    db = new Database(true);
-    await db.clearCauses();
+    db = Database.getInstance(true);
+    await Database.getInstance().clearCauses();
   });
 
   /**
@@ -18,8 +18,8 @@ describe("Database", () => {
    */
   test("addCause should add a new cause to the database", async () => {
     const name = "John Doe";
-    const id = await db.addCause(name);
-    const cause = await db.getCause(id);
+    const id = await Database.getInstance().addCause(name);
+    const cause = await Database.getInstance().getCause(id);
     expect(cause).toEqual({ id, name });
   });
 
@@ -29,9 +29,9 @@ describe("Database", () => {
   test("updateCause should update a cause's name in the database", async () => {
     const name = "John Doe";
     const newName = "Jane Smith";
-    const id = await db.addCause(name);
-    await db.updateCause(id, newName);
-    const updatedCause = await db.getCause(id);
+    const id = await Database.getInstance().addCause(name);
+    await Database.getInstance().updateCause(id, newName);
+    const updatedCause = await Database.getInstance().getCause(id);
 
     expect(updatedCause).toEqual({ id, name: newName });
   });
@@ -42,9 +42,9 @@ describe("Database", () => {
   test("deleteCause should delete a cause from the database", async () => {
     const name = "John Doe";
 
-    const id = await db.addCause(name);
-    await db.deleteCause(id);
-    const deletedCause = await db.getCause(id);
+    const id = await Database.getInstance().addCause(name);
+    await Database.getInstance().deleteCause(id);
+    const deletedCause = await Database.getInstance().getCause(id);
 
     expect(deletedCause).toBeUndefined();
   });
@@ -59,9 +59,9 @@ describe("Database", () => {
       { name: "Bob Johnson" },
     ];
     for (const cause of causes) {
-      await db.addCause(cause.name);
+      await Database.getInstance().addCause(cause.name);
     }
-    const allCauses = await db.getAllCauses();
+    const allCauses = await Database.getInstance().getAllCauses();
     expect(allCauses).toHaveLength(causes.length);
     expect(allCauses.map((p) => p.name)).toEqual(
       expect.arrayContaining(causes.map((p) => p.name)),
@@ -77,10 +77,10 @@ describe("Database", () => {
       { name: "Bob Johnson" },
     ];
     for (const cause of causes) {
-      await db.addCause(cause.name);
+      await Database.getInstance().addCause(cause.name);
     }
-    await db.clearCauses();
-    const allCauses = await db.getAllCauses();
+    await Database.getInstance().clearCauses();
+    const allCauses = await Database.getInstance().getAllCauses();
     expect(allCauses).toHaveLength(0);
   });
   /**
@@ -88,8 +88,8 @@ describe("Database", () => {
    */
   test("getCause should fetch a cause from the database", async () => {
     const name = "John Doe";
-    const id = await db.addCause(name);
-    const cause = await db.getCause(id);
+    const id = await Database.getInstance().addCause(name);
+    const cause = await Database.getInstance().getCause(id);
     expect(cause).toEqual({ id, name });
   });
 
@@ -105,7 +105,7 @@ describe("Database", () => {
    */
   test("should throw an error if a cause with the same name already exists", async () => {
     const name = "John Doe";
-    await db.addCause(name);
+    await Database.getInstance().addCause(name);
     await expect(db.addCause(name)).rejects.toThrow();
   });
 });

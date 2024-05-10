@@ -9,8 +9,8 @@ describe("Database", () => {
    * Clear the database before each test.
    */
   beforeEach(async () => {
-    db = new Database(true);
-    await db.clearActions();
+    db = Database.getInstance(true);
+    await Database.getInstance().clearActions();
   });
 
   /**
@@ -18,8 +18,8 @@ describe("Database", () => {
    */
   test("addAction should add a new action to the database", async () => {
     const name = "John Doe";
-    const id = await db.addAction(name);
-    const action = await db.getAction(id);
+    const id = await Database.getInstance().addAction(name);
+    const action = await Database.getInstance().getAction(id);
     expect(action).toEqual({ id, name });
   });
 
@@ -29,9 +29,9 @@ describe("Database", () => {
   test("updateAction should update a action's name in the database", async () => {
     const name = "John Doe";
     const newName = "Jane Smith";
-    const id = await db.addAction(name);
-    await db.updateAction(id, newName);
-    const updatedAction = await db.getAction(id);
+    const id = await Database.getInstance().addAction(name);
+    await Database.getInstance().updateAction(id, newName);
+    const updatedAction = await Database.getInstance().getAction(id);
 
     expect(updatedAction).toEqual({ id, name: newName });
   });
@@ -42,9 +42,9 @@ describe("Database", () => {
   test("deleteAction should delete a action from the database", async () => {
     const name = "John Doe";
 
-    const id = await db.addAction(name);
-    await db.deleteAction(id);
-    const deletedAction = await db.getAction(id);
+    const id = await Database.getInstance().addAction(name);
+    await Database.getInstance().deleteAction(id);
+    const deletedAction = await Database.getInstance().getAction(id);
 
     expect(deletedAction).toBeUndefined();
   });
@@ -59,9 +59,9 @@ describe("Database", () => {
       { name: "Bob Johnson" },
     ];
     for (const action of actions) {
-      await db.addAction(action.name);
+      await Database.getInstance().addAction(action.name);
     }
-    const allActions = await db.getAllActions();
+    const allActions = await Database.getInstance().getAllActions();
     expect(allActions).toHaveLength(actions.length);
     expect(allActions.map((p) => p.name)).toEqual(
       expect.arrayContaining(actions.map((p) => p.name)),
@@ -77,10 +77,10 @@ describe("Database", () => {
       { name: "Bob Johnson" },
     ];
     for (const action of actions) {
-      await db.addAction(action.name);
+      await Database.getInstance().addAction(action.name);
     }
-    await db.clearActions();
-    const allActions = await db.getAllActions();
+    await Database.getInstance().clearActions();
+    const allActions = await Database.getInstance().getAllActions();
     expect(allActions).toHaveLength(0);
   });
   /**
@@ -88,8 +88,8 @@ describe("Database", () => {
    */
   test("getAction should fetch a action from the database", async () => {
     const name = "John Doe";
-    const id = await db.addAction(name);
-    const action = await db.getAction(id);
+    const id = await Database.getInstance().addAction(name);
+    const action = await Database.getInstance().getAction(id);
     expect(action).toEqual({ id, name });
   });
 
@@ -105,7 +105,7 @@ describe("Database", () => {
    */
   test("should throw an error if a action with the same name already exists", async () => {
     const name = "John Doe";
-    await db.addAction(name);
+    await Database.getInstance().addAction(name);
     await expect(db.addAction(name)).rejects.toThrow();
   });
 });

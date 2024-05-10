@@ -1,5 +1,5 @@
 import ItemsComponent from "../generic";
-import db from "../../../model/db";
+import Database from "../../../model/db";
 import { IPeople } from "../../people/types";
 /**
  * CRUD component for the person type.
@@ -8,11 +8,11 @@ import { IPeople } from "../../people/types";
 const PersonComponent = () => {
   return (
     <ItemsComponent<IPeople>
-      getAllItem={async () => await db.getAllPeople()}
-      addItem={async (name: string) => await db.addPerson(name)}
-      deleteItem={async (id: number) => await db.deletePerson(id)}
+      getAllItem={async () => await Database.getInstance().getAllPeople()}
+      addItem={async (name: string) => await Database.getInstance().addPerson(name)}
+      deleteItem={async (id: number) => await Database.getInstance().deletePerson(id)}
       updateItem={async (id: number, name: string) =>
-        await db.updatePerson(id, name)
+        await Database.getInstance().updatePerson(id, name)
       }
       label="Type d'persones"
     />

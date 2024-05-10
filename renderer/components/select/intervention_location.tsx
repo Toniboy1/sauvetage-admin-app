@@ -1,5 +1,5 @@
 import Select from "./generic";
-import db from "../../model/db";
+import Database from "../../model/db";
 import { IPropsSelectGereric } from "./types";
 const InterventionLocationSelect = ({
   allowCreate = false,
@@ -9,11 +9,11 @@ const InterventionLocationSelect = ({
     <Select
       formField={"interventionLocation"}
       allowCreate={allowCreate}
-      getAllOptions={async () => await db.getAllCommonLocations()}
+      getAllOptions={async () => await Database.getInstance().getAllCommonLocations()}
       searchOptions={async (searchTerm) =>
-        await db.searchCommonLocation(searchTerm)
+        await Database.getInstance().searchCommonLocation(searchTerm)
       }
-      addOption={async (name) => await db.addCommonLocation(name)}
+      addOption={async (name) => await Database.getInstance().addCommonLocation(name)}
       multiple={false}
       placeholder="Rechercher un lieu d'intervention"
       label="Lieu d'intervention"

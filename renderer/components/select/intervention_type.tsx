@@ -1,5 +1,5 @@
 import Select from "./generic";
-import db from "../../model/db";
+import Database from "../../model/db";
 import { IPropsSelectGereric } from "./types";
 const InterventionTypeSelect = ({
   allowCreate = false,
@@ -9,11 +9,11 @@ const InterventionTypeSelect = ({
     <Select
       formField={"inteverntionType"}
       allowCreate={allowCreate}
-      getAllOptions={async () => await db.getAllInterventions()} // Ensure proper method binding
+      getAllOptions={async () => await Database.getInstance().getAllInterventions()} // Ensure proper method binding
       searchOptions={async (searchTerm) =>
-        await db.searchInterventions(searchTerm)
+        await Database.getInstance().searchInterventions(searchTerm)
       }
-      addOption={async (name) => await db.addIntervention(name)}
+      addOption={async (name) => await Database.getInstance().addIntervention(name)}
       placeholder="Rechercher un type d'intervention"
       multiple={true}
       label="Type d'intervention"

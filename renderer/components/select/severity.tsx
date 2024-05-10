@@ -1,5 +1,5 @@
 import Select from "./generic";
-import db from "../../model/db";
+import Database from "../../model/db";
 import { IPropsSelectGereric } from "./types";
 const SeveritySelect = ({
   allowCreate = false,
@@ -10,11 +10,11 @@ const SeveritySelect = ({
     <Select
       formField={"severity"}
       allowCreate={allowCreate}
-      getAllOptions={async () => await db.getAllSeverities()} // Ensure proper method binding
+      getAllOptions={async () => await Database.getInstance().getAllSeverities()} // Ensure proper method binding
       searchOptions={async (searchTerm) =>
-        await db.searchSeverities(searchTerm)
+        await Database.getInstance().searchSeverities(searchTerm)
       }
-      addOption={async (name) => await db.addSeverity(name)}
+      addOption={async (name) => await Database.getInstance().addSeverity(name)}
       placeholder="Rechercher une sévérité"
       label="Sévérité"
       required={required}

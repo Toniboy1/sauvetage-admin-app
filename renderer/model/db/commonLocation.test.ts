@@ -9,8 +9,8 @@ describe("Database", () => {
    * Clear the database before each test.
    */
   beforeEach(async () => {
-    db = new Database(true);
-    await db.clearCommonLocations();
+    db = Database.getInstance(true);
+    await Database.getInstance().clearCommonLocations();
   });
 
   /**
@@ -18,8 +18,8 @@ describe("Database", () => {
    */
   test("addCommonLocation should add a new commonlocation to the database", async () => {
     const name = "John Doe";
-    const id = await db.addCommonLocation(name);
-    const commonlocation = await db.getCommonLocation(id);
+    const id = await Database.getInstance().addCommonLocation(name);
+    const commonlocation = await Database.getInstance().getCommonLocation(id);
     expect(commonlocation).toEqual({ id, name });
   });
 
@@ -29,9 +29,9 @@ describe("Database", () => {
   test("updateCommonLocation should update a commonlocation's name in the database", async () => {
     const name = "John Doe";
     const newName = "Jane Smith";
-    const id = await db.addCommonLocation(name);
-    await db.updateCommonLocation(id, newName);
-    const updatedCommonLocation = await db.getCommonLocation(id);
+    const id = await Database.getInstance().addCommonLocation(name);
+    await Database.getInstance().updateCommonLocation(id, newName);
+    const updatedCommonLocation = await Database.getInstance().getCommonLocation(id);
 
     expect(updatedCommonLocation).toEqual({ id, name: newName });
   });
@@ -42,9 +42,9 @@ describe("Database", () => {
   test("deleteCommonLocation should delete a commonlocation from the database", async () => {
     const name = "John Doe";
 
-    const id = await db.addCommonLocation(name);
-    await db.deleteCommonLocation(id);
-    const deletedCommonLocation = await db.getCommonLocation(id);
+    const id = await Database.getInstance().addCommonLocation(name);
+    await Database.getInstance().deleteCommonLocation(id);
+    const deletedCommonLocation = await Database.getInstance().getCommonLocation(id);
 
     expect(deletedCommonLocation).toBeUndefined();
   });
@@ -59,9 +59,9 @@ describe("Database", () => {
       { name: "Bob Johnson" },
     ];
     for (const commonlocation of commonlocations) {
-      await db.addCommonLocation(commonlocation.name);
+      await Database.getInstance().addCommonLocation(commonlocation.name);
     }
-    const allCommonLocations = await db.getAllCommonLocations();
+    const allCommonLocations = await Database.getInstance().getAllCommonLocations();
     expect(allCommonLocations).toHaveLength(commonlocations.length);
     expect(allCommonLocations.map((p) => p.name)).toEqual(
       expect.arrayContaining(commonlocations.map((p) => p.name)),
@@ -77,10 +77,10 @@ describe("Database", () => {
       { name: "Bob Johnson" },
     ];
     for (const commonlocation of commonlocations) {
-      await db.addCommonLocation(commonlocation.name);
+      await Database.getInstance().addCommonLocation(commonlocation.name);
     }
-    await db.clearCommonLocations();
-    const allCommonLocations = await db.getAllCommonLocations();
+    await Database.getInstance().clearCommonLocations();
+    const allCommonLocations = await Database.getInstance().getAllCommonLocations();
     expect(allCommonLocations).toHaveLength(0);
   });
   /**
@@ -88,8 +88,8 @@ describe("Database", () => {
    */
   test("getCommonLocation should fetch a commonlocation from the database", async () => {
     const name = "John Doe";
-    const id = await db.addCommonLocation(name);
-    const commonlocation = await db.getCommonLocation(id);
+    const id = await Database.getInstance().addCommonLocation(name);
+    const commonlocation = await Database.getInstance().getCommonLocation(id);
     expect(commonlocation).toEqual({ id, name });
   });
 
@@ -105,7 +105,7 @@ describe("Database", () => {
    */
   test("should throw an error if a commonlocation with the same name already exists", async () => {
     const name = "John Doe";
-    await db.addCommonLocation(name);
+    await Database.getInstance().addCommonLocation(name);
     await expect(db.addCommonLocation(name)).rejects.toThrow();
   });
 });

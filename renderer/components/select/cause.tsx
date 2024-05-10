@@ -1,5 +1,5 @@
 import Select from "./generic";
-import db from "../../model/db";
+import Database from "../../model/db";
 import { IPropsSelectGereric } from "./types";
 const CauseSelect = ({
   allowCreate = false,
@@ -9,9 +9,9 @@ const CauseSelect = ({
     <Select
       formField={"causes"}
       allowCreate={allowCreate}
-      getAllOptions={async () => await db.getAllCauses()} // Ensure proper method binding
-      searchOptions={async (searchTerm) => await db.searchCause(searchTerm)}
-      addOption={async (name) => await db.addCause(name)}
+      getAllOptions={async () => await Database.getInstance().getAllCauses()} // Ensure proper method binding
+      searchOptions={async (searchTerm) => await Database.getInstance().searchCause(searchTerm)}
+      addOption={async (name) => await Database.getInstance().addCause(name)}
       placeholder="Rechercher une cause"
       multiple={true}
       label="Causes"

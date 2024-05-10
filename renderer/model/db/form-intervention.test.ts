@@ -11,8 +11,8 @@ describe("Database", () => {
    * Clear the database before each test.
    */
   beforeEach(async () => {
-    db = new Database(true);
-    await db.clearFormInterventions();
+    db = Database.getInstance(true);
+    await Database.getInstance().clearFormInterventions();
   });
 
   /**
@@ -44,8 +44,8 @@ describe("Database", () => {
       nCoordinate: "1138470",
       eCoordinate: "2560250",
     };
-    const id = await db.addFormIntervention(input);
-    const formintervention = await db.getFormIntervention(id);
+    const id = await Database.getInstance().addFormIntervention(input);
+    const formintervention = await Database.getInstance().getFormIntervention(id);
     expect(formintervention).toEqual({ id, ...input });
   });
 
@@ -78,7 +78,7 @@ describe("Database", () => {
       nCoordinate: "1138470",
       eCoordinate: "2560250",
     };
-    const id = await db.addFormIntervention(input);
+    const id = await Database.getInstance().addFormIntervention(input);
     const update = {
       startedAt: input.startedAt,
       endedAt: input.endedAt,
@@ -104,8 +104,8 @@ describe("Database", () => {
       nCoordinate: "1138470",
       eCoordinate: "2560250",
     };
-    await db.updateFormIntervention(id, update);
-    const updatedFormIntervention = await db.getFormIntervention(id);
+    await Database.getInstance().updateFormIntervention(id, update);
+    const updatedFormIntervention = await Database.getInstance().getFormIntervention(id);
     expect(updatedFormIntervention).toEqual({ id: id, ...update });
   });
 
@@ -138,9 +138,9 @@ describe("Database", () => {
       nCoordinate: "1138470",
       eCoordinate: "2560250",
     };
-    const id = await db.addFormIntervention(input);
-    await db.deleteFormIntervention(id);
-    const deletedFormIntervention = await db.getFormIntervention(id);
+    const id = await Database.getInstance().addFormIntervention(input);
+    await Database.getInstance().deleteFormIntervention(id);
+    const deletedFormIntervention = await Database.getInstance().getFormIntervention(id);
     expect(deletedFormIntervention).toBeUndefined();
   });
 
@@ -227,10 +227,10 @@ describe("Database", () => {
     ];
     let result: IInterventionFormData[] = [];
     for (let i = 0; i < forminterventions.length; i++) {
-      const id = await db.addFormIntervention(forminterventions[i]);
+      const id = await Database.getInstance().addFormIntervention(forminterventions[i]);
       result.push({ id, ...forminterventions[i] });
     }
-    const allFormInterventions = await db.getAllFormInterventions();
+    const allFormInterventions = await Database.getInstance().getAllFormInterventions();
     expect(allFormInterventions).toHaveLength(forminterventions.length);
     expect(allFormInterventions).toEqual(expect.arrayContaining(result));
   });
@@ -316,10 +316,10 @@ describe("Database", () => {
       },
     ];
     for (const formintervention of forminterventions) {
-      await db.addFormIntervention(formintervention);
+      await Database.getInstance().addFormIntervention(formintervention);
     }
-    await db.clearFormInterventions();
-    const allFormInterventions = await db.getAllFormInterventions();
+    await Database.getInstance().clearFormInterventions();
+    const allFormInterventions = await Database.getInstance().getAllFormInterventions();
     expect(allFormInterventions).toHaveLength(0);
   });
   /**
@@ -351,8 +351,8 @@ describe("Database", () => {
       nCoordinate: "1138470",
       eCoordinate: "2560250",
     };
-    const id = await db.addFormIntervention(input);
-    const formintervention = await db.getFormIntervention(id);
+    const id = await Database.getInstance().addFormIntervention(input);
+    const formintervention = await Database.getInstance().getFormIntervention(id);
     expect(formintervention).toEqual({
       ...input,
       id: id,

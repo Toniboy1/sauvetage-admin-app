@@ -1,5 +1,5 @@
 import Select from "./generic";
-import db from "../../model/db";
+import Database from "../../model/db";
 import { IPropsSelectGereric } from "./types";
 const OtherMeansSelect = ({
   allowCreate = false,
@@ -9,11 +9,11 @@ const OtherMeansSelect = ({
     <Select
       formField={"otherMeans"}
       allowCreate={allowCreate}
-      getAllOptions={async () => await db.getAllOtherMeans()} // Ensure proper method binding
+      getAllOptions={async () => await Database.getInstance().getAllOtherMeans()} // Ensure proper method binding
       searchOptions={async (searchTerm) =>
-        await db.searchOtherMeans(searchTerm)
+        await Database.getInstance().searchOtherMeans(searchTerm)
       }
-      addOption={async (name) => await db.addOtherMean(name)}
+      addOption={async (name) => await Database.getInstance().addOtherMean(name)}
       placeholder="Rechercher un autre moyen"
       multiple={true}
       label="Autres moyens"

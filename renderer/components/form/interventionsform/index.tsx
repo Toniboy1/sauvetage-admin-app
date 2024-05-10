@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
-import db from "../../../model/db";
+import Database from "../../../model/db";
 import {
   Table,
   TableBody,
@@ -32,7 +32,7 @@ const FormInterventionsComponent = () => {
    * Loads all forminterventions from the database and updates the state with the retrieved data.
    */
   const loadFormInterventions = async () => {
-    const allFormInterventions = await db.getAllFormInterventions();
+    const allFormInterventions = await Database.getInstance().getAllFormInterventions();
     setFormInterventions(allFormInterventions);
   };
 
@@ -49,7 +49,7 @@ const FormInterventionsComponent = () => {
    * @returns - A promise that resolves when the formintervention is deleted.
    */
   const handleDeleteFormIntervention = async (id: number): Promise<void> => {
-    await db.deleteFormIntervention(id);
+    await Database.getInstance().deleteFormIntervention(id);
     loadFormInterventions();
   };
 
@@ -69,13 +69,13 @@ const FormInterventionsComponent = () => {
     formintervention: IInterventionFormData,
   ): Promise<void> {
     const doc = new jsPDF();
-    const alarms = await db.getAllAlarms();
-    const severities = await db.getAllSeverities();
-    const interventionTypes = await db.getAllInterventions();
-    const causes = await db.getAllCauses();
-    const otherMeans = await db.getAllOtherMeans();
-    const actionsTaken = await db.getAllActions();
-    const commonLocations = await db.getAllCommonLocations();
+    const alarms = await Database.getInstance().getAllAlarms();
+    const severities = await Database.getInstance().getAllSeverities();
+    const interventionTypes = await Database.getInstance().getAllInterventions();
+    const causes = await Database.getInstance().getAllCauses();
+    const otherMeans = await Database.getInstance().getAllOtherMeans();
+    const actionsTaken = await Database.getInstance().getAllActions();
+    const commonLocations = await Database.getInstance().getAllCommonLocations();
     Intervention(
       doc,
       formintervention,
