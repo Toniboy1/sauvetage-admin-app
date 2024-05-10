@@ -1,4 +1,4 @@
-import { Database } from "./index";
+import { Database } from "../../renderer/model/db/index";
 import { describe, expect, test, beforeEach } from "@jest/globals";
 /**
  * Test suite for the Database module.

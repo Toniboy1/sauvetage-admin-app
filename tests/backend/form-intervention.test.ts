@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
-import { Database } from "./index";
+import { Database } from "../../renderer/model/db/index";
 import { describe, expect, test, beforeEach } from "@jest/globals";
-import { IInterventionFormData } from "../../components/reports/intervention/types";
+import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
 /**
  * Test suite for the Database module.
  */
