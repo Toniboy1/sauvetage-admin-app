@@ -1,5 +1,5 @@
 import ItemsComponent from "../generic";
-import db from "../../../model/db";
+import Database from "../../../model/db";
 import { ICause } from "../../causes/types";
 /**
  * CRUD component for the cause type.
@@ -8,11 +8,11 @@ import { ICause } from "../../causes/types";
 const CauseComponent = () => {
   return (
     <ItemsComponent<ICause>
-      getAllItem={async () => await db.getAllCauses()}
-      addItem={async (name: string) => await db.addCause(name)}
-      deleteItem={async (id: number) => await db.deleteCause(id)}
+      getAllItem={async () => await Database.getInstance().getAllCauses()}
+      addItem={async (name: string) => await Database.getInstance().addCause(name)}
+      deleteItem={async (id: number) => await Database.getInstance().deleteCause(id)}
       updateItem={async (id: number, name: string) =>
-        await db.updateCause(id, name)
+        await Database.getInstance().updateCause(id, name)
       }
       label="Cause des interventions"
     />

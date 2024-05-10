@@ -1,5 +1,5 @@
 import ItemsComponent from "../generic";
-import db from "../../../model/db";
+import Database from "../../../model/db";
 import { IInterventionType } from "../../interventions/types";
 /**
  * CRUD component for the alarm type.
@@ -8,11 +8,11 @@ import { IInterventionType } from "../../interventions/types";
 const InterventionsTypeComponent = () => {
   return (
     <ItemsComponent<IInterventionType>
-      getAllItem={async () => await db.getAllInterventions()}
-      addItem={async (name: string) => await db.addIntervention(name)}
-      deleteItem={async (id: number) => await db.deleteIntervention(id)}
+      getAllItem={async () => await Database.getInstance().getAllInterventions()}
+      addItem={async (name: string) => await Database.getInstance().addIntervention(name)}
+      deleteItem={async (id: number) => await Database.getInstance().deleteIntervention(id)}
       updateItem={async (id: number, name: string) =>
-        await db.updateIntervention(id, name)
+        await Database.getInstance().updateIntervention(id, name)
       }
       label="Type d'interventions"
     />

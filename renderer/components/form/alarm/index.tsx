@@ -1,5 +1,5 @@
 import ItemsComponent from "../generic";
-import db from "../../../model/db";
+import Database from "../../../model/db";
 import { IAlarm } from "../../alarm/types";
 /**
  * CRUD component for the alarm type.
@@ -8,11 +8,11 @@ import { IAlarm } from "../../alarm/types";
 const AlarmComponent = () => {
   return (
     <ItemsComponent<IAlarm>
-      getAllItem={async () => await db.getAllAlarms()}
-      addItem={async (name: string) => await db.addAlarm(name)}
-      deleteItem={async (id: number) => await db.deleteAlarm(id)}
+      getAllItem={async () => await Database.getInstance().getAllAlarms()}
+      addItem={async (name: string) => await Database.getInstance().addAlarm(name)}
+      deleteItem={async (id: number) => await Database.getInstance().deleteAlarm(id)}
       updateItem={async (id: number, name: string) =>
-        await db.updateAlarm(id, name)
+        await Database.getInstance().updateAlarm(id, name)
       }
       label="Type d'alarmes"
     />

@@ -1,5 +1,5 @@
 import ItemsComponent from "../generic";
-import db from "../../../model/db";
+import Database from "../../../model/db";
 import { ISeverity } from "../../severities/types";
 /**
  * CRUD component for the severity type.
@@ -8,11 +8,11 @@ import { ISeverity } from "../../severities/types";
 const SeverityComponent = () => {
   return (
     <ItemsComponent<ISeverity>
-      getAllItem={async () => await db.getAllSeverities()}
-      addItem={async (name: string) => await db.addSeverity(name)}
-      deleteItem={async (id: number) => await db.deleteSeverity(id)}
+      getAllItem={async () => await Database.getInstance().getAllSeverities()}
+      addItem={async (name: string) => await Database.getInstance().addSeverity(name)}
+      deleteItem={async (id: number) => await Database.getInstance().deleteSeverity(id)}
       updateItem={async (id: number, name: string) =>
-        await db.updateSeverity(id, name)
+        await Database.getInstance().updateSeverity(id, name)
       }
       label="Type de sévérité"
     />

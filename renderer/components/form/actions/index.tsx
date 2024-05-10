@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import db from "../../../model/db";
+import Database from "../../../model/db";
 import {
   Table,
   TableBody,
@@ -38,7 +38,7 @@ const ActionsComponent = () => {
    * Loads all actions from the database and updates the state with the retrieved data.
    */
   const loadActions = async () => {
-    const allActions = await db.getAllActions();
+    const allActions = await Database.getInstance().getAllActions();
     setActions(allActions);
   };
 
@@ -46,7 +46,7 @@ const ActionsComponent = () => {
    * Adds a new action to the database and reloads the list of actions.
    */
   const handleAddAction = async () => {
-    await db.addAction("New Action");
+    await Database.getInstance().addAction("New Action");
     loadActions();
   };
 
@@ -56,7 +56,7 @@ const ActionsComponent = () => {
    * @returns - A promise that resolves when the action is deleted.
    */
   const handleDeleteAction = async (id: number): Promise<void> => {
-    await db.deleteAction(id);
+    await Database.getInstance().deleteAction(id);
     loadActions();
   };
 
@@ -65,7 +65,7 @@ const ActionsComponent = () => {
    * Updates the action's name in the database, reloads the actions list, and closes the form.
    */
   const handleUpdateAction = async () => {
-    await db.updateAction(currentAction.id, currentAction.name);
+    await Database.getInstance().updateAction(currentAction.id, currentAction.name);
     loadActions();
     handleClose();
   };

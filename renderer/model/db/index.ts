@@ -12,11 +12,13 @@ import {
   IInterventionFormData,
 } from "../../components/reports/intervention/types";
 import dayjs from "dayjs";
+import IDBExportImport from "indexeddb-export-import";
 
 /**
  * Sets up and manages the database using Dexie.js.
  */
 export class Database extends Dexie {
+  static instance: Database;
   people: Dexie.Table<IPeople, number>;
   alarms: Dexie.Table<IAlarm, number>;
   severities: Dexie.Table<ISeverity, number>;
@@ -30,7 +32,7 @@ export class Database extends Dexie {
    * Represents the database index.
    * @param isTest - Indicates whether the database is for testing purposes.
    */
-  constructor(isTest = false) {
+  private constructor(isTest = false) {
     super(isTest ? "test-local-storage" : "local-strorage");
     this.version(1).stores({
       people: "++id, &name",
@@ -44,6 +46,117 @@ export class Database extends Dexie {
       forminterventions: "++id, date",
     });
   }
+
+  /**
+   * Get the singleton instance of the database.
+   * @param isTest - Indicates whether the database is for testing purposes.
+   * @returns The database instance.
+   */
+  static getInstance(isTest = true): Database {
+    if (!Database.instance) {
+      Database.setInstance(new Database(isTest));
+    }
+    return Database.instance;
+  }
+  /**
+   * Set current instance with new database
+   * @param instance - The new instance of the database.
+   * @returns The database instance.
+   */
+  static setInstance(instance: Database): Database {
+    Database.instance = instance;
+    return Database.instance;
+  }
+
+  /**
+   * get current IDB database
+   * @returns The IDB database.
+   */
+  getIdbDatabase() {
+    return this.backendDB();
+  }
+  /**
+   * Imports a database from a file and reinitializes the class instance.
+   * @param file The file to import.
+   * @returns A promise that resolves when the database is successfully re-initialized.
+   */
+  async importDatabase(file: File): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      // Export current database as a backup
+      IDBExportImport.exportToJsonString(this.getIdbDatabase(), (error, jsonString) => {
+        if (error) {
+          console.error("Serialization failed: ", error);
+          return reject(error);
+        }
+
+        // Clear all data in preparation for import
+        IDBExportImport.clearDatabase(this.getIdbDatabase(), (clearError) => {
+          if (clearError) {
+            console.error("Failed to clear the data before importing: ", clearError);
+            return reject(clearError);
+          }
+
+          // Proceed to import new data
+          file.text().then((text) => {
+            IDBExportImport.importFromJsonString(this.getIdbDatabase(), text, (importError) => {
+              if (importError) {
+                console.error("Import failed: ", importError);
+                // Attempt to restore from backup
+                IDBExportImport.importFromJsonString(this.getIdbDatabase(), jsonString, (restoreError) => {
+                  if (restoreError) {
+                    console.error("Failed to restore database from backup: ", restoreError);
+                  }
+                  return reject(importError);
+                });
+              } else {
+                resolve();
+              }
+            });
+          }).catch((textError) => {
+            console.error("Failed to read file: ", textError);
+            reject(textError);
+          });
+        });
+      });
+    });
+  }
+
+  /**
+   * Export the database to a file.
+   * @returns A promise that resolves with the exported file.
+   */
+  async exportDatabase(): Promise<Blob> {
+    return new Promise((resolve, reject) => {
+      IDBExportImport.exportToJsonString(this.getIdbDatabase(), (error, jsonString) => {
+        if (error) {
+          console.error("Export failed: ", error);
+          reject(error);
+        } else {
+          // Convert jsonString to Blob
+          const blob = new Blob([jsonString], { type: 'application/json' });
+          resolve(blob);
+        }
+      });
+    });
+  }
+
+  /**
+   * Clear all data from the database
+   */
+  async clearAllData() {
+    return new Promise<void>((resolve, reject) => {
+      IDBExportImport.clearDatabase(this.getIdbDatabase(), (error) => {
+        if (error) {
+          console.error("Failed to clear the database: ", error);
+          reject(error);
+        } else {
+          resolve();
+        }
+      });
+    });
+  }
+
+
   /**
    * Fetches all people from the database.
    * @returns A promise that resolves with the list of all people.
@@ -713,5 +826,4 @@ export class Database extends Dexie {
   }
 }
 
-const db = new Database();
-export default db;
+export default Database;

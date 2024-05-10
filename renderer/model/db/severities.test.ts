@@ -9,8 +9,8 @@ describe("Database", () => {
    * Clear the database before each test.
    */
   beforeEach(async () => {
-    db = new Database(true);
-    await db.clearSeverities();
+    db = Database.getInstance(true);
+    await Database.getInstance().clearSeverities();
   });
 
   /**
@@ -18,8 +18,8 @@ describe("Database", () => {
    */
   test("addSeverity should add a new severity to the database", async () => {
     const name = "John Doe";
-    const id = await db.addSeverity(name);
-    const severity = await db.getSeverity(id);
+    const id = await Database.getInstance().addSeverity(name);
+    const severity = await Database.getInstance().getSeverity(id);
     expect(severity).toEqual({ id, name });
   });
 
@@ -29,9 +29,9 @@ describe("Database", () => {
   test("updateSeverity should update a severity's name in the database", async () => {
     const name = "John Doe";
     const newName = "Jane Smith";
-    const id = await db.addSeverity(name);
-    await db.updateSeverity(id, newName);
-    const updatedSeverity = await db.getSeverity(id);
+    const id = await Database.getInstance().addSeverity(name);
+    await Database.getInstance().updateSeverity(id, newName);
+    const updatedSeverity = await Database.getInstance().getSeverity(id);
 
     expect(updatedSeverity).toEqual({ id, name: newName });
   });
@@ -42,9 +42,9 @@ describe("Database", () => {
   test("deleteSeverity should delete a severity from the database", async () => {
     const name = "John Doe";
 
-    const id = await db.addSeverity(name);
-    await db.deleteSeverity(id);
-    const deletedSeverity = await db.getSeverity(id);
+    const id = await Database.getInstance().addSeverity(name);
+    await Database.getInstance().deleteSeverity(id);
+    const deletedSeverity = await Database.getInstance().getSeverity(id);
 
     expect(deletedSeverity).toBeUndefined();
   });
@@ -59,9 +59,9 @@ describe("Database", () => {
       { name: "Bob Johnson" },
     ];
     for (const severity of severities) {
-      await db.addSeverity(severity.name);
+      await Database.getInstance().addSeverity(severity.name);
     }
-    const allSeverities = await db.getAllSeverities();
+    const allSeverities = await Database.getInstance().getAllSeverities();
     expect(allSeverities).toHaveLength(severities.length);
     expect(allSeverities.map((p) => p.name)).toEqual(
       expect.arrayContaining(severities.map((p) => p.name)),
@@ -77,10 +77,10 @@ describe("Database", () => {
       { name: "Bob Johnson" },
     ];
     for (const severity of severities) {
-      await db.addSeverity(severity.name);
+      await Database.getInstance().addSeverity(severity.name);
     }
-    await db.clearSeverities();
-    const allSeverities = await db.getAllSeverities();
+    await Database.getInstance().clearSeverities();
+    const allSeverities = await Database.getInstance().getAllSeverities();
     expect(allSeverities).toHaveLength(0);
   });
   /**
@@ -88,8 +88,8 @@ describe("Database", () => {
    */
   test("getSeverity should fetch a severity from the database", async () => {
     const name = "John Doe";
-    const id = await db.addSeverity(name);
-    const severity = await db.getSeverity(id);
+    const id = await Database.getInstance().addSeverity(name);
+    const severity = await Database.getInstance().getSeverity(id);
     expect(severity).toEqual({ id, name });
   });
 
@@ -105,7 +105,7 @@ describe("Database", () => {
    */
   test("should throw an error if a severity with the same name already exists", async () => {
     const name = "John Doe";
-    await db.addSeverity(name);
+    await Database.getInstance().addSeverity(name);
     await expect(db.addSeverity(name)).rejects.toThrow();
   });
 });

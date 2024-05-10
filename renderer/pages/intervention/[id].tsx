@@ -1,11 +1,11 @@
 "use client";
 import { useRouter } from "next/router";
-import React, { use, useEffect } from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
 import { styled } from "@mui/material";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { IInterventionFormData } from "../../components/reports/intervention/types";
-import db from "../../model/db";
+import Database from "../../model/db";
 import InterventionForm from "../../components/reports/intervention/form";
 import dayjs from "dayjs";
 /**
@@ -50,12 +50,12 @@ const EditIntervention = () => {
     },
   });
   const onSubmit: SubmitHandler<IInterventionFormData> = async (data) => {
-    await db.updateFormIntervention(formId, data);
+    await Database.getInstance().updateFormIntervention(formId, data);
     window.location.href = "/forms_interventions";
   };
   useEffect(() => {
     if (id) {
-      db.getFormIntervention(formId)
+      Database.getInstance().getFormIntervention(formId)
         .then((form) => {
           methods.reset(form);
         })

@@ -1,5 +1,5 @@
 import Select from "./generic";
-import db from "../../model/db";
+import Database from "../../model/db";
 import { IPropsSelectGereric } from "./types";
 const CrewSelect = ({
   allowCreate = false,
@@ -10,9 +10,9 @@ const CrewSelect = ({
     <Select
       formField={"crew"}
       allowCreate={allowCreate}
-      getAllOptions={async () => await db.getAllPeople()} // Ensure proper method binding
-      searchOptions={async (searchTerm) => await db.searchPeople(searchTerm)}
-      addOption={async (name) => await db.addPerson(name)}
+      getAllOptions={async () => await Database.getInstance().getAllPeople()} // Ensure proper method binding
+      searchOptions={async (searchTerm) => await Database.getInstance().searchPeople(searchTerm)}
+      addOption={async (name) => await Database.getInstance().addPerson(name)}
       placeholder="Rechercher un membre d'équipage"
       multiple={multiple}
       label="Membre d'équipage"

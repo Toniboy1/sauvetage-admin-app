@@ -13,7 +13,7 @@ const Select = <
   T extends GenericProperties,
   TExt extends GenericPropertiesExtended,
 >({
-  multiple,
+  multiple = true,
   allowCreate = true,
   formField,
   getAllOptions,

@@ -9,8 +9,8 @@ describe("Database", () => {
    * Clear the database before each test.
    */
   beforeEach(async () => {
-    db = new Database(true);
-    await db.clearPeople();
+    db = Database.getInstance(true);
+    await Database.getInstance().clearPeople();
   });
 
   /**
@@ -18,8 +18,8 @@ describe("Database", () => {
    */
   test("addPerson should add a new person to the database", async () => {
     const name = "John Doe";
-    const id = await db.addPerson(name);
-    const person = await db.getPerson(id);
+    const id = await Database.getInstance().addPerson(name);
+    const person = await Database.getInstance().getPerson(id);
     expect(person).toEqual({ id, name });
   });
 
@@ -29,9 +29,9 @@ describe("Database", () => {
   test("updatePerson should update a person's name in the database", async () => {
     const name = "John Doe";
     const newName = "Jane Smith";
-    const id = await db.addPerson(name);
-    await db.updatePerson(id, newName);
-    const updatedPerson = await db.getPerson(id);
+    const id = await Database.getInstance().addPerson(name);
+    await Database.getInstance().updatePerson(id, newName);
+    const updatedPerson = await Database.getInstance().getPerson(id);
 
     expect(updatedPerson).toEqual({ id, name: newName });
   });
@@ -42,9 +42,9 @@ describe("Database", () => {
   test("deletePerson should delete a person from the database", async () => {
     const name = "John Doe";
 
-    const id = await db.addPerson(name);
-    await db.deletePerson(id);
-    const deletedPerson = await db.getPerson(id);
+    const id = await Database.getInstance().addPerson(name);
+    await Database.getInstance().deletePerson(id);
+    const deletedPerson = await Database.getInstance().getPerson(id);
 
     expect(deletedPerson).toBeUndefined();
   });
@@ -59,9 +59,9 @@ describe("Database", () => {
       { name: "Bob Johnson" },
     ];
     for (const person of people) {
-      await db.addPerson(person.name);
+      await Database.getInstance().addPerson(person.name);
     }
-    const allPeople = await db.getAllPeople();
+    const allPeople = await Database.getInstance().getAllPeople();
     expect(allPeople).toHaveLength(people.length);
     expect(allPeople.map((p) => p.name)).toEqual(
       expect.arrayContaining(people.map((p) => p.name)),
@@ -77,10 +77,10 @@ describe("Database", () => {
       { name: "Bob Johnson" },
     ];
     for (const person of people) {
-      await db.addPerson(person.name);
+      await Database.getInstance().addPerson(person.name);
     }
-    await db.clearPeople();
-    const allPeople = await db.getAllPeople();
+    await Database.getInstance().clearPeople();
+    const allPeople = await Database.getInstance().getAllPeople();
     expect(allPeople).toHaveLength(0);
   });
   /**
@@ -88,8 +88,8 @@ describe("Database", () => {
    */
   test("getPerson should fetch a person from the database", async () => {
     const name = "John Doe";
-    const id = await db.addPerson(name);
-    const person = await db.getPerson(id);
+    const id = await Database.getInstance().addPerson(name);
+    const person = await Database.getInstance().getPerson(id);
     expect(person).toEqual({ id, name });
   });
 
@@ -105,7 +105,7 @@ describe("Database", () => {
    */
   test("should throw an error if a person with the same name already exists", async () => {
     const name = "John Doe";
-    await db.addPerson(name);
+    await Database.getInstance().addPerson(name);
     await expect(db.addPerson(name)).rejects.toThrow();
   });
 });

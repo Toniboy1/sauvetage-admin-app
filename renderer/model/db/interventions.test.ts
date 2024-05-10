@@ -9,8 +9,8 @@ describe("Database", () => {
    * Clear the database before each test.
    */
   beforeEach(async () => {
-    db = new Database(true);
-    await db.clearInterventions();
+    db = Database.getInstance(true);
+    await Database.getInstance().clearInterventions();
   });
 
   /**
@@ -18,8 +18,8 @@ describe("Database", () => {
    */
   test("addIntervention should add a new intervention to the database", async () => {
     const name = "John Doe";
-    const id = await db.addIntervention(name);
-    const intervention = await db.getIntervention(id);
+    const id = await Database.getInstance().addIntervention(name);
+    const intervention = await Database.getInstance().getIntervention(id);
     expect(intervention).toEqual({ id, name });
   });
 
@@ -29,9 +29,9 @@ describe("Database", () => {
   test("updateIntervention should update a intervention's name in the database", async () => {
     const name = "John Doe";
     const newName = "Jane Smith";
-    const id = await db.addIntervention(name);
-    await db.updateIntervention(id, newName);
-    const updatedIntervention = await db.getIntervention(id);
+    const id = await Database.getInstance().addIntervention(name);
+    await Database.getInstance().updateIntervention(id, newName);
+    const updatedIntervention = await Database.getInstance().getIntervention(id);
 
     expect(updatedIntervention).toEqual({ id, name: newName });
   });
@@ -42,9 +42,9 @@ describe("Database", () => {
   test("deleteIntervention should delete a intervention from the database", async () => {
     const name = "John Doe";
 
-    const id = await db.addIntervention(name);
-    await db.deleteIntervention(id);
-    const deletedIntervention = await db.getIntervention(id);
+    const id = await Database.getInstance().addIntervention(name);
+    await Database.getInstance().deleteIntervention(id);
+    const deletedIntervention = await Database.getInstance().getIntervention(id);
 
     expect(deletedIntervention).toBeUndefined();
   });
@@ -59,9 +59,9 @@ describe("Database", () => {
       { name: "Bob Johnson" },
     ];
     for (const intervention of interventions) {
-      await db.addIntervention(intervention.name);
+      await Database.getInstance().addIntervention(intervention.name);
     }
-    const allInterventions = await db.getAllInterventions();
+    const allInterventions = await Database.getInstance().getAllInterventions();
     expect(allInterventions).toHaveLength(interventions.length);
     expect(allInterventions.map((p) => p.name)).toEqual(
       expect.arrayContaining(interventions.map((p) => p.name)),
@@ -77,10 +77,10 @@ describe("Database", () => {
       { name: "Bob Johnson" },
     ];
     for (const intervention of interventions) {
-      await db.addIntervention(intervention.name);
+      await Database.getInstance().addIntervention(intervention.name);
     }
-    await db.clearInterventions();
-    const allInterventions = await db.getAllInterventions();
+    await Database.getInstance().clearInterventions();
+    const allInterventions = await Database.getInstance().getAllInterventions();
     expect(allInterventions).toHaveLength(0);
   });
   /**
@@ -88,8 +88,8 @@ describe("Database", () => {
    */
   test("getIntervention should fetch a intervention from the database", async () => {
     const name = "John Doe";
-    const id = await db.addIntervention(name);
-    const intervention = await db.getIntervention(id);
+    const id = await Database.getInstance().addIntervention(name);
+    const intervention = await Database.getInstance().getIntervention(id);
     expect(intervention).toEqual({ id, name });
   });
 
@@ -105,7 +105,7 @@ describe("Database", () => {
    */
   test("should throw an error if a intervention with the same name already exists", async () => {
     const name = "John Doe";
-    await db.addIntervention(name);
+    await Database.getInstance().addIntervention(name);
     await expect(db.addIntervention(name)).rejects.toThrow();
   });
 });

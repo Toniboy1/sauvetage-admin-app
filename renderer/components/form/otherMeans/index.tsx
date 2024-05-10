@@ -1,5 +1,5 @@
 import ItemsComponent from "../generic";
-import db from "../../../model/db";
+import Database from "../../../model/db";
 import { IOtherMean } from "../../otherMeans/types";
 /**
  * CRUD component for the other means type.
@@ -8,11 +8,11 @@ import { IOtherMean } from "../../otherMeans/types";
 const OtherMeansComponent = () => {
   return (
     <ItemsComponent<IOtherMean>
-      getAllItem={async () => await db.getAllOtherMeans()}
-      addItem={async (name: string) => await db.addOtherMean(name)}
-      deleteItem={async (id: number) => await db.deleteOtherMean(id)}
+      getAllItem={async () => await Database.getInstance().getAllOtherMeans()}
+      addItem={async (name: string) => await Database.getInstance().addOtherMean(name)}
+      deleteItem={async (id: number) => await Database.getInstance().deleteOtherMean(id)}
       updateItem={async (id: number, name: string) =>
-        await db.updateOtherMean(id, name)
+        await Database.getInstance().updateOtherMean(id, name)
       }
       label="Type d'alarmes"
     />

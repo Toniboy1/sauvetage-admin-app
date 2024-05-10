@@ -1,5 +1,5 @@
 import ItemsComponent from "../generic";
-import db from "../../../model/db";
+import Database from "../../../model/db";
 import { ICommonLocation } from "../../location/commons/types";
 /**
  * CRUD component for the Common locations type.
@@ -8,11 +8,11 @@ import { ICommonLocation } from "../../location/commons/types";
 const CommonLoacationComponent = () => {
   return (
     <ItemsComponent<ICommonLocation>
-      getAllItem={async () => await db.getAllCommonLocations()}
-      addItem={async (name: string) => await db.addCommonLocation(name)}
-      deleteItem={async (id: number) => await db.deleteCommonLocation(id)}
+      getAllItem={async () => await Database.getInstance().getAllCommonLocations()}
+      addItem={async (name: string) => await Database.getInstance().addCommonLocation(name)}
+      deleteItem={async (id: number) => await Database.getInstance().deleteCommonLocation(id)}
       updateItem={async (id: number, name: string) =>
-        await db.updateCommonLocation(id, name)
+        await Database.getInstance().updateCommonLocation(id, name)
       }
       label="Lieux Fréquents"
     />

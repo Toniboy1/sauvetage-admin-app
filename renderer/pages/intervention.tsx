@@ -4,7 +4,7 @@ import Head from "next/head";
 import { styled } from "@mui/material";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { IInterventionFormData } from "../components/reports/intervention/types";
-import db from "../model/db";
+import Database from "../model/db";
 import InterventionForm from "../components/reports/intervention/form";
 import dayjs from "dayjs";
 /**
@@ -48,7 +48,7 @@ export default function Intervention() {
   console.log("InterventionForm");
   console.log(methods.formState.errors)
   const onSubmit: SubmitHandler<IInterventionFormData> = async (data) => {
-    await db.addFormIntervention(data);
+    await Database.getInstance().addFormIntervention(data);
     window.location.href = "/forms_interventions";
   };
   return (

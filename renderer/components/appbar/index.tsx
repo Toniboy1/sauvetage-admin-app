@@ -5,6 +5,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
+import Data from "../data";
 import { useUpdate } from "../providers/update";
 
 const pages = [
@@ -64,7 +65,7 @@ const AppNavBar = () => {
                 onClick={() => {
                   window.location.href = page.href;
                 }}
-                sx={{ my: 2, color: "white", display: "block" }}
+                  sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page.name}
               </Button>
@@ -74,6 +75,7 @@ const AppNavBar = () => {
                 {updateMessage}
               </Typography>
             )}
+            <Data/>
           </Box>
         </Toolbar>
       </Container>

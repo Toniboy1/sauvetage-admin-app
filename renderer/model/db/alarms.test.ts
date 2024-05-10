@@ -9,8 +9,8 @@ describe("Database", () => {
    * Clear the database before each test.
    */
   beforeEach(async () => {
-    db = new Database(true);
-    await db.clearAlarms();
+    db = Database.getInstance(true);
+    await Database.getInstance().clearAlarms();
   });
 
   /**
@@ -18,8 +18,8 @@ describe("Database", () => {
    */
   test("addAlarm should add a new alarm to the database", async () => {
     const name = "John Doe";
-    const id = await db.addAlarm(name);
-    const alarm = await db.getAlarm(id);
+    const id = await Database.getInstance().addAlarm(name);
+    const alarm = await Database.getInstance().getAlarm(id);
     expect(alarm).toEqual({ id, name });
   });
 
@@ -29,9 +29,9 @@ describe("Database", () => {
   test("updateAlarm should update a alarm's name in the database", async () => {
     const name = "John Doe";
     const newName = "Jane Smith";
-    const id = await db.addAlarm(name);
-    await db.updateAlarm(id, newName);
-    const updatedAlarm = await db.getAlarm(id);
+    const id = await Database.getInstance().addAlarm(name);
+    await Database.getInstance().updateAlarm(id, newName);
+    const updatedAlarm = await Database.getInstance().getAlarm(id);
 
     expect(updatedAlarm).toEqual({ id, name: newName });
   });
@@ -42,9 +42,9 @@ describe("Database", () => {
   test("deleteAlarm should delete a alarm from the database", async () => {
     const name = "John Doe";
 
-    const id = await db.addAlarm(name);
-    await db.deleteAlarm(id);
-    const deletedAlarm = await db.getAlarm(id);
+    const id = await Database.getInstance().addAlarm(name);
+    await Database.getInstance().deleteAlarm(id);
+    const deletedAlarm = await Database.getInstance().getAlarm(id);
 
     expect(deletedAlarm).toBeUndefined();
   });
@@ -59,9 +59,9 @@ describe("Database", () => {
       { name: "Bob Johnson" },
     ];
     for (const alarm of alarms) {
-      await db.addAlarm(alarm.name);
+      await Database.getInstance().addAlarm(alarm.name);
     }
-    const allAlarms = await db.getAllAlarms();
+    const allAlarms = await Database.getInstance().getAllAlarms();
     expect(allAlarms).toHaveLength(alarms.length);
     expect(allAlarms.map((p) => p.name)).toEqual(
       expect.arrayContaining(alarms.map((p) => p.name)),
@@ -77,10 +77,10 @@ describe("Database", () => {
       { name: "Bob Johnson" },
     ];
     for (const alarm of alarms) {
-      await db.addAlarm(alarm.name);
+      await Database.getInstance().addAlarm(alarm.name);
     }
-    await db.clearAlarms();
-    const allAlarms = await db.getAllAlarms();
+    await Database.getInstance().clearAlarms();
+    const allAlarms = await Database.getInstance().getAllAlarms();
     expect(allAlarms).toHaveLength(0);
   });
   /**
@@ -88,8 +88,8 @@ describe("Database", () => {
    */
   test("getAlarm should fetch a alarm from the database", async () => {
     const name = "John Doe";
-    const id = await db.addAlarm(name);
-    const alarm = await db.getAlarm(id);
+    const id = await Database.getInstance().addAlarm(name);
+    const alarm = await Database.getInstance().getAlarm(id);
     expect(alarm).toEqual({ id, name });
   });
 
@@ -105,7 +105,7 @@ describe("Database", () => {
    */
   test("should throw an error if a alarm with the same name already exists", async () => {
     const name = "John Doe";
-    await db.addAlarm(name);
+    await Database.getInstance().addAlarm(name);
     await expect(db.addAlarm(name)).rejects.toThrow();
   });
 });
