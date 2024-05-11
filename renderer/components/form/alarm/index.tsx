@@ -15,6 +15,7 @@ const AlarmComponent = () => {
         await Database.getInstance().updateAlarm(id, name)
       }
       label="Type d'alarmes"
+      type="alarm"
     />
   );
 };

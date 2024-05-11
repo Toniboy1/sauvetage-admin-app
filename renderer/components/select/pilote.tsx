@@ -21,3 +21,4 @@ const PiloteSelect = ({
   );
 };
 export default PiloteSelect;
+export { PiloteSelect };

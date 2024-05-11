@@ -4,4 +4,5 @@ export interface ItemsComponentProps<T extends { id?: number; name: string }> {
   deleteItem: (id: number) => Promise<void>;
   updateItem: (id: number, name: string) => Promise<number>;
   label: string;
+  type: string;
 }
