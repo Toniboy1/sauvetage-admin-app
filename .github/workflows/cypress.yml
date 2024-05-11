@@ -1,8 +1,6 @@
 name: Generate badges
 on:
-  push:
-    tags:
-      - "v*"
+  [push]
 jobs:
   bump:
     runs-on: ubuntu-latest
