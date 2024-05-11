@@ -1,21 +1,36 @@
-name: Generate badges
-on:
-  [push]
+name: Run Cypress E2E Tests
+
+on: [push, pull_request]
+
 jobs:
-  bump:
+  cypress-run:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v3
-      - name: Install Node.js, NPM and Yarn
-        uses: actions/setup-node@v3
-        with:
-          node-version: "20"
-      - name: Cypress tests
-        uses: ./
-        with:
-            working-directory: .
-            build: npm i
-            start: npm run dev
-            wait-on: 'http://localhost:8888'
-          
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16' # Set this to your project's required Node.js version
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Cache Cypress binary
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/Cypress
+        key: ${{ runner.os }}-cypress-${{ hashFiles('package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-cypress-
+
+    - name: Run Cypress Tests
+      uses: cypress-io/github-action@v3
+      with:
+        start: npm run dev # Command to start your server, if needed
+        wait-on: 'http://localhost:8888' # Adjust the URL/port as necessary
+        wait-on-timeout: 300 # seconds to wait for your server to start
+        # config: video=true # Enable video recording of the test runs
+        working-directory: ./cypress/e2e # Directory where your tests are located
