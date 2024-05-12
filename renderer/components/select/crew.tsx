@@ -21,3 +21,4 @@ const CrewSelect = ({
   );
 };
 export default CrewSelect;
+export { CrewSelect };

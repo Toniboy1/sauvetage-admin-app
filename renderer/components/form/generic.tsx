@@ -28,6 +28,7 @@ const ItemsComponent = <
   deleteItem,
   updateItem,
   label,
+  type,
 }: ItemsComponentProps<T>) => {
   const [items, setItems] = useState([]);
   const [open, setOpen] = useState(false);
@@ -106,7 +107,7 @@ const ItemsComponent = <
   return (
     <div>
       <h1>{label}</h1>
-      <Button variant="contained" color="primary" onClick={handleAddItem}>
+      <Button variant="contained" color="primary" onClick={handleAddItem} id={`add-${type}`}>
         Add New Item
       </Button>
       <TableContainer component={Paper}>
@@ -124,12 +125,13 @@ const ItemsComponent = <
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.name}</TableCell>
                 <TableCell>
-                  <Button color="primary" onClick={() => handleClickOpen(item)}>
+                  <Button color="primary" onClick={() => handleClickOpen(item)} id={`edit-${type}-${currentItem.id}`}>
                     Edit
                   </Button>
                   <Button
                     color="error"
                     onClick={() => handleDeleteItem(item.id)}
+                    id={`delete-${type}-${currentItem.id}`}
                   >
                     Delete
                   </Button>
@@ -154,6 +156,7 @@ const ItemsComponent = <
             margin="dense"
             id="name"
             label="Name"
+            name="name"
             type="text"
             fullWidth
             value={currentItem.name}
@@ -161,10 +164,10 @@ const ItemsComponent = <
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} color="primary" id={`edit-save-${type}-${currentItem.id}`}>
             Cancel
           </Button>
-          <Button onClick={handleUpdateItem} color="primary">
+          <Button onClick={handleUpdateItem} color="primary"id={`edit-cancel-${type}-${currentItem.id}`}>
             Update
           </Button>
         </DialogActions>

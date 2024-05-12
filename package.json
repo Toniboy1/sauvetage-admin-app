@@ -17,7 +17,11 @@
     "prepare": "husky install",
     "release": "electron-builder",
     "publish": "electron-builder",
-    "test-ci": "jest --ci --coverage"
+    "test-ci": "jest --ci --coverage",
+    "cypress:open": "cypress open ",
+    "next": "next dev ./renderer -p 8888",
+    "next:build": "next build ./renderer",
+    "next:start": "next start ./renderer -p 8888"
   },
   "build": {
     "appId": "com.anthonyfasano.sauvetage-admin-app",
@@ -113,6 +117,7 @@
     "@types/react": "^18.2.52",
     "@typescript-eslint/parser": "^7.8.0",
     "babel-jest": "^29.7.0",
+    "cypress": "^13.9.0",
     "electron": "^29.3.0",
     "electron-builder": "^24.13.3",
     "electron-log": "^5.1.2",

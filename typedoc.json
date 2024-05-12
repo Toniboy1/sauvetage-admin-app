@@ -2,7 +2,7 @@
   "$schema": "https://typedoc.org/schema.json",
   "entryPointStrategy": "expand",
   "entryPoints": ["./renderer"],
-  "out": "./docs",
+  "out": "./doc",
   "exclude": [
     "./renderer/.next/**",
     "**/*.test.ts",

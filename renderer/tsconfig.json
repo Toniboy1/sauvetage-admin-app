@@ -3,6 +3,6 @@
     "target": "es2017"
   },
   "extends": "../tsconfig.json",
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "../tests/backend/actions.test.ts", "../tests/backend/alarms.test.ts", "../tests/backend/causes.test.ts", "../tests/backend/commonLocation.test.ts", "../tests/backend/form-intervention.test.ts", "../tests/backend/interventions.test.ts"],
   "exclude": ["node_modules"]
 }
