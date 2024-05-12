@@ -18,7 +18,10 @@
     "release": "electron-builder",
     "publish": "electron-builder",
     "test-ci": "jest --ci --coverage",
-    "cypress:open": "cypress open "
+    "cypress:open": "cypress open ",
+    "next": "next dev ./renderer -p 3000",
+    "next:build": "next build ./renderer",
+    "next:start": "next start ./renderer -p 3000"
   },
   "build": {
     "appId": "com.anthonyfasano.sauvetage-admin-app",
