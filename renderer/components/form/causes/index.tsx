@@ -9,8 +9,12 @@ const CauseComponent = () => {
   return (
     <ItemsComponent<ICause>
       getAllItem={async () => await Database.getInstance().getAllCauses()}
-      addItem={async (name: string) => await Database.getInstance().addCause(name)}
-      deleteItem={async (id: number) => await Database.getInstance().deleteCause(id)}
+      addItem={async (name: string) =>
+        await Database.getInstance().addCause(name)
+      }
+      deleteItem={async (id: number) =>
+        await Database.getInstance().deleteCause(id)
+      }
       updateItem={async (id: number, name: string) =>
         await Database.getInstance().updateCause(id, name)
       }

@@ -10,7 +10,9 @@ const SeveritySelect = ({
     <Select
       formField={"severity"}
       allowCreate={allowCreate}
-      getAllOptions={async () => await Database.getInstance().getAllSeverities()} // Ensure proper method binding
+      getAllOptions={async () =>
+        await Database.getInstance().getAllSeverities()
+      } // Ensure proper method binding
       searchOptions={async (searchTerm) =>
         await Database.getInstance().searchSeverities(searchTerm)
       }

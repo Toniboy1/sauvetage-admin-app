@@ -9,8 +9,12 @@ const AlarmComponent = () => {
   return (
     <ItemsComponent<IAlarm>
       getAllItem={async () => await Database.getInstance().getAllAlarms()}
-      addItem={async (name: string) => await Database.getInstance().addAlarm(name)}
-      deleteItem={async (id: number) => await Database.getInstance().deleteAlarm(id)}
+      addItem={async (name: string) =>
+        await Database.getInstance().addAlarm(name)
+      }
+      deleteItem={async (id: number) =>
+        await Database.getInstance().deleteAlarm(id)
+      }
       updateItem={async (id: number, name: string) =>
         await Database.getInstance().updateAlarm(id, name)
       }

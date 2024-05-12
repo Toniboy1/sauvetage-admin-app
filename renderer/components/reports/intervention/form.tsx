@@ -50,7 +50,11 @@ const InterventionForm = () => {
               </Stack>
               <Stack spacing={4} direction="row">
                 <Typography variant="h6">Equipage:</Typography>
-                <CrewSelect allowCreate={true} required={false} multiple={true} />
+                <CrewSelect
+                  allowCreate={true}
+                  required={false}
+                  multiple={true}
+                />
               </Stack>
             </Stack>
           </CardContent>

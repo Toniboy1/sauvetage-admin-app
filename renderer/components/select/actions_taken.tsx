@@ -10,7 +10,9 @@ const ActionTakenSelect = ({
       formField={"actionsTaken"}
       allowCreate={allowCreate}
       getAllOptions={async () => await Database.getInstance().getAllActions()} // Ensure proper method binding
-      searchOptions={async (searchTerm) => await Database.getInstance().searchActions(searchTerm)}
+      searchOptions={async (searchTerm) =>
+        await Database.getInstance().searchActions(searchTerm)
+      }
       addOption={async (name) => await Database.getInstance().addAction(name)}
       placeholder="Rechercher une mesure"
       multiple={true}

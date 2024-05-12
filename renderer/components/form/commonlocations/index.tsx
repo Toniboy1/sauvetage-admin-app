@@ -8,9 +8,15 @@ import { ICommonLocation } from "../../location/commons/types";
 const CommonLoacationComponent = () => {
   return (
     <ItemsComponent<ICommonLocation>
-      getAllItem={async () => await Database.getInstance().getAllCommonLocations()}
-      addItem={async (name: string) => await Database.getInstance().addCommonLocation(name)}
-      deleteItem={async (id: number) => await Database.getInstance().deleteCommonLocation(id)}
+      getAllItem={async () =>
+        await Database.getInstance().getAllCommonLocations()
+      }
+      addItem={async (name: string) =>
+        await Database.getInstance().addCommonLocation(name)
+      }
+      deleteItem={async (id: number) =>
+        await Database.getInstance().deleteCommonLocation(id)
+      }
       updateItem={async (id: number, name: string) =>
         await Database.getInstance().updateCommonLocation(id, name)
       }

@@ -1,8 +1,7 @@
-import React from 'react';
-import { Button } from '@mui/material';
-import Database from '../../model/db';
-const DataManagement =() =>{
-  
+import React from "react";
+import { Button } from "@mui/material";
+import Database from "../../model/db";
+const DataManagement = () => {
   /**
    * Handles the export of the database.
    * Exports the database to a JSON file and downloads it.
@@ -11,13 +10,13 @@ const DataManagement =() =>{
     try {
       const blob = await Database.getInstance().exportDatabase();
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
-      a.download = 'database-export.json';
+      a.download = "database-export.json";
       a.click();
       URL.revokeObjectURL(url);
     } catch (error) {
-      console.error('Export failed: ', error);
+      console.error("Export failed: ", error);
     }
   };
 
@@ -30,9 +29,9 @@ const DataManagement =() =>{
     try {
       await Database.getInstance().importDatabase(file);
       window.location.reload();
-      console.log('Database import successful');
+      console.log("Database import successful");
     } catch (error) {
-      console.error('Import failed: ', error);
+      console.error("Import failed: ", error);
     }
   };
 
@@ -42,10 +41,14 @@ const DataManagement =() =>{
         Import Database
         <input type="file" hidden onChange={handleImport} />
       </Button>
-      <Button variant="contained" onClick={handleExport} style={{ marginLeft: 8 }}>
+      <Button
+        variant="contained"
+        onClick={handleExport}
+        style={{ marginLeft: 8 }}
+      >
         Export Database
       </Button>
     </div>
   );
-}
+};
 export default DataManagement;

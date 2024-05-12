@@ -9,8 +9,12 @@ const OtherMeansComponent = () => {
   return (
     <ItemsComponent<IOtherMean>
       getAllItem={async () => await Database.getInstance().getAllOtherMeans()}
-      addItem={async (name: string) => await Database.getInstance().addOtherMean(name)}
-      deleteItem={async (id: number) => await Database.getInstance().deleteOtherMean(id)}
+      addItem={async (name: string) =>
+        await Database.getInstance().addOtherMean(name)
+      }
+      deleteItem={async (id: number) =>
+        await Database.getInstance().deleteOtherMean(id)
+      }
       updateItem={async (id: number, name: string) =>
         await Database.getInstance().updateOtherMean(id, name)
       }

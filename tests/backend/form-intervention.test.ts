@@ -45,7 +45,8 @@ describe("Database", () => {
       eCoordinate: "2560250",
     };
     const id = await Database.getInstance().addFormIntervention(input);
-    const formintervention = await Database.getInstance().getFormIntervention(id);
+    const formintervention =
+      await Database.getInstance().getFormIntervention(id);
     expect(formintervention).toEqual({ id, ...input });
   });
 
@@ -105,7 +106,8 @@ describe("Database", () => {
       eCoordinate: "2560250",
     };
     await Database.getInstance().updateFormIntervention(id, update);
-    const updatedFormIntervention = await Database.getInstance().getFormIntervention(id);
+    const updatedFormIntervention =
+      await Database.getInstance().getFormIntervention(id);
     expect(updatedFormIntervention).toEqual({ id: id, ...update });
   });
 
@@ -140,7 +142,8 @@ describe("Database", () => {
     };
     const id = await Database.getInstance().addFormIntervention(input);
     await Database.getInstance().deleteFormIntervention(id);
-    const deletedFormIntervention = await Database.getInstance().getFormIntervention(id);
+    const deletedFormIntervention =
+      await Database.getInstance().getFormIntervention(id);
     expect(deletedFormIntervention).toBeUndefined();
   });
 
@@ -227,10 +230,13 @@ describe("Database", () => {
     ];
     let result: IInterventionFormData[] = [];
     for (let i = 0; i < forminterventions.length; i++) {
-      const id = await Database.getInstance().addFormIntervention(forminterventions[i]);
+      const id = await Database.getInstance().addFormIntervention(
+        forminterventions[i],
+      );
       result.push({ id, ...forminterventions[i] });
     }
-    const allFormInterventions = await Database.getInstance().getAllFormInterventions();
+    const allFormInterventions =
+      await Database.getInstance().getAllFormInterventions();
     expect(allFormInterventions).toHaveLength(forminterventions.length);
     expect(allFormInterventions).toEqual(expect.arrayContaining(result));
   });
@@ -319,7 +325,8 @@ describe("Database", () => {
       await Database.getInstance().addFormIntervention(formintervention);
     }
     await Database.getInstance().clearFormInterventions();
-    const allFormInterventions = await Database.getInstance().getAllFormInterventions();
+    const allFormInterventions =
+      await Database.getInstance().getAllFormInterventions();
     expect(allFormInterventions).toHaveLength(0);
   });
   /**
@@ -352,7 +359,8 @@ describe("Database", () => {
       eCoordinate: "2560250",
     };
     const id = await Database.getInstance().addFormIntervention(input);
-    const formintervention = await Database.getInstance().getFormIntervention(id);
+    const formintervention =
+      await Database.getInstance().getFormIntervention(id);
     expect(formintervention).toEqual({
       ...input,
       id: id,

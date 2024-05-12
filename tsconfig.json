@@ -28,5 +28,11 @@
     "dist",
     "**/*.test.ts"
   ],
-  "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx","jest.config.js"]
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "jest.config.js"
+  ]
 }

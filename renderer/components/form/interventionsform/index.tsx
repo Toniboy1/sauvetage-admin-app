@@ -32,7 +32,8 @@ const FormInterventionsComponent = () => {
    * Loads all forminterventions from the database and updates the state with the retrieved data.
    */
   const loadFormInterventions = async () => {
-    const allFormInterventions = await Database.getInstance().getAllFormInterventions();
+    const allFormInterventions =
+      await Database.getInstance().getAllFormInterventions();
     setFormInterventions(allFormInterventions);
   };
 
@@ -71,11 +72,13 @@ const FormInterventionsComponent = () => {
     const doc = new jsPDF();
     const alarms = await Database.getInstance().getAllAlarms();
     const severities = await Database.getInstance().getAllSeverities();
-    const interventionTypes = await Database.getInstance().getAllInterventions();
+    const interventionTypes =
+      await Database.getInstance().getAllInterventions();
     const causes = await Database.getInstance().getAllCauses();
     const otherMeans = await Database.getInstance().getAllOtherMeans();
     const actionsTaken = await Database.getInstance().getAllActions();
-    const commonLocations = await Database.getInstance().getAllCommonLocations();
+    const commonLocations =
+      await Database.getInstance().getAllCommonLocations();
     Intervention(
       doc,
       formintervention,

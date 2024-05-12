@@ -106,6 +106,21 @@ describe("Database", () => {
   test("should throw an error if a action with the same name already exists", async () => {
     const name = "John Doe";
     await Database.getInstance().addAction(name);
-    await expect(db.addAction(name)).rejects.toThrow();
+    await expect(Database.getInstance().addAction(name)).rejects.toThrow();
+  });
+  /**
+   *  test case Search for actions by name
+   */
+  test("searchActions should return aczions with matching names", async () => {
+    const datas = [
+      { name: "John Doe" },
+      { name: "Jane Smith" },
+      { name: "Bob Johnson" },
+    ];
+    for (const data of datas) {
+      await Database.getInstance().addAction(data.name);
+    }
+    const searchResults = await Database.getInstance().searchActions("John");
+    expect(searchResults).toHaveLength(1);
   });
 });

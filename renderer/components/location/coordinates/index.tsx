@@ -9,12 +9,13 @@ import { IInterventionFormData } from "../../reports/intervention/types";
  * @returns JSX element representing the location data component.
  */
 const LocationData = () => {
-  const { control, getValues, setValue, register } = useFormContext<IInterventionFormData>();
+  const { control, getValues, setValue, register } =
+    useFormContext<IInterventionFormData>();
   useEffect(() => {
-  const initialECoordinate = getValues("eCoordinate");
-  const initialNCoordinate = getValues("nCoordinate");
-  if (initialECoordinate) setValue("nCoordinate", initialECoordinate);
-  if (initialNCoordinate) setValue("eCoordinate", initialECoordinate);
+    const initialECoordinate = getValues("eCoordinate");
+    const initialNCoordinate = getValues("nCoordinate");
+    if (initialECoordinate) setValue("nCoordinate", initialECoordinate);
+    if (initialNCoordinate) setValue("eCoordinate", initialECoordinate);
   }, [getValues, setValue]);
   return (
     <Grid container spacing={2}>
@@ -38,12 +39,9 @@ const LocationData = () => {
                 disabled={false}
                 maskChar=" "
               >
-
                 {() => <TextField label="°N" name={field.name} />}
               </InputMask>
             )}
-
-
           />
           <Controller
             control={control}
@@ -58,11 +56,10 @@ const LocationData = () => {
                 disabled={false}
                 maskChar=" "
               >
-
                 {() => <TextField label="°E" name={field.name} />}
               </InputMask>
             )}
-            />
+          />
         </Stack>
       </Grid>
     </Grid>

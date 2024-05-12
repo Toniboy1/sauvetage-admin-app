@@ -31,7 +31,7 @@ const interventionType = (
     box.value = "Yes";
     doc.addField(box);
     doc.rect(20 + x, startingY + 15 + (count % rows) * 10, 5, 5);
-    if (form.alarmedBy.find((a) => a.id === p.id)) {
+    if (form.inteverntionType.find((a) => a.id === p.id)) {
       doc.text("X", 21 + x, startingY + 19 + (count % rows) * 10);
     }
     doc.text(` ${p.name}`, 25 + x, startingY + 19 + (count % rows) * 10);

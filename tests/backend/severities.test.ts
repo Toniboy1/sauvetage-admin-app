@@ -106,6 +106,22 @@ describe("Database", () => {
   test("should throw an error if a severity with the same name already exists", async () => {
     const name = "John Doe";
     await Database.getInstance().addSeverity(name);
-    await expect(db.addSeverity(name)).rejects.toThrow();
+    await expect(Database.getInstance().addSeverity(name)).rejects.toThrow();
+  });
+
+  /**
+   *  test case Search for severities by name
+   */
+  test("searchSeverities should return severities with matching names", async () => {
+    const datas = [
+      { name: "John Doe" },
+      { name: "Jane Smith" },
+      { name: "Bob Johnson" },
+    ];
+    for (const data of datas) {
+      await Database.getInstance().addSeverity(data.name);
+    }
+    const searchResults = await Database.getInstance().searchSeverities("John");
+    expect(searchResults).toHaveLength(1);
   });
 });

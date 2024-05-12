@@ -8,9 +8,15 @@ import { IInterventionType } from "../../interventions/types";
 const InterventionsTypeComponent = () => {
   return (
     <ItemsComponent<IInterventionType>
-      getAllItem={async () => await Database.getInstance().getAllInterventions()}
-      addItem={async (name: string) => await Database.getInstance().addIntervention(name)}
-      deleteItem={async (id: number) => await Database.getInstance().deleteIntervention(id)}
+      getAllItem={async () =>
+        await Database.getInstance().getAllInterventions()
+      }
+      addItem={async (name: string) =>
+        await Database.getInstance().addIntervention(name)
+      }
+      deleteItem={async (id: number) =>
+        await Database.getInstance().deleteIntervention(id)
+      }
       updateItem={async (id: number, name: string) =>
         await Database.getInstance().updateIntervention(id, name)
       }

@@ -10,7 +10,9 @@ const CauseSelect = ({
       formField={"causes"}
       allowCreate={allowCreate}
       getAllOptions={async () => await Database.getInstance().getAllCauses()} // Ensure proper method binding
-      searchOptions={async (searchTerm) => await Database.getInstance().searchCause(searchTerm)}
+      searchOptions={async (searchTerm) =>
+        await Database.getInstance().searchCause(searchTerm)
+      }
       addOption={async (name) => await Database.getInstance().addCause(name)}
       placeholder="Rechercher une cause"
       multiple={true}

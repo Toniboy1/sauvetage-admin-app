@@ -11,7 +11,9 @@ const PiloteSelect = ({
       formField={"pilote"}
       allowCreate={allowCreate}
       getAllOptions={async () => await Database.getInstance().getAllPeople()} // Ensure proper method binding
-      searchOptions={async (searchTerm) => await Database.getInstance().searchPeople(searchTerm)}
+      searchOptions={async (searchTerm) =>
+        await Database.getInstance().searchPeople(searchTerm)
+      }
       addOption={async (name) => await Database.getInstance().addPerson(name)}
       placeholder="Rechercher un pilote"
       label="Pilote"
