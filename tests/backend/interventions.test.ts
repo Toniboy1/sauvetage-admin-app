@@ -106,6 +106,22 @@ describe("Database", () => {
   test("should throw an error if a intervention with the same name already exists", async () => {
     const name = "John Doe";
     await Database.getInstance().addIntervention(name);
-    await expect(db.addIntervention(name)).rejects.toThrow();
+    await expect(Database.getInstance().addIntervention(name)).rejects.toThrow();
+  });
+
+  /**
+   *  test case Search for interventions by name
+   */
+  test("searchInterventions should return interventions with matching names", async () => {
+    const datas = [
+      { name: "John Doe" },
+      { name: "Jane Smith" },
+      { name: "Bob Johnson" },
+    ];
+    for (const data of datas) {
+      await Database.getInstance().addIntervention(data.name);
+    }
+    const searchResults = await Database.getInstance().searchInterventions("John");
+    expect(searchResults).toHaveLength(1);
   });
 });

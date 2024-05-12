@@ -21,7 +21,7 @@ import Location from "./location";
 import { ICommonLocation } from "../../location/types";
 import Remarks from "./remarks";
 import Destination from "./destination";
-const addPage = (doc: jsPDF, y: number) => {
+export const addPage = (doc: jsPDF, y: number) => {
   if (y > 250) {
     doc.addPage();
     y = 10;

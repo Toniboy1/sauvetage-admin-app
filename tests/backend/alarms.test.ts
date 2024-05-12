@@ -106,6 +106,21 @@ describe("Database", () => {
   test("should throw an error if a alarm with the same name already exists", async () => {
     const name = "John Doe";
     await Database.getInstance().addAlarm(name);
-    await expect(db.addAlarm(name)).rejects.toThrow();
+    await expect(Database.getInstance().addAlarm(name)).rejects.toThrow();
+  });
+  /**
+   *  test case Search for alarms by name
+   */
+  test("searchAlarms should return alarms with matching names", async () => {
+    const datas = [
+      { name: "John Doe" },
+      { name: "Jane Smith" },
+      { name: "Bob Johnson" },
+    ];
+    for (const data of datas) {
+      await Database.getInstance().addAlarm(data.name);
+    }
+    const searchResults = await Database.getInstance().searchAlarms("John");
+    expect(searchResults).toHaveLength(1);
   });
 });

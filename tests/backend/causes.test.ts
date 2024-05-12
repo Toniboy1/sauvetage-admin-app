@@ -106,6 +106,21 @@ describe("Database", () => {
   test("should throw an error if a cause with the same name already exists", async () => {
     const name = "John Doe";
     await Database.getInstance().addCause(name);
-    await expect(db.addCause(name)).rejects.toThrow();
+    await expect(Database.getInstance().addCause(name)).rejects.toThrow();
+  });
+  /**
+   *  test case Search for causes by name
+   */
+  test("searchCause should return causes with matching names", async () => {
+    const datas = [
+      { name: "John Doe" },
+      { name: "Jane Smith" },
+      { name: "Bob Johnson" },
+    ];
+    for (const data of datas) {
+      await Database.getInstance().addCause(data.name);
+    }
+    const searchResults = await Database.getInstance().searchCause("John");
+    expect(searchResults).toHaveLength(1);
   });
 });

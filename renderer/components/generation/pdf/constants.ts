@@ -7,7 +7,6 @@ const TEXT_FONT = (doc: jsPDF) => {
 };
 const SUBTITLE_FONT = (doc: jsPDF) => {
   doc.setFontSize(25);
-  //red
   doc.setTextColor(255, 0, 0);
   doc.setFont("calibri", "light");
 };

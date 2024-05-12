@@ -106,6 +106,23 @@ describe("Database", () => {
   test("should throw an error if a person with the same name already exists", async () => {
     const name = "John Doe";
     await Database.getInstance().addPerson(name);
-    await expect(db.addPerson(name)).rejects.toThrow();
+    await expect(Database.getInstance().addPerson(name)).rejects.toThrow();
+  });
+
+  /**
+   *  test case Search for people by name
+   */
+  test("searchPeople should return people with matching names", async () => {
+    const people = [
+      { name: "John Doe" },
+      { name: "Jane Smith" },
+      { name: "Bob Johnson" },
+    ];
+    for (const person of people) {
+      await Database.getInstance().addPerson(person.name);
+    }
+    const searchResults = await Database.getInstance().searchPeople("John");
+    expect(searchResults).toHaveLength(1);
+    expect(searchResults[0].name).toEqual("John Doe");
   });
 });

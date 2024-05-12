@@ -106,6 +106,23 @@ describe("Database", () => {
   test("should throw an error if a othermean with the same name already exists", async () => {
     const name = "John Doe";
     await Database.getInstance().addOtherMean(name);
-    await expect(db.addOtherMean(name)).rejects.toThrow();
+    await expect(Database.getInstance().addOtherMean(name)).rejects.toThrow();
   });
+
+  /**
+   * Search for othermeans by name
+   */
+  test("searchOtherMeans should return all othermeans with the given name", async () => {
+    const othermeans = [
+      { name: "John Doe" },
+      { name: "Jane Smith" },
+      { name: "Bob Johnson" },
+    ];
+    for (const othermean of othermeans) {
+      await Database.getInstance().addOtherMean(othermean.name);
+    }
+    const searchResults = await Database.getInstance().searchOtherMeans("John");
+    expect(searchResults).toHaveLength(1);
+    expect(searchResults[0].name).toEqual("John Doe");
+  })
 });

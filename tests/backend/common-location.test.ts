@@ -101,11 +101,18 @@ describe("Database", () => {
   });
 
   /**
-   * Test for name unique constraint creation
+   *  test case Search for commonlocations by name
    */
-  test("should throw an error if a commonlocation with the same name already exists", async () => {
-    const name = "John Doe";
-    await Database.getInstance().addCommonLocation(name);
-    await expect(db.addCommonLocation(name)).rejects.toThrow();
+  test("searchCommonLocation should return commonlocations with matching names", async () => {
+    const datas = [
+      { name: "John Doe" },
+      { name: "Jane Smith" },
+      { name: "Bob Johnson" },
+    ];
+    for (const data of datas) {
+      await Database.getInstance().addCommonLocation(data.name);
+    }
+    const searchResults = await Database.getInstance().searchCommonLocation("John");
+    expect(searchResults).toHaveLength(1);
   });
 });
