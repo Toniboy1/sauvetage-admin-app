@@ -24,7 +24,8 @@ const config: JestConfigWithTsJest = {
           tsconfig: "<rootDir>/tsconfig.json",
         },
       },
-    }, {
+    },
+    {
       displayName: "pdf",
       testMatch: ["<rootDir>/tests/pdf/*.test.ts"],
       testEnvironment: "node",
@@ -35,7 +36,8 @@ const config: JestConfigWithTsJest = {
           tsconfig: "<rootDir>/tsconfig.json",
         },
       },
-    }],
+    },
+  ],
   coverageReporters: ["json-summary"],
   collectCoverageFrom: [
     "./renderer/components/**/*.ts",

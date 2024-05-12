@@ -91,19 +91,25 @@ export class Database extends Dexie {
   async importDatabase(file: File): Promise<void> {
     try {
       const jsonString = await new Promise<string>((resolve, reject) => {
-        IDBExportImport.exportToJsonString(this.getIdbDatabase(), (error, jsonString) => {
-          if (error) {
-            console.error("Serialization failed: ", error);
-            reject(error);
-          } else {
-            resolve(jsonString);
-          }
-        });
+        IDBExportImport.exportToJsonString(
+          this.getIdbDatabase(),
+          (error, jsonString) => {
+            if (error) {
+              console.error("Serialization failed: ", error);
+              reject(error);
+            } else {
+              resolve(jsonString);
+            }
+          },
+        );
       });
       await new Promise<void>((resolve, reject) => {
         IDBExportImport.clearDatabase(this.getIdbDatabase(), (clearError) => {
           if (clearError) {
-            console.error("Failed to clear the data before importing: ", clearError);
+            console.error(
+              "Failed to clear the data before importing: ",
+              clearError,
+            );
             reject(clearError);
           } else {
             resolve();
@@ -112,19 +118,30 @@ export class Database extends Dexie {
       });
       const text = await file.text();
       await new Promise<void>((resolve, reject) => {
-        IDBExportImport.importFromJsonString(this.getIdbDatabase(), text, (importError) => {
-          if (importError) {
-            console.error("Import failed: ", importError);
-            IDBExportImport.importFromJsonString(this.getIdbDatabase(), jsonString, (restoreError) => {
-              if (restoreError) {
-                console.error("Failed to restore database from backup: ", restoreError);
-              }
-              reject(importError);
-            });
-          } else {
-            resolve();
-          }
-        });
+        IDBExportImport.importFromJsonString(
+          this.getIdbDatabase(),
+          text,
+          (importError) => {
+            if (importError) {
+              console.error("Import failed: ", importError);
+              IDBExportImport.importFromJsonString(
+                this.getIdbDatabase(),
+                jsonString,
+                (restoreError) => {
+                  if (restoreError) {
+                    console.error(
+                      "Failed to restore database from backup: ",
+                      restoreError,
+                    );
+                  }
+                  reject(importError);
+                },
+              );
+            } else {
+              resolve();
+            }
+          },
+        );
       });
     } catch (textError) {
       console.error("Failed during import process: ", textError);
