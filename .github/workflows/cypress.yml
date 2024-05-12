@@ -30,7 +30,7 @@ jobs:
       uses: cypress-io/github-action@v3
       with:
         start: npm run next # Command to start your server, if needed
-        wait-on: 'http://localhost:3000/interventions' # Adjust the URL/port as necessary
+        wait-on: 'http://localhost:8888/interventions' # Adjust the URL/port as necessary
         wait-on-timeout: 300 # seconds to wait for your server to start
         # config: video=true # Enable video recording of the test runs
         working-directory: ./ # Specify if your cypress.json is in a different folder
