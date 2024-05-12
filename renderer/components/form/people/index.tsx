@@ -15,6 +15,7 @@ const PersonComponent = () => {
         await Database.getInstance().updatePerson(id, name)
       }
       label="Type d'persones"
+      type="person"
     />
   );
 };

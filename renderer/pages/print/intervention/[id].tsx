@@ -13,7 +13,7 @@ const EditIntervention = () => {
 
   useEffect(() => {
     if (id) {
-      db.getFormIntervention(formId).then(setForm).catch(console.error);
+      Database.getInstance().getFormIntervention(formId).then(setForm).catch(console.error);
     }
   }, [id]);
 

@@ -14,6 +14,7 @@ const CauseComponent = () => {
       updateItem={async (id: number, name: string) =>
         await Database.getInstance().updateCause(id, name)
       }
+      type="cause"
       label="Cause des interventions"
     />
   );

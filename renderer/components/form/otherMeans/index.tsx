@@ -15,6 +15,7 @@ const OtherMeansComponent = () => {
         await Database.getInstance().updateOtherMean(id, name)
       }
       label="Type d'alarmes"
+      type="other-mean"
     />
   );
 };

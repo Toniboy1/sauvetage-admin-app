@@ -15,6 +15,7 @@ const CommonLoacationComponent = () => {
         await Database.getInstance().updateCommonLocation(id, name)
       }
       label="Lieux Fréquents"
+      type="common-location"
     />
   );
 };

@@ -15,6 +15,7 @@ const SeverityComponent = () => {
         await Database.getInstance().updateSeverity(id, name)
       }
       label="Type de sévérité"
+      type="severity"
     />
   );
 };

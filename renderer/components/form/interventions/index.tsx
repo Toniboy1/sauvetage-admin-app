@@ -15,6 +15,7 @@ const InterventionsTypeComponent = () => {
         await Database.getInstance().updateIntervention(id, name)
       }
       label="Type d'interventions"
+      type="intervention"
     />
   );
 };
