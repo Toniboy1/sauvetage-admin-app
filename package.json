@@ -78,6 +78,7 @@
     "@date-io/dayjs": "^3.0.0",
     "@hookform/error-message": "^2.0.1",
     "@mui/x-date-pickers": "^7.3.2",
+    "blob-polyfill": "^7.0.20220408",
     "custom-electron-titlebar": "^4.2.8",
     "dayjs": "^1.11.11",
     "dexie": "^4.0.4",
@@ -91,13 +92,15 @@
     "husky": "^9.0.11",
     "indexeddb-export-import": "^2.1.5",
     "install": "^0.13.0",
+    "jest-environment-jsdom": "^29.7.0",
     "jspdf": "^2.5.1",
     "lodash": "^4.17.21",
     "n-readlines": "^1.0.1",
     "npm": "^10.7.0",
     "react-hook-form": "^7.51.4",
     "react-input-mask": "^2.0.4",
-    "stream-to-blob": "^2.0.1"
+    "stream-to-blob": "^2.0.1",
+    "structured-clone": "^0.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.24.5",
@@ -140,7 +143,8 @@
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
     "typedoc": "^0.25.13",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "web-file-polyfill": "^1.0.4"
   },
   "lint-staged": {
     "*.{js,css,md}": "prettier --write"

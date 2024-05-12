@@ -1,17 +1,45 @@
 import { JestConfigWithTsJest } from "ts-jest/dist/types";
 const config: JestConfigWithTsJest = {
-  preset: "ts-jest",
-  testEnvironment: "node",
+  projects: [
+    {
+      displayName: "IDB jsdom",
+      testMatch: ["<rootDir>/tests/backend/idb/*.test.ts"],
+      testEnvironment: "jsdom",
+      preset: "ts-jest",
+      setupFiles: ["<rootDir>/jest.setup.ts"],
+      globals: {
+        "ts-jest": {
+          tsconfig: "<rootDir>/tsconfig.json",
+        },
+      },
+    },
+    {
+      displayName: "backend",
+      testMatch: ["<rootDir>/tests/backend/*.test.ts"],
+      testEnvironment: "node",
+      preset: "ts-jest",
+      setupFiles: ["<rootDir>/jest.setup.ts"],
+      globals: {
+        "ts-jest": {
+          tsconfig: "<rootDir>/tsconfig.json",
+        },
+      },
+    }, {
+      displayName: "pdf",
+      testMatch: ["<rootDir>/tests/pdf/*.test.ts"],
+      testEnvironment: "node",
+      preset: "ts-jest",
+      setupFiles: ["<rootDir>/jest.setup.ts"],
+      globals: {
+        "ts-jest": {
+          tsconfig: "<rootDir>/tsconfig.json",
+        },
+      },
+    }],
   coverageReporters: ["json-summary"],
   collectCoverageFrom: [
     "./renderer/components/**/*.ts",
     "./renderer/model/**/*.ts",
   ],
-  setupFiles: ["<rootDir>/jest.setup.ts"],
-  globals: {
-    "ts-jest": {
-      tsconfig: "<rootDir>/tsconfig.json",
-    },
-  },
 };
 export default config;

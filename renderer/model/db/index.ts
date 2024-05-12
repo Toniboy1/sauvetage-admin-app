@@ -46,6 +46,14 @@ export class Database extends Dexie {
       forminterventions: "++id, date",
     });
   }
+  /**
+   * Delete the current instance of the database and clean the local storage.
+   */
+  async deleteDb() {
+    Database.instance = undefined;
+    await this.close();
+    await this.delete();
+  }
 
   /**
    * Get the singleton instance of the database.
@@ -81,64 +89,47 @@ export class Database extends Dexie {
    * @returns A promise that resolves when the database is successfully re-initialized.
    */
   async importDatabase(file: File): Promise<void> {
-    return new Promise(async (resolve, reject) => {
-      // Export current database as a backup
-      IDBExportImport.exportToJsonString(
-        this.getIdbDatabase(),
-        (error, jsonString) => {
+    try {
+      const jsonString = await new Promise<string>((resolve, reject) => {
+        IDBExportImport.exportToJsonString(this.getIdbDatabase(), (error, jsonString) => {
           if (error) {
             console.error("Serialization failed: ", error);
-            return reject(error);
+            reject(error);
+          } else {
+            resolve(jsonString);
           }
-
-          // Clear all data in preparation for import
-          IDBExportImport.clearDatabase(this.getIdbDatabase(), (clearError) => {
-            if (clearError) {
-              console.error(
-                "Failed to clear the data before importing: ",
-                clearError,
-              );
-              return reject(clearError);
-            }
-
-            // Proceed to import new data
-            file
-              .text()
-              .then((text) => {
-                IDBExportImport.importFromJsonString(
-                  this.getIdbDatabase(),
-                  text,
-                  (importError) => {
-                    if (importError) {
-                      console.error("Import failed: ", importError);
-                      // Attempt to restore from backup
-                      IDBExportImport.importFromJsonString(
-                        this.getIdbDatabase(),
-                        jsonString,
-                        (restoreError) => {
-                          if (restoreError) {
-                            console.error(
-                              "Failed to restore database from backup: ",
-                              restoreError,
-                            );
-                          }
-                          return reject(importError);
-                        },
-                      );
-                    } else {
-                      resolve();
-                    }
-                  },
-                );
-              })
-              .catch((textError) => {
-                console.error("Failed to read file: ", textError);
-                reject(textError);
-              });
-          });
-        },
-      );
-    });
+        });
+      });
+      await new Promise<void>((resolve, reject) => {
+        IDBExportImport.clearDatabase(this.getIdbDatabase(), (clearError) => {
+          if (clearError) {
+            console.error("Failed to clear the data before importing: ", clearError);
+            reject(clearError);
+          } else {
+            resolve();
+          }
+        });
+      });
+      const text = await file.text();
+      await new Promise<void>((resolve, reject) => {
+        IDBExportImport.importFromJsonString(this.getIdbDatabase(), text, (importError) => {
+          if (importError) {
+            console.error("Import failed: ", importError);
+            IDBExportImport.importFromJsonString(this.getIdbDatabase(), jsonString, (restoreError) => {
+              if (restoreError) {
+                console.error("Failed to restore database from backup: ", restoreError);
+              }
+              reject(importError);
+            });
+          } else {
+            resolve();
+          }
+        });
+      });
+    } catch (textError) {
+      console.error("Failed during import process: ", textError);
+      throw textError;
+    }
   }
 
   /**
