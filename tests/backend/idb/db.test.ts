@@ -69,7 +69,6 @@ describe("Database Tests", () => {
         type: "application/json",
       });
       const file = new File([blob], "db.json");
-      console.log(file);
       await db.importDatabase(file);
       const peopleResult = await db.getAllPeople();
       expect(peopleResult).toHaveLength(1);
