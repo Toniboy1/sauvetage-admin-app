@@ -1,5 +1,5 @@
 import { jsPDF } from "jspdf";
-import { describe, expect, it, beforeEach ,jest} from "@jest/globals";
+import { describe, expect, it, beforeEach, jest } from "@jest/globals";
 import { addPage } from "../../renderer/components/generation/pdf/intervention";
 describe("addPage Functionality", () => {
   let doc;
@@ -13,7 +13,7 @@ describe("addPage Functionality", () => {
   it("should add a new page and reset y if y > 250", () => {
     let y = 251;
     y = addPage(doc, y);
-    
+
     expect(doc.addPage).toHaveBeenCalledTimes(1);
     expect(y).toBe(10);
   });
@@ -21,7 +21,7 @@ describe("addPage Functionality", () => {
   it("should not add a new page or change y if y <= 250", () => {
     let y = 250;
     y = addPage(doc, y);
-    
+
     expect(doc.addPage).not.toHaveBeenCalled();
     expect(y).toBe(250);
   });

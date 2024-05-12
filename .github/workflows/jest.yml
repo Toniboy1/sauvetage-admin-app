@@ -25,4 +25,3 @@ jobs:
         uses: jpb06/jest-badges-action@latest
         with:
           branches: main
-

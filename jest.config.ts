@@ -4,8 +4,8 @@ const config: JestConfigWithTsJest = {
   testEnvironment: "node",
   coverageReporters: ["json-summary"],
   collectCoverageFrom: [
-    './renderer/components/**/*.ts',
-    './renderer/model/**/*.ts',
+    "./renderer/components/**/*.ts",
+    "./renderer/model/**/*.ts",
   ],
   setupFiles: ["<rootDir>/jest.setup.ts"],
   globals: {

@@ -9,8 +9,12 @@ const PersonComponent = () => {
   return (
     <ItemsComponent<IPeople>
       getAllItem={async () => await Database.getInstance().getAllPeople()}
-      addItem={async (name: string) => await Database.getInstance().addPerson(name)}
-      deleteItem={async (id: number) => await Database.getInstance().deletePerson(id)}
+      addItem={async (name: string) =>
+        await Database.getInstance().addPerson(name)
+      }
+      deleteItem={async (id: number) =>
+        await Database.getInstance().deletePerson(id)
+      }
       updateItem={async (id: number, name: string) =>
         await Database.getInstance().updatePerson(id, name)
       }

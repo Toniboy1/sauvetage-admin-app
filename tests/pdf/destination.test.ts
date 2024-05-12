@@ -12,40 +12,40 @@ jest.mock("jspdf", () => ({
     setFont: jest.fn(),
     setFontSize: jest.fn(),
     setTextColor: jest.fn(),
-    getFont: jest.fn(() => ({ fontName: '', fontStyle: '' })),
+    getFont: jest.fn(() => ({ fontName: "", fontStyle: "" })),
   })),
   AcroFormCheckBox: jest.fn().mockImplementation(() => ({
-    fieldName: '',
-    value: '',
+    fieldName: "",
+    value: "",
   })),
 }));
 
 describe("Destination Functionality", () => {
   let doc;
-  const form:IInterventionFormData = {
-      interventionDestination: [
-          { id: 1, name: "Location 1" },
-          { id: 2, name: "Location 2" } // Assuming interventionDestination is correctly structured
-      ],
-      startedAt: dayjs(),
-      endedAt:  dayjs(),
-      date:  dayjs(),
-      pilote: [],
-      crew: [],
-      alarmedBy: [],
-      severity: [],
-      inteverntionType: [],
-      otherMeans: [],
-      causes: [],
-      actionsTaken: [],
-      interventionLocation: [],
-      remark: "",
-      rescued: 0,
-      medicalized: 0,
-      deceased: 0,
-      eCoordinate: "",
-      nCoordinate: "",
-      boatRegistration: ""
+  const form: IInterventionFormData = {
+    interventionDestination: [
+      { id: 1, name: "Location 1" },
+      { id: 2, name: "Location 2" }, // Assuming interventionDestination is correctly structured
+    ],
+    startedAt: dayjs(),
+    endedAt: dayjs(),
+    date: dayjs(),
+    pilote: [],
+    crew: [],
+    alarmedBy: [],
+    severity: [],
+    inteverntionType: [],
+    otherMeans: [],
+    causes: [],
+    actionsTaken: [],
+    interventionLocation: [],
+    remark: "",
+    rescued: 0,
+    medicalized: 0,
+    deceased: 0,
+    eCoordinate: "",
+    nCoordinate: "",
+    boatRegistration: "",
   };
   const options = [
     { id: 1, name: "Location 1" },

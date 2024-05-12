@@ -65,7 +65,10 @@ const ActionsComponent = () => {
    * Updates the action's name in the database, reloads the actions list, and closes the form.
    */
   const handleUpdateAction = async () => {
-    await Database.getInstance().updateAction(currentAction.id, currentAction.name);
+    await Database.getInstance().updateAction(
+      currentAction.id,
+      currentAction.name,
+    );
     loadActions();
     handleClose();
   };

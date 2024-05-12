@@ -46,7 +46,7 @@ export default function Intervention() {
     },
   });
   console.log("InterventionForm");
-  console.log(methods.formState.errors)
+  console.log(methods.formState.errors);
   const onSubmit: SubmitHandler<IInterventionFormData> = async (data) => {
     await Database.getInstance().addFormIntervention(data);
     window.location.href = "/forms_interventions";

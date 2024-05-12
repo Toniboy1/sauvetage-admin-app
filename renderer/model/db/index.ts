@@ -83,41 +83,61 @@ export class Database extends Dexie {
   async importDatabase(file: File): Promise<void> {
     return new Promise(async (resolve, reject) => {
       // Export current database as a backup
-      IDBExportImport.exportToJsonString(this.getIdbDatabase(), (error, jsonString) => {
-        if (error) {
-          console.error("Serialization failed: ", error);
-          return reject(error);
-        }
-
-        // Clear all data in preparation for import
-        IDBExportImport.clearDatabase(this.getIdbDatabase(), (clearError) => {
-          if (clearError) {
-            console.error("Failed to clear the data before importing: ", clearError);
-            return reject(clearError);
+      IDBExportImport.exportToJsonString(
+        this.getIdbDatabase(),
+        (error, jsonString) => {
+          if (error) {
+            console.error("Serialization failed: ", error);
+            return reject(error);
           }
 
-          // Proceed to import new data
-          file.text().then((text) => {
-            IDBExportImport.importFromJsonString(this.getIdbDatabase(), text, (importError) => {
-              if (importError) {
-                console.error("Import failed: ", importError);
-                // Attempt to restore from backup
-                IDBExportImport.importFromJsonString(this.getIdbDatabase(), jsonString, (restoreError) => {
-                  if (restoreError) {
-                    console.error("Failed to restore database from backup: ", restoreError);
-                  }
-                  return reject(importError);
-                });
-              } else {
-                resolve();
-              }
-            });
-          }).catch((textError) => {
-            console.error("Failed to read file: ", textError);
-            reject(textError);
+          // Clear all data in preparation for import
+          IDBExportImport.clearDatabase(this.getIdbDatabase(), (clearError) => {
+            if (clearError) {
+              console.error(
+                "Failed to clear the data before importing: ",
+                clearError,
+              );
+              return reject(clearError);
+            }
+
+            // Proceed to import new data
+            file
+              .text()
+              .then((text) => {
+                IDBExportImport.importFromJsonString(
+                  this.getIdbDatabase(),
+                  text,
+                  (importError) => {
+                    if (importError) {
+                      console.error("Import failed: ", importError);
+                      // Attempt to restore from backup
+                      IDBExportImport.importFromJsonString(
+                        this.getIdbDatabase(),
+                        jsonString,
+                        (restoreError) => {
+                          if (restoreError) {
+                            console.error(
+                              "Failed to restore database from backup: ",
+                              restoreError,
+                            );
+                          }
+                          return reject(importError);
+                        },
+                      );
+                    } else {
+                      resolve();
+                    }
+                  },
+                );
+              })
+              .catch((textError) => {
+                console.error("Failed to read file: ", textError);
+                reject(textError);
+              });
           });
-        });
-      });
+        },
+      );
     });
   }
 
@@ -127,16 +147,19 @@ export class Database extends Dexie {
    */
   async exportDatabase(): Promise<Blob> {
     return new Promise((resolve, reject) => {
-      IDBExportImport.exportToJsonString(this.getIdbDatabase(), (error, jsonString) => {
-        if (error) {
-          console.error("Export failed: ", error);
-          reject(error);
-        } else {
-          // Convert jsonString to Blob
-          const blob = new Blob([jsonString], { type: 'application/json' });
-          resolve(blob);
-        }
-      });
+      IDBExportImport.exportToJsonString(
+        this.getIdbDatabase(),
+        (error, jsonString) => {
+          if (error) {
+            console.error("Export failed: ", error);
+            reject(error);
+          } else {
+            // Convert jsonString to Blob
+            const blob = new Blob([jsonString], { type: "application/json" });
+            resolve(blob);
+          }
+        },
+      );
     });
   }
 
@@ -155,7 +178,6 @@ export class Database extends Dexie {
       });
     });
   }
-
 
   /**
    * Fetches all people from the database.

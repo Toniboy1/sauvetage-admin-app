@@ -65,7 +65,7 @@ const AppNavBar = () => {
                 onClick={() => {
                   window.location.href = page.href;
                 }}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page.name}
               </Button>
@@ -75,7 +75,7 @@ const AppNavBar = () => {
                 {updateMessage}
               </Typography>
             )}
-            <Data/>
+            <Data />
           </Box>
         </Toolbar>
       </Container>

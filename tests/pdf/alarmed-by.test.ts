@@ -11,20 +11,18 @@ jest.mock("jspdf", () => ({
     setFont: jest.fn(),
     setFontSize: jest.fn(),
     setTextColor: jest.fn(),
-    getFont: jest.fn(() => ({ fontName: '', fontStyle: '' })),
+    getFont: jest.fn(() => ({ fontName: "", fontStyle: "" })),
   })),
   AcroFormCheckBox: jest.fn().mockImplementation(() => ({
-    fieldName: '',
-    value: '',
+    fieldName: "",
+    value: "",
   })),
 }));
 
 describe("AlarmedBy Functionality", () => {
   let doc;
-  const form:IInterventionFormData = {
-    alarmedBy: [
-      { id: 1, name: "Alarm 1" }
-    ],
+  const form: IInterventionFormData = {
+    alarmedBy: [{ id: 1, name: "Alarm 1" }],
     startedAt: dayjs(),
     endedAt: dayjs(),
     date: dayjs(),
@@ -43,7 +41,7 @@ describe("AlarmedBy Functionality", () => {
     deceased: 0,
     eCoordinate: "",
     nCoordinate: "",
-    boatRegistration: ""
+    boatRegistration: "",
   };
   const options = [
     { id: 1, name: "Alarm 1" },

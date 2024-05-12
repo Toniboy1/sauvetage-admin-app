@@ -31,7 +31,8 @@ describe("Database", () => {
     const newName = "Jane Smith";
     const id = await Database.getInstance().addCommonLocation(name);
     await Database.getInstance().updateCommonLocation(id, newName);
-    const updatedCommonLocation = await Database.getInstance().getCommonLocation(id);
+    const updatedCommonLocation =
+      await Database.getInstance().getCommonLocation(id);
 
     expect(updatedCommonLocation).toEqual({ id, name: newName });
   });
@@ -44,7 +45,8 @@ describe("Database", () => {
 
     const id = await Database.getInstance().addCommonLocation(name);
     await Database.getInstance().deleteCommonLocation(id);
-    const deletedCommonLocation = await Database.getInstance().getCommonLocation(id);
+    const deletedCommonLocation =
+      await Database.getInstance().getCommonLocation(id);
 
     expect(deletedCommonLocation).toBeUndefined();
   });
@@ -61,7 +63,8 @@ describe("Database", () => {
     for (const commonlocation of commonlocations) {
       await Database.getInstance().addCommonLocation(commonlocation.name);
     }
-    const allCommonLocations = await Database.getInstance().getAllCommonLocations();
+    const allCommonLocations =
+      await Database.getInstance().getAllCommonLocations();
     expect(allCommonLocations).toHaveLength(commonlocations.length);
     expect(allCommonLocations.map((p) => p.name)).toEqual(
       expect.arrayContaining(commonlocations.map((p) => p.name)),
@@ -80,7 +83,8 @@ describe("Database", () => {
       await Database.getInstance().addCommonLocation(commonlocation.name);
     }
     await Database.getInstance().clearCommonLocations();
-    const allCommonLocations = await Database.getInstance().getAllCommonLocations();
+    const allCommonLocations =
+      await Database.getInstance().getAllCommonLocations();
     expect(allCommonLocations).toHaveLength(0);
   });
   /**
@@ -112,7 +116,8 @@ describe("Database", () => {
     for (const data of datas) {
       await Database.getInstance().addCommonLocation(data.name);
     }
-    const searchResults = await Database.getInstance().searchCommonLocation("John");
+    const searchResults =
+      await Database.getInstance().searchCommonLocation("John");
     expect(searchResults).toHaveLength(1);
   });
 });

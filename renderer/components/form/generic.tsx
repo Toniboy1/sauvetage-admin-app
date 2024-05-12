@@ -107,7 +107,12 @@ const ItemsComponent = <
   return (
     <div>
       <h1>{label}</h1>
-      <Button variant="contained" color="primary" onClick={handleAddItem} id={`add-${type}`}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleAddItem}
+        id={`add-${type}`}
+      >
         Add New Item
       </Button>
       <TableContainer component={Paper}>
@@ -125,7 +130,11 @@ const ItemsComponent = <
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.name}</TableCell>
                 <TableCell>
-                  <Button color="primary" onClick={() => handleClickOpen(item)} id={`edit-${type}-${currentItem.id}`}>
+                  <Button
+                    color="primary"
+                    onClick={() => handleClickOpen(item)}
+                    id={`edit-${type}-${currentItem.id}`}
+                  >
                     Edit
                   </Button>
                   <Button
@@ -164,10 +173,18 @@ const ItemsComponent = <
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary" id={`edit-save-${type}-${currentItem.id}`}>
+          <Button
+            onClick={handleClose}
+            color="primary"
+            id={`edit-save-${type}-${currentItem.id}`}
+          >
             Cancel
           </Button>
-          <Button onClick={handleUpdateItem} color="primary"id={`edit-cancel-${type}-${currentItem.id}`}>
+          <Button
+            onClick={handleUpdateItem}
+            color="primary"
+            id={`edit-cancel-${type}-${currentItem.id}`}
+          >
             Update
           </Button>
         </DialogActions>

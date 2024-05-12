@@ -10,7 +10,9 @@ const AlarmedBySelect = ({
       formField={"alarmedBy"}
       allowCreate={allowCreate}
       getAllOptions={async () => await Database.getInstance().getAllAlarms()} // Ensure proper method binding
-      searchOptions={async (searchTerm) => await Database.getInstance().searchAlarms(searchTerm)}
+      searchOptions={async (searchTerm) =>
+        await Database.getInstance().searchAlarms(searchTerm)
+      }
       addOption={async (name) => await Database.getInstance().addAlarm(name)}
       placeholder="Rechercher un type d'alarme"
       multiple={true}

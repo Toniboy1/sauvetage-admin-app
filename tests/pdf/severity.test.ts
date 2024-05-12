@@ -1,7 +1,10 @@
 import { jsPDF } from "jspdf";
 import { describe, expect, it, beforeEach, jest } from "@jest/globals";
 import Severity from "../../renderer/components/generation/pdf/severity";
-import { TEXT_FONT, TITLE } from "../../renderer/components/generation/pdf/constants";
+import {
+  TEXT_FONT,
+  TITLE,
+} from "../../renderer/components/generation/pdf/constants";
 import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
 import dayjs from "dayjs";
 
@@ -13,39 +16,37 @@ jest.mock("jspdf", () => ({
     setFont: jest.fn(),
     setFontSize: jest.fn(),
     setTextColor: jest.fn(),
-    getFont: jest.fn(() => ({ fontName: '', fontStyle: '' })),
+    getFont: jest.fn(() => ({ fontName: "", fontStyle: "" })),
   })),
   AcroFormCheckBox: jest.fn().mockImplementation(() => ({
-    fieldName: '',
-    value: '',
+    fieldName: "",
+    value: "",
   })),
 }));
 
 describe("Severity Functionality", () => {
   let doc;
-  const form:IInterventionFormData = {
-      severity: [
-          { id: 1, name: "High" },
-      ],
-      startedAt: dayjs(),
-      endedAt: dayjs(),
-      date: dayjs(),
-      pilote: [],
-      crew: [],
-      alarmedBy: [],
-      inteverntionType: [],
-      otherMeans: [],
-      causes: [],
-      actionsTaken: [],
-      interventionLocation: [],
-      interventionDestination: [],
-      remark: "",
-      rescued: 0,
-      medicalized: 0,
-      deceased: 0,
-      eCoordinate: "",
-      nCoordinate: "",
-      boatRegistration: ""
+  const form: IInterventionFormData = {
+    severity: [{ id: 1, name: "High" }],
+    startedAt: dayjs(),
+    endedAt: dayjs(),
+    date: dayjs(),
+    pilote: [],
+    crew: [],
+    alarmedBy: [],
+    inteverntionType: [],
+    otherMeans: [],
+    causes: [],
+    actionsTaken: [],
+    interventionLocation: [],
+    interventionDestination: [],
+    remark: "",
+    rescued: 0,
+    medicalized: 0,
+    deceased: 0,
+    eCoordinate: "",
+    nCoordinate: "",
+    boatRegistration: "",
   };
   const options = [
     { id: 1, name: "High" },
@@ -66,6 +67,10 @@ describe("Severity Functionality", () => {
     expect(doc.rect).toHaveBeenCalledTimes(options.length);
     expect(newY).toBeGreaterThan(startingY);
 
-    expect(doc.text).toHaveBeenCalledWith("Gravité de l'intervention:", 20, startingY + 10);
+    expect(doc.text).toHaveBeenCalledWith(
+      "Gravité de l'intervention:",
+      20,
+      startingY + 10,
+    );
   });
 });

@@ -12,20 +12,18 @@ jest.mock("jspdf", () => ({
     setFont: jest.fn(),
     setFontSize: jest.fn(),
     setTextColor: jest.fn(),
-    getFont: jest.fn(() => ({ fontName: '', fontStyle: '' })),
+    getFont: jest.fn(() => ({ fontName: "", fontStyle: "" })),
   })),
   AcroFormCheckBox: jest.fn().mockImplementation(() => ({
-    fieldName: '',
-    value: '',
+    fieldName: "",
+    value: "",
   })),
 }));
 
 describe("Cause Functionality", () => {
   let doc;
-  const form:IInterventionFormData = {
-    causes: [
-      { id: 1, name: "Cause 1" }
-    ],
+  const form: IInterventionFormData = {
+    causes: [{ id: 1, name: "Cause 1" }],
     startedAt: dayjs(),
     endedAt: dayjs(),
     date: dayjs(),
@@ -44,7 +42,7 @@ describe("Cause Functionality", () => {
     deceased: 0,
     eCoordinate: "",
     nCoordinate: "",
-    boatRegistration: ""
+    boatRegistration: "",
   };
   const options = [
     { id: 1, name: "Cause 1" },

@@ -53,7 +53,7 @@ if (isProd) {
       preload: path.join(__dirname, "preload.js"),
       spellcheck: true,
       nodeIntegration: true,
-      nodeIntegrationInWorker: true
+      nodeIntegrationInWorker: true,
     },
   });
   autoUpdater.on("checking-for-update", () => {

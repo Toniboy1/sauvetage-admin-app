@@ -10,33 +10,33 @@ jest.mock("jspdf", () => ({
     setFont: jest.fn(),
     setFontSize: jest.fn(),
     setTextColor: jest.fn(),
-    getFont: jest.fn(() => ({ fontName: '', fontStyle: '' })),
+    getFont: jest.fn(() => ({ fontName: "", fontStyle: "" })),
   })),
 }));
 
 describe("Remarks Functionality", () => {
   let doc;
-  const form:IInterventionFormData = {
-      remark: "This is a test remark for the intervention.",
-      startedAt: dayjs(),
-      endedAt: dayjs(),
-      date: dayjs(),
-      pilote: [],
-      crew: [],
-      alarmedBy: [],
-      severity: [],
-      inteverntionType: [],
-      otherMeans: [],
-      causes: [],
-      actionsTaken: [],
-      interventionLocation: [],
-      interventionDestination: [],
-      rescued: 0,
-      medicalized: 0,
-      deceased: 0,
-      eCoordinate: "",
-      nCoordinate: "",
-      boatRegistration: ""
+  const form: IInterventionFormData = {
+    remark: "This is a test remark for the intervention.",
+    startedAt: dayjs(),
+    endedAt: dayjs(),
+    date: dayjs(),
+    pilote: [],
+    crew: [],
+    alarmedBy: [],
+    severity: [],
+    inteverntionType: [],
+    otherMeans: [],
+    causes: [],
+    actionsTaken: [],
+    interventionLocation: [],
+    interventionDestination: [],
+    rescued: 0,
+    medicalized: 0,
+    deceased: 0,
+    eCoordinate: "",
+    nCoordinate: "",
+    boatRegistration: "",
   };
   let startingY = 10;
 

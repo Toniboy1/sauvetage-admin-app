@@ -8,11 +8,13 @@ jest.mock("jspdf", () => ({
     setFont: jest.fn(),
     setFontSize: jest.fn(),
     setTextColor: jest.fn(),
-    getFont: jest.fn(() => ({ fontName: '', fontStyle: '' })),
+    getFont: jest.fn(() => ({ fontName: "", fontStyle: "" })),
   })),
 }));
 
-jest.mock("../../../public/images/logo", () => "mockedLogoPath", { virtual: true });
+jest.mock("../../../public/images/logo", () => "mockedLogoPath", {
+  virtual: true,
+});
 
 describe("Header Functionality", () => {
   let doc;
@@ -25,13 +27,30 @@ describe("Header Functionality", () => {
   it("should add a header with a logo and titles to the document", () => {
     const newY = header(doc, startingY);
 
-    expect(doc.addImage).toHaveBeenCalledWith(expect.any(String), "PNG", 20, 10, 20, 20);
-    expect(doc.text).toHaveBeenCalledWith("SISL-SECTION VILLENEUVE", 105, startingY + 20, { align: "center" });
-    expect(doc.text).toHaveBeenCalledWith("Rapport d'intervention", 105, startingY + 30, { align: "center" });
+    expect(doc.addImage).toHaveBeenCalledWith(
+      expect.any(String),
+      "PNG",
+      20,
+      10,
+      20,
+      20,
+    );
+    expect(doc.text).toHaveBeenCalledWith(
+      "SISL-SECTION VILLENEUVE",
+      105,
+      startingY + 20,
+      { align: "center" },
+    );
+    expect(doc.text).toHaveBeenCalledWith(
+      "Rapport d'intervention",
+      105,
+      startingY + 30,
+      { align: "center" },
+    );
     expect(newY).toBe(startingY + 30);
 
-    expect(doc.setFont).toHaveBeenCalledTimes(3); 
-    expect(doc.setFontSize).toHaveBeenCalledTimes(3); 
+    expect(doc.setFont).toHaveBeenCalledTimes(3);
+    expect(doc.setFontSize).toHaveBeenCalledTimes(3);
     expect(doc.setTextColor).toHaveBeenCalledTimes(3);
   });
 });

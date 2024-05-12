@@ -124,5 +124,5 @@ describe("Database", () => {
     const searchResults = await Database.getInstance().searchOtherMeans("John");
     expect(searchResults).toHaveLength(1);
     expect(searchResults[0].name).toEqual("John Doe");
-  })
+  });
 });

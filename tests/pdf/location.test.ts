@@ -12,40 +12,40 @@ jest.mock("jspdf", () => ({
     setFont: jest.fn(),
     setFontSize: jest.fn(),
     setTextColor: jest.fn(),
-    getFont: jest.fn(() => ({ fontName: '', fontStyle: '' })),
+    getFont: jest.fn(() => ({ fontName: "", fontStyle: "" })),
   })),
   AcroFormCheckBox: jest.fn().mockImplementation(() => ({
-    fieldName: '',
-    value: '',
+    fieldName: "",
+    value: "",
   })),
 }));
 
 describe("Location Functionality", () => {
   let doc;
-  const form:IInterventionFormData = {
-      nCoordinate: "N 123.45",
-      eCoordinate: "E 67.89",
-      interventionLocation: [
-          { id: 1, name: "Location 1" },
-          { id: 2, name: "Location 2" }
-      ],
-      startedAt: dayjs(),
-      endedAt: dayjs(),
-      date: dayjs(),
-      pilote: [],
-      crew: [],
-      alarmedBy: [],
-      severity: [],
-      inteverntionType: [],
-      otherMeans: [],
-      causes: [],
-      actionsTaken: [],
-      interventionDestination: [],
-      remark: "",
-      rescued: 0,
-      medicalized: 0,
-      deceased: 0,
-      boatRegistration: ""
+  const form: IInterventionFormData = {
+    nCoordinate: "N 123.45",
+    eCoordinate: "E 67.89",
+    interventionLocation: [
+      { id: 1, name: "Location 1" },
+      { id: 2, name: "Location 2" },
+    ],
+    startedAt: dayjs(),
+    endedAt: dayjs(),
+    date: dayjs(),
+    pilote: [],
+    crew: [],
+    alarmedBy: [],
+    severity: [],
+    inteverntionType: [],
+    otherMeans: [],
+    causes: [],
+    actionsTaken: [],
+    interventionDestination: [],
+    remark: "",
+    rescued: 0,
+    medicalized: 0,
+    deceased: 0,
+    boatRegistration: "",
   };
   const options = [
     { id: 1, name: "Location 1" },
@@ -62,12 +62,16 @@ describe("Location Functionality", () => {
     const newY = Location(doc, form, options, startingY);
 
     expect(doc.addField).toHaveBeenCalledTimes(options.length);
-    expect(doc.text).toHaveBeenCalledTimes(8); 
+    expect(doc.text).toHaveBeenCalledTimes(8);
     expect(doc.rect).toHaveBeenCalledTimes(options.length);
     expect(newY).toBeGreaterThan(startingY + 25 + (options.length % 3) * 10);
 
     expect(doc.text).toHaveBeenCalledWith("Localisation:", 20, startingY + 10);
-    expect(doc.text).toHaveBeenCalledWith(`Coordonnées: ${form.nCoordinate}`, 20, startingY + 20);
+    expect(doc.text).toHaveBeenCalledWith(
+      `Coordonnées: ${form.nCoordinate}`,
+      20,
+      startingY + 20,
+    );
     expect(doc.text).toHaveBeenCalledWith(form.eCoordinate, 90, startingY + 20);
   });
 });

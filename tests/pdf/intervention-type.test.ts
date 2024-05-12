@@ -11,40 +11,40 @@ jest.mock("jspdf", () => ({
     setFont: jest.fn(),
     setFontSize: jest.fn(),
     setTextColor: jest.fn(),
-    getFont: jest.fn(() => ({ fontName: '', fontStyle: '' })),
+    getFont: jest.fn(() => ({ fontName: "", fontStyle: "" })),
   })),
   AcroFormCheckBox: jest.fn().mockImplementation(() => ({
-    fieldName: '',
-    value: '',
+    fieldName: "",
+    value: "",
   })),
 }));
 
 describe("InterventionType Functionality", () => {
   let doc;
-  const form:IInterventionFormData = {
-      inteverntionType: [
-          { id: 1, name: "Type 1" },
-          { id: 2, name: "Type 2" } // Assuming these are in the form data
-      ],
-      startedAt: dayjs(),
-      endedAt: dayjs(),
-      date: dayjs(),
-      pilote: [],
-      crew: [],
-      alarmedBy: [],
-      severity: [],
-      otherMeans: [],
-      causes: [],
-      actionsTaken: [],
-      interventionLocation: [],
-      interventionDestination: [],
-      remark: "",
-      rescued: 0,
-      medicalized: 0,
-      deceased: 0,
-      eCoordinate: "",
-      nCoordinate: "",
-      boatRegistration: ""
+  const form: IInterventionFormData = {
+    inteverntionType: [
+      { id: 1, name: "Type 1" },
+      { id: 2, name: "Type 2" }, // Assuming these are in the form data
+    ],
+    startedAt: dayjs(),
+    endedAt: dayjs(),
+    date: dayjs(),
+    pilote: [],
+    crew: [],
+    alarmedBy: [],
+    severity: [],
+    otherMeans: [],
+    causes: [],
+    actionsTaken: [],
+    interventionLocation: [],
+    interventionDestination: [],
+    remark: "",
+    rescued: 0,
+    medicalized: 0,
+    deceased: 0,
+    eCoordinate: "",
+    nCoordinate: "",
+    boatRegistration: "",
   };
   const options = [
     { id: 1, name: "Type 1" },
@@ -62,10 +62,14 @@ describe("InterventionType Functionality", () => {
     const newY = interventionType(doc, form, options, startingY);
 
     expect(doc.addField).toHaveBeenCalledTimes(4);
-    expect(doc.text).toHaveBeenCalledTimes(7); 
+    expect(doc.text).toHaveBeenCalledTimes(7);
     expect(doc.rect).toHaveBeenCalledTimes(4);
     expect(newY).toBeGreaterThan(startingY);
 
-    expect(doc.text).toHaveBeenCalledWith("Type d'intervention:", 20, startingY + 10);
+    expect(doc.text).toHaveBeenCalledWith(
+      "Type d'intervention:",
+      20,
+      startingY + 10,
+    );
   });
 });

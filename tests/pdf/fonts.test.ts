@@ -12,7 +12,9 @@ describe("setupFonts", () => {
   it("should add the calibri font family with correct styles to the jsPDF document", () => {
     setupFonts(doc);
     const fontList = doc.getFontList();
-    expect(fontList).toHaveProperty('calibri');
-    expect(fontList.calibri).toEqual(expect.arrayContaining(['normal', 'bold', 'light', 'italic']));
+    expect(fontList).toHaveProperty("calibri");
+    expect(fontList.calibri).toEqual(
+      expect.arrayContaining(["normal", "bold", "light", "italic"]),
+    );
   });
 });

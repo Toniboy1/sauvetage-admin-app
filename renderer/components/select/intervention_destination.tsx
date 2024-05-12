@@ -9,11 +9,15 @@ const InterventionDestinationSelect = ({
     <Select
       formField={"interventionDestination"}
       allowCreate={allowCreate}
-      getAllOptions={async () => await Database.getInstance().getAllCommonLocations()} // Ensure proper method binding
+      getAllOptions={async () =>
+        await Database.getInstance().getAllCommonLocations()
+      } // Ensure proper method binding
       searchOptions={async (searchTerm) =>
         await Database.getInstance().searchCommonLocation(searchTerm)
       }
-      addOption={async (name) => await Database.getInstance().addCommonLocation(name)}
+      addOption={async (name) =>
+        await Database.getInstance().addCommonLocation(name)
+      }
       multiple={false}
       placeholder="Rechercher une destination"
       label="Destination"

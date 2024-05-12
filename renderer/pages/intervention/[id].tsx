@@ -55,7 +55,8 @@ const EditIntervention = () => {
   };
   useEffect(() => {
     if (id) {
-      Database.getInstance().getFormIntervention(formId)
+      Database.getInstance()
+        .getFormIntervention(formId)
         .then((form) => {
           methods.reset(form);
         })
