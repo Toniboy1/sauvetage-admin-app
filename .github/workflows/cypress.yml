@@ -33,4 +33,4 @@ jobs:
         wait-on: 'http://localhost:8888' # Adjust the URL/port as necessary
         wait-on-timeout: 300 # seconds to wait for your server to start
         config: video=true # Enable video recording of the test runs
-        working-directory: ./cypress/e2e # Specify if your cypress.json is in a different folder
+        working-directory: ./ # Specify if your cypress.json is in a different folder
