@@ -13,16 +13,16 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '16' # Set this to your project's required Node.js version
+        node-version: '20'  # Updated to use Node.js version 20
 
-    - name: Install Dependencies
-      run: npm install
+    - name: Install Dependencies with npm ci
+      run: npm ci  # Using npm ci for a cleaner, more reliable install based on package-lock.json
 
     - name: Cache Cypress binary
       uses: actions/cache@v3
       with:
         path: ~/.cache/Cypress
-        key: ${{ runner.os }}-cypress-${{ hashFiles('package-lock.json') }}
+        key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-cypress-
 
@@ -32,5 +32,5 @@ jobs:
         start: npm run dev # Command to start your server, if needed
         wait-on: 'http://localhost:8888' # Adjust the URL/port as necessary
         wait-on-timeout: 300 # seconds to wait for your server to start
-        # config: video=true # Enable video recording of the test runs
-        working-directory: ./ # Directory where your tests are located
+        config: video=true # Enable video recording of the test runs
+        working-directory: ./cypress/e2e # Specify if your cypress.json is in a different folder
