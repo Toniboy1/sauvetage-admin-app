@@ -1,7 +1,6 @@
 import {
   Typography,
   Button,
-  Grid,
   Stack,
   Box,
   Card,
@@ -11,7 +10,6 @@ import {
 import LocationData from "../../location/coordinates";
 import RescuedData from "../../recuscued";
 import DateTimeIntervention from "../../time";
-import dynamic from "next/dynamic";
 import CrewSelect from "../../select/crew";
 import PiloteSelect from "../../select/pilote";
 import AlarmedBySelect from "../../select/alarmed_by";
@@ -22,9 +20,7 @@ import CauseSelect from "../../select/cause";
 import ActionTakenSelect from "../../select/actions_taken";
 import InterventionDestinationSelect from "../../select/intervention_destination";
 import InterventionLocationSelect from "../../select/intervention_location";
-import { useFormContext } from "react-hook-form";
-import { IInterventionFormData } from "./types";
-const Remark = dynamic(() => import("../../remark"), { ssr: false });
+import Remark from "../../remark";
 
 const InterventionForm = () => {
   return (
