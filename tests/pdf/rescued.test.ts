@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 import { jsPDF } from "jspdf";
 import rescued from "../../renderer/components/generation/pdf/rescued";
 import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
+import { INTERLINE_COMPONENT_LOOP, PADDING_BOTTOM, TITLE_SPACING } from "../../renderer/components/generation/pdf/constants";
 
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({
@@ -51,23 +52,23 @@ describe("Rescued Functionality", () => {
     expect(doc.text).toHaveBeenCalledWith(
       `Nombre de personne assistées: ${form.rescued}`,
       20,
-      startingY + 10,
+      startingY + TITLE_SPACING,
     );
     expect(doc.text).toHaveBeenCalledWith(
       `Nombre de personnes médicalisées: ${form.medicalized}`,
       20,
-      startingY + 20,
+      startingY + TITLE_SPACING + INTERLINE_COMPONENT_LOOP,
     );
     expect(doc.text).toHaveBeenCalledWith(
       `Nombre de oersonne décédées: ${form.deceased}`,
       100,
-      startingY + 10,
+      startingY + TITLE_SPACING,
     );
     expect(doc.text).toHaveBeenCalledWith(
       `Immatriculation du bateau: ${form.boatRegistration}`,
       100,
-      startingY + 20,
+      startingY + TITLE_SPACING + INTERLINE_COMPONENT_LOOP,
     );
-    expect(newY).toBe(startingY + 20);
+    expect(newY).toBe(startingY + TITLE_SPACING + INTERLINE_COMPONENT_LOOP + PADDING_BOTTOM);
   });
 });

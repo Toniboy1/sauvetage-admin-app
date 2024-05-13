@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 import { jsPDF } from "jspdf";
 import Severity from "../../renderer/components/generation/pdf/severity";
 import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
+import { TITLE_SPACING } from "../../renderer/components/generation/pdf/constants";
 
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({
@@ -66,7 +67,7 @@ describe("Severity Functionality", () => {
     expect(doc.text).toHaveBeenCalledWith(
       "Gravité de l'intervention:",
       20,
-      startingY + 10,
+      startingY + TITLE_SPACING,
     );
   });
 });

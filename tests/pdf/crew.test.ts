@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 import { jsPDF } from "jspdf";
 import Crew from "../../renderer/components/generation/pdf/crew";
 import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
+import { INTERLINE_COMPONENT_LOOP, PADDING_BOTTOM, TITLE_SPACING } from "../../renderer/components/generation/pdf/constants";
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({
     text: jest.fn(),
@@ -50,17 +51,17 @@ describe("Crew Functionality", () => {
     const newY = Crew(doc, form, startingY);
 
     expect(doc.text).toHaveBeenCalledTimes(3);
-    expect(doc.text).toHaveBeenCalledWith("Équipage:", 20, 10 + startingY);
+    expect(doc.text).toHaveBeenCalledWith("Équipage:", 20, startingY + TITLE_SPACING -5);
     expect(doc.text).toHaveBeenCalledWith(
       "Pilote: John Doe",
       20,
-      20 + startingY,
+      startingY + TITLE_SPACING,
     );
     expect(doc.text).toHaveBeenCalledWith(
       "Equipiers: Jane Doe, Jim Doe",
       20,
-      30 + startingY,
+      startingY + TITLE_SPACING + INTERLINE_COMPONENT_LOOP,
     );
-    expect(newY).toBe(startingY + 30); // Ensure newY is calculated as expected
+    expect(newY).toBe(startingY + TITLE_SPACING + INTERLINE_COMPONENT_LOOP + PADDING_BOTTOM); // Ensure newY is calculated as expected
   });
 });

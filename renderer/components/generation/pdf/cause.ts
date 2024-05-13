@@ -1,7 +1,7 @@
 import jsPDF, { AcroFormCheckBox } from "jspdf";
 import { ICause } from "../../causes/types";
 import { IInterventionFormData } from "../../reports/intervention/types";
-import { TEXT_FONT, TITLE } from "./constants";
+import { CHECKBOX_SPACING, INTERLINE_COMPONENT_LOOP, PADDING_BOTTOM, TEXT_FONT, TEXT_SPACING, TITLE, TITLE_SPACING } from "./constants";
 
 /**
  * Setup the fonts for the PDFs.
@@ -17,9 +17,9 @@ const Cause = (
   options: ICause[],
   startingY: number,
 ): number => {
-  const rows = Math.ceil(options.length / 3);
+  const rows = Math.ceil(options.length / 4);
   TITLE(doc);
-  doc.text("Cause:", 20, startingY + 10);
+  doc.text("Cause:", 20, startingY + TITLE_SPACING);
   TEXT_FONT(doc);
   let count = 0;
   let x = 0;
@@ -29,16 +29,16 @@ const Cause = (
     box.fieldName = `Check${index}`;
     box.value = "Yes";
     doc.addField(box);
-    doc.rect(20 + x, startingY + 15 + (count % rows) * 10, 5, 5);
+    doc.rect(20 + x, startingY + CHECKBOX_SPACING + (count % rows) * INTERLINE_COMPONENT_LOOP, 5, 5);
     if (form.causes.find((a) => a.id === p.id)) {
-      doc.text("X", 21 + x, startingY + 19 + (count % rows) * 10);
+      doc.text("X", 21 + x, startingY + TEXT_SPACING + (count % rows) * INTERLINE_COMPONENT_LOOP);
     }
-    doc.text(` ${p.name}`, 25 + x, startingY + 19 + (count % rows) * 10);
+    doc.text(` ${p.name}`, 25 + x, startingY + TEXT_SPACING + (count % rows) * INTERLINE_COMPONENT_LOOP);
     if (count % rows === 0) {
-      x += 60;
+      x += 40;
     }
   });
-  return startingY + 20 + (count % rows) * 10;
+  return startingY + PADDING_BOTTOM +  rows * INTERLINE_COMPONENT_LOOP;
 };
 
 export default Cause;

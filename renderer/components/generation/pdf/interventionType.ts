@@ -1,7 +1,7 @@
 import jsPDF, { AcroFormCheckBox } from "jspdf";
 import { IInterventionType } from "../../interventions/types";
 import { IInterventionFormData } from "../../reports/intervention/types";
-import { TEXT_FONT, TITLE } from "./constants";
+import { CHECKBOX_SPACING, INTERLINE_COMPONENT_LOOP, PADDING_BOTTOM, TEXT_FONT, TEXT_SPACING, TITLE, TITLE_SPACING } from "./constants";
 
 /**
  * Setup the fonts for the PDFs.
@@ -19,7 +19,7 @@ const interventionType = (
 ): number => {
   const rows = Math.ceil(options.length / 4);
   TITLE(doc);
-  doc.text("Type d'intervention:", 20, startingY + 10);
+  doc.text("Type d'intervention:", 20, startingY + TITLE_SPACING);
   TEXT_FONT(doc);
   let count = 0;
   let x = 0;
@@ -29,16 +29,16 @@ const interventionType = (
     box.fieldName = `Check${index}`;
     box.value = "Yes";
     doc.addField(box);
-    doc.rect(20 + x, startingY + 15 + (count % rows) * 10, 5, 5);
+    doc.rect(20 + x, startingY + CHECKBOX_SPACING + (count % rows) * INTERLINE_COMPONENT_LOOP, 5, 5);
     if (form.inteverntionType.find((a) => a.id === p.id)) {
-      doc.text("X", 21 + x, startingY + 19 + (count % rows) * 10);
+      doc.text("X", 21 + x, startingY + TEXT_SPACING + (count % rows) * INTERLINE_COMPONENT_LOOP);
     }
-    doc.text(` ${p.name}`, 25 + x, startingY + 19 + (count % rows) * 10);
+    doc.text(` ${p.name}`, 25 + x, startingY + TEXT_SPACING + (count % rows) * INTERLINE_COMPONENT_LOOP);
     if (count % rows === 0) {
       x += 40;
     }
   });
-  return startingY + 20 + (count % rows) * 10;
+  return startingY + PADDING_BOTTOM + rows * INTERLINE_COMPONENT_LOOP;
 };
 
 export default interventionType;

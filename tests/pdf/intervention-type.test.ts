@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 import { jsPDF } from "jspdf";
 import interventionType from "../../renderer/components/generation/pdf/interventionType";
 import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
+import { TITLE_SPACING } from "../../renderer/components/generation/pdf/constants";
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({
     addField: jest.fn(),
@@ -69,7 +70,7 @@ describe("InterventionType Functionality", () => {
     expect(doc.text).toHaveBeenCalledWith(
       "Type d'intervention:",
       20,
-      startingY + 10,
+      startingY + TITLE_SPACING,
     );
   });
 });

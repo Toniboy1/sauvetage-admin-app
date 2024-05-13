@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 import { jsPDF } from "jspdf";
 import Location from "../../renderer/components/generation/pdf/location";
 import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
+import { INTERLINE_COMPONENT_LOOP, PADDING_BOTTOM, TITLE_SPACING } from "../../renderer/components/generation/pdf/constants";
 
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({
@@ -62,16 +63,13 @@ describe("Location Functionality", () => {
     const newY = Location(doc, form, options, startingY);
 
     expect(doc.addField).toHaveBeenCalledTimes(options.length);
-    expect(doc.text).toHaveBeenCalledTimes(8);
+    expect(doc.text).toHaveBeenCalledTimes(options.length * 2 + 1);
     expect(doc.rect).toHaveBeenCalledTimes(options.length);
-    expect(newY).toBeGreaterThan(startingY + 25 + (options.length % 3) * 10);
+    expect(newY).toBeGreaterThan(startingY + PADDING_BOTTOM + 0 * INTERLINE_COMPONENT_LOOP);
 
-    expect(doc.text).toHaveBeenCalledWith("Localisation:", 20, startingY + 10);
+    expect(doc.text).toHaveBeenCalledWith("Localisation:", 20, startingY + TITLE_SPACING);
     expect(doc.text).toHaveBeenCalledWith(
-      `Coordonnées: ${form.nCoordinate}`,
-      20,
-      startingY + 20,
+      `Coordonnées: ${form.nCoordinate}°N ${form.eCoordinate}°E`, 55, startingY + TITLE_SPACING
     );
-    expect(doc.text).toHaveBeenCalledWith(form.eCoordinate, 90, startingY + 20);
   });
 });

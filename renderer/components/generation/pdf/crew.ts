@@ -1,6 +1,6 @@
 import jsPDF from "jspdf";
 import { IInterventionFormData } from "../../reports/intervention/types";
-import { TEXT_FONT, TITLE } from "./constants";
+import { INTERLINE_COMPONENT_LOOP, PADDING_BOTTOM, TEXT_FONT, TITLE, TITLE_SPACING } from "./constants";
 
 /**
  *  Setup the fonts for the pdfs
@@ -15,19 +15,19 @@ const crewComponent = (
   startingY: number,
 ): number => {
   TITLE(doc);
-  doc.text("Équipage:", 20, 10 + startingY);
+  doc.text("Équipage:", 20, startingY);
   TEXT_FONT(doc);
   doc.text(
     `Pilote: ${form.pilote.map((p) => p.name).join(", ")}`,
     20,
-    20 + startingY,
+     startingY + TITLE_SPACING,
   );
   doc.text(
     `Equipiers: ${form.crew.map((p) => p.name).join(", ")}`,
     20,
-    30 + startingY,
+    startingY + TITLE_SPACING + INTERLINE_COMPONENT_LOOP,
   );
-  return startingY + 30;
+  return startingY + TITLE_SPACING + INTERLINE_COMPONENT_LOOP + PADDING_BOTTOM;
 };
 
 export default crewComponent;

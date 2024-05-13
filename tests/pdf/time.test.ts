@@ -61,7 +61,7 @@ describe("Time Functionality", () => {
     expect(doc.text).toHaveBeenCalledWith(
       `Heure de fin: ${form.endedAt.format("HH:mm")}`,
       90,
-      startingY + 20,
+      startingY + 15,
     );
     expect(newY).toBe(startingY + 20);
   });
