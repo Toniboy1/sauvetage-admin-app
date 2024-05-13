@@ -7,49 +7,9 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Data from "../data";
 import { useUpdate } from "../providers/update";
+import { pages } from "../../site";
 
-const pages = [
-  {
-    name: "Interventions",
-    href: "/intervention",
-  },
-  {
-    name: "Alarmes",
-    href: "/alarmes",
-  },
-  {
-    name: "Sauveteurs",
-    href: "/people",
-  },
-  {
-    name: "Gravité",
-    href: "/severities",
-  },
-  {
-    name: "Types d'interventions",
-    href: "/interventions",
-  },
-  {
-    name: "Types de moyens supplémentaires",
-    href: "/other_means",
-  },
-  {
-    name: "Types de causes",
-    href: "/causes",
-  },
-  {
-    name: "Actions",
-    href: "/actions",
-  },
-  {
-    name: "Lieux communs",
-    href: "/common_locations",
-  },
-  {
-    name: "Liste des rapports d'interventions",
-    href: "/forms_interventions",
-  },
-];
+
 
 const AppNavBar = () => {
   const { updateMessage } = useUpdate();
