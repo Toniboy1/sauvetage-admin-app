@@ -47,7 +47,7 @@ const Select = <
         value: 1,
         message: "Veuillez sélectionner au moins une alarmne",
       },
-      ...(multiple
+      ...(!multiple
         ? {
             maxLength: {
               value: 1,
@@ -181,7 +181,6 @@ const Select = <
       event.preventDefault(); // Prevent form submission or other default behavior
     }
   };
-
   return (
     <div>
       {Boolean(getFieldState(formField)?.invalid) && (
