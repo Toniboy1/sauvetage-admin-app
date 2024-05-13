@@ -7,18 +7,14 @@ import { IInterventionFormData } from "../../reports/intervention/types";
 /**
  * A forward ref component for the InputMask component.
  */
-const ForwardedInputMaskCoordinate = forwardRef<HTMLInputElement, InputMaskProps>(
-  (props, forwardedRef) => {
-    return (
-      <InputMask
-        ref={forwardedRef}
-        mask="9'999'999"
-        replacement="9"
-        {...props}
-      />
-    );
-  },
-);
+const ForwardedInputMaskCoordinate = forwardRef<
+  HTMLInputElement,
+  InputMaskProps
+>((props, forwardedRef) => {
+  return (
+    <InputMask ref={forwardedRef} mask="9'999'999" replacement="9" {...props} />
+  );
+});
 /**
  * Renders the location data component.
  * @returns JSX element representing the location data component.

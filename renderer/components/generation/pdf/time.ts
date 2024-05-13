@@ -1,6 +1,6 @@
 import jsPDF from "jspdf";
 import { IInterventionFormData } from "../../reports/intervention/types";
-import { PADDING_BOTTOM, TEXT_FONT, TITLE_SPACING } from "./constants";
+import { PADDING_BOTTOM, TEXT_FONT } from "./constants";
 
 const time = (
   doc: jsPDF,

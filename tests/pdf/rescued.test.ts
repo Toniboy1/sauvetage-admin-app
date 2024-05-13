@@ -1,9 +1,13 @@
 import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import dayjs from "dayjs";
 import { jsPDF } from "jspdf";
+import {
+  INTERLINE_COMPONENT_LOOP,
+  PADDING_BOTTOM,
+  TITLE_SPACING,
+} from "../../renderer/components/generation/pdf/constants";
 import rescued from "../../renderer/components/generation/pdf/rescued";
 import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
-import { INTERLINE_COMPONENT_LOOP, PADDING_BOTTOM, TITLE_SPACING } from "../../renderer/components/generation/pdf/constants";
 
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({
@@ -69,6 +73,8 @@ describe("Rescued Functionality", () => {
       100,
       startingY + TITLE_SPACING + INTERLINE_COMPONENT_LOOP,
     );
-    expect(newY).toBe(startingY + TITLE_SPACING + INTERLINE_COMPONENT_LOOP + PADDING_BOTTOM);
+    expect(newY).toBe(
+      startingY + TITLE_SPACING + INTERLINE_COMPONENT_LOOP + PADDING_BOTTOM,
+    );
   });
 });

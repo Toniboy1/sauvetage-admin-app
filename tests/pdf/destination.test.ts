@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import dayjs from "dayjs";
 import { jsPDF } from "jspdf";
+import { TITLE_SPACING } from "../../renderer/components/generation/pdf/constants";
 import Destination from "../../renderer/components/generation/pdf/destination";
 import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
-import { TITLE_SPACING } from "../../renderer/components/generation/pdf/constants";
 
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({
@@ -67,6 +67,10 @@ describe("Destination Functionality", () => {
     expect(doc.rect).toHaveBeenCalledTimes(3);
     expect(newY).toBeGreaterThan(startingY);
 
-    expect(doc.text).toHaveBeenCalledWith("Ramené à/au:", 20, startingY + TITLE_SPACING);
+    expect(doc.text).toHaveBeenCalledWith(
+      "Ramené à/au:",
+      20,
+      startingY + TITLE_SPACING,
+    );
   });
 });

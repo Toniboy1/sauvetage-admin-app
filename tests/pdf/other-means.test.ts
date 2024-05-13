@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import dayjs from "dayjs";
 import { jsPDF } from "jspdf";
+import { TITLE_SPACING } from "../../renderer/components/generation/pdf/constants";
 import OtherMeans from "../../renderer/components/generation/pdf/otherMeans";
 import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
-import { TITLE_SPACING } from "../../renderer/components/generation/pdf/constants";
 
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({

@@ -2,8 +2,8 @@ import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import dayjs from "dayjs";
 import { jsPDF } from "jspdf";
 import AlarmedBy from "../../renderer/components/generation/pdf/alarmed";
-import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
 import { TITLE_SPACING } from "../../renderer/components/generation/pdf/constants";
+import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({
     text: jest.fn(),
@@ -63,6 +63,10 @@ describe("AlarmedBy Functionality", () => {
     expect(doc.rect).toHaveBeenCalledTimes(options.length);
     expect(newY).toBeGreaterThan(startingY);
 
-    expect(doc.text).toHaveBeenCalledWith("Alarmé par:", 20, startingY + TITLE_SPACING);
+    expect(doc.text).toHaveBeenCalledWith(
+      "Alarmé par:",
+      20,
+      startingY + TITLE_SPACING,
+    );
   });
 });

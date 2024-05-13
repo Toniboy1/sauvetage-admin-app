@@ -2,8 +2,8 @@ import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import dayjs from "dayjs";
 import { jsPDF } from "jspdf";
 import ActionTaken from "../../renderer/components/generation/pdf/actionsTaken";
-import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
 import { TITLE_SPACING } from "../../renderer/components/generation/pdf/constants";
+import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
 
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({
@@ -69,7 +69,11 @@ describe("ActionTaken Functionality", () => {
     expect(doc.rect).toHaveBeenCalledTimes(3);
     expect(newY).toBeGreaterThan(startingY);
 
-    expect(doc.text).toHaveBeenCalledWith("Mesures prises:", 20, startingY + TITLE_SPACING);
+    expect(doc.text).toHaveBeenCalledWith(
+      "Mesures prises:",
+      20,
+      startingY + TITLE_SPACING,
+    );
     expect(doc.text).toHaveBeenCalledWith("X", 21, 22); // Corrected based on actual behavior
     expect(doc.text).toHaveBeenCalledWith(" Action 1", 25, 22); // Corrected based on actual behavior
   });

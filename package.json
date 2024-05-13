@@ -89,7 +89,6 @@
     "lodash": "^4.17.21",
     "npm": "^10.7.0",
     "react-hook-form": "^7.51.4",
-    "react-input-mask": "^2.0.4",
     "structured-clone": "^0.2.2"
   },
   "devDependencies": {

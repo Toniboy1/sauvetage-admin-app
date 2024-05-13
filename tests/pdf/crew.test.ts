@@ -1,9 +1,13 @@
 import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import dayjs from "dayjs";
 import { jsPDF } from "jspdf";
+import {
+  INTERLINE_COMPONENT_LOOP,
+  PADDING_BOTTOM,
+  TITLE_SPACING,
+} from "../../renderer/components/generation/pdf/constants";
 import Crew from "../../renderer/components/generation/pdf/crew";
 import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
-import { INTERLINE_COMPONENT_LOOP, PADDING_BOTTOM, TITLE_SPACING } from "../../renderer/components/generation/pdf/constants";
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({
     text: jest.fn(),
@@ -51,7 +55,11 @@ describe("Crew Functionality", () => {
     const newY = Crew(doc, form, startingY);
 
     expect(doc.text).toHaveBeenCalledTimes(3);
-    expect(doc.text).toHaveBeenCalledWith("Équipage:", 20, startingY + TITLE_SPACING -5);
+    expect(doc.text).toHaveBeenCalledWith(
+      "Équipage:",
+      20,
+      startingY + TITLE_SPACING - 5,
+    );
     expect(doc.text).toHaveBeenCalledWith(
       "Pilote: John Doe",
       20,
@@ -62,6 +70,8 @@ describe("Crew Functionality", () => {
       20,
       startingY + TITLE_SPACING + INTERLINE_COMPONENT_LOOP,
     );
-    expect(newY).toBe(startingY + TITLE_SPACING + INTERLINE_COMPONENT_LOOP + PADDING_BOTTOM); // Ensure newY is calculated as expected
+    expect(newY).toBe(
+      startingY + TITLE_SPACING + INTERLINE_COMPONENT_LOOP + PADDING_BOTTOM,
+    ); // Ensure newY is calculated as expected
   });
 });

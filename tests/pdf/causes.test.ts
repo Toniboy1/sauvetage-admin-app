@@ -2,8 +2,8 @@ import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import dayjs from "dayjs";
 import { jsPDF } from "jspdf";
 import Cause from "../../renderer/components/generation/pdf/cause";
-import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
 import { TITLE_SPACING } from "../../renderer/components/generation/pdf/constants";
+import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
 
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({
@@ -62,6 +62,10 @@ describe("Cause Functionality", () => {
     expect(doc.addField).toHaveBeenCalledTimes(3);
     expect(doc.rect).toHaveBeenCalledTimes(3);
     expect(newY).toBeGreaterThan(startingY);
-    expect(doc.text).toHaveBeenCalledWith("Cause:", 20, startingY + TITLE_SPACING);
+    expect(doc.text).toHaveBeenCalledWith(
+      "Cause:",
+      20,
+      startingY + TITLE_SPACING,
+    );
   });
 });
