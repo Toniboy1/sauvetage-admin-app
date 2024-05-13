@@ -1,6 +1,6 @@
-import ItemsComponent from "../generic";
 import Database from "../../../model/db";
 import { IAction } from "../../actions/types";
+import ItemsComponent from "../generic";
 /**
  * CRUD component for the action type.
  * @returns  The JSX element representing the Action component.

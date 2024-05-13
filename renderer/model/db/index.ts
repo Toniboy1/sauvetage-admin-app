@@ -1,18 +1,18 @@
+import dayjs from "dayjs";
 import Dexie, { UpdateSpec } from "dexie";
-import { IPeople } from "../../components/people/types";
-import { IAlarm } from "../../components/alarm/types";
-import { ISeverity } from "../../components/severities/types";
-import { IInterventionType } from "../../components/interventions/types";
-import { IOtherMean } from "../../components/otherMeans/types";
-import { ICause } from "../../components/causes/types";
+import IDBExportImport from "indexeddb-export-import";
 import { IAction } from "../../components/actions/types";
+import { IAlarm } from "../../components/alarm/types";
+import { ICause } from "../../components/causes/types";
+import { IInterventionType } from "../../components/interventions/types";
 import { ICommonLocation } from "../../components/location/types";
+import { IOtherMean } from "../../components/otherMeans/types";
+import { IPeople } from "../../components/people/types";
 import {
   IInterventionData,
   IInterventionFormData,
 } from "../../components/reports/intervention/types";
-import dayjs from "dayjs";
-import IDBExportImport from "indexeddb-export-import";
+import { ISeverity } from "../../components/severities/types";
 
 /**
  * Sets up and manages the database using Dexie.js.

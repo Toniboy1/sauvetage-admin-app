@@ -1,6 +1,6 @@
 import jsPDF from "jspdf";
-import { TEXT_FONT } from "./constants";
 import { IInterventionFormData } from "../../reports/intervention/types";
+import { TEXT_FONT } from "./constants";
 
 const time = (
   doc: jsPDF,

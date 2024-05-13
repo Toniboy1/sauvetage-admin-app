@@ -1,12 +1,12 @@
 "use client";
-import React from "react";
-import Head from "next/head";
 import { styled } from "@mui/material";
-import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
+import dayjs from "dayjs";
+import Head from "next/head";
+import React from "react";
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import InterventionForm from "../components/reports/intervention/form";
 import { IInterventionFormData } from "../components/reports/intervention/types";
 import Database from "../model/db";
-import InterventionForm from "../components/reports/intervention/form";
-import dayjs from "dayjs";
 /**
  * Root component for the intervention page.
  */
@@ -41,8 +41,8 @@ export default function Intervention() {
       medicalized: 0,
       deceased: 0,
       boatRegistration: "",
-      eCoordinate: "2560250",
-      nCoordinate: "1138470",
+      eCoordinate: "2'560'250",
+      nCoordinate: "1'138'470",
     },
   });
   const onSubmit: SubmitHandler<IInterventionFormData> = async (data) => {

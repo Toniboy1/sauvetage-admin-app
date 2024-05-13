@@ -1,29 +1,29 @@
-import { jsPDF } from "jspdf";
-import { describe, expect, it, beforeEach, jest } from "@jest/globals";
-import time from "../../renderer/components/generation/pdf/time";
-import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
+import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import dayjs from "dayjs";
-import { IAlarm } from "../../renderer/components/alarm/types";
-import { ISeverity } from "../../renderer/components/severities/types";
-import { IInterventionType } from "../../renderer/components/interventions/types";
-import { ICause } from "../../renderer/components/causes/types";
-import { IOtherMean } from "../../renderer/components/otherMeans/types";
+import { jsPDF } from "jspdf";
 import { IAction } from "../../renderer/components/actions/types";
-import { ICommonLocation } from "../../renderer/components/location/types";
-import Intervention from "../../renderer/components/generation/pdf/intervention";
-import header from "../../renderer/components/generation/pdf/header";
-import crew from "../../renderer/components/generation/pdf/crew";
-import AlarmedBy from "../../renderer/components/generation/pdf/alarmed";
+import { IAlarm } from "../../renderer/components/alarm/types";
+import { ICause } from "../../renderer/components/causes/types";
 import ActionTaken from "../../renderer/components/generation/pdf/actionsTaken";
+import AlarmedBy from "../../renderer/components/generation/pdf/alarmed";
 import Cause from "../../renderer/components/generation/pdf/cause";
+import crew from "../../renderer/components/generation/pdf/crew";
 import Destination from "../../renderer/components/generation/pdf/destination";
+import Fonts from "../../renderer/components/generation/pdf/fonts";
+import header from "../../renderer/components/generation/pdf/header";
+import Intervention from "../../renderer/components/generation/pdf/intervention";
 import InterventionType from "../../renderer/components/generation/pdf/interventionType";
 import Location from "../../renderer/components/generation/pdf/location";
 import OtherMeans from "../../renderer/components/generation/pdf/otherMeans";
 import Remarks from "../../renderer/components/generation/pdf/remarks";
 import Rescued from "../../renderer/components/generation/pdf/rescued";
 import Severity from "../../renderer/components/generation/pdf/severity";
-import Fonts from "../../renderer/components/generation/pdf/fonts";
+import time from "../../renderer/components/generation/pdf/time";
+import { IInterventionType } from "../../renderer/components/interventions/types";
+import { ICommonLocation } from "../../renderer/components/location/types";
+import { IOtherMean } from "../../renderer/components/otherMeans/types";
+import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
+import { ISeverity } from "../../renderer/components/severities/types";
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({
     addPage: jest.fn(),

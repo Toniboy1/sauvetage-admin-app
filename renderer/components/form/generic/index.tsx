@@ -1,15 +1,15 @@
-import React, { ChangeEvent, useEffect, useState, KeyboardEvent } from "react";
 import {
+  Button,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
-  Button,
   TextField,
 } from "@mui/material";
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 import { ItemsComponentProps } from "./types";
 
 /**
@@ -102,7 +102,7 @@ const ItemsComponent = <
    * @param event The key press event.
    */
   const handleKeyPress = (event: KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       handleUpdateItem();
     }
   };

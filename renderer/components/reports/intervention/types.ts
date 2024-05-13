@@ -1,12 +1,12 @@
 import dayjs from "dayjs";
-import { IPeople } from "../../people/types";
-import { IAlarm } from "../../alarm/types";
-import { ISeverity } from "../../severities/types";
-import { IInterventionType } from "../../interventions/types";
-import { IOtherMean } from "../../otherMeans/types";
-import { ICause } from "../../causes/types";
 import { IAction } from "../../actions/types";
+import { IAlarm } from "../../alarm/types";
+import { ICause } from "../../causes/types";
+import { IInterventionType } from "../../interventions/types";
 import { ICommonLocation } from "../../location/types";
+import { IOtherMean } from "../../otherMeans/types";
+import { IPeople } from "../../people/types";
+import { ISeverity } from "../../severities/types";
 
 export interface IInterventionFormData {
   id?: number;

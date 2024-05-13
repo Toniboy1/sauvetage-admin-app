@@ -1,6 +1,6 @@
 import jsPDF from "jspdf";
-import { HEADER_TITLE, SUBTITLE_FONT, TEXT_FONT } from "./constants";
 import logo from "../../../public/images/logo";
+import { HEADER_TITLE, SUBTITLE_FONT, TEXT_FONT } from "./constants";
 /**
  *  Setup the fonts for the pdfs
  * @param doc  - The jsPDF document

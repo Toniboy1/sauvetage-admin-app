@@ -1,6 +1,6 @@
-import ItemsComponent from "../generic";
 import Database from "../../../model/db";
 import { ISeverity } from "../../severities/types";
+import ItemsComponent from "../generic";
 /**
  * CRUD component for the severity type.
  * @returns  The JSX element representing the Severity component.

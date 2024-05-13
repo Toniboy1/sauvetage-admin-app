@@ -1,17 +1,16 @@
-import React from "react";
-import {
-  Html,
-  Head,
-  Main,
-  NextScript,
-  DocumentProps,
-  DocumentContext,
-} from "next/document";
 import {
   DocumentHeadTags,
   DocumentHeadTagsProps,
   documentGetInitialProps,
 } from "@mui/material-nextjs/v14-pagesRouter";
+import {
+  DocumentContext,
+  DocumentProps,
+  Head,
+  Html,
+  Main,
+  NextScript,
+} from "next/document";
 import theme, { roboto } from "../lib/theme";
 
 /**

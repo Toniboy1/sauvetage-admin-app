@@ -1,5 +1,5 @@
+import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import { jsPDF } from "jspdf";
-import { describe, expect, it, beforeEach, jest } from "@jest/globals";
 import { addPage } from "../../renderer/components/generation/pdf/intervention";
 describe("addPage Functionality", () => {
   let doc;

@@ -21,4 +21,4 @@ const HEADER_TITLE = (doc: jsPDF) => {
   doc.setTextColor(0, 0, 0);
 };
 
-export { TEXT_FONT, SUBTITLE_FONT, TITLE, HEADER_TITLE };
+export { HEADER_TITLE, SUBTITLE_FONT, TEXT_FONT, TITLE };

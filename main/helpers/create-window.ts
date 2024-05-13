@@ -1,13 +1,13 @@
 import {
-  screen,
+  attachTitlebarToWindow,
+  setupTitlebar,
+} from "custom-electron-titlebar/main";
+import {
   BrowserWindow,
   BrowserWindowConstructorOptions,
   Rectangle,
+  screen,
 } from "electron";
-import {
-  setupTitlebar,
-  attachTitlebarToWindow,
-} from "custom-electron-titlebar/main";
 import Store from "electron-store";
 setupTitlebar();
 export const createWindow = (

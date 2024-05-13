@@ -1,13 +1,13 @@
 "use client";
+import { styled } from "@mui/material";
+import dayjs from "dayjs";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import Head from "next/head";
-import { styled } from "@mui/material";
-import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import InterventionForm from "../../components/reports/intervention/form";
 import { IInterventionFormData } from "../../components/reports/intervention/types";
 import Database from "../../model/db";
-import InterventionForm from "../../components/reports/intervention/form";
-import dayjs from "dayjs";
 /**
  * Root component for the intervention page.
  */

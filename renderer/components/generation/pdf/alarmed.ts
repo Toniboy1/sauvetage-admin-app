@@ -1,8 +1,7 @@
-import jsPDF from "jspdf";
-import { AcroFormCheckBox } from "jspdf";
-import { TEXT_FONT, TITLE } from "./constants";
-import { IInterventionFormData } from "../../reports/intervention/types";
+import jsPDF, { AcroFormCheckBox } from "jspdf";
 import { IAlarm } from "../../alarm/types";
+import { IInterventionFormData } from "../../reports/intervention/types";
+import { TEXT_FONT, TITLE } from "./constants";
 
 /**
  * Setup the fonts for the PDFs.

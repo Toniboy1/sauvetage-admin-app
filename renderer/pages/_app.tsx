@@ -1,17 +1,16 @@
-import React from "react";
-import Head from "next/head";
-import { AppProps } from "next/app";
 import { AppCacheProvider } from "@mui/material-nextjs/v14-pagesRouter";
-import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import theme from "../lib/theme";
+import { ThemeProvider } from "@mui/material/styles";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import AppNavBar from "../components/appbar";
 import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
+import { AppProps } from "next/app";
+import Head from "next/head";
+import AppNavBar from "../components/appbar";
 import { UpdateProvider } from "../components/providers/update";
+import theme from "../lib/theme";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);

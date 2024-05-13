@@ -1,6 +1,6 @@
 import jsPDF from "jspdf";
-import { TEXT_FONT, TITLE } from "./constants";
 import { IInterventionFormData } from "../../reports/intervention/types";
+import { TEXT_FONT, TITLE } from "./constants";
 
 const Remarks = (
   doc: jsPDF,

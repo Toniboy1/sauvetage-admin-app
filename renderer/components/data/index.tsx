@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
-import { Button } from '@mui/material';
-import {Database} from '../../model/db';
+import { Button } from "@mui/material";
+import { useRef } from "react";
+import { Database } from "../../model/db";
 
 const DataManagement = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -9,19 +9,19 @@ const DataManagement = () => {
    * Handles the export of the database.
    * Exports the database to a JSON file and downloads it.
    */
-    const handleExport = async () => {
-      try {
-        const blob = await Database.getInstance().exportDatabase();
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "database-export.json";
-        a.click();
-        URL.revokeObjectURL(url);
-      } catch (error) {
-        console.error("Export failed: ", error);
-      }
-    };
+  const handleExport = async () => {
+    try {
+      const blob = await Database.getInstance().exportDatabase();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "database-export.json";
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Export failed: ", error);
+    }
+  };
   /**
    * Handles the import of a database file.
    * @param event The event containing the file to import.
@@ -46,32 +46,38 @@ const DataManagement = () => {
 
   return (
     <>
-      <Button 
-      onClick={triggerFileInput}
-      sx={{
-        minWidth: 120, // Set a minimum width for consistency
-        maxWidth: 160, // Maximum width after which text will be truncated
-        my: 2, mx: 0.5, color: 'white', display: 'block',
-        overflow: 'hidden',  // Hide overflowed text
-        textOverflow: 'ellipsis',  // Add ellipsis to overflowed text
-        whiteSpace: 'nowrap',  // Keep text on a single line
-        'WebkitAppRegion': 'no-drag'  // Ensure buttons are clickable
-      }}>
+      <Button
+        onClick={triggerFileInput}
+        sx={{
+          minWidth: 120, // Set a minimum width for consistency
+          maxWidth: 160, // Maximum width after which text will be truncated
+          my: 2,
+          mx: 0.5,
+          color: "white",
+          display: "block",
+          overflow: "hidden", // Hide overflowed text
+          textOverflow: "ellipsis", // Add ellipsis to overflowed text
+          whiteSpace: "nowrap", // Keep text on a single line
+          WebkitAppRegion: "no-drag", // Ensure buttons are clickable
+        }}
+      >
         Importer
-        <input type="file" hidden onChange={handleImport} ref={fileInputRef}/>
+        <input type="file" hidden onChange={handleImport} ref={fileInputRef} />
       </Button>
       <Button
         sx={{
           minWidth: 120, // Set a minimum width for consistency
           maxWidth: 160, // Maximum width after which text will be truncated
-          my: 2, mx: 0.5, color: 'white', display: 'block',
-          overflow: 'hidden',  // Hide overflowed text
-          textOverflow: 'ellipsis',  // Add ellipsis to overflowed text
-          whiteSpace: 'nowrap',  // Keep text on a single line
-          'WebkitAppRegion': 'no-drag'  // Ensure buttons are clickable
+          my: 2,
+          mx: 0.5,
+          color: "white",
+          display: "block",
+          overflow: "hidden", // Hide overflowed text
+          textOverflow: "ellipsis", // Add ellipsis to overflowed text
+          whiteSpace: "nowrap", // Keep text on a single line
+          WebkitAppRegion: "no-drag", // Ensure buttons are clickable
         }}
         onClick={handleExport}
-
       >
         Exporter
       </Button>

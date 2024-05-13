@@ -1,7 +1,6 @@
-import React from "react";
-import Head from "next/head";
 import { styled } from "@mui/material";
-import People from "../components/form/people";
+import Head from "next/head";
+import React from "react";
 import FormInterventionsComponent from "../components/form/interventionsform";
 
 /**

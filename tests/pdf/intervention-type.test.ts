@@ -1,8 +1,8 @@
+import { beforeEach, describe, expect, it, jest } from "@jest/globals";
+import dayjs from "dayjs";
 import { jsPDF } from "jspdf";
-import { describe, expect, it, beforeEach, jest } from "@jest/globals";
 import interventionType from "../../renderer/components/generation/pdf/interventionType";
 import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
-import dayjs from "dayjs";
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({
     addField: jest.fn(),

@@ -1,13 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { Autocomplete, TextField, Button, Typography } from "@mui/material";
-import { useFieldArray, useFormContext } from "react-hook-form";
+import { Autocomplete, Button, TextField, Typography } from "@mui/material";
 import { debounce } from "lodash";
+import { KeyboardEvent, useCallback, useEffect, useState } from "react";
+import { useFieldArray, useFormContext } from "react-hook-form";
 import { IInterventionFormData } from "../reports/intervention/types";
-import { KeyboardEvent } from "react";
 import {
   GenericProperties,
-  IPropsSelect,
   GenericPropertiesExtended,
+  IPropsSelect,
 } from "./types";
 
 const Select = <
@@ -37,15 +36,15 @@ const Select = <
       },
       ...(multiple
         ? {
-          maxLength: {
-            value: 1,
-            message: "Maximum 1",
-          },
-        }
+            maxLength: {
+              value: 1,
+              message: "Maximum 1",
+            },
+          }
         : undefined),
     },
   });
-    const [options, setOptions] = useState<TExt[]>([]);
+  const [options, setOptions] = useState<TExt[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -99,7 +98,6 @@ const Select = <
         setInputValue(newInputValue);
         debounceSearch(newInputValue);
       }
-
     },
     [debounceSearch, setInputValue],
   );
@@ -126,7 +124,11 @@ const Select = <
    * @param event The key press event.
    */
   const handleKeyPress = (event: KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'Enter' && inputValue && !options.some(option => option.name === inputValue)) {
+    if (
+      event.key === "Enter" &&
+      inputValue &&
+      !options.some((option) => option.name === inputValue)
+    ) {
       handleAddOption();
       event.preventDefault(); // Prevent form submission or other default behavior
     }
@@ -185,11 +187,12 @@ const Select = <
         renderOption={(props, option) =>
           option.id === 0 ? (
             <li {...props}>
-              {allowCreate && !options.find((opt) => opt.name === inputValue) && (
-                <Button fullWidth onClick={handleAddOption}>
-                  Ajouter "{option.name}"
-                </Button>
-              )}
+              {allowCreate &&
+                !options.find((opt) => opt.name === inputValue) && (
+                  <Button fullWidth onClick={handleAddOption}>
+                    Ajouter "{option.name}"
+                  </Button>
+                )}
             </li>
           ) : (
             <li {...props}>{option.name}</li>
@@ -203,7 +206,11 @@ const Select = <
             placeholder={placeholder}
             variant="outlined"
             error={Boolean(getFieldState(formField)?.invalid)}
-            helperText={getFieldState(formField)?.invalid ? getFieldState(formField)?.error?.message : ""}
+            helperText={
+              getFieldState(formField)?.invalid
+                ? getFieldState(formField)?.error?.message
+                : ""
+            }
             onKeyDown={handleKeyPress}
           />
         )}

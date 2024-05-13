@@ -1,5 +1,5 @@
-import Select from "./generic";
 import Database from "../../model/db";
+import Select from "./generic";
 import { IPropsSelectGereric } from "./types";
 const AlarmedBySelect = ({
   allowCreate = false,

@@ -1,5 +1,5 @@
+import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import { jsPDF } from "jspdf";
-import { describe, expect, it, beforeEach, jest } from "@jest/globals";
 import header from "../../renderer/components/generation/pdf/header";
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({

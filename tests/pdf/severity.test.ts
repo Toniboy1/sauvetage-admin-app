@@ -1,12 +1,8 @@
-import { jsPDF } from "jspdf";
-import { describe, expect, it, beforeEach, jest } from "@jest/globals";
-import Severity from "../../renderer/components/generation/pdf/severity";
-import {
-  TEXT_FONT,
-  TITLE,
-} from "../../renderer/components/generation/pdf/constants";
-import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
+import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import dayjs from "dayjs";
+import { jsPDF } from "jspdf";
+import Severity from "../../renderer/components/generation/pdf/severity";
+import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
 
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({

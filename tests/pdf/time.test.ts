@@ -1,7 +1,7 @@
-import { jsPDF } from "jspdf";
-import { describe, expect, it, beforeEach, jest } from "@jest/globals";
-import time from "../../renderer/components/generation/pdf/time";
+import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import dayjs from "dayjs";
+import { jsPDF } from "jspdf";
+import time from "../../renderer/components/generation/pdf/time";
 import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
 
 jest.mock("jspdf", () => ({

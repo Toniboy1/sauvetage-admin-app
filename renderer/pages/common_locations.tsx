@@ -1,6 +1,6 @@
-import React from "react";
-import Head from "next/head";
 import { styled } from "@mui/material";
+import Head from "next/head";
+import React from "react";
 import CommonLocations from "../components/form/commonlocations";
 
 /**

@@ -1,6 +1,6 @@
-import ItemsComponent from "../generic";
 import Database from "../../../model/db";
 import { ICommonLocation } from "../../location/commons/types";
+import ItemsComponent from "../generic";
 /**
  * CRUD component for the Common locations type.
  * @returns  The JSX element representing the common locations component.

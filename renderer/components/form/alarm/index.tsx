@@ -1,6 +1,6 @@
-import ItemsComponent from "../generic";
 import Database from "../../../model/db";
 import { IAlarm } from "../../alarm/types";
+import ItemsComponent from "../generic";
 /**
  * CRUD component for the alarm type.
  * @returns  The JSX element representing the Alarm component.
