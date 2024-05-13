@@ -48,8 +48,8 @@ const AppNavBar = () => {
   return (
     <Box sx={{ display: 'flex' }}>
       <AppBar position="sticky" sx={{
-        '-webkit-app-region': 'drag',
-        '-webkit-user-select': 'none',
+        'WebkitAppRegion': 'drag',
+        'WebkitUserSelect': 'none',
         cursor: 'default'
       }}>
         <Container maxWidth="xl" sx={{ overflow: 'hidden', width: '100%' }}>
@@ -62,7 +62,7 @@ const AppNavBar = () => {
               sx={{
                 mr: 2,
                 display: { sm: 'none' },
-                '-webkit-app-region': 'no-drag'
+                'WebkitAppRegion': 'no-drag'
               }}
               onClick={handleDrawerToggle}
             >
@@ -88,7 +88,7 @@ const AppNavBar = () => {
                     overflow: 'hidden',  
                     textOverflow: 'ellipsis',  
                     whiteSpace: 'nowrap',  
-                    '-webkit-app-region': 'no-drag' 
+                    'WebkitAppRegion': 'no-drag' 
                   }}
                 >
                   {page.name}

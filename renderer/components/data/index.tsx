@@ -55,7 +55,7 @@ const DataManagement = () => {
         overflow: 'hidden',  // Hide overflowed text
         textOverflow: 'ellipsis',  // Add ellipsis to overflowed text
         whiteSpace: 'nowrap',  // Keep text on a single line
-        '-webkit-app-region': 'no-drag'  // Ensure buttons are clickable
+        'WebkitAppRegion': 'no-drag'  // Ensure buttons are clickable
       }}>
         Importer
         <input type="file" hidden onChange={handleImport} ref={fileInputRef}/>
@@ -68,7 +68,7 @@ const DataManagement = () => {
           overflow: 'hidden',  // Hide overflowed text
           textOverflow: 'ellipsis',  // Add ellipsis to overflowed text
           whiteSpace: 'nowrap',  // Keep text on a single line
-          '-webkit-app-region': 'no-drag'  // Ensure buttons are clickable
+          'WebkitAppRegion': 'no-drag'  // Ensure buttons are clickable
         }}
         onClick={handleExport}
 
