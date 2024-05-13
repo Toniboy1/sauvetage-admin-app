@@ -1,6 +1,6 @@
 import jsPDF, { AcroFormCheckBox } from "jspdf";
-import { IWeather } from "../../weathers/types";
 import { IInterventionFormData } from "../../reports/intervention/types";
+import { IWeather } from "../../weathers/types";
 import {
   CHECKBOX_SPACING,
   INTERLINE_COMPONENT_LOOP,

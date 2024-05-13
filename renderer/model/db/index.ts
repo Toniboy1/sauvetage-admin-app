@@ -5,6 +5,7 @@ import { IAction } from "../../components/actions/types";
 import { IAlarm } from "../../components/alarm/types";
 import { ICause } from "../../components/causes/types";
 import { IInterventionType } from "../../components/interventions/types";
+import { ILakeState } from "../../components/lakeStates/types";
 import { ICommonLocation } from "../../components/location/types";
 import { IOtherMean } from "../../components/otherMeans/types";
 import { IPeople } from "../../components/people/types";
@@ -14,7 +15,6 @@ import {
 } from "../../components/reports/intervention/types";
 import { ISeverity } from "../../components/severities/types";
 import { IWeather } from "../../components/weathers/types";
-import { ILakeState } from "../../components/lakeStates/types";
 import { IWind } from "../../components/winds/types";
 
 /**
@@ -923,7 +923,9 @@ export class Database extends Dexie {
    * @returns all lakestates
    */
   async getAllLakeStates(): Promise<Array<ILakeState>> {
-    return this.lakeStates.orderBy("name").toArray() as Promise<Array<ILakeState>>;
+    return this.lakeStates.orderBy("name").toArray() as Promise<
+      Array<ILakeState>
+    >;
   }
   /**
    * Deletes all lakestates from the database.

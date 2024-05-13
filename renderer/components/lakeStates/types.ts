@@ -1,4 +1,4 @@
-export interface ILakeState{
-    id?:number,
-    name:string
+export interface ILakeState {
+  id?: number;
+  name: string;
 }
