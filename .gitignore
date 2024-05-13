@@ -5,3 +5,4 @@ app
 dist
 doc
 coverage
+model-db.json

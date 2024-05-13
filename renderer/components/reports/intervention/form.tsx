@@ -24,11 +24,6 @@ import DateTimeIntervention from "../../time";
 
 const InterventionForm = () => {
   return (
-    <Box
-      component="section"
-      sx={{ p: 2, border: "1px dashed grey" }}
-      padding={6}
-    >
       <Stack spacing={2}>
         <DateTimeIntervention />
         <Card>
@@ -162,7 +157,6 @@ const InterventionForm = () => {
           Soumettre
         </Button>
       </Stack>
-    </Box>
   );
 };
 export default InterventionForm;

@@ -1,24 +1,363 @@
 {
-  "actions": [],
-  "alarms": [],
-  "causes": [],
-  "forminterventions": [],
-  "interventions": [],
-  "otherMeans": [],
-  "severities": [
-    {
-      "name": "Bénin (Assistance ou dépannage, sans avarie)",
-      "id": 1
-    },
-    {
-      "name": "Moyen (Avarie, sans blessé)",
-      "id": 2
-    },
-    {
-      "name": "Grave (décès, blessé, indépendamment des avaries)",
-      "id": 3
-    }
-  ],
-  "commonlocations": [],
-  "people": []
+    "actions": [
+        {
+            "name": "Remorquage",
+            "id": 1
+        },
+        {
+            "name": "Mise à l’abri des personnes",
+            "id": 2
+        },
+        {
+            "name": "Aucune, propre moyen",
+            "id": 3
+        },
+        {
+            "name": "Autres",
+            "id": 4
+        }
+    ],
+    "causes": [
+        {
+            "name": "Panne Carburant",
+            "id": 1
+        },
+        {
+            "name": "Panne Batterie",
+            "id": 2
+        },
+        {
+            "name": "Panne Moteur",
+            "id": 3
+        },
+        {
+            "name": "Voie d’eau",
+            "id": 4
+        },
+        {
+            "name": "Gouvernail",
+            "id": 5
+        },
+        {
+            "name": "Corde dans l’hélice",
+            "id": 6
+        },
+        {
+            "name": "Chavirage",
+            "id": 7
+        },
+        {
+            "name": "Echouage",
+            "id": 8
+        },
+        {
+            "name": "En dérive",
+            "id": 9
+        },
+        {
+            "name": "Animal",
+            "id": 10
+        },
+        {
+            "name": "Blessé(s)",
+            "id": 11
+        },
+        {
+            "name": "Noyade",
+            "id": 12
+        },
+        {
+            "name": "Recherche Subaquatique (objet)",
+            "id": 13
+        },
+        {
+            "name": "Prévention",
+            "id": 14
+        },
+        {
+            "name": "Autre",
+            "id": 15
+        }
+    ],
+    "commonlocations": [
+        {
+            "name": "France",
+            "id": 1
+        },
+        {
+            "name": "St-Gingolph",
+            "id": 2
+        },
+        {
+            "name": "Le Bouveret",
+            "id": 3
+        },
+        {
+            "name": "Au large du Rhône",
+            "id": 4
+        },
+        {
+            "name": "Entre Rhône et Grand Canal",
+            "id": 5
+        },
+        {
+            "name": "Entre Grand Canal et Eau froide",
+            "id": 6
+        },
+        {
+            "name": "Aux alentours de l’île de Peilz",
+            "id": 7
+        },
+        {
+            "name": "Entre l’Eau froide et la Tinière",
+            "id": 8
+        },
+        {
+            "name": "Entre la Tinière et le Château de Chillon",
+            "id": 9
+        },
+        {
+            "name": "Au large du Château de Chillon",
+            "id": 10
+        },
+        {
+            "name": "Veytaux",
+            "id": 11
+        },
+        {
+            "name": "Territet",
+            "id": 12
+        },
+        {
+            "name": "Montreux",
+            "id": 13
+        },
+        {
+            "name": "Clarens",
+            "id": 14
+        },
+        {
+            "name": "La Tour-de-Peilz",
+            "id": 15
+        },
+        {
+            "name": "Vevey",
+            "id": 16
+        },
+        {
+            "name": "Autre",
+            "id": 17
+        },
+        {
+            "name": "Port St-Gingolph",
+            "id": 18
+        },
+        {
+            "name": "Port Bouveret",
+            "id": 19
+        },
+        {
+            "name": "Port Vieux-Rhône",
+            "id": 20
+        },
+        {
+            "name": "Port Ries, Noville",
+            "id": 21
+        },
+        {
+            "name": "Port Grand Canal",
+            "id": 22
+        },
+        {
+            "name": "Port Eau froide",
+            "id": 23
+        },
+        {
+            "name": "Port Villeneuve",
+            "id": 24
+        },
+        {
+            "name": "Port Clarens",
+            "id": 25
+        },
+        {
+            "name": "Port la Tour-de-Peilz",
+            "id": 26
+        },
+        {
+            "name": "Port Vevey",
+            "id": 27
+        },
+        {
+            "name": "Port Pichette",
+            "id": 28
+        }
+    ],
+    "forminterventions": [],
+    "interventions": [
+        {
+            "name": "Voilier",
+            "id": 1
+        },
+        {
+            "name": "Moteur",
+            "id": 2
+        },
+        {
+            "name": "Bateau passager",
+            "id": 3
+        },
+        {
+            "name": "Petite batellerie",
+            "id": 4
+        },
+        {
+            "name": "Engin de plage",
+            "id": 5
+        },
+        {
+            "name": "Paddle",
+            "id": 6
+        },
+        {
+            "name": "Kitesurf",
+            "id": 7
+        },
+        {
+            "name": "Animal",
+            "id": 8
+        },
+        {
+            "name": "Parapente",
+            "id": 9
+        },
+        {
+            "name": "Nageur",
+            "id": 10
+        },
+        {
+            "name": "Recherche",
+            "id": 11
+        },
+        {
+            "name": "Autre",
+            "id": 12
+        }
+    ],
+    "otherMeans": [
+        {
+            "name": "Non",
+            "id": 1
+        },
+        {
+            "name": "Gendarmerie",
+            "id": 2
+        },
+        {
+            "name": "Jorat 702",
+            "id": 3
+        },
+        {
+            "name": "Pompier",
+            "id": 4
+        },
+        {
+            "name": "Ambulance",
+            "id": 5
+        },
+        {
+            "name": "SMUR",
+            "id": 6
+        },
+        {
+            "name": "Plongeurs",
+            "id": 7
+        },
+        {
+            "name": "REGA",
+            "id": 8
+        },
+        {
+            "name": "Air-Glaciers",
+            "id": 9
+        },
+        {
+            "name": "Service de Lutte contre la pollution",
+            "id": 10
+        },
+        {
+            "name": "Sauvetage N° 234",
+            "id": 11
+        },
+        {
+            "name": "Sauvetage N° 236",
+            "id": 12
+        },
+        {
+            "name": "Autres",
+            "id": 13
+        }
+    ],
+    "severities": [
+        {
+            "name": "Bénin (Assistance ou dépannage, sans avarie)",
+            "id": 1
+        },
+        {
+            "name": "Moyen (Avarie, sans blessé)",
+            "id": 2
+        },
+        {
+            "name": "Grave (décès, blessé, indépendamment des avaries)",
+            "id": 3
+        }
+    ],
+    "people": [
+        {
+            "name": "Anthony Fasano",
+            "id": 1
+        },
+        {
+            "name": "Jérôme Ruchet",
+            "id": 2
+        },
+        {
+            "name": "Romain Bertholet",
+            "id": 3
+        },
+        {
+            "name": "Maxime Vetsch",
+            "id": 4
+        },
+        {
+            "name": "Bernard Chalon",
+            "id": 5
+        }
+    ],
+    "alarms": [
+        {
+            "name": "CVP - Système VOICE/SMS",
+            "id": 1
+        },
+        {
+            "name": "CVP - Radio/DL",
+            "id": 2
+        },
+        {
+            "name": "Fausse Alarme",
+            "id": 3
+        },
+        {
+            "name": "Vision direct",
+            "id": 4
+        },
+        {
+            "name": "Téléphone",
+            "id": 5
+        },
+        {
+            "name": "Autre",
+            "id": 6
+        }
+    ]
 }
