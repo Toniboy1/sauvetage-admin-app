@@ -1,4 +1,4 @@
-import { Autocomplete, Button, TextField, Typography } from "@mui/material";
+import { Autocomplete, Button, Chip, TextField, Typography } from "@mui/material";
 import { debounce } from "lodash";
 import { KeyboardEvent, useCallback, useEffect, useState } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
@@ -7,6 +7,7 @@ import {
   GenericProperties,
   GenericPropertiesExtended,
   IPropsSelect,
+  LiProps,
 } from "./types";
 
 const Select = <
@@ -36,11 +37,11 @@ const Select = <
       },
       ...(multiple
         ? {
-            maxLength: {
-              value: 1,
-              message: "Maximum 1",
-            },
-          }
+          maxLength: {
+            value: 1,
+            message: "Maximum 1",
+          },
+        }
         : undefined),
     },
   });
@@ -92,8 +93,6 @@ const Select = <
    */
   const handleInputChange = useCallback(
     (event, newInputValue) => {
-      console.log("event", event);
-      console.log("newInputValue", newInputValue);
       if (event?.type === "change") {
         setInputValue(newInputValue);
         debounceSearch(newInputValue);
@@ -149,6 +148,7 @@ const Select = <
         id={`${formField}-autocomplete`}
         options={options}
         getOptionLabel={(option) => (option ? option.name : "")}
+        getOptionKey={(option) => option.id}
         loading={loading}
         inputValue={inputValue}
         onInputChange={handleInputChange}
@@ -184,9 +184,9 @@ const Select = <
           }
           return filtered;
         }}
-        renderOption={(props, option) =>
-          option.id === 0 ? (
-            <li {...props}>
+        renderOption={(props:LiProps, option) => {
+          return option.id === 0 ? (
+            <li {...props} key={option.id}>
               {allowCreate &&
                 !options.find((opt) => opt.name === inputValue) && (
                   <Button fullWidth onClick={handleAddOption}>
@@ -195,9 +195,14 @@ const Select = <
                 )}
             </li>
           ) : (
-            <li {...props}>{option.name}</li>
-          )
-        }
+            <li {...props} key={option.id}>{option.name}</li>
+          );
+        }}
+        renderTags={(tagValue, getTagProps) => {
+          return tagValue.map((option, index) => (
+            <Chip {...getTagProps({ index })} key={option.id} label={option.name} />
+          ));
+        }}
         sx={{ width: 300 }}
         renderInput={(params) => (
           <TextField
