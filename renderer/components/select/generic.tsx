@@ -3,6 +3,7 @@ import { Autocomplete, TextField, Button, Typography } from "@mui/material";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { debounce } from "lodash";
 import { IInterventionFormData } from "../reports/intervention/types";
+import {KeyboardEvent} from "react";
 import {
   GenericProperties,
   IPropsSelect,
@@ -36,11 +37,11 @@ const Select = <
       },
       ...(multiple
         ? {
-            maxLength: {
-              value: 1,
-              message: "Maximum 1",
-            },
-          }
+          maxLength: {
+            value: 1,
+            message: "Maximum 1",
+          },
+        }
         : undefined),
     },
   });
@@ -49,6 +50,9 @@ const Select = <
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    /**
+     * Fetches all options and sets the state.
+     */
     const fetchOptions = async () => {
       const options = await getAllOptions();
       setOptions(
@@ -62,6 +66,9 @@ const Select = <
     fetchOptions();
   }, []);
 
+  /**
+   * Debounces the search function to avoid making too many requests.
+   */
   const debounceSearch = useCallback(
     debounce(async (input) => {
       setLoading(true);
@@ -81,16 +88,25 @@ const Select = <
     [],
   );
 
+  /**
+   * Handles the input change event.
+   */
   const handleInputChange = useCallback(
     (event, newInputValue) => {
-      if (newInputValue) {
+      console.log("event", event);
+      console.log("newInputValue", newInputValue);
+      if (event?.type === "change") {
         setInputValue(newInputValue);
         debounceSearch(newInputValue);
       }
+
     },
     [debounceSearch, setInputValue],
   );
 
+  /**
+   * Handles the add option event.
+   */
   const handleAddOption = useCallback(async () => {
     if (inputValue) {
       const newId = await addOption(inputValue);
@@ -104,6 +120,14 @@ const Select = <
       setOptions((prev: TExt[]) => [...prev, newOption] as TExt[]);
     }
   }, [append, inputValue]);
+
+  const handleKeyPress = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter' && inputValue && !options.some(option => option.name === inputValue)) {
+      handleAddOption();
+      event.preventDefault(); // Prevent form submission or other default behavior
+    }
+  };
+
   return (
     <div>
       {Boolean(getFieldState(formField)?.invalid) && (
@@ -156,7 +180,7 @@ const Select = <
         renderOption={(props, option) =>
           option.id === 0 ? (
             <li {...props}>
-              {allowCreate && (
+              {allowCreate && !options.find((opt) => opt.name === inputValue) && (
                 <Button fullWidth onClick={handleAddOption}>
                   Ajouter "{option.name}"
                 </Button>
@@ -169,16 +193,13 @@ const Select = <
         sx={{ width: 300 }}
         renderInput={(params) => (
           <TextField
-            error={Boolean(getFieldState(formField)?.invalid)}
-            helperText={
-              getFieldState(formField)?.invalid
-                ? getFieldState(formField)?.error?.message
-                : ""
-            }
             {...params}
             label={label}
             placeholder={placeholder}
             variant="outlined"
+            error={Boolean(getFieldState(formField)?.invalid)}
+            helperText={getFieldState(formField)?.invalid ? getFieldState(formField)?.error?.message : ""}
+            onKeyPress={handleKeyPress}
           />
         )}
       />
