@@ -3,7 +3,7 @@ import { Autocomplete, TextField, Button, Typography } from "@mui/material";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { debounce } from "lodash";
 import { IInterventionFormData } from "../reports/intervention/types";
-import {KeyboardEvent} from "react";
+import { KeyboardEvent } from "react";
 import {
   GenericProperties,
   IPropsSelect,
@@ -45,7 +45,7 @@ const Select = <
         : undefined),
     },
   });
-  const [options, setOptions] = useState<TExt[]>([]);
+    const [options, setOptions] = useState<TExt[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -121,6 +121,10 @@ const Select = <
     }
   }, [append, inputValue]);
 
+  /**
+   * Handles the key press event.
+   * @param event The key press event.
+   */
   const handleKeyPress = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Enter' && inputValue && !options.some(option => option.name === inputValue)) {
       handleAddOption();
@@ -135,6 +139,7 @@ const Select = <
           {getFieldState(formField)?.error?.root?.message}
         </Typography>
       )}
+
       <Autocomplete
         size="medium"
         fullWidth={true}
@@ -199,7 +204,7 @@ const Select = <
             variant="outlined"
             error={Boolean(getFieldState(formField)?.invalid)}
             helperText={getFieldState(formField)?.invalid ? getFieldState(formField)?.error?.message : ""}
-            onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyPress}
           />
         )}
       />
