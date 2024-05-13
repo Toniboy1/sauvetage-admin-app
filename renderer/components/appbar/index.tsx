@@ -45,8 +45,8 @@ const AppNavBar = () => {
         '-webkit-user-select': 'none',
         cursor: 'default'
       }}>
-        <Container maxWidth="xl">
-          <Toolbar disableGutters>
+        <Container maxWidth="xl" sx={{ overflow: 'hidden', width: '100%' }}>
+        <Toolbar disableGutters sx={{ width: '100%', overflow: 'hidden' }}>
             <IconButton
               size="large"
               edge="start"
@@ -55,24 +55,40 @@ const AppNavBar = () => {
               sx={{
                 mr: 2,
                 display: { sm: 'none' },
-                '-webkit-app-region': 'no-drag'  // Ensure the icon button is clickable
+                '-webkit-app-region': 'no-drag'
               }}
               onClick={handleDrawerToggle}
             >
               <MenuIcon />
             </IconButton>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}>
+            <Box sx={{
+              flexGrow: 1,
+              display: { xs: 'none', sm: 'flex' },
+              overflowX: 'auto',
+              whiteSpace: 'nowrap', 
+              '&::-webkit-scrollbar': {
+                height: '4px' 
+              }
+            }}>
               {pages.map((page) => (
                 <Button
                   key={page.href}
                   onClick={() => { window.location.href = page.href; }}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
+                  sx={{
+                    minWidth: 120, // Set a minimum width for consistency
+                    maxWidth: 160, // Maximum width after which text will be truncated
+                    my: 2, mx: 0.5, color: 'white', display: 'block',
+                    overflow: 'hidden',  // Hide overflowed text
+                    textOverflow: 'ellipsis',  // Add ellipsis to overflowed text
+                    whiteSpace: 'nowrap',  // Keep text on a single line
+                    '-webkit-app-region': 'no-drag'  // Ensure buttons are clickable
+                  }}
                 >
                   {page.name}
                 </Button>
               ))}
               {updateMessage && (
-                <Typography sx={{ mt: 4, mb: 2, color: 'secondary.main' }}>
+                <Typography sx={{ mt: 4, ml: 2, color: 'secondary.main', whiteSpace: 'nowrap' }}>
                   {updateMessage}
                 </Typography>
               )}
@@ -83,7 +99,6 @@ const AppNavBar = () => {
       </AppBar>
       <Drawer
         variant="temporary"
-        color='primary'
         open={mobileOpen}
         onClose={handleDrawerToggle}
         ModalProps={{
