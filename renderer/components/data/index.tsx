@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import { useRef } from "react";
 import { Database } from "../../model/db";
+import { testAuth } from "../../hooks/auth";
 
 const DataManagement = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -43,7 +44,8 @@ const DataManagement = () => {
   const triggerFileInput = () => {
     fileInputRef.current.click(); // Programmatically click the hidden file input
   };
-
+  const {session,status} = testAuth();
+  if (status != "authenticated") return null;
   return (
     <>
       <Button

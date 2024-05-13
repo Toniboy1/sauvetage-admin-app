@@ -11,7 +11,7 @@ import Head from "next/head";
 import AppNavBar from "../components/appbar";
 import { UpdateProvider } from "../components/providers/update";
 import theme from "../lib/theme";
-
+import { SessionProvider } from "next-auth/react";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 /**
@@ -20,13 +20,14 @@ dayjs.extend(timezone);
  * @returns The rendered JSX element.
  */
 export default function App(props: AppProps) {
-  const { Component, pageProps } = props;
+  const { Component, pageProps, } = props;
   return (
     <AppCacheProvider {...props}>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <UpdateProvider>
+        <SessionProvider session={pageProps.session}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -34,6 +35,7 @@ export default function App(props: AppProps) {
             <Component {...pageProps} />
           </ThemeProvider>
         </LocalizationProvider>
+        </SessionProvider>
       </UpdateProvider>
     </AppCacheProvider>
   );

@@ -39,11 +39,11 @@ const InterventionForm = () => {
           >
             <Stack spacing={4} direction="row">
               <Typography variant="h6">Pilote:</Typography>
-              <PiloteSelect allowCreate={true} required={true} />
+              <PiloteSelect allowCreate={false} required={true} />
             </Stack>
             <Stack spacing={4} direction="row">
               <Typography variant="h6">Equipage:</Typography>
-              <CrewSelect allowCreate={true} required={false} multiple={true} />
+              <CrewSelect allowCreate={false} required={false} multiple={true} />
             </Stack>
           </Stack>
         </CardContent>
@@ -60,7 +60,7 @@ const InterventionForm = () => {
             <Stack spacing={4} direction="column">
               <Stack spacing={4} direction="row">
                 <Typography variant="h6">Alarmé par:</Typography>
-                <AlarmedBySelect allowCreate={true} required={true} />
+                <AlarmedBySelect allowCreate={false} required={true} />
               </Stack>
               <Stack spacing={4} direction="row">
                 <Typography variant="h6">Gravité de l'intervention:</Typography>
@@ -74,17 +74,17 @@ const InterventionForm = () => {
               </Stack>
               <Stack spacing={4} direction="row">
                 <Typography variant="h6">Cause:</Typography>
-                <CauseSelect allowCreate={true} required={true} />
+                <CauseSelect allowCreate={false} required={true} />
               </Stack>
             </Stack>
             <Stack spacing={4} direction="column">
               <Stack spacing={4} direction="row">
                 <Typography variant="h6">Mesure prises:</Typography>
-                <ActionTakenSelect allowCreate={true} required={true} />
+                <ActionTakenSelect allowCreate={false} required={true} />
               </Stack>
               <Stack spacing={4} direction="row">
                 <Typography variant="h6">Autre moyens engagés:</Typography>
-                <OtherMeansSelect allowCreate={true} required={false} />
+                <OtherMeansSelect allowCreate={false} required={false} />
               </Stack>
             </Stack>
           </Stack>
@@ -124,7 +124,7 @@ const InterventionForm = () => {
                 >
                   <Typography variant="h6">Lieux d'intervention:</Typography>
                   <InterventionLocationSelect
-                    allowCreate={true}
+                    allowCreate={false}
                     required={true}
                   />
                 </Stack>
@@ -136,7 +136,7 @@ const InterventionForm = () => {
                 >
                   <Typography variant="h6">Ramené à/au:</Typography>
                   <InterventionDestinationSelect
-                    allowCreate={true}
+                    allowCreate={false}
                     required={false}
                   />
                 </Stack>
