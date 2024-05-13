@@ -4,7 +4,6 @@
 ![Statements](./badges/coverage-statements.svg)
 ![Jest coverage](./badges/coverage-jest%20coverage.svg)
 [![Documentation deployement](https://github.com/Toniboy1/sauvetage-admin-app/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Toniboy1/sauvetage-admin-app/actions/workflows/pages/pages-build-deployment)
-![builds](https://github.com/Toniboy1/sauvetage-admin-app/actions/workflows/build.yml/badge.svg)
 ![Cypress](https://github.com/Toniboy1/sauvetage-admin-app/actions/workflows/cypress.yml/badge.svg)
 
 # Sauvetage Admin App
