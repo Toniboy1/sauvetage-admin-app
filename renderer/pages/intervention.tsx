@@ -45,8 +45,6 @@ export default function Intervention() {
       nCoordinate: "1138470",
     },
   });
-  console.log("InterventionForm");
-  console.log(methods.formState.errors);
   const onSubmit: SubmitHandler<IInterventionFormData> = async (data) => {
     await Database.getInstance().addFormIntervention(data);
     window.location.href = "/forms_interventions";

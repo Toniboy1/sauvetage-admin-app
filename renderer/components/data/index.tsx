@@ -32,7 +32,6 @@ const DataManagement = () => {
       // Assuming Database is a class that handles your database operations
       await Database.getInstance().importDatabase(file);
       window.location.reload(); // Consider providing user feedback instead of reloading
-      console.log("Database import successful");
     } catch (error) {
       console.error("Import failed: ", error);
     }
