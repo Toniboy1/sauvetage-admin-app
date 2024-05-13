@@ -1,8 +1,10 @@
-name: Build/release
+name: Build/Release
+
 on:
   push:
     tags:
       - "v*"
+
 jobs:
   release:
     runs-on: ${{ matrix.os }}
@@ -11,11 +13,18 @@ jobs:
         os: [macos-latest, windows-latest]
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
       - name: Install Node.js, NPM and Yarn
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: "npm"
+
+      - name: Install Dependencies
+        run: npm install
+        working-directory: .
+
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1
         with:
