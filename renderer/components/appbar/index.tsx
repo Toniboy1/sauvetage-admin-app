@@ -16,7 +16,7 @@ import { pages } from "../../site";
 import Data from "../data";
 import { useUpdate } from "../providers/update";
 import { testAuth } from "../../hooks/auth";
-import { stat } from "fs";
+import Disconnect from "../disconnect";
 
 /**
  *  A navigation bar for the application
@@ -32,7 +32,7 @@ const AppNavBar = () => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const { session, status } = testAuth();
+  const {  status } = testAuth();
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <List>
@@ -52,6 +52,7 @@ const AppNavBar = () => {
             </ListItem>
           )
         })}
+        <Disconnect />
       </List>
     </Box>
   );
@@ -93,6 +94,7 @@ const AppNavBar = () => {
                 },
               }}
             >
+              <Disconnect />
               {pages.map((page) => {
                 if (page.role == "authenticated" && status != "authenticated") return null;
                 return (
@@ -119,6 +121,7 @@ const AppNavBar = () => {
                 )
               })}
               <Data />
+              
               {updateMessage && (
                 <Typography
                   sx={{

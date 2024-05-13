@@ -1,30 +1,28 @@
-// pages/auth/signin.tsx
+"use client";
 import { Button, TextField, Container, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { signIn } from 'next-auth/react';
+import Database from '../../model/db';
 
 /**
  *  Sign in page
  * @returns Sign in page
  */
 export default function SignIn() {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm<{ username: string, password: string }>();
 
-    const onSubmit = async data => {
-        const result = await signIn('credentials', {
-            redirect: false,
-            username: data.username,
-            password: data.password,
-        });
-        if (result?.error) {
-            alert('Authentication failed');
+    const onSubmit = async (data: { username: string, password: string }) => {
+        if (await Database.getInstance().checkCredentials(data.username, data.password)) {
+            localStorage.setItem('status', 'authenticated');
+            window.location.href = '/forms_interventions';
+        } else {
+            alert('Nom d\'utilisateur ou mot de passe incorrect');
         }
     };
 
     return (
         <Container component="main" maxWidth="xs">
             <Typography component="h1" variant="h5">
-                Sign in
+                Se connecter
             </Typography>
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 <TextField
@@ -33,11 +31,11 @@ export default function SignIn() {
                     required
                     fullWidth
                     id="username"
-                    label="Username"
+                    label="Nom d'utilisateur"
                     name="username"
                     autoComplete="username"
                     autoFocus
-                    {...register("username", { required: "Username required" })}
+                    {...register("username", { required: "Nom d'utilisateur requis" })}
                     error={Boolean(errors.username)}
                     helperText={errors.username?.message.toString()} // Convert the value to a string
                 />
@@ -47,11 +45,11 @@ export default function SignIn() {
                     required
                     fullWidth
                     name="password"
-                    label="Password"
+                    label="Mot de passe"
                     type="password"
                     id="password"
                     autoComplete="current-password"
-                    {...register("password", { required: "Password required" })}
+                    {...register("password", { required: "Mot de passe" })}
                     error={Boolean(errors.password)}
                     helperText={errors.password?.message.toString()}
                 />
@@ -61,7 +59,7 @@ export default function SignIn() {
                     variant="contained"
                     color="primary"
                 >
-                    Sign In
+                    Se connecter
                 </Button>
             </form>
         </Container>

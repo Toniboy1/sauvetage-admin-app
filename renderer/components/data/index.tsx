@@ -1,10 +1,19 @@
+"use client";
 import { Button } from "@mui/material";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Database } from "../../model/db";
 import { testAuth } from "../../hooks/auth";
 
 const DataManagement = () => {
+  const { status: initialStatus } = testAuth();
+  const [status, setStatus] = useState(initialStatus);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    setStatus(initialStatus);
+  }, [initialStatus]);
+
+  if (status !== "authenticated") return null;
+
 
   /**
    * Handles the export of the database.
@@ -44,8 +53,6 @@ const DataManagement = () => {
   const triggerFileInput = () => {
     fileInputRef.current.click(); // Programmatically click the hidden file input
   };
-  const {session,status} = testAuth();
-  if (status != "authenticated") return null;
   return (
     <>
       <Button

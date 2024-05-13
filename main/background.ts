@@ -77,10 +77,10 @@ if (isProd) {
   });
 
   if (isProd) {
-    await mainWindow.loadURL("app://./auth/signin");
+    await mainWindow.loadURL("app://./alarmes");
   } else {
     const port = process.argv[2];
-    await mainWindow.loadURL(`http://localhost:${port}/auth/signin`);
+    await mainWindow.loadURL(`http://localhost:${port}/alarmes`);
     mainWindow.webContents.openDevTools();
   }
 })();

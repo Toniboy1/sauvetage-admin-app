@@ -62,6 +62,7 @@
   "dependencies": {
     "@mui/x-date-pickers": "^7.3.2",
     "@react-input/mask": "^1.2.3",
+    "bcryptjs": "^2.4.3",
     "blob-polyfill": "^7.0.20220408",
     "custom-electron-titlebar": "^4.2.8",
     "dayjs": "^1.11.11",
@@ -76,7 +77,6 @@
     "indexeddb-export-import": "^2.1.5",
     "jspdf": "^2.5.1",
     "lodash": "^4.17.21",
-    "next-auth": "^4.24.7",
     "npm": "^10.7.0",
     "react-hook-form": "^7.51.4",
     "structured-clone": "^0.2.2"
@@ -95,6 +95,7 @@
     "@mui/material-nextjs": "^5.15.11",
     "@next/eslint-plugin-next": "^14.2.3",
     "@saswatb/eslint-plugin-sort-sx-prop": "^0.2.0",
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20.11.16",
     "@types/react": "^18.2.52",
     "@typescript-eslint/parser": "^7.8.0",

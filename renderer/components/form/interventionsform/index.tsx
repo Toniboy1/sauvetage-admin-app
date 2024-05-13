@@ -98,7 +98,7 @@ const FormInterventionsComponent = () => {
     );
     doc.save("rapport-intervention.pdf");
   }
-  const { session, status } = testAuth();;
+  const { status } = testAuth();;
   return (
     <div>
       <h1>Liste des rapports d'interventions</h1>

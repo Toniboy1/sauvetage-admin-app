@@ -1,22 +1,28 @@
-// hooks/useAuth.js
-import { useSession, signIn } from "next-auth/react";
-import { useEffect } from "react";
+"use client";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 export const useAuth = (redirectUrl = "/auth/signin") => {
-  const { data: session, status } = useSession();
+  const [status, setStatus] = useState("unauthenticated"); // State to track authentication status
   const router = useRouter();
 
   useEffect(() => {
-    if (status === "loading") return; // Do nothing while loading
-    if (!session) router.push(redirectUrl); // Redirect if not authenticated
-  }, [session, status, router, redirectUrl]);
-
-  return { session, status };
+    const localStatus = localStorage.getItem("status") || "unauthenticated";
+    setStatus(localStatus);
+    if (localStatus !== "authenticated") {
+      router.push(redirectUrl);
+    }
+  }, [router, redirectUrl]);
+  return { status };
 };
 
-export const testAuth = () => {
-    const {data: session, status } = useSession();
-    return { session, status };
-    };
 
+export const testAuth = () => {
+  const [status, setStatus] = useState("unauthenticated");
+
+  useEffect(() => {
+    const localStatus = localStorage.getItem("status") || "unauthenticated";
+    setStatus(localStatus); 
+  }, []); 
+  return { status };
+};
