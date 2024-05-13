@@ -12,8 +12,10 @@ import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
+import { testAuth } from "../../hooks/auth";
 import { pages } from "../../site";
 import Data from "../data";
+import Disconnect from "../disconnect";
 import { useUpdate } from "../providers/update";
 
 /**
@@ -30,22 +32,27 @@ const AppNavBar = () => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
+  const { status } = testAuth();
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <List>
-        {pages.map((page) => (
-          <ListItem key={page.href} disablePadding>
-            <ListItemButton
-              sx={{ textAlign: "center" }}
-              onClick={() => {
-                window.location.href = page.href;
-              }}
-            >
-              <ListItemText primary={page.name} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        {pages.map((page) => {
+          if (page.role == "authenticated" && status != "authenticated")
+            return null;
+          return (
+            <ListItem key={page.href} disablePadding>
+              <ListItemButton
+                sx={{ textAlign: "center" }}
+                onClick={() => {
+                  window.location.href = page.href;
+                }}
+              >
+                <ListItemText primary={page.name} />
+              </ListItemButton>
+            </ListItem>
+          );
+        })}
+        <Disconnect />
       </List>
     </Box>
   );
@@ -87,29 +94,35 @@ const AppNavBar = () => {
                 },
               }}
             >
-              {pages.map((page) => (
-                <Button
-                  key={page.href}
-                  onClick={() => {
-                    window.location.href = page.href;
-                  }}
-                  sx={{
-                    minWidth: 120,
-                    maxWidth: 250,
-                    my: 2,
-                    mx: 0.5,
-                    color: "white",
-                    display: "block",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                    WebkitAppRegion: "no-drag",
-                  }}
-                >
-                  {page.name}
-                </Button>
-              ))}
+              <Disconnect />
+              {pages.map((page) => {
+                if (page.role == "authenticated" && status != "authenticated")
+                  return null;
+                return (
+                  <Button
+                    key={page.href}
+                    onClick={() => {
+                      window.location.href = page.href;
+                    }}
+                    sx={{
+                      minWidth: 120,
+                      maxWidth: 250,
+                      my: 2,
+                      mx: 0.5,
+                      color: "white",
+                      display: "block",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                      WebkitAppRegion: "no-drag",
+                    }}
+                  >
+                    {page.name}
+                  </Button>
+                );
+              })}
               <Data />
+
               {updateMessage && (
                 <Typography
                   sx={{

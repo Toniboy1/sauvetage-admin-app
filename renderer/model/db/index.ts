@@ -1,3 +1,4 @@
+import bcrypt from "bcryptjs";
 import dayjs from "dayjs";
 import Dexie, { UpdateSpec } from "dexie";
 import IDBExportImport from "indexeddb-export-import";
@@ -14,6 +15,7 @@ import {
   IInterventionFormData,
 } from "../../components/reports/intervention/types";
 import { ISeverity } from "../../components/severities/types";
+import { IUser } from "../../components/users/types";
 import { IWeather } from "../../components/weathers/types";
 import { IWind } from "../../components/winds/types";
 
@@ -34,6 +36,7 @@ export class Database extends Dexie {
   weathers: Dexie.Table<IWeather, number>;
   winds: Dexie.Table<IWind, number>;
   lakeStates: Dexie.Table<ILakeState, number>;
+  users: Dexie.Table<IUser, number>;
   /**
    * Represents the database index.
    * @param isTest - Indicates whether the database is for testing purposes.
@@ -53,7 +56,17 @@ export class Database extends Dexie {
       weathers: "++id, &name",
       winds: "++id, &name",
       lakeStates: "++id, &name",
+      users: "++id, &username",
     });
+  }
+  /**
+   * Create default user for the application
+   */
+  async init() {
+    const users = await this.getAllUsers();
+    if (users.length === 0) {
+      await this.addUser("admin", "admin");
+    }
   }
   /**
    * Delete the current instance of the database and clean the local storage.
@@ -72,6 +85,7 @@ export class Database extends Dexie {
   static getInstance(isTest = true): Database {
     if (!Database.instance) {
       Database.setInstance(new Database(isTest));
+      Database.instance.init();
     }
     return Database.instance;
   }
@@ -1058,6 +1072,144 @@ export class Database extends Dexie {
   }
 
   /**
+   * Fetches an user from the database.
+   * @param id The ID of the user to fetch.
+   * @returns A promise that resolves with the user.
+   */
+  async getUser(id: number): Promise<IUser> {
+    return this.users.get(id);
+  }
+
+  /**
+   * Adds a new user to the database
+   * @param username The username of the user to add.
+   * @param password The password of the user to add.
+   * @returns A promise that resolves with the new user's ID.
+   */
+  async addUser(username: string, password: string): Promise<number> {
+    return this.users.add({
+      username: username,
+      password: await this.hashPassword(password),
+    });
+  }
+
+  /**
+   * Updates an user's name in the database.
+   * @param id The ID of the user to update.
+   * @param username The new username for the user.
+   * @param password The new password for the user.
+   * @returns A promise that resolves with the user's ID.
+   */
+  async updateUser(
+    id: number,
+    username: string,
+    password: string,
+  ): Promise<number> {
+    return this.users.update(id, {
+      username,
+      password: await this.hashPassword(password),
+    });
+  }
+  /**
+   * Deletes an user from the database.
+   * @param id The ID of the user to delete.
+   * @returns A promise that resolves when the user is deleted.
+   */
+  async deleteUser(id: number): Promise<void> {
+    return this.users.delete(id);
+  }
+  /**
+   * Fetches all alarms from the database.
+   * @returns A promise that resolves with the list of all alarms.
+   */
+  async getAllUsers(): Promise<Array<IUser>> {
+    return this.users.orderBy("username").toArray() as Promise<Array<IUser>>;
+  }
+
+  /**
+   * Deletes all users from the database.
+   */
+  async clearUsers() {
+    try {
+      await this.transaction("rw", this.users, async () => {
+        await this.users.clear();
+      });
+    } catch (error) {
+      console.error("Failed to clear the users table:", error);
+      throw error;
+    }
+  }
+  /**
+   * Search users by name
+   * @param input search params
+   * @returns  matched users
+   */
+  async searchUsers(input: string): Promise<IUser[]> {
+    return this.users.where("username").startsWithIgnoreCase(input).toArray();
+  }
+
+  /**
+   * match username and compare password with hashed password
+   * @param username username
+   * @param password password
+   * @returns id
+   */
+  async matchUser(username: string, password: string): Promise<number> {
+    const res = await this.users.where("username").equals(username).first();
+    const valid = await this.comparePassword(password, res.password);
+    return valid ? res.id : null;
+  }
+
+  /**
+   * Hashes a password using bcrypt.
+   * @param password The password to hash.
+   * @returns The hashed password.
+   */
+  async hashPassword(password: string): Promise<string | undefined> {
+    const saltRounds = 10;
+    try {
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
+      return hashedPassword;
+    } catch (error) {
+      console.error("Hashing failed:", error);
+      return undefined;
+    }
+  }
+  /**
+   * Compare plain password with hashed password
+   * @param plainPassword Plain password
+   * @param hashedPassword Hashed password
+   * @returns true if password is correct, false otherwise
+   */
+  async comparePassword(
+    plainPassword: string,
+    hashedPassword: string,
+  ): Promise<boolean> {
+    try {
+      return await bcrypt.compare(plainPassword, hashedPassword);
+    } catch (error) {
+      console.error("Comparison failed:", error);
+      return false;
+    }
+  }
+  /**
+   * check credentials
+   * @param username Check username
+   * @param password Check password
+   * @returns IUser or null
+   */
+  async checkCredentials(username, password) {
+    const user = await this.users.where("username").equals(username).first();
+    if (!user) {
+      return null;
+    }
+    const isPasswordCorrect = await this.comparePassword(
+      password,
+      user.password,
+    );
+    return isPasswordCorrect ? user : null;
+  }
+  /**
    * Deletes all data from the database.
    */
   async clearAll() {
@@ -1073,6 +1225,7 @@ export class Database extends Dexie {
     await this.clearWeathers();
     await this.clearWinds();
     await this.clearLakeStates();
+    await this.clearUsers();
     await this.clearAllData();
   }
 }

@@ -11,7 +11,6 @@ import Head from "next/head";
 import AppNavBar from "../components/appbar";
 import { UpdateProvider } from "../components/providers/update";
 import theme from "../lib/theme";
-
 dayjs.extend(utc);
 dayjs.extend(timezone);
 /**

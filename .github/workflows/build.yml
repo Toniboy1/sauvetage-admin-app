@@ -26,7 +26,6 @@ jobs:
         working-directory: .
       - name: Disable Next.js Telemetry
         run: npx next telemetry disable
-      
 
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1

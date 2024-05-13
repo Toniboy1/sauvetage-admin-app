@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import jsPDF from "jspdf";
 import { useEffect, useState } from "react";
+import { testAuth } from "../../../hooks/auth";
 import Database from "../../../model/db";
 import Intervention from "../../generation/pdf/intervention";
 import { IInterventionFormData } from "../../reports/intervention/types";
@@ -97,6 +98,7 @@ const FormInterventionsComponent = () => {
     );
     doc.save("rapport-intervention.pdf");
   }
+  const { status } = testAuth();
   return (
     <div>
       <h1>Liste des rapports d'interventions</h1>
@@ -117,7 +119,7 @@ const FormInterventionsComponent = () => {
               <TableCell>Date</TableCell>
               <TableCell>Pilote</TableCell>
               <TableCell>Equipage</TableCell>
-              <TableCell>Actions</TableCell>
+              {status != "authenticated" && <TableCell>Actions</TableCell>}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -153,20 +155,24 @@ const FormInterventionsComponent = () => {
                     >
                       Imprimer
                     </Button>
-                    <Button
-                      color="primary"
-                      onClick={() => handleEdit(formintervention)}
-                    >
-                      Modifier
-                    </Button>
-                    <Button
-                      color="error"
-                      onClick={() =>
-                        handleDeleteFormIntervention(formintervention.id)
-                      }
-                    >
-                      Supprimer
-                    </Button>
+                    {status == "authenticated" && (
+                      <>
+                        <Button
+                          color="primary"
+                          onClick={() => handleEdit(formintervention)}
+                        >
+                          Modifier
+                        </Button>
+                        <Button
+                          color="error"
+                          onClick={() =>
+                            handleDeleteFormIntervention(formintervention.id)
+                          }
+                        >
+                          Supprimer
+                        </Button>
+                      </>
+                    )}
                   </TableCell>
                 </TableRow>
               );
