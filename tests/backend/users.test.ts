@@ -19,9 +19,12 @@ describe("Database", () => {
   test("addUser should add a new user to the database", async () => {
     const name = "John Doe";
     const password = "password";
-    const id = await Database.getInstance().addUser(name,password);
+    const id = await Database.getInstance().addUser(name, password);
     const user = await Database.getInstance().getUser(id);
-    const res = await  Database.getInstance().comparePassword(password,user.password);
+    const res = await Database.getInstance().comparePassword(
+      password,
+      user.password,
+    );
     expect(res).toBe(true);
   });
 
@@ -32,12 +35,18 @@ describe("Database", () => {
     const name = "John Doe";
     const password = "password";
     const newName = "Jane Smith";
-    const id = await Database.getInstance().addUser(name,password);
+    const id = await Database.getInstance().addUser(name, password);
     await Database.getInstance().updateUser(id, newName, password);
     const updatedUser = await Database.getInstance().getUser(id);
-    const res = await  Database.getInstance().comparePassword(password,updatedUser.password);
+    const res = await Database.getInstance().comparePassword(
+      password,
+      updatedUser.password,
+    );
     expect(res).toBe(true);
-    expect({id:updatedUser.id, username:updatedUser.username}).toEqual({ id, username: newName });
+    expect({ id: updatedUser.id, username: updatedUser.username }).toEqual({
+      id,
+      username: newName,
+    });
   });
 
   /**
@@ -46,7 +55,7 @@ describe("Database", () => {
   test("deleteUser should delete a user from the database", async () => {
     const name = "John Doe";
     const password = "password";
-    const id = await Database.getInstance().addUser(name,password);
+    const id = await Database.getInstance().addUser(name, password);
     await Database.getInstance().deleteUser(id);
     const deletedUser = await Database.getInstance().getUser(id);
 
@@ -58,12 +67,12 @@ describe("Database", () => {
    */
   test("getAllUsers should return all users from the database", async () => {
     const users = [
-      { username: "John Doe",password: "password"},
-      { username: "Jane Smith",password: "password"},
-      { username: "Bob Johnson",password: "password"},
+      { username: "John Doe", password: "password" },
+      { username: "Jane Smith", password: "password" },
+      { username: "Bob Johnson", password: "password" },
     ];
     for (const user of users) {
-      await Database.getInstance().addUser(user.username,user.password);
+      await Database.getInstance().addUser(user.username, user.password);
     }
     const allUsers = await Database.getInstance().getAllUsers();
     expect(allUsers).toHaveLength(users.length);
@@ -76,12 +85,12 @@ describe("Database", () => {
    */
   test("clearUsers should delete all users from the database", async () => {
     const users = [
-      { username: "John Doe",password: "password"},
-      { username: "Jane Smith",password: "password"},
-      { username: "Bob Johnson",password: "password"},
+      { username: "John Doe", password: "password" },
+      { username: "Jane Smith", password: "password" },
+      { username: "Bob Johnson", password: "password" },
     ];
     for (const user of users) {
-      await Database.getInstance().addUser(user.username,user.password);
+      await Database.getInstance().addUser(user.username, user.password);
     }
     await Database.getInstance().clearUsers();
     const allUsers = await Database.getInstance().getAllUsers();
@@ -93,11 +102,17 @@ describe("Database", () => {
   test("getUser should fetch a user from the database", async () => {
     const name = "John Doe";
     const password = "password";
-    const id = await Database.getInstance().addUser(name,password);
+    const id = await Database.getInstance().addUser(name, password);
     const user = await Database.getInstance().getUser(id);
-    const res = await  Database.getInstance().comparePassword(password,user.password);
+    const res = await Database.getInstance().comparePassword(
+      password,
+      user.password,
+    );
     expect(res).toBe(true);
-    expect({id:user.id, username:user.username}).toEqual({ id, username: name });
+    expect({ id: user.id, username: user.username }).toEqual({
+      id,
+      username: name,
+    });
   });
 
   /**
@@ -113,20 +128,22 @@ describe("Database", () => {
   test("should throw an error if a user with the same name already exists", async () => {
     const name = "John Doe";
     const password = "password";
-    await Database.getInstance().addUser(name,password);
-    await expect(Database.getInstance().addUser(name,password)).rejects.toThrow();
+    await Database.getInstance().addUser(name, password);
+    await expect(
+      Database.getInstance().addUser(name, password),
+    ).rejects.toThrow();
   });
   /**
    *  test case Search for users by name
    */
   test("searchUsers should return aczions with matching names", async () => {
     const datas = [
-      { username: "John Doe",password: "password"},
-      { username: "Jane Smith",password: "password"},
-      { username: "Bob Johnson",password: "password"},
+      { username: "John Doe", password: "password" },
+      { username: "Jane Smith", password: "password" },
+      { username: "Bob Johnson", password: "password" },
     ];
     for (const data of datas) {
-      await Database.getInstance().addUser(data.username,data.password);
+      await Database.getInstance().addUser(data.username, data.password);
     }
     const searchResults = await Database.getInstance().searchUsers("John");
     expect(searchResults).toHaveLength(1);
@@ -138,18 +155,21 @@ describe("Database", () => {
   test("matchUser should return the ID of the matching user", async () => {
     const name = "John Doe";
     const password = "password";
-    const id = await Database.getInstance().addUser(name,password);
+    const id = await Database.getInstance().addUser(name, password);
     const matchedId = await Database.getInstance().matchUser(name, password);
     expect(matchedId).toBe(id);
-  })
+  });
   /**
    * Test case for not matching a user by username and password.
    */
   test("matchUser should return null if no user matches the credentials", async () => {
     const name = "John Doe";
     const password = "password";
-    await Database.getInstance().addUser(name,password);
-    const matchedId = await Database.getInstance().matchUser(name, "wrongpassword");
+    await Database.getInstance().addUser(name, password);
+    const matchedId = await Database.getInstance().matchUser(
+      name,
+      "wrongpassword",
+    );
     expect(matchedId).toBeNull();
   });
 });

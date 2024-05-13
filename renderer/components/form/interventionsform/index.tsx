@@ -10,10 +10,10 @@ import {
 } from "@mui/material";
 import jsPDF from "jspdf";
 import { useEffect, useState } from "react";
+import { testAuth } from "../../../hooks/auth";
 import Database from "../../../model/db";
 import Intervention from "../../generation/pdf/intervention";
 import { IInterventionFormData } from "../../reports/intervention/types";
-import { testAuth } from "../../../hooks/auth";
 
 /**
  * Represents a component that displays a list of forminterventions and allows adding, editing, and deleting forminterventions.
@@ -98,7 +98,7 @@ const FormInterventionsComponent = () => {
     );
     doc.save("rapport-intervention.pdf");
   }
-  const { status } = testAuth();;
+  const { status } = testAuth();
   return (
     <div>
       <h1>Liste des rapports d'interventions</h1>
@@ -155,20 +155,24 @@ const FormInterventionsComponent = () => {
                     >
                       Imprimer
                     </Button>
-                    {status == "authenticated" && <><Button
-                      color="primary"
-                      onClick={() => handleEdit(formintervention)}
-                    >
-                      Modifier
-                    </Button>
-                      <Button
-                        color="error"
-                        onClick={() =>
-                          handleDeleteFormIntervention(formintervention.id)
-                        }
-                      >
-                        Supprimer
-                      </Button></>}
+                    {status == "authenticated" && (
+                      <>
+                        <Button
+                          color="primary"
+                          onClick={() => handleEdit(formintervention)}
+                        >
+                          Modifier
+                        </Button>
+                        <Button
+                          color="error"
+                          onClick={() =>
+                            handleDeleteFormIntervention(formintervention.id)
+                          }
+                        >
+                          Supprimer
+                        </Button>
+                      </>
+                    )}
                   </TableCell>
                 </TableRow>
               );

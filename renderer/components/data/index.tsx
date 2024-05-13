@@ -1,8 +1,8 @@
 "use client";
 import { Button } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-import { Database } from "../../model/db";
 import { testAuth } from "../../hooks/auth";
+import { Database } from "../../model/db";
 
 const DataManagement = () => {
   const { status: initialStatus } = testAuth();
@@ -13,7 +13,6 @@ const DataManagement = () => {
   }, [initialStatus]);
 
   if (status !== "authenticated") return null;
-
 
   /**
    * Handles the export of the database.

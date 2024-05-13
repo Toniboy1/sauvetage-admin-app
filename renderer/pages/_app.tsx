@@ -19,7 +19,7 @@ dayjs.extend(timezone);
  * @returns The rendered JSX element.
  */
 export default function App(props: AppProps) {
-  const { Component, pageProps, } = props;
+  const { Component, pageProps } = props;
   return (
     <AppCacheProvider {...props}>
       <Head>

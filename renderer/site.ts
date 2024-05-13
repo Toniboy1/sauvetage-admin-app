@@ -71,5 +71,5 @@ export const pages = [
     name: "Connexion",
     href: "/auth/signin",
     role: "unauthenticated",
-  }
+  },
 ];

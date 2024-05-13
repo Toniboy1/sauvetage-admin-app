@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 export const useAuth = (redirectUrl = "/auth/signin") => {
   const [status, setStatus] = useState("unauthenticated"); // State to track authentication status
@@ -16,13 +16,12 @@ export const useAuth = (redirectUrl = "/auth/signin") => {
   return { status };
 };
 
-
 export const testAuth = () => {
   const [status, setStatus] = useState("unauthenticated");
 
   useEffect(() => {
     const localStatus = localStorage.getItem("status") || "unauthenticated";
-    setStatus(localStatus); 
-  }, []); 
+    setStatus(localStatus);
+  }, []);
   return { status };
 };

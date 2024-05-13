@@ -12,11 +12,11 @@ import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
+import { testAuth } from "../../hooks/auth";
 import { pages } from "../../site";
 import Data from "../data";
-import { useUpdate } from "../providers/update";
-import { testAuth } from "../../hooks/auth";
 import Disconnect from "../disconnect";
+import { useUpdate } from "../providers/update";
 
 /**
  *  A navigation bar for the application
@@ -32,14 +32,14 @@ const AppNavBar = () => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const {  status } = testAuth();
+  const { status } = testAuth();
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <List>
         {pages.map((page) => {
-          if (page.role == "authenticated" && status != "authenticated") return null;
+          if (page.role == "authenticated" && status != "authenticated")
+            return null;
           return (
-
             <ListItem key={page.href} disablePadding>
               <ListItemButton
                 sx={{ textAlign: "center" }}
@@ -50,7 +50,7 @@ const AppNavBar = () => {
                 <ListItemText primary={page.name} />
               </ListItemButton>
             </ListItem>
-          )
+          );
         })}
         <Disconnect />
       </List>
@@ -96,7 +96,8 @@ const AppNavBar = () => {
             >
               <Disconnect />
               {pages.map((page) => {
-                if (page.role == "authenticated" && status != "authenticated") return null;
+                if (page.role == "authenticated" && status != "authenticated")
+                  return null;
                 return (
                   <Button
                     key={page.href}
@@ -118,10 +119,10 @@ const AppNavBar = () => {
                   >
                     {page.name}
                   </Button>
-                )
+                );
               })}
               <Data />
-              
+
               {updateMessage && (
                 <Typography
                   sx={{

@@ -2,7 +2,7 @@ import { styled } from "@mui/material";
 import Head from "next/head";
 import React from "react";
 import Alarm from "../components/form/alarm";
-import {useAuth} from "../hooks/auth";
+import { useAuth } from "../hooks/auth";
 
 /**
  * Root component for the Alarm page.
@@ -19,7 +19,7 @@ const Root = styled("div")(({ theme }) => {
  * @returns The rendered AlarmPage component.
  */
 export default function AlarmPage() {
-  const { session, status } = useAuth();
+  const { status } = useAuth();
   return (
     <React.Fragment>
       <Head>
