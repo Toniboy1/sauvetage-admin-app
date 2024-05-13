@@ -55,7 +55,10 @@ const AppNavBar = () => {
   const { updateMessage } = useUpdate();
   console.log(updateMessage);
   return (
-    <AppBar position="sticky">
+    <AppBar position="sticky"sx={{
+      '-webkit-app-region': 'drag',
+      '-webkit-user-select': 'none',
+      cursor: 'default'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
