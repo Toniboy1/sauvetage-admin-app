@@ -94,13 +94,13 @@ const FormInterventionsComponent = () => {
   }
   return (
     <div>
-      <h1>FormInterventions</h1>
+      <h1>Liste des rapports d'interventions</h1>
       <Button
         variant="contained"
         color="primary"
         onClick={handleAddFormIntervention}
       >
-        Add New FormIntervention
+        Ajouter un nouveau rapport d'intervention
       </Button>
       <TableContainer component={Paper}>
         <Table>
@@ -146,13 +146,13 @@ const FormInterventionsComponent = () => {
                       color="primary"
                       onClick={() => handlPrint(formintervention)}
                     >
-                      Print
+                      Imprimer
                     </Button>
                     <Button
                       color="primary"
                       onClick={() => handleEdit(formintervention)}
                     >
-                      Edit
+                      Modifier
                     </Button>
                     <Button
                       color="error"
@@ -160,7 +160,7 @@ const FormInterventionsComponent = () => {
                         handleDeleteFormIntervention(formintervention.id)
                       }
                     >
-                      Delete
+                      Supprimer
                     </Button>
                   </TableCell>
                 </TableRow>

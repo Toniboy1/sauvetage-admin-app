@@ -18,7 +18,7 @@ const PersonComponent = () => {
       updateItem={async (id: number, name: string) =>
         await Database.getInstance().updatePerson(id, name)
       }
-      label="Type d'persones"
+      label="Liste des sauveteurs"
       type="person"
     />
   );

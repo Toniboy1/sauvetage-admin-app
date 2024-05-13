@@ -18,7 +18,7 @@ const OtherMeansComponent = () => {
       updateItem={async (id: number, name: string) =>
         await Database.getInstance().updateOtherMean(id, name)
       }
-      label="Type d'alarmes"
+      label="Liste des moyens supplémentaires"
       type="other-mean"
     />
   );

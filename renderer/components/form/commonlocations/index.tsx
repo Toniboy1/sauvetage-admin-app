@@ -20,7 +20,7 @@ const CommonLoacationComponent = () => {
       updateItem={async (id: number, name: string) =>
         await Database.getInstance().updateCommonLocation(id, name)
       }
-      label="Lieux Fréquents"
+      label="Liste des lieux fréquents"
       type="common-location"
     />
   );

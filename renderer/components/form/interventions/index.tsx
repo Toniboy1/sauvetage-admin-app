@@ -20,7 +20,7 @@ const InterventionsTypeComponent = () => {
       updateItem={async (id: number, name: string) =>
         await Database.getInstance().updateIntervention(id, name)
       }
-      label="Type d'interventions"
+      label="Liste des types d'interventions"
       type="intervention"
     />
   );

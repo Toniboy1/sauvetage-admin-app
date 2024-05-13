@@ -18,7 +18,7 @@ const SeverityComponent = () => {
       updateItem={async (id: number, name: string) =>
         await Database.getInstance().updateSeverity(id, name)
       }
-      label="Type de sévérité"
+      label="Type de gravité"
       type="severity"
     />
   );

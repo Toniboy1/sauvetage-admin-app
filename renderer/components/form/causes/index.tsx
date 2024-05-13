@@ -19,7 +19,7 @@ const CauseComponent = () => {
         await Database.getInstance().updateCause(id, name)
       }
       type="cause"
-      label="Cause des interventions"
+      label="Liste des causes d'interventions"
     />
   );
 };
