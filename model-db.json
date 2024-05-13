@@ -359,5 +359,27 @@
             "name": "Autre",
             "id": 6
         }
+    ],
+    "weathers":[
+        {
+            "name": "Beau",
+            "id": 1
+        },
+        {
+            "name": "Couvert",
+            "id": 2
+        },
+        {
+            "name": "Légère pluie",
+            "id": 3
+        },
+        {
+            "name": "Pluie",
+            "id": 4
+        },
+        {
+            "name": "Grosse Pluie",
+            "id": 5
+        }
     ]
 }

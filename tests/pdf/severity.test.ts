@@ -37,6 +37,7 @@ describe("Severity Functionality", () => {
     actionsTaken: [],
     interventionLocation: [],
     interventionDestination: [],
+    weathers: [],
     remark: "",
     rescued: 0,
     medicalized: 0,

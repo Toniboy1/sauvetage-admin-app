@@ -40,6 +40,7 @@ describe("Destination Functionality", () => {
     causes: [],
     actionsTaken: [],
     interventionLocation: [],
+    weathers: [],
     remark: "",
     rescued: 0,
     medicalized: 0,

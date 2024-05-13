@@ -19,11 +19,13 @@ import Remarks from "../../renderer/components/generation/pdf/remarks";
 import Rescued from "../../renderer/components/generation/pdf/rescued";
 import Severity from "../../renderer/components/generation/pdf/severity";
 import time from "../../renderer/components/generation/pdf/time";
+import Weather from "../../renderer/components/generation/pdf/weather";
 import { IInterventionType } from "../../renderer/components/interventions/types";
 import { ICommonLocation } from "../../renderer/components/location/types";
 import { IOtherMean } from "../../renderer/components/otherMeans/types";
 import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
 import { ISeverity } from "../../renderer/components/severities/types";
+import { IWeather } from "../../renderer/components/weathers/types";
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({
     addPage: jest.fn(),
@@ -91,6 +93,10 @@ jest.mock("../../renderer/components/generation/pdf/rescued", () => ({
   __esModule: true,
   default: jest.fn(),
 }));
+jest.mock("../../renderer/components/generation/pdf/weather", () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
 
 describe("Intervention Report Generation", () => {
   let doc;
@@ -155,6 +161,10 @@ describe("Intervention Report Generation", () => {
         name: "Location 2",
       },
     ],
+    weathers: [{
+      id: 1,
+      name: "Weather 1",
+    }],
     remark: "Remark",
     rescued: 1,
     medicalized: 2,
@@ -191,6 +201,10 @@ describe("Intervention Report Generation", () => {
     { id: 1, name: "Location 1" },
     { id: 2, name: "Location 2" },
   ];
+  const weathers: IWeather[] = [
+    { id: 1, name: "Weather 1" },
+    { id: 2, name: "Weather 2" },
+  ];
 
   beforeEach(() => {
     doc = new jsPDF();
@@ -208,6 +222,7 @@ describe("Intervention Report Generation", () => {
     (Rescued as jest.Mock).mockClear();
     (Severity as jest.Mock).mockClear();
     (InterventionType as jest.Mock).mockClear();
+    (Weather as jest.Mock).mockClear();
   });
 
   it("should orchestrate the intervention report creation correctly", () => {
@@ -221,6 +236,7 @@ describe("Intervention Report Generation", () => {
       otherMeans,
       actionsTaken,
       commonLocations,
+      weathers
     );
 
     expect(header).toHaveBeenCalled();

@@ -31,6 +31,7 @@ describe("Remarks Functionality", () => {
     actionsTaken: [],
     interventionLocation: [],
     interventionDestination: [],
+    weathers: [],
     rescued: 0,
     medicalized: 0,
     deceased: 0,

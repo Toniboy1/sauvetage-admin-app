@@ -7,6 +7,7 @@ import { ICommonLocation } from "../../location/types";
 import { IOtherMean } from "../../otherMeans/types";
 import { IPeople } from "../../people/types";
 import { ISeverity } from "../../severities/types";
+import { IWeather } from "../../weathers/types";
 
 export interface IInterventionFormData {
   id?: number;
@@ -23,6 +24,7 @@ export interface IInterventionFormData {
   actionsTaken: Array<IAction>;
   interventionLocation: Array<ICommonLocation>;
   interventionDestination: Array<ICommonLocation>;
+  weathers: Array<IWeather>
   remark: string;
   rescued: number;
   medicalized: number;
@@ -46,6 +48,7 @@ export interface IInterventionData {
   actionsTaken: Array<IAction>;
   interventionLocation: Array<ICommonLocation>;
   interventionDestination: Array<ICommonLocation>;
+  weathers: Array<IWeather>
   remark: string;
   rescued: number;
   medicalized: number;

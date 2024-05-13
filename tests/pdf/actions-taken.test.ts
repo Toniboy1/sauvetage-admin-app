@@ -42,6 +42,7 @@ describe("ActionTaken Functionality", () => {
     ],
     interventionLocation: [],
     interventionDestination: [],
+    weathers: [],
     remark: "",
     rescued: 0,
     medicalized: 0,

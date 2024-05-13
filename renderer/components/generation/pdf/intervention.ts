@@ -21,6 +21,8 @@ import Remarks from "./remarks";
 import rescued from "./rescued";
 import Severity from "./severity";
 import time from "./time";
+import { IWeather } from "../../weathers/types";
+import Weather from "./weather";
 export const addPage = (doc: jsPDF, y: number) => {
   if (y > 250) {
     doc.addPage();
@@ -39,6 +41,7 @@ const Intervention = (
   otherMeans: IOtherMean[],
   actionsTaken: IAction[],
   commonLocations: ICommonLocation[],
+  weathers: IWeather[],
 ) => {
   let y = 0;
   setupFonts(doc);
@@ -57,6 +60,8 @@ const Intervention = (
   y = addPage(doc, y);
   y = Location(doc, form, commonLocations, y);
   y = Destination(doc, form, commonLocations, y);
+  y = addPage(doc, y);
+  y = Weather(doc, form, weathers, y);
   y = Remarks(doc, form, y);
 };
 export default Intervention;

@@ -35,6 +35,10 @@ export const pages = [
     href: "/actions",
   },
   {
+    name: "Météo",
+    href: "/weathers",
+  },
+  {
     name: "Lieux",
     href: "/common_locations",
   },

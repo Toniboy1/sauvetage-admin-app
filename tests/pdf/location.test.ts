@@ -46,6 +46,7 @@ describe("Location Functionality", () => {
     causes: [],
     actionsTaken: [],
     interventionDestination: [],
+    weathers: [],
     remark: "",
     rescued: 0,
     medicalized: 0,

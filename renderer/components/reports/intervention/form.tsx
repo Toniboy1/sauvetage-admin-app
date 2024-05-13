@@ -11,6 +11,7 @@ import RescuedData from "../../recuscued";
 import Remark from "../../remark";
 import ActionTakenSelect from "../../select/actions_taken";
 import AlarmedBySelect from "../../select/alarmed_by";
+import WeatherSelect from "../../select/weather";
 import CauseSelect from "../../select/cause";
 import CrewSelect from "../../select/crew";
 import InterventionDestinationSelect from "../../select/intervention_destination";
@@ -140,6 +141,29 @@ const InterventionForm = () => {
               </Stack>
             </Stack>
           </Stack>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader title="Conditions" />
+        <CardContent>
+          <Stack
+            spacing={12}
+            direction={"row"}
+            alignItems={"center"}
+            justifyContent={"center"}
+          >
+              <Stack spacing={4} direction="row">
+                <Typography variant="h6">Temps:</Typography>
+                <WeatherSelect allowCreate={false} required={true} />
+              </Stack>
+
+          </Stack>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader title="Personnes secourues" />
+        <CardContent>
+          <RescuedData />
         </CardContent>
       </Card>
       <Typography variant="h6">Remarque:</Typography>

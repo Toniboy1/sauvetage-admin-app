@@ -39,6 +39,7 @@ describe("Rescued Functionality", () => {
     actionsTaken: [],
     interventionLocation: [],
     interventionDestination: [],
+    weathers: [],
     remark: "",
     eCoordinate: "",
     nCoordinate: "",

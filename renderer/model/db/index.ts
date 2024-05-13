@@ -13,6 +13,7 @@ import {
   IInterventionFormData,
 } from "../../components/reports/intervention/types";
 import { ISeverity } from "../../components/severities/types";
+import { IWeather } from "../../components/weathers/types";
 
 /**
  * Sets up and manages the database using Dexie.js.
@@ -28,6 +29,7 @@ export class Database extends Dexie {
   actions: Dexie.Table<IAction, number>;
   commonlocations: Dexie.Table<ICommonLocation, number>;
   forminterventions: Dexie.Table<IInterventionData, number>;
+  weathers: Dexie.Table<IWeather, number>;
   /**
    * Represents the database index.
    * @param isTest - Indicates whether the database is for testing purposes.
@@ -44,6 +46,7 @@ export class Database extends Dexie {
       actions: "++id, &name",
       commonlocations: "++id, &name",
       forminterventions: "++id, date",
+      weathers: "++id, &name",
     });
   }
   /**
@@ -838,6 +841,75 @@ export class Database extends Dexie {
    */
   async deleteFormIntervention(id: number): Promise<void> {
     return this.forminterventions.delete(id);
+  }
+
+  /**
+   * get all weathers
+   * @returns all weathers
+   */
+  async getAllWeathers(): Promise<Array<IWeather>> {
+    return this.weathers.orderBy("name").toArray() as Promise<Array<IWeather>>;
+  }
+  /**
+   * Deletes all weathers from the database.
+   */
+  async clearWeathers() {
+    try {
+      await this.transaction("rw", this.weathers, async () => {
+        await this.weathers.clear();
+      });
+    } catch (error) {
+      console.error("Failed to clear the weathers table:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * Fetches a weather from the database.
+   * @param id The ID of the weather to fetch.
+   * @returns A promise that resolves with the weather.
+   */
+  async getWeather(id: number): Promise<IWeather> {
+    return this.weathers.get(id);
+  }
+
+  /**
+   * Adds a new weather to the database.
+   * @param name The name of the weather to add.
+   * @returns A promise that resolves with the new weather's ID.
+   */
+  async addWeather(name: string): Promise<number> {
+    return this.weathers.add({
+      name: name,
+    });
+  }
+
+  /**
+   * Updates a weather's name in the database.
+   * @param id The ID of the weather to update.
+   * @param name The new name for the weather.
+   * @returns A promise that resolves with the weather's ID.
+   */
+  async updateWeather(id: number, name: string): Promise<number> {
+    return this.weathers.update(id, { name });
+  }
+
+  /**
+   * Deletes a weather from the database.
+   * @param id The ID of the weather to delete.
+   * @returns A promise that resolves when the weather is deleted.
+   */
+  async deleteWeather(id: number): Promise<void> {
+    return this.weathers.delete(id);
+  }
+
+  /**
+   * Search weather by name
+   * @param input search params
+   * @returns matched weathers
+   */
+  async searchWeathers(input: string): Promise<IWeather[]> {
+    return this.weathers.where("name").startsWithIgnoreCase(input).toArray();
   }
 
   /**
