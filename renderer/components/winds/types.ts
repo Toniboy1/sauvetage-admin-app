@@ -1,4 +1,4 @@
-export interface IWind{
-    id?:number,
-    name:string
+export interface IWind {
+  id?: number;
+  name: string;
 }

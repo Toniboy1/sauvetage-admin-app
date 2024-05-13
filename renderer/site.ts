@@ -39,8 +39,8 @@ export const pages = [
     href: "/weathers",
   },
   {
-    name:"Lac",
-    href:"/lake_states"
+    name: "Lac",
+    href: "/lake_states",
   },
   {
     name: "Vents",

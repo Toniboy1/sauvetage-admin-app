@@ -1,5 +1,5 @@
 import jsPDF, { AcroFormCheckBox } from "jspdf";
-import { ILakeState } from "../../lakeStates/types"
+import { ILakeState } from "../../lakeStates/types";
 import { IInterventionFormData } from "../../reports/intervention/types";
 import {
   CHECKBOX_SPACING,

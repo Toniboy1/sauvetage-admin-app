@@ -11,18 +11,18 @@ import RescuedData from "../../recuscued";
 import Remark from "../../remark";
 import ActionTakenSelect from "../../select/actions_taken";
 import AlarmedBySelect from "../../select/alarmed_by";
-import WeatherSelect from "../../select/weather";
 import CauseSelect from "../../select/cause";
 import CrewSelect from "../../select/crew";
 import InterventionDestinationSelect from "../../select/intervention_destination";
 import InterventionLocationSelect from "../../select/intervention_location";
 import InterventionTypeSelect from "../../select/intervention_type";
+import LakeStates from "../../select/lake_state";
 import OtherMeansSelect from "../../select/other_means";
 import PiloteSelect from "../../select/pilote";
 import SeveritySelect from "../../select/severity";
-import DateTimeIntervention from "../../time";
-import LakeStates from "../../select/lake_state";
+import WeatherSelect from "../../select/weather";
 import Winds from "../../select/wind";
+import DateTimeIntervention from "../../time";
 
 const InterventionForm = () => {
   return (
@@ -154,19 +154,18 @@ const InterventionForm = () => {
             alignItems={"center"}
             justifyContent={"center"}
           >
-              <Stack spacing={4} direction="row">
-                <Typography variant="h6">Temps:</Typography>
-                <WeatherSelect allowCreate={false} required={true} />
-              </Stack>
-              <Stack spacing={4} direction="row">
-                <Typography variant="h6">Lac:</Typography>
-                <LakeStates allowCreate={false} required={true} />
-              </Stack>
-              <Stack spacing={4} direction="row">
-                <Typography variant="h6">Vent:</Typography>
-                <Winds allowCreate={false} required={true} />
-              </Stack>
-
+            <Stack spacing={4} direction="row">
+              <Typography variant="h6">Temps:</Typography>
+              <WeatherSelect allowCreate={false} required={true} />
+            </Stack>
+            <Stack spacing={4} direction="row">
+              <Typography variant="h6">Lac:</Typography>
+              <LakeStates allowCreate={false} required={true} />
+            </Stack>
+            <Stack spacing={4} direction="row">
+              <Typography variant="h6">Vent:</Typography>
+              <Winds allowCreate={false} required={true} />
+            </Stack>
           </Stack>
         </CardContent>
       </Card>

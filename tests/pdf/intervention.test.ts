@@ -13,6 +13,7 @@ import Fonts from "../../renderer/components/generation/pdf/fonts";
 import header from "../../renderer/components/generation/pdf/header";
 import Intervention from "../../renderer/components/generation/pdf/intervention";
 import InterventionType from "../../renderer/components/generation/pdf/interventionType";
+import LakeState from "../../renderer/components/generation/pdf/lakeState";
 import Location from "../../renderer/components/generation/pdf/location";
 import OtherMeans from "../../renderer/components/generation/pdf/otherMeans";
 import Remarks from "../../renderer/components/generation/pdf/remarks";
@@ -20,15 +21,14 @@ import Rescued from "../../renderer/components/generation/pdf/rescued";
 import Severity from "../../renderer/components/generation/pdf/severity";
 import time from "../../renderer/components/generation/pdf/time";
 import Weather from "../../renderer/components/generation/pdf/weather";
-import LakeState from "../../renderer/components/generation/pdf/lakeState";
 import Wind from "../../renderer/components/generation/pdf/wind";
 import { IInterventionType } from "../../renderer/components/interventions/types";
+import { ILakeState } from "../../renderer/components/lakeStates/types";
 import { ICommonLocation } from "../../renderer/components/location/types";
 import { IOtherMean } from "../../renderer/components/otherMeans/types";
 import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
 import { ISeverity } from "../../renderer/components/severities/types";
 import { IWeather } from "../../renderer/components/weathers/types";
-import { ILakeState } from "../../renderer/components/lakeStates/types";
 import { IWind } from "../../renderer/components/winds/types";
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({
@@ -173,11 +173,13 @@ describe("Intervention Report Generation", () => {
         name: "Location 2",
       },
     ],
-    weathers: [{
-      id: 1,
-      name: "Weather 1",
-    }],
-    winds:[
+    weathers: [
+      {
+        id: 1,
+        name: "Weather 1",
+      },
+    ],
+    winds: [
       {
         id: 1,
         name: "Wind 1",
@@ -185,7 +187,7 @@ describe("Intervention Report Generation", () => {
       {
         id: 2,
         name: "Wind 2",
-      }
+      },
     ],
     lakeStates: [
       {
@@ -195,7 +197,7 @@ describe("Intervention Report Generation", () => {
       {
         id: 2,
         name: "Lake State 2",
-      }
+      },
     ],
     remark: "Remark",
     rescued: 1,
@@ -280,7 +282,7 @@ describe("Intervention Report Generation", () => {
       commonLocations,
       weathers,
       lakeStates,
-      winds
+      winds,
     );
 
     expect(header).toHaveBeenCalled();

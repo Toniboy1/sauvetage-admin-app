@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import dayjs from "dayjs";
 import { jsPDF } from "jspdf";
-import LakeState from "../../renderer/components/generation/pdf/lakeState";
 import { TITLE_SPACING } from "../../renderer/components/generation/pdf/constants";
+import LakeState from "../../renderer/components/generation/pdf/lakeState";
 import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
 
 jest.mock("jspdf", () => ({
@@ -37,10 +37,12 @@ describe("ActionTaken Functionality", () => {
     actionsTaken: [],
     interventionLocation: [],
     interventionDestination: [],
-    lakeStates: [{
-      id: 1,
-      name: "LakeState 1",
-    }],
+    lakeStates: [
+      {
+        id: 1,
+        name: "LakeState 1",
+      },
+    ],
     weathers: [],
     winds: [],
     remark: "",
@@ -76,6 +78,6 @@ describe("ActionTaken Functionality", () => {
       startingY + TITLE_SPACING,
     );
     expect(doc.text).toHaveBeenCalledWith("X", 21, 22);
-    expect(doc.text).toHaveBeenCalledWith(" LakeState 1", 25, 22); 
+    expect(doc.text).toHaveBeenCalledWith(" LakeState 1", 25, 22);
   });
 });
