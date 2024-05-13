@@ -79,6 +79,8 @@ const FormInterventionsComponent = () => {
     const commonLocations =
       await Database.getInstance().getAllCommonLocations();
     const weathers = await Database.getInstance().getAllWeathers();
+    const winds = await Database.getInstance().getAllWinds();
+    const lakeStates = await Database.getInstance().getAllLakeStates();
     Intervention(
       doc,
       formintervention,
@@ -89,7 +91,9 @@ const FormInterventionsComponent = () => {
       otherMeans,
       actionsTaken,
       commonLocations,
-      weathers
+      weathers,
+      lakeStates,
+      winds,
     );
     doc.save("rapport-intervention.pdf");
   }

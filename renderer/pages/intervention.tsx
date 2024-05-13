@@ -36,6 +36,8 @@ export default function Intervention() {
       actionsTaken: [],
       interventionLocation: [],
       interventionDestination: [],
+      weathers: [],
+      lakeStates: [],
       remark: "",
       rescued: 0,
       medicalized: 0,

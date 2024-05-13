@@ -20,12 +20,16 @@ import Rescued from "../../renderer/components/generation/pdf/rescued";
 import Severity from "../../renderer/components/generation/pdf/severity";
 import time from "../../renderer/components/generation/pdf/time";
 import Weather from "../../renderer/components/generation/pdf/weather";
+import LakeState from "../../renderer/components/generation/pdf/lakeState";
+import Wind from "../../renderer/components/generation/pdf/wind";
 import { IInterventionType } from "../../renderer/components/interventions/types";
 import { ICommonLocation } from "../../renderer/components/location/types";
 import { IOtherMean } from "../../renderer/components/otherMeans/types";
 import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
 import { ISeverity } from "../../renderer/components/severities/types";
 import { IWeather } from "../../renderer/components/weathers/types";
+import { ILakeState } from "../../renderer/components/lakeStates/types";
+import { IWind } from "../../renderer/components/winds/types";
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({
     addPage: jest.fn(),
@@ -97,6 +101,14 @@ jest.mock("../../renderer/components/generation/pdf/weather", () => ({
   __esModule: true,
   default: jest.fn(),
 }));
+jest.mock("../../renderer/components/generation/pdf/lakeState", () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
+jest.mock("../../renderer/components/generation/pdf/wind", () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
 
 describe("Intervention Report Generation", () => {
   let doc;
@@ -165,6 +177,26 @@ describe("Intervention Report Generation", () => {
       id: 1,
       name: "Weather 1",
     }],
+    winds:[
+      {
+        id: 1,
+        name: "Wind 1",
+      },
+      {
+        id: 2,
+        name: "Wind 2",
+      }
+    ],
+    lakeStates: [
+      {
+        id: 1,
+        name: "Lake State 1",
+      },
+      {
+        id: 2,
+        name: "Lake State 2",
+      }
+    ],
     remark: "Remark",
     rescued: 1,
     medicalized: 2,
@@ -205,6 +237,14 @@ describe("Intervention Report Generation", () => {
     { id: 1, name: "Weather 1" },
     { id: 2, name: "Weather 2" },
   ];
+  const winds: IWind[] = [
+    { id: 1, name: "Wind 1" },
+    { id: 2, name: "Wind 2" },
+  ];
+  const lakeStates: ILakeState[] = [
+    { id: 1, name: "Lake State 1" },
+    { id: 2, name: "Lake State 2" },
+  ];
 
   beforeEach(() => {
     doc = new jsPDF();
@@ -223,6 +263,8 @@ describe("Intervention Report Generation", () => {
     (Severity as jest.Mock).mockClear();
     (InterventionType as jest.Mock).mockClear();
     (Weather as jest.Mock).mockClear();
+    (LakeState as jest.Mock).mockClear();
+    (Wind as jest.Mock).mockClear();
   });
 
   it("should orchestrate the intervention report creation correctly", () => {
@@ -236,7 +278,9 @@ describe("Intervention Report Generation", () => {
       otherMeans,
       actionsTaken,
       commonLocations,
-      weathers
+      weathers,
+      lakeStates,
+      winds
     );
 
     expect(header).toHaveBeenCalled();
@@ -253,6 +297,9 @@ describe("Intervention Report Generation", () => {
     expect(Rescued).toHaveBeenCalled();
     expect(Severity).toHaveBeenCalled();
     expect(InterventionType).toHaveBeenCalled();
+    expect(Weather).toHaveBeenCalled();
+    expect(LakeState).toHaveBeenCalled();
+    expect(Wind).toHaveBeenCalled();
     expect(doc.addPage).toHaveBeenCalledTimes(0);
   });
 });

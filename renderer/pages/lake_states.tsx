@@ -1,7 +1,7 @@
 import { styled } from "@mui/material";
 import Head from "next/head";
 import React from "react";
-import Weathers from "../components/form/weathers";
+import LakeStates from "../components/form/lakeState";
 
 /**
  * Root component for the People page.
@@ -21,10 +21,10 @@ export default function PeoplePage() {
   return (
     <React.Fragment>
       <Head>
-        <title>Type de météo</title>
+        <title>Agitations du lac</title>
       </Head>
       <Root>
-        <Weathers />
+        <LakeStates />
       </Root>
     </React.Fragment>
   );

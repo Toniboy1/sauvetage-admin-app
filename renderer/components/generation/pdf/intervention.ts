@@ -23,6 +23,10 @@ import Severity from "./severity";
 import time from "./time";
 import { IWeather } from "../../weathers/types";
 import Weather from "./weather";
+import LakeState from "./lakeState";
+import Wind from "./wind";
+import { ILakeState } from "../../lakeStates/types";
+import { IWind } from "../../winds/types";
 export const addPage = (doc: jsPDF, y: number) => {
   if (y > 250) {
     doc.addPage();
@@ -42,6 +46,8 @@ const Intervention = (
   actionsTaken: IAction[],
   commonLocations: ICommonLocation[],
   weathers: IWeather[],
+  lakeStates: ILakeState[],
+  winds: IWind[]
 ) => {
   let y = 0;
   setupFonts(doc);
@@ -62,6 +68,10 @@ const Intervention = (
   y = Destination(doc, form, commonLocations, y);
   y = addPage(doc, y);
   y = Weather(doc, form, weathers, y);
+  y = addPage(doc, y);
+  y = LakeState(doc, form,lakeStates, y);
+  y = addPage(doc, y);
+  y = Wind(doc, form, winds, y);
   y = Remarks(doc, form, y);
 };
 export default Intervention;

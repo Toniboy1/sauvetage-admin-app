@@ -11,6 +11,7 @@ jest.mock("jspdf", () => ({
     setFontSize: jest.fn(),
     setTextColor: jest.fn(),
     getFont: jest.fn(() => ({ fontName: "", fontStyle: "" })),
+    getStringUnitWidth: jest.fn(() => 12),
   })),
 }));
 
@@ -32,6 +33,8 @@ describe("Remarks Functionality", () => {
     interventionLocation: [],
     interventionDestination: [],
     weathers: [],
+    winds: [],
+    lakeStates: [],
     rescued: 0,
     medicalized: 0,
     deceased: 0,

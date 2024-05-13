@@ -360,7 +360,7 @@
             "id": 6
         }
     ],
-    "weathers":[
+    "weathers": [
         {
             "name": "Beau",
             "id": 1
@@ -379,6 +379,50 @@
         },
         {
             "name": "Grosse Pluie",
+            "id": 5
+        }
+    ],
+    "winds": [
+        {
+            "name": "Rien",
+            "id": 1
+        },
+        {
+            "name": "Peu",
+            "id": 2
+        },
+        {
+            "name": "Moyen",
+            "id": 3
+        },
+        {
+            "name": "Fort",
+            "id": 4
+        },
+        {
+            "name": "Très fort",
+            "id": 5
+        }
+    ],
+    "lakeStates":[
+        {
+            "name": "Calme",
+            "id": 1
+        },
+        {
+            "name": "Peu agité",
+            "id": 2
+        },
+        {
+            "name": "Agité",
+            "id": 3
+        },
+        {
+            "name": "Très agité",
+            "id": 4
+        },
+        {
+            "name": "Démonté",
             "id": 5
         }
     ]

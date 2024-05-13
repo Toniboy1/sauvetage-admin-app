@@ -41,6 +41,8 @@ describe("Destination Functionality", () => {
     actionsTaken: [],
     interventionLocation: [],
     weathers: [],
+    winds: [],
+    lakeStates: [],
     remark: "",
     rescued: 0,
     medicalized: 0,

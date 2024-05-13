@@ -41,6 +41,8 @@ describe("ActionTaken Functionality", () => {
       id: 1,
       name: "Weather 1",
     }],
+    winds: [],
+    lakeStates: [],
     remark: "",
     rescued: 0,
     medicalized: 0,

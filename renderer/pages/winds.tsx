@@ -1,7 +1,7 @@
 import { styled } from "@mui/material";
 import Head from "next/head";
 import React from "react";
-import Weathers from "../components/form/weathers";
+import Winds from "../components/form/winds";
 
 /**
  * Root component for the People page.
@@ -21,10 +21,10 @@ export default function PeoplePage() {
   return (
     <React.Fragment>
       <Head>
-        <title>Type de météo</title>
+        <title>Type de vents</title>
       </Head>
       <Root>
-        <Weathers />
+        <Winds />
       </Root>
     </React.Fragment>
   );

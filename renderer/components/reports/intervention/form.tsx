@@ -21,6 +21,8 @@ import OtherMeansSelect from "../../select/other_means";
 import PiloteSelect from "../../select/pilote";
 import SeveritySelect from "../../select/severity";
 import DateTimeIntervention from "../../time";
+import LakeStates from "../../select/lake_state";
+import Winds from "../../select/wind";
 
 const InterventionForm = () => {
   return (
@@ -156,14 +158,16 @@ const InterventionForm = () => {
                 <Typography variant="h6">Temps:</Typography>
                 <WeatherSelect allowCreate={false} required={true} />
               </Stack>
+              <Stack spacing={4} direction="row">
+                <Typography variant="h6">Lac:</Typography>
+                <LakeStates allowCreate={false} required={true} />
+              </Stack>
+              <Stack spacing={4} direction="row">
+                <Typography variant="h6">Vent:</Typography>
+                <Winds allowCreate={false} required={true} />
+              </Stack>
 
           </Stack>
-        </CardContent>
-      </Card>
-      <Card>
-        <CardHeader title="Personnes secourues" />
-        <CardContent>
-          <RescuedData />
         </CardContent>
       </Card>
       <Typography variant="h6">Remarque:</Typography>

@@ -40,6 +40,8 @@ describe("Rescued Functionality", () => {
     interventionLocation: [],
     interventionDestination: [],
     weathers: [],
+    winds: [],
+    lakeStates: [],
     remark: "",
     eCoordinate: "",
     nCoordinate: "",

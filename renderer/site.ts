@@ -18,25 +18,33 @@ export const pages = [
     name: "Gravité",
     href: "/severities",
   },
-  {
-    name: "Types d'interventions",
-    href: "/interventions",
-  },
-  {
-    name: "Moyens supplémentaires",
-    href: "/other_means",
-  },
-  {
-    name: "Causes",
-    href: "/causes",
-  },
-  {
-    name: "Actions",
-    href: "/actions",
-  },
+  // {
+  //   name: "Types d'interventions",
+  //   href: "/interventions",
+  // },
+  // {
+  //   name: "Moyens supplémentaires",
+  //   href: "/other_means",
+  // },
+  // {
+  //   name: "Causes",
+  //   href: "/causes",
+  // },
+  // {
+  //   name: "Actions",
+  //   href: "/actions",
+  // },
   {
     name: "Météo",
     href: "/weathers",
+  },
+  {
+    name:"Lac",
+    href:"/lake_states"
+  },
+  {
+    name: "Vents",
+    href: "/winds",
   },
   {
     name: "Lieux",
