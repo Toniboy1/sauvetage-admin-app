@@ -1,6 +1,6 @@
 import { Autocomplete, Button, Chip, TextField, Typography } from "@mui/material";
 import { debounce } from "lodash";
-import { KeyboardEvent, useCallback, useEffect, useState } from "react";
+import { KeyboardEvent, SyntheticEvent, useCallback, useEffect, useState } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { IInterventionFormData } from "../reports/intervention/types";
 import {
@@ -74,25 +74,38 @@ const Select = <
       setLoading(true);
       try {
         const searchResults = await searchOptions(input);
-        setOptions(
-          searchResults.map((option) => ({
+        setOptions(prevOptions => {
+          const newOptions = searchResults.map(option => ({
             id: option.id,
             name: option.name,
             firstLetter: option.name.charAt(0),
-          })) as TExt[],
-        );
+          } as TExt));
+  
+          // Create a set of new option IDs for quick lookup
+          const newOptionIds = new Set(newOptions.map(option => option.id));
+          
+          // Filter to keep only those that are not in the new results but are currently selected
+          const retainedOptions = prevOptions.filter(option => 
+            fields.some(field => field.id === option.id) && !newOptionIds.has(option.id)
+          );
+  
+          return [...retainedOptions, ...newOptions];
+        });
       } finally {
         setLoading(false);
       }
     }, 500),
-    [],
+    [fields, searchOptions]
   );
+  
 
   /**
    * Handles the input change event.
+   * @param event The input change event.
+   * @param newInputValue The new input value.
    */
   const handleInputChange = useCallback(
-    (event, newInputValue) => {
+    (event:SyntheticEvent<Element, Event>, newInputValue:string) => {
       if (event?.type === "change") {
         setInputValue(newInputValue);
         debounceSearch(newInputValue);
@@ -105,7 +118,7 @@ const Select = <
    * Handles the add option event.
    */
   const handleAddOption = useCallback(async () => {
-    if (inputValue) {
+    if (inputValue && !options.some(option => option.name.toLowerCase() === inputValue.toLowerCase())) {
       const newId = await addOption(inputValue);
       const newOption = {
         id: newId,
@@ -114,9 +127,23 @@ const Select = <
       };
       append(newOption);
       setInputValue("");
-      setOptions((prev: TExt[]) => [...prev, newOption] as TExt[]);
+      setOptions(prevOptions => {
+        const newOptions = [newOption] as TExt[];
+
+        // Create a set of new option IDs for quick lookup
+        const newOptionIds = new Set(newOptions.map(option => option.id));
+        
+        // Filter to keep only those that are not in the new results but are currently selected
+        const retainedOptions = prevOptions.filter(option => 
+          fields.some(field => field.id === option.id) && !newOptionIds.has(option.id)
+        );
+
+        return [...retainedOptions, ...newOptions];
+      });
+      setOptions(prev => [...prev, newOption] as TExt[]); // Update the type of setOptions
     }
-  }, [append, inputValue]);
+  }, [append, inputValue, options, addOption]);
+  
 
   /**
    * Handles the key press event.
@@ -147,40 +174,51 @@ const Select = <
         multiple
         id={`${formField}-autocomplete`}
         options={options}
-        getOptionLabel={(option) => (option ? option.name : "")}
+        getOptionLabel={(option) => option.name}
         getOptionKey={(option) => option.id}
         loading={loading}
         inputValue={inputValue}
         onInputChange={handleInputChange}
-        value={fields
-          .map((field) => options.find((option) => option.id === field.id))
-          .filter((option) => option !== undefined)}
+        value={fields.map(field => options.find(option => option.id === field.id)).filter(Boolean)}
         onChange={(event, newValue) => {
-          const newValueSet = new Set(newValue.map((item) => item.id));
+          // Map of new values by ID for quick access
+          const newValueMap = new Map(newValue.map(item => [item.id, item]));
+        
+          // Filter out any fields not present in the new set of values
           fields.forEach((field, index) => {
-            if (!newValueSet.has(field.id)) {
+            if (!newValueMap.has(field.id)) {
               remove(index);
             }
           });
-          newValue.forEach((item) => {
-            if (!fields.some((field) => field.id === item.id)) {
+        
+          // Append new items that are not already in the fields
+          newValue.forEach(item => {
+            if (!fields.some(field => field.id === item.id)) {
               append(item);
             }
           });
         }}
         filterOptions={(options, params) => {
-          const filtered = options.filter((option) =>
-            option.name.toLowerCase().includes(params.inputValue.toLowerCase()),
+          // Convert currently selected field ids into a Set for quick lookup
+          const selectedIds = new Set(fields.map(field => field.id));
+        
+          // Filter out options that are already selected
+          const filtered = options.filter(option =>
+            !selectedIds.has(option.id) &&
+            option.name.toLowerCase().includes(params.inputValue.toLowerCase())
           );
+        
+          // Optionally add a temporary option for creating new entries if not found
           if (
             params.inputValue !== "" &&
-            !filtered.some((option) => option.name === params.inputValue)
+            !filtered.some(option => option.name === params.inputValue) &&
+            allowCreate
           ) {
             filtered.push({
-              id: 0,
+              id: 0, // Use a unique temporary id
               name: params.inputValue,
               firstLetter: params.inputValue.charAt(0),
-            } as TExt); // Cast the object to type T
+            } as TExt);
           }
           return filtered;
         }}
@@ -199,9 +237,10 @@ const Select = <
           );
         }}
         renderTags={(tagValue, getTagProps) => {
-          return tagValue.map((option, index) => (
-            <Chip {...getTagProps({ index })} key={option.id} label={option.name} />
-          ));
+          return tagValue.map((option, index) => {
+            const chip = <Chip {...getTagProps({ index })} key={option.id} label={option.name} />;
+            return chip
+        });
         }}
         sx={{ width: 300 }}
         renderInput={(params) => (
