@@ -1,6 +1,6 @@
-import ItemsComponent from "../generic";
 import Database from "../../../model/db";
 import { IOtherMean } from "../../otherMeans/types";
+import ItemsComponent from "../generic";
 /**
  * CRUD component for the other means type.
  * @returns  The JSX element representing the Other means component.
@@ -18,7 +18,7 @@ const OtherMeansComponent = () => {
       updateItem={async (id: number, name: string) =>
         await Database.getInstance().updateOtherMean(id, name)
       }
-      label="Type d'alarmes"
+      label="Liste des moyens supplémentaires"
       type="other-mean"
     />
   );

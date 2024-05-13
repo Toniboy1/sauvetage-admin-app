@@ -1,9 +1,9 @@
-import path from "path";
 import { app, ipcMain, Menu, protocol } from "electron";
-import serve from "electron-serve";
-import { createWindow } from "./helpers";
 import log from "electron-log";
+import serve from "electron-serve";
 import { autoUpdater } from "electron-updater";
+import path from "path";
+import { createWindow } from "./helpers";
 
 autoUpdater.logger = log;
 log.info("App starting...");

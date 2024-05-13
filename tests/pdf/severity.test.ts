@@ -1,12 +1,9 @@
-import { jsPDF } from "jspdf";
-import { describe, expect, it, beforeEach, jest } from "@jest/globals";
-import Severity from "../../renderer/components/generation/pdf/severity";
-import {
-  TEXT_FONT,
-  TITLE,
-} from "../../renderer/components/generation/pdf/constants";
-import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
+import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import dayjs from "dayjs";
+import { jsPDF } from "jspdf";
+import { TITLE_SPACING } from "../../renderer/components/generation/pdf/constants";
+import Severity from "../../renderer/components/generation/pdf/severity";
+import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
 
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({
@@ -40,6 +37,9 @@ describe("Severity Functionality", () => {
     actionsTaken: [],
     interventionLocation: [],
     interventionDestination: [],
+    weathers: [],
+    winds: [],
+    lakeStates: [],
     remark: "",
     rescued: 0,
     medicalized: 0,
@@ -70,7 +70,7 @@ describe("Severity Functionality", () => {
     expect(doc.text).toHaveBeenCalledWith(
       "Gravité de l'intervention:",
       20,
-      startingY + 10,
+      startingY + TITLE_SPACING,
     );
   });
 });

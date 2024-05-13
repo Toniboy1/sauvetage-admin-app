@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from "react";
-import dayjs from "dayjs";
-import Database from "../../../model/db";
 import {
+  Button,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
-  Button,
 } from "@mui/material";
-import { IInterventionFormData } from "../../reports/intervention/types";
-import Intervention from "../../generation/pdf/intervention";
 import jsPDF from "jspdf";
+import { useEffect, useState } from "react";
+import Database from "../../../model/db";
+import Intervention from "../../generation/pdf/intervention";
+import { IInterventionFormData } from "../../reports/intervention/types";
 
 /**
  * Represents a component that displays a list of forminterventions and allows adding, editing, and deleting forminterventions.
@@ -79,6 +78,9 @@ const FormInterventionsComponent = () => {
     const actionsTaken = await Database.getInstance().getAllActions();
     const commonLocations =
       await Database.getInstance().getAllCommonLocations();
+    const weathers = await Database.getInstance().getAllWeathers();
+    const winds = await Database.getInstance().getAllWinds();
+    const lakeStates = await Database.getInstance().getAllLakeStates();
     Intervention(
       doc,
       formintervention,
@@ -89,18 +91,21 @@ const FormInterventionsComponent = () => {
       otherMeans,
       actionsTaken,
       commonLocations,
+      weathers,
+      lakeStates,
+      winds,
     );
     doc.save("rapport-intervention.pdf");
   }
   return (
     <div>
-      <h1>FormInterventions</h1>
+      <h1>Liste des rapports d'interventions</h1>
       <Button
         variant="contained"
         color="primary"
         onClick={handleAddFormIntervention}
       >
-        Add New FormIntervention
+        Ajouter un nouveau rapport d'intervention
       </Button>
       <TableContainer component={Paper}>
         <Table>
@@ -146,13 +151,13 @@ const FormInterventionsComponent = () => {
                       color="primary"
                       onClick={() => handlPrint(formintervention)}
                     >
-                      Print
+                      Imprimer
                     </Button>
                     <Button
                       color="primary"
                       onClick={() => handleEdit(formintervention)}
                     >
-                      Edit
+                      Modifier
                     </Button>
                     <Button
                       color="error"
@@ -160,7 +165,7 @@ const FormInterventionsComponent = () => {
                         handleDeleteFormIntervention(formintervention.id)
                       }
                     >
-                      Delete
+                      Supprimer
                     </Button>
                   </TableCell>
                 </TableRow>

@@ -1,10 +1,10 @@
+import { beforeEach, describe, expect, it } from "@jest/globals";
 import jsPDF from "jspdf";
-import { describe, expect, it, beforeEach } from "@jest/globals";
 import {
-  TEXT_FONT,
-  SUBTITLE_FONT,
-  TITLE,
   HEADER_TITLE,
+  SUBTITLE_FONT,
+  TEXT_FONT,
+  TITLE,
 } from "../../renderer/components/generation/pdf/constants";
 import setupFonts from "../../renderer/components/generation/pdf/fonts";
 

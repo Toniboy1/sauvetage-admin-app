@@ -1,5 +1,5 @@
+import { beforeEach, describe, expect, it } from "@jest/globals";
 import jsPDF from "jspdf";
-import { describe, expect, it, beforeEach } from "@jest/globals";
 import setupFonts from "../../renderer/components/generation/pdf/fonts";
 
 describe("setupFonts", () => {

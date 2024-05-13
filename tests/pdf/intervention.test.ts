@@ -1,29 +1,35 @@
-import { jsPDF } from "jspdf";
-import { describe, expect, it, beforeEach, jest } from "@jest/globals";
-import time from "../../renderer/components/generation/pdf/time";
-import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
+import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import dayjs from "dayjs";
-import { IAlarm } from "../../renderer/components/alarm/types";
-import { ISeverity } from "../../renderer/components/severities/types";
-import { IInterventionType } from "../../renderer/components/interventions/types";
-import { ICause } from "../../renderer/components/causes/types";
-import { IOtherMean } from "../../renderer/components/otherMeans/types";
+import { jsPDF } from "jspdf";
 import { IAction } from "../../renderer/components/actions/types";
-import { ICommonLocation } from "../../renderer/components/location/types";
-import Intervention from "../../renderer/components/generation/pdf/intervention";
-import header from "../../renderer/components/generation/pdf/header";
-import crew from "../../renderer/components/generation/pdf/crew";
-import AlarmedBy from "../../renderer/components/generation/pdf/alarmed";
+import { IAlarm } from "../../renderer/components/alarm/types";
+import { ICause } from "../../renderer/components/causes/types";
 import ActionTaken from "../../renderer/components/generation/pdf/actionsTaken";
+import AlarmedBy from "../../renderer/components/generation/pdf/alarmed";
 import Cause from "../../renderer/components/generation/pdf/cause";
+import crew from "../../renderer/components/generation/pdf/crew";
 import Destination from "../../renderer/components/generation/pdf/destination";
+import Fonts from "../../renderer/components/generation/pdf/fonts";
+import header from "../../renderer/components/generation/pdf/header";
+import Intervention from "../../renderer/components/generation/pdf/intervention";
 import InterventionType from "../../renderer/components/generation/pdf/interventionType";
 import Location from "../../renderer/components/generation/pdf/location";
 import OtherMeans from "../../renderer/components/generation/pdf/otherMeans";
 import Remarks from "../../renderer/components/generation/pdf/remarks";
 import Rescued from "../../renderer/components/generation/pdf/rescued";
 import Severity from "../../renderer/components/generation/pdf/severity";
-import Fonts from "../../renderer/components/generation/pdf/fonts";
+import time from "../../renderer/components/generation/pdf/time";
+import Weather from "../../renderer/components/generation/pdf/weather";
+import LakeState from "../../renderer/components/generation/pdf/lakeState";
+import Wind from "../../renderer/components/generation/pdf/wind";
+import { IInterventionType } from "../../renderer/components/interventions/types";
+import { ICommonLocation } from "../../renderer/components/location/types";
+import { IOtherMean } from "../../renderer/components/otherMeans/types";
+import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
+import { ISeverity } from "../../renderer/components/severities/types";
+import { IWeather } from "../../renderer/components/weathers/types";
+import { ILakeState } from "../../renderer/components/lakeStates/types";
+import { IWind } from "../../renderer/components/winds/types";
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({
     addPage: jest.fn(),
@@ -91,6 +97,18 @@ jest.mock("../../renderer/components/generation/pdf/rescued", () => ({
   __esModule: true,
   default: jest.fn(),
 }));
+jest.mock("../../renderer/components/generation/pdf/weather", () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
+jest.mock("../../renderer/components/generation/pdf/lakeState", () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
+jest.mock("../../renderer/components/generation/pdf/wind", () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
 
 describe("Intervention Report Generation", () => {
   let doc;
@@ -155,6 +173,30 @@ describe("Intervention Report Generation", () => {
         name: "Location 2",
       },
     ],
+    weathers: [{
+      id: 1,
+      name: "Weather 1",
+    }],
+    winds:[
+      {
+        id: 1,
+        name: "Wind 1",
+      },
+      {
+        id: 2,
+        name: "Wind 2",
+      }
+    ],
+    lakeStates: [
+      {
+        id: 1,
+        name: "Lake State 1",
+      },
+      {
+        id: 2,
+        name: "Lake State 2",
+      }
+    ],
     remark: "Remark",
     rescued: 1,
     medicalized: 2,
@@ -191,6 +233,18 @@ describe("Intervention Report Generation", () => {
     { id: 1, name: "Location 1" },
     { id: 2, name: "Location 2" },
   ];
+  const weathers: IWeather[] = [
+    { id: 1, name: "Weather 1" },
+    { id: 2, name: "Weather 2" },
+  ];
+  const winds: IWind[] = [
+    { id: 1, name: "Wind 1" },
+    { id: 2, name: "Wind 2" },
+  ];
+  const lakeStates: ILakeState[] = [
+    { id: 1, name: "Lake State 1" },
+    { id: 2, name: "Lake State 2" },
+  ];
 
   beforeEach(() => {
     doc = new jsPDF();
@@ -208,6 +262,9 @@ describe("Intervention Report Generation", () => {
     (Rescued as jest.Mock).mockClear();
     (Severity as jest.Mock).mockClear();
     (InterventionType as jest.Mock).mockClear();
+    (Weather as jest.Mock).mockClear();
+    (LakeState as jest.Mock).mockClear();
+    (Wind as jest.Mock).mockClear();
   });
 
   it("should orchestrate the intervention report creation correctly", () => {
@@ -221,6 +278,9 @@ describe("Intervention Report Generation", () => {
       otherMeans,
       actionsTaken,
       commonLocations,
+      weathers,
+      lakeStates,
+      winds
     );
 
     expect(header).toHaveBeenCalled();
@@ -237,6 +297,9 @@ describe("Intervention Report Generation", () => {
     expect(Rescued).toHaveBeenCalled();
     expect(Severity).toHaveBeenCalled();
     expect(InterventionType).toHaveBeenCalled();
+    expect(Weather).toHaveBeenCalled();
+    expect(LakeState).toHaveBeenCalled();
+    expect(Wind).toHaveBeenCalled();
     expect(doc.addPage).toHaveBeenCalledTimes(0);
   });
 });

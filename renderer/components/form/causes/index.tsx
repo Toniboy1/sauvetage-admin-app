@@ -1,6 +1,6 @@
-import ItemsComponent from "../generic";
 import Database from "../../../model/db";
 import { ICause } from "../../causes/types";
+import ItemsComponent from "../generic";
 /**
  * CRUD component for the cause type.
  * @returns  The JSX element representing the Cause component.
@@ -19,7 +19,7 @@ const CauseComponent = () => {
         await Database.getInstance().updateCause(id, name)
       }
       type="cause"
-      label="Cause des interventions"
+      label="Liste des causes d'interventions"
     />
   );
 };

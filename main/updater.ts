@@ -1,10 +1,10 @@
-import {
-  NsisUpdater,
-  AppImageUpdater,
-  MacUpdater,
-  AppUpdater,
-} from "electron-updater";
 import { GithubOptions } from "builder-util-runtime";
+import {
+  AppImageUpdater,
+  AppUpdater,
+  MacUpdater,
+  NsisUpdater,
+} from "electron-updater";
 // Or MacUpdater, AppImageUpdater
 
 export default class Updater {

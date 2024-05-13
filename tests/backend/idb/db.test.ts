@@ -1,15 +1,15 @@
-import Database from "../../../renderer/model/db";
-import fakeIndexedDB from "fake-indexeddb";
-import FDBKeyRange from "fake-indexeddb/lib/FDBKeyRange";
 import {
+  afterEach,
+  beforeAll,
+  beforeEach,
   describe,
   expect,
-  beforeEach,
   it,
-  beforeAll,
-  afterEach,
 } from "@jest/globals";
+import fakeIndexedDB from "fake-indexeddb";
+import FDBKeyRange from "fake-indexeddb/lib/FDBKeyRange";
 import structuredClone from "structured-clone";
+import Database from "../../../renderer/model/db";
 global.structuredClone = structuredClone;
 global.Blob = require("blob-polyfill").Blob;
 describe("Database Tests", () => {

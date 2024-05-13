@@ -1,8 +1,9 @@
+import { beforeEach, describe, expect, it, jest } from "@jest/globals";
+import dayjs from "dayjs";
 import { jsPDF } from "jspdf";
-import { describe, expect, it, beforeEach, jest } from "@jest/globals";
+import { TITLE_SPACING } from "../../renderer/components/generation/pdf/constants";
 import interventionType from "../../renderer/components/generation/pdf/interventionType";
 import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
-import dayjs from "dayjs";
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({
     addField: jest.fn(),
@@ -38,6 +39,9 @@ describe("InterventionType Functionality", () => {
     actionsTaken: [],
     interventionLocation: [],
     interventionDestination: [],
+    weathers: [],
+    winds: [],
+    lakeStates: [],
     remark: "",
     rescued: 0,
     medicalized: 0,
@@ -69,7 +73,7 @@ describe("InterventionType Functionality", () => {
     expect(doc.text).toHaveBeenCalledWith(
       "Type d'intervention:",
       20,
-      startingY + 10,
+      startingY + TITLE_SPACING,
     );
   });
 });

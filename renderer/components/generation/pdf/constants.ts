@@ -5,6 +5,12 @@ const TEXT_FONT = (doc: jsPDF) => {
   doc.setFontSize(12);
   doc.setFont("calibri", "normal");
 };
+
+const TEXT_FONT_REDUCED = (doc: jsPDF) => {
+  doc.setTextColor(0, 0, 0);
+  doc.setFontSize(10);
+  doc.setFont("calibri", "normal");
+};
 const SUBTITLE_FONT = (doc: jsPDF) => {
   doc.setFontSize(25);
   doc.setTextColor(255, 0, 0);
@@ -21,4 +27,21 @@ const HEADER_TITLE = (doc: jsPDF) => {
   doc.setTextColor(0, 0, 0);
 };
 
-export { TEXT_FONT, SUBTITLE_FONT, TITLE, HEADER_TITLE };
+const PADDING_BOTTOM = 5;
+const INTERLINE_COMPONENT_LOOP = 10;
+const TITLE_SPACING = 5;
+const CHECKBOX_SPACING = 8;
+const TEXT_SPACING = 12;
+
+export {
+  CHECKBOX_SPACING,
+  HEADER_TITLE,
+  INTERLINE_COMPONENT_LOOP,
+  PADDING_BOTTOM,
+  SUBTITLE_FONT,
+  TEXT_FONT,
+  TEXT_FONT_REDUCED,
+  TEXT_SPACING,
+  TITLE,
+  TITLE_SPACING,
+};

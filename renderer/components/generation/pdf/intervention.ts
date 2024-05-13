@@ -1,26 +1,32 @@
 import jsPDF from "jspdf";
-import header from "./header";
-import time from "./time";
-import crew from "./crew";
-import { IInterventionFormData } from "../../reports/intervention/types";
-import setupFonts from "./fonts";
-import AlarmedBy from "./alarmed";
-import { IAlarm } from "../../alarm/types";
-import Severity from "./severity";
-import { ISeverity } from "../../severities/types";
-import { IInterventionType } from "../../interventions/types";
-import interventionType from "./interventionType";
-import rescued from "./rescued";
-import { ICause } from "../../causes/types";
-import Cause from "./cause";
-import { IOtherMean } from "../../otherMeans/types";
-import OtherMeans from "./otherMeans";
 import { IAction } from "../../actions/types";
-import ActionTaken from "./actionsTaken";
-import Location from "./location";
+import { IAlarm } from "../../alarm/types";
+import { ICause } from "../../causes/types";
+import { IInterventionType } from "../../interventions/types";
 import { ICommonLocation } from "../../location/types";
-import Remarks from "./remarks";
+import { IOtherMean } from "../../otherMeans/types";
+import { IInterventionFormData } from "../../reports/intervention/types";
+import { ISeverity } from "../../severities/types";
+import ActionTaken from "./actionsTaken";
+import AlarmedBy from "./alarmed";
+import Cause from "./cause";
+import crew from "./crew";
 import Destination from "./destination";
+import setupFonts from "./fonts";
+import header from "./header";
+import interventionType from "./interventionType";
+import Location from "./location";
+import OtherMeans from "./otherMeans";
+import Remarks from "./remarks";
+import rescued from "./rescued";
+import Severity from "./severity";
+import time from "./time";
+import { IWeather } from "../../weathers/types";
+import Weather from "./weather";
+import LakeState from "./lakeState";
+import Wind from "./wind";
+import { ILakeState } from "../../lakeStates/types";
+import { IWind } from "../../winds/types";
 export const addPage = (doc: jsPDF, y: number) => {
   if (y > 250) {
     doc.addPage();
@@ -39,6 +45,9 @@ const Intervention = (
   otherMeans: IOtherMean[],
   actionsTaken: IAction[],
   commonLocations: ICommonLocation[],
+  weathers: IWeather[],
+  lakeStates: ILakeState[],
+  winds: IWind[]
 ) => {
   let y = 0;
   setupFonts(doc);
@@ -57,6 +66,12 @@ const Intervention = (
   y = addPage(doc, y);
   y = Location(doc, form, commonLocations, y);
   y = Destination(doc, form, commonLocations, y);
+  y = addPage(doc, y);
+  y = Weather(doc, form, weathers, y);
+  y = addPage(doc, y);
+  y = LakeState(doc, form,lakeStates, y);
+  y = addPage(doc, y);
+  y = Wind(doc, form, winds, y);
   y = Remarks(doc, form, y);
 };
 export default Intervention;

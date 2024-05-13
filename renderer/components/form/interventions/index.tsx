@@ -1,6 +1,6 @@
-import ItemsComponent from "../generic";
 import Database from "../../../model/db";
 import { IInterventionType } from "../../interventions/types";
+import ItemsComponent from "../generic";
 /**
  * CRUD component for the alarm type.
  * @returns  The JSX element representing the Alarm component.
@@ -20,7 +20,7 @@ const InterventionsTypeComponent = () => {
       updateItem={async (id: number, name: string) =>
         await Database.getInstance().updateIntervention(id, name)
       }
-      label="Type d'interventions"
+      label="Liste des types d'interventions"
       type="intervention"
     />
   );

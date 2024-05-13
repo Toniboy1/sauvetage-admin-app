@@ -1,6 +1,6 @@
-import ItemsComponent from "../generic";
 import Database from "../../../model/db";
 import { IPeople } from "../../people/types";
+import ItemsComponent from "../generic";
 /**
  * CRUD component for the person type.
  * @returns  The JSX element representing the Person component.
@@ -18,7 +18,7 @@ const PersonComponent = () => {
       updateItem={async (id: number, name: string) =>
         await Database.getInstance().updatePerson(id, name)
       }
-      label="Type d'persones"
+      label="Liste des sauveteurs"
       type="person"
     />
   );

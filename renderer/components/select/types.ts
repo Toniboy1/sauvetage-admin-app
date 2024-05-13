@@ -32,3 +32,7 @@ export type GenericProperties = {
 export type GenericPropertiesExtended = GenericProperties & {
   firstLetter: string;
 };
+
+export interface LiProps extends React.HTMLAttributes<HTMLLIElement> {
+  key: React.Key;
+}

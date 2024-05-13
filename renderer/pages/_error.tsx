@@ -1,7 +1,7 @@
-import React from "react";
-import Head from "next/head";
-import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Head from "next/head";
+import React from "react";
 import Link from "../components/Link";
 
 /**

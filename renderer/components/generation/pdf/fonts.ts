@@ -1,8 +1,8 @@
 import jsPDF from "jspdf";
-import CalibriRegular from "../../../public/fonts/calibri-regular";
 import CalibriBold from "../../../public/fonts/calibri-bold";
-import CalibriLight from "../../../public/fonts/calibri-light";
 import CalibriItalic from "../../../public/fonts/calibri-italic";
+import CalibriLight from "../../../public/fonts/calibri-light";
+import CalibriRegular from "../../../public/fonts/calibri-regular";
 /**
  * Setup the fonts for the pdfs
  * @param doc  - The jsPDF document

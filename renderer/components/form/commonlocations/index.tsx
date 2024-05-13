@@ -1,6 +1,6 @@
-import ItemsComponent from "../generic";
 import Database from "../../../model/db";
 import { ICommonLocation } from "../../location/commons/types";
+import ItemsComponent from "../generic";
 /**
  * CRUD component for the Common locations type.
  * @returns  The JSX element representing the common locations component.
@@ -20,7 +20,7 @@ const CommonLoacationComponent = () => {
       updateItem={async (id: number, name: string) =>
         await Database.getInstance().updateCommonLocation(id, name)
       }
-      label="Lieux Fréquents"
+      label="Liste des lieux fréquents"
       type="common-location"
     />
   );

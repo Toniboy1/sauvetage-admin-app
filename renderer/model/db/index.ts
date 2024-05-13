@@ -1,18 +1,21 @@
+import dayjs from "dayjs";
 import Dexie, { UpdateSpec } from "dexie";
-import { IPeople } from "../../components/people/types";
-import { IAlarm } from "../../components/alarm/types";
-import { ISeverity } from "../../components/severities/types";
-import { IInterventionType } from "../../components/interventions/types";
-import { IOtherMean } from "../../components/otherMeans/types";
-import { ICause } from "../../components/causes/types";
+import IDBExportImport from "indexeddb-export-import";
 import { IAction } from "../../components/actions/types";
+import { IAlarm } from "../../components/alarm/types";
+import { ICause } from "../../components/causes/types";
+import { IInterventionType } from "../../components/interventions/types";
 import { ICommonLocation } from "../../components/location/types";
+import { IOtherMean } from "../../components/otherMeans/types";
+import { IPeople } from "../../components/people/types";
 import {
   IInterventionData,
   IInterventionFormData,
 } from "../../components/reports/intervention/types";
-import dayjs from "dayjs";
-import IDBExportImport from "indexeddb-export-import";
+import { ISeverity } from "../../components/severities/types";
+import { IWeather } from "../../components/weathers/types";
+import { ILakeState } from "../../components/lakeStates/types";
+import { IWind } from "../../components/winds/types";
 
 /**
  * Sets up and manages the database using Dexie.js.
@@ -28,6 +31,9 @@ export class Database extends Dexie {
   actions: Dexie.Table<IAction, number>;
   commonlocations: Dexie.Table<ICommonLocation, number>;
   forminterventions: Dexie.Table<IInterventionData, number>;
+  weathers: Dexie.Table<IWeather, number>;
+  winds: Dexie.Table<IWind, number>;
+  lakeStates: Dexie.Table<ILakeState, number>;
   /**
    * Represents the database index.
    * @param isTest - Indicates whether the database is for testing purposes.
@@ -44,6 +50,9 @@ export class Database extends Dexie {
       actions: "++id, &name",
       commonlocations: "++id, &name",
       forminterventions: "++id, date",
+      weathers: "++id, &name",
+      winds: "++id, &name",
+      lakeStates: "++id, &name",
     });
   }
   /**
@@ -841,6 +850,212 @@ export class Database extends Dexie {
   }
 
   /**
+   * get all weathers
+   * @returns all weathers
+   */
+  async getAllWeathers(): Promise<Array<IWeather>> {
+    return this.weathers.orderBy("name").toArray() as Promise<Array<IWeather>>;
+  }
+  /**
+   * Deletes all weathers from the database.
+   */
+  async clearWeathers() {
+    try {
+      await this.transaction("rw", this.weathers, async () => {
+        await this.weathers.clear();
+      });
+    } catch (error) {
+      console.error("Failed to clear the weathers table:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * Fetches a weather from the database.
+   * @param id The ID of the weather to fetch.
+   * @returns A promise that resolves with the weather.
+   */
+  async getWeather(id: number): Promise<IWeather> {
+    return this.weathers.get(id);
+  }
+
+  /**
+   * Adds a new weather to the database.
+   * @param name The name of the weather to add.
+   * @returns A promise that resolves with the new weather's ID.
+   */
+  async addWeather(name: string): Promise<number> {
+    return this.weathers.add({
+      name: name,
+    });
+  }
+
+  /**
+   * Updates a weather's name in the database.
+   * @param id The ID of the weather to update.
+   * @param name The new name for the weather.
+   * @returns A promise that resolves with the weather's ID.
+   */
+  async updateWeather(id: number, name: string): Promise<number> {
+    return this.weathers.update(id, { name });
+  }
+
+  /**
+   * Deletes a weather from the database.
+   * @param id The ID of the weather to delete.
+   * @returns A promise that resolves when the weather is deleted.
+   */
+  async deleteWeather(id: number): Promise<void> {
+    return this.weathers.delete(id);
+  }
+
+  /**
+   * Search weather by name
+   * @param input search params
+   * @returns matched weathers
+   */
+  async searchWeathers(input: string): Promise<IWeather[]> {
+    return this.weathers.where("name").startsWithIgnoreCase(input).toArray();
+  }
+
+  /**
+   * get all lakestates
+   * @returns all lakestates
+   */
+  async getAllLakeStates(): Promise<Array<ILakeState>> {
+    return this.lakeStates.orderBy("name").toArray() as Promise<Array<ILakeState>>;
+  }
+  /**
+   * Deletes all lakestates from the database.
+   */
+  async clearLakeStates() {
+    try {
+      await this.transaction("rw", this.lakeStates, async () => {
+        await this.lakeStates.clear();
+      });
+    } catch (error) {
+      console.error("Failed to clear the lakestates table:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * Fetches a lakestate from the database.
+   * @param id The ID of the lakestate to fetch.
+   * @returns A promise that resolves with the lakestate.
+   */
+  async getLakeState(id: number): Promise<ILakeState> {
+    return this.lakeStates.get(id);
+  }
+
+  /**
+   * Adds a new lakestate to the database.
+   * @param name The name of the lakestate to add.
+   * @returns A promise that resolves with the new lakestate's ID.
+   */
+  async addLakeState(name: string): Promise<number> {
+    return this.lakeStates.add({
+      name: name,
+    });
+  }
+
+  /**
+   * Updates a lakestate's name in the database.
+   * @param id The ID of the lakestate to update.
+   * @param name The new name for the lakestate.
+   * @returns A promise that resolves with the lakestate's ID.
+   */
+  async updateLakeState(id: number, name: string): Promise<number> {
+    return this.lakeStates.update(id, { name });
+  }
+
+  /**
+   * Deletes a lakestate from the database.
+   * @param id The ID of the lakestate to delete.
+   * @returns A promise that resolves when the lakestate is deleted.
+   */
+  async deleteLakeState(id: number): Promise<void> {
+    return this.lakeStates.delete(id);
+  }
+
+  /**
+   * Search lakestate by name
+   * @param input search params
+   * @returns matched lakestates
+   */
+  async searchLakeStates(input: string): Promise<ILakeState[]> {
+    return this.lakeStates.where("name").startsWithIgnoreCase(input).toArray();
+  }
+  /**
+   * get all winds
+   * @returns all winds
+   */
+  async getAllWinds(): Promise<Array<IWind>> {
+    return this.winds.orderBy("name").toArray() as Promise<Array<IWind>>;
+  }
+  /**
+   * Deletes all winds from the database.
+   */
+  async clearWinds() {
+    try {
+      await this.transaction("rw", this.winds, async () => {
+        await this.winds.clear();
+      });
+    } catch (error) {
+      console.error("Failed to clear the winds table:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * Fetches a wind from the database.
+   * @param id The ID of the wind to fetch.
+   * @returns A promise that resolves with the wind.
+   */
+  async getWind(id: number): Promise<IWind> {
+    return this.winds.get(id);
+  }
+
+  /**
+   * Adds a new wind to the database.
+   * @param name The name of the wind to add.
+   * @returns A promise that resolves with the new wind's ID.
+   */
+  async addWind(name: string): Promise<number> {
+    return this.winds.add({
+      name: name,
+    });
+  }
+
+  /**
+   * Updates a wind's name in the database.
+   * @param id The ID of the wind to update.
+   * @param name The new name for the wind.
+   * @returns A promise that resolves with the wind's ID.
+   */
+  async updateWind(id: number, name: string): Promise<number> {
+    return this.winds.update(id, { name });
+  }
+
+  /**
+   * Deletes a wind from the database.
+   * @param id The ID of the wind to delete.
+   * @returns A promise that resolves when the wind is deleted.
+   */
+  async deleteWind(id: number): Promise<void> {
+    return this.winds.delete(id);
+  }
+
+  /**
+   * Search wind by name
+   * @param input search params
+   * @returns matched winds
+   */
+  async searchWinds(input: string): Promise<IWind[]> {
+    return this.winds.where("name").startsWithIgnoreCase(input).toArray();
+  }
+
+  /**
    * Deletes all data from the database.
    */
   async clearAll() {
@@ -853,6 +1068,10 @@ export class Database extends Dexie {
     await this.clearActions();
     await this.clearCommonLocations();
     await this.clearFormInterventions();
+    await this.clearWeathers();
+    await this.clearWinds();
+    await this.clearLakeStates();
+    await this.clearAllData();
   }
 }
 

@@ -1,8 +1,13 @@
+import { beforeEach, describe, expect, it, jest } from "@jest/globals";
+import dayjs from "dayjs";
 import { jsPDF } from "jspdf";
-import { describe, expect, it, beforeEach, jest } from "@jest/globals";
+import {
+  INTERLINE_COMPONENT_LOOP,
+  PADDING_BOTTOM,
+  TITLE_SPACING,
+} from "../../renderer/components/generation/pdf/constants";
 import Location from "../../renderer/components/generation/pdf/location";
 import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
-import dayjs from "dayjs";
 
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({
@@ -41,6 +46,9 @@ describe("Location Functionality", () => {
     causes: [],
     actionsTaken: [],
     interventionDestination: [],
+    weathers: [],
+    winds: [],
+    lakeStates: [],
     remark: "",
     rescued: 0,
     medicalized: 0,
@@ -62,16 +70,21 @@ describe("Location Functionality", () => {
     const newY = Location(doc, form, options, startingY);
 
     expect(doc.addField).toHaveBeenCalledTimes(options.length);
-    expect(doc.text).toHaveBeenCalledTimes(8);
+    expect(doc.text).toHaveBeenCalledTimes(options.length * 2 + 1);
     expect(doc.rect).toHaveBeenCalledTimes(options.length);
-    expect(newY).toBeGreaterThan(startingY + 25 + (options.length % 3) * 10);
-
-    expect(doc.text).toHaveBeenCalledWith("Localisation:", 20, startingY + 10);
-    expect(doc.text).toHaveBeenCalledWith(
-      `Coordonnées: ${form.nCoordinate}`,
-      20,
-      startingY + 20,
+    expect(newY).toBeGreaterThan(
+      startingY + PADDING_BOTTOM + 0 * INTERLINE_COMPONENT_LOOP,
     );
-    expect(doc.text).toHaveBeenCalledWith(form.eCoordinate, 90, startingY + 20);
+
+    expect(doc.text).toHaveBeenCalledWith(
+      "Localisation:",
+      20,
+      startingY + TITLE_SPACING,
+    );
+    expect(doc.text).toHaveBeenCalledWith(
+      `Coordonnées: ${form.nCoordinate}°N ${form.eCoordinate}°E`,
+      55,
+      startingY + TITLE_SPACING,
+    );
   });
 });

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import Database from "../../../model/db";
-import { IInterventionFormData } from "../../../components/reports/intervention/types";
-import { Fab } from "@mui/material";
 import { Print } from "@mui/icons-material";
+import { Fab } from "@mui/material";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { IInterventionFormData } from "../../../components/reports/intervention/types";
+import Database from "../../../model/db";
 
 const EditIntervention = () => {
   const router = useRouter();

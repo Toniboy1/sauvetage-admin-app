@@ -1,6 +1,3 @@
-import dayjs from "dayjs";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import {
   Card,
   CardContent,
@@ -9,8 +6,11 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { Controller, useFormContext } from "react-hook-form";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import dayjs from "dayjs";
 import { useEffect } from "react";
+import { Controller, useFormContext } from "react-hook-form";
 
 /**
  * Component for the date and time of the intervention.

@@ -1,7 +1,7 @@
+import { beforeEach, describe, expect, test } from "@jest/globals";
 import dayjs from "dayjs";
-import { Database } from "../../renderer/model/db/index";
-import { describe, expect, test, beforeEach } from "@jest/globals";
 import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
+import { Database } from "../../renderer/model/db/index";
 /**
  * Test suite for the Database module.
  */
@@ -36,13 +36,16 @@ describe("Database", () => {
       actionsTaken: [{ id: 1, name: "Action" }],
       interventionLocation: [{ id: 1, name: "Location" }],
       interventionDestination: [{ id: 1, name: "Destination" }],
+      weathers:[{id:1,name:"Weather"}],
+      winds:[{id:1,name:"Wind"}],
+      lakeStates:[{id:1,name:"Lake"}],
       remark: "remark",
       rescued: 0,
       medicalized: 0,
       deceased: 0,
       boatRegistration: "",
-      nCoordinate: "1138470",
-      eCoordinate: "2560250",
+      nCoordinate: "1'138'470°E",
+      eCoordinate: "2'560'250°N",
     };
     const id = await Database.getInstance().addFormIntervention(input);
     const formintervention =
@@ -71,13 +74,16 @@ describe("Database", () => {
       actionsTaken: [{ id: 1, name: "Action" }],
       interventionLocation: [{ id: 1, name: "Location" }],
       interventionDestination: [{ id: 1, name: "Destination" }],
+      weathers:[{id:1,name:"Weather"}],
+      winds:[{id:1,name:"Wind"}],
+      lakeStates:[{id:1,name:"Lake"}],
       remark: "remark",
       rescued: 0,
       medicalized: 0,
       deceased: 0,
       boatRegistration: "",
-      nCoordinate: "1138470",
-      eCoordinate: "2560250",
+      nCoordinate: "1'138'470°E",
+      eCoordinate: "2'560'250°N",
     };
     const id = await Database.getInstance().addFormIntervention(input);
     const update = {
@@ -97,13 +103,16 @@ describe("Database", () => {
       actionsTaken: [{ id: 1, name: "Action" }],
       interventionLocation: [{ id: 1, name: "Location" }],
       interventionDestination: [{ id: 1, name: "Destination" }],
+      weathers:[{id:1,name:"Weather"}],
+      winds:[{id:1,name:"Wind"}],
+      lakeStates:[{id:1,name:"Lake"}],
       remark: "remark",
       rescued: 0,
       medicalized: 0,
       deceased: 0,
       boatRegistration: "",
-      nCoordinate: "1138470",
-      eCoordinate: "2560250",
+      nCoordinate: "1'138'470°E",
+      eCoordinate: "2'560'250°N",
     };
     await Database.getInstance().updateFormIntervention(id, update);
     const updatedFormIntervention =
@@ -132,13 +141,16 @@ describe("Database", () => {
       actionsTaken: [{ id: 1, name: "Action" }],
       interventionLocation: [{ id: 1, name: "Location" }],
       interventionDestination: [{ id: 1, name: "Destination" }],
+      weathers:[{id:1,name:"Weather"}],
+      winds:[{id:1,name:"Wind"}],
+      lakeStates:[{id:1,name:"Lake"}],
       remark: "remark",
       rescued: 0,
       medicalized: 0,
       deceased: 0,
       boatRegistration: "",
-      nCoordinate: "1138470",
-      eCoordinate: "2560250",
+      nCoordinate: "1'138'470°E",
+      eCoordinate: "2'560'250°N",
     };
     const id = await Database.getInstance().addFormIntervention(input);
     await Database.getInstance().deleteFormIntervention(id);
@@ -169,13 +181,16 @@ describe("Database", () => {
         actionsTaken: [{ id: 1, name: "Action" }],
         interventionLocation: [{ id: 1, name: "Location" }],
         interventionDestination: [{ id: 1, name: "Destination" }],
+        weathers:[{id:1,name:"Weather"}],
+      winds:[{id:1,name:"Wind"}],
+      lakeStates:[{id:1,name:"Lake"}],
         remark: "remark",
         rescued: 0,
         medicalized: 0,
         deceased: 0,
         boatRegistration: "",
-        nCoordinate: "1138470",
-        eCoordinate: "2560250",
+        nCoordinate: "1'138'470°E",
+        eCoordinate: "2'560'250°N",
       },
       {
         startedAt: dayjs(),
@@ -194,13 +209,16 @@ describe("Database", () => {
         actionsTaken: [{ id: 1, name: "Action" }],
         interventionLocation: [{ id: 1, name: "Location" }],
         interventionDestination: [{ id: 1, name: "Destination" }],
+        weathers:[{id:1,name:"Weather"}],
+      winds:[{id:1,name:"Wind"}],
+      lakeStates:[{id:1,name:"Lake"}],
         remark: "remark",
         rescued: 0,
         medicalized: 0,
         deceased: 0,
         boatRegistration: "",
-        nCoordinate: "1138470",
-        eCoordinate: "2560250",
+        nCoordinate: "1'138'470°E",
+        eCoordinate: "2'560'250°N",
       },
       {
         startedAt: dayjs(),
@@ -219,13 +237,16 @@ describe("Database", () => {
         actionsTaken: [{ id: 1, name: "Action" }],
         interventionLocation: [{ id: 1, name: "Location" }],
         interventionDestination: [{ id: 1, name: "Destination" }],
+        weathers:[{id:1,name:"Weather"}],
+      winds:[{id:1,name:"Wind"}],
+      lakeStates:[{id:1,name:"Lake"}],
         remark: "remark",
         rescued: 0,
         medicalized: 0,
         deceased: 0,
         boatRegistration: "",
-        nCoordinate: "1138470",
-        eCoordinate: "2560250",
+        nCoordinate: "1'138'470°E",
+        eCoordinate: "2'560'250°N",
       },
     ];
     let result: IInterventionFormData[] = [];
@@ -262,13 +283,16 @@ describe("Database", () => {
         actionsTaken: [{ id: 1, name: "Action" }],
         interventionLocation: [{ id: 1, name: "Location" }],
         interventionDestination: [{ id: 1, name: "Destination" }],
+        weathers:[{id:1,name:"Weather"}],
+      winds:[{id:1,name:"Wind"}],
+      lakeStates:[{id:1,name:"Lake"}],
         remark: "remark",
         rescued: 0,
         medicalized: 0,
         deceased: 0,
         boatRegistration: "",
-        nCoordinate: "1138470",
-        eCoordinate: "2560250",
+        nCoordinate: "1'138'470°E",
+        eCoordinate: "2'560'250°N",
       },
       {
         startedAt: dayjs(),
@@ -287,13 +311,16 @@ describe("Database", () => {
         actionsTaken: [{ id: 1, name: "Action" }],
         interventionLocation: [{ id: 1, name: "Location" }],
         interventionDestination: [{ id: 1, name: "Destination" }],
+        weathers:[{id:1,name:"Weather"}],
+      winds:[{id:1,name:"Wind"}],
+      lakeStates:[{id:1,name:"Lake"}],
         remark: "remark",
         rescued: 0,
         medicalized: 0,
         deceased: 0,
         boatRegistration: "",
-        nCoordinate: "1138470",
-        eCoordinate: "2560250",
+        nCoordinate: "1'138'470°E",
+        eCoordinate: "2'560'250°N",
       },
       {
         startedAt: dayjs(),
@@ -312,13 +339,16 @@ describe("Database", () => {
         actionsTaken: [{ id: 1, name: "Action" }],
         interventionLocation: [{ id: 1, name: "Location" }],
         interventionDestination: [{ id: 1, name: "Destination" }],
+        weathers:[{id:1,name:"Weather"}],
+      winds:[{id:1,name:"Wind"}],
+      lakeStates:[{id:1,name:"Lake"}],
         remark: "remark",
         rescued: 0,
         medicalized: 0,
         deceased: 0,
         boatRegistration: "",
-        nCoordinate: "1138470",
-        eCoordinate: "2560250",
+        nCoordinate: "1'138'470°E",
+        eCoordinate: "2'560'250°N",
       },
     ];
     for (const formintervention of forminterventions) {
@@ -350,13 +380,16 @@ describe("Database", () => {
       actionsTaken: [{ id: 1, name: "Action" }],
       interventionLocation: [{ id: 1, name: "Location" }],
       interventionDestination: [{ id: 1, name: "Destination" }],
+      weathers:[{id:1,name:"Weather"}],
+      winds:[{id:1,name:"Wind"}],
+      lakeStates:[{id:1,name:"Lake"}],
       remark: "remark",
       rescued: 0,
       medicalized: 0,
       deceased: 0,
       boatRegistration: "",
-      nCoordinate: "1138470",
-      eCoordinate: "2560250",
+      nCoordinate: "1'138'470°E",
+      eCoordinate: "2'560'250°N",
     };
     const id = await Database.getInstance().addFormIntervention(input);
     const formintervention =

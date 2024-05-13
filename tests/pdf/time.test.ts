@@ -1,7 +1,7 @@
-import { jsPDF } from "jspdf";
-import { describe, expect, it, beforeEach, jest } from "@jest/globals";
-import time from "../../renderer/components/generation/pdf/time";
+import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import dayjs from "dayjs";
+import { jsPDF } from "jspdf";
+import time from "../../renderer/components/generation/pdf/time";
 import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
 
 jest.mock("jspdf", () => ({
@@ -30,6 +30,9 @@ describe("Time Functionality", () => {
     actionsTaken: [],
     interventionLocation: [],
     interventionDestination: [],
+    weathers: [],
+    winds: [],
+    lakeStates: [],
     remark: "",
     rescued: 0,
     medicalized: 0,
@@ -61,7 +64,7 @@ describe("Time Functionality", () => {
     expect(doc.text).toHaveBeenCalledWith(
       `Heure de fin: ${form.endedAt.format("HH:mm")}`,
       90,
-      startingY + 20,
+      startingY + 15,
     );
     expect(newY).toBe(startingY + 20);
   });

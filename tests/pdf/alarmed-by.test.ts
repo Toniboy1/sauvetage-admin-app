@@ -1,8 +1,9 @@
-import { jsPDF } from "jspdf";
-import { describe, expect, it, beforeEach, jest } from "@jest/globals";
-import AlarmedBy from "../../renderer/components/generation/pdf/alarmed";
-import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
+import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import dayjs from "dayjs";
+import { jsPDF } from "jspdf";
+import AlarmedBy from "../../renderer/components/generation/pdf/alarmed";
+import { TITLE_SPACING } from "../../renderer/components/generation/pdf/constants";
+import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({
     text: jest.fn(),
@@ -35,6 +36,9 @@ describe("AlarmedBy Functionality", () => {
     actionsTaken: [],
     interventionLocation: [],
     interventionDestination: [],
+    weathers: [],
+    winds: [],
+    lakeStates: [],
     remark: "",
     rescued: 0,
     medicalized: 0,
@@ -58,10 +62,14 @@ describe("AlarmedBy Functionality", () => {
     const newY = AlarmedBy(doc, form, options, startingY);
 
     expect(doc.text).toHaveBeenCalledTimes(5);
-    expect(doc.addField).toHaveBeenCalledTimes(3);
-    expect(doc.rect).toHaveBeenCalledTimes(3);
+    expect(doc.addField).toHaveBeenCalledTimes(options.length);
+    expect(doc.rect).toHaveBeenCalledTimes(options.length);
     expect(newY).toBeGreaterThan(startingY);
 
-    expect(doc.text).toHaveBeenCalledWith("Alarmé par:", 20, startingY + 10);
+    expect(doc.text).toHaveBeenCalledWith(
+      "Alarmé par:",
+      20,
+      startingY + TITLE_SPACING,
+    );
   });
 });

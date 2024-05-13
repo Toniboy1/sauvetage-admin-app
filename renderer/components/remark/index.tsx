@@ -1,8 +1,7 @@
-import React from "react";
-import { useFormContext, Controller } from "react-hook-form";
-import TextField from "@mui/material/TextField"; // Import TextField from MUI
-import { IInterventionFormData } from "../reports/intervention/types";
 import { FormControl } from "@mui/material";
+import TextField from "@mui/material/TextField"; // Import TextField from MUI
+import { Controller, useFormContext } from "react-hook-form";
+import { IInterventionFormData } from "../reports/intervention/types";
 
 /**
  * Remark component

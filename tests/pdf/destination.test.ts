@@ -1,8 +1,9 @@
+import { beforeEach, describe, expect, it, jest } from "@jest/globals";
+import dayjs from "dayjs";
 import { jsPDF } from "jspdf";
-import { describe, expect, it, beforeEach, jest } from "@jest/globals";
+import { TITLE_SPACING } from "../../renderer/components/generation/pdf/constants";
 import Destination from "../../renderer/components/generation/pdf/destination";
 import { IInterventionFormData } from "../../renderer/components/reports/intervention/types";
-import dayjs from "dayjs";
 
 jest.mock("jspdf", () => ({
   jsPDF: jest.fn().mockImplementation(() => ({
@@ -39,6 +40,9 @@ describe("Destination Functionality", () => {
     causes: [],
     actionsTaken: [],
     interventionLocation: [],
+    weathers: [],
+    winds: [],
+    lakeStates: [],
     remark: "",
     rescued: 0,
     medicalized: 0,
@@ -66,6 +70,10 @@ describe("Destination Functionality", () => {
     expect(doc.rect).toHaveBeenCalledTimes(3);
     expect(newY).toBeGreaterThan(startingY);
 
-    expect(doc.text).toHaveBeenCalledWith("Ramené à/au:", 20, startingY + 10);
+    expect(doc.text).toHaveBeenCalledWith(
+      "Ramené à/au:",
+      20,
+      startingY + TITLE_SPACING,
+    );
   });
 });

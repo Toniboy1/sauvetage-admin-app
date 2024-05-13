@@ -1,12 +1,15 @@
 import dayjs from "dayjs";
-import { IPeople } from "../../people/types";
-import { IAlarm } from "../../alarm/types";
-import { ISeverity } from "../../severities/types";
-import { IInterventionType } from "../../interventions/types";
-import { IOtherMean } from "../../otherMeans/types";
-import { ICause } from "../../causes/types";
 import { IAction } from "../../actions/types";
+import { IAlarm } from "../../alarm/types";
+import { ICause } from "../../causes/types";
+import { IInterventionType } from "../../interventions/types";
 import { ICommonLocation } from "../../location/types";
+import { IOtherMean } from "../../otherMeans/types";
+import { IPeople } from "../../people/types";
+import { ISeverity } from "../../severities/types";
+import { IWeather } from "../../weathers/types";
+import { IWind } from "../../winds/types";
+import { ILakeState } from "../../lakeStates/types";
 
 export interface IInterventionFormData {
   id?: number;
@@ -23,6 +26,9 @@ export interface IInterventionFormData {
   actionsTaken: Array<IAction>;
   interventionLocation: Array<ICommonLocation>;
   interventionDestination: Array<ICommonLocation>;
+  weathers: Array<IWeather>
+  winds: Array<IWind>;
+  lakeStates: Array<ILakeState>;
   remark: string;
   rescued: number;
   medicalized: number;
@@ -46,6 +52,9 @@ export interface IInterventionData {
   actionsTaken: Array<IAction>;
   interventionLocation: Array<ICommonLocation>;
   interventionDestination: Array<ICommonLocation>;
+  weathers: Array<IWeather>
+  winds: Array<IWind>;
+  lakeStates: Array<ILakeState>;
   remark: string;
   rescued: number;
   medicalized: number;
