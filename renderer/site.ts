@@ -3,7 +3,7 @@
  */
 export const pages = [
     {
-      name: "Interventions",
+      name: "Nouveau rapport",
       href: "/intervention",
     },
     {
@@ -23,11 +23,11 @@ export const pages = [
       href: "/interventions",
     },
     {
-      name: "Types de moyens supplémentaires",
+      name: "Moyens supplémentaires",
       href: "/other_means",
     },
     {
-      name: "Types de causes",
+      name: "Causes",
       href: "/causes",
     },
     {
@@ -35,11 +35,11 @@ export const pages = [
       href: "/actions",
     },
     {
-      name: "Lieux communs",
+      name: "Lieux",
       href: "/common_locations",
     },
     {
-      name: "Liste des rapports d'interventions",
+      name: "Rapports d'interventions",
       href: "/forms_interventions",
     },
   ];

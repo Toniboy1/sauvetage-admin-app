@@ -16,10 +16,17 @@ import Data from '../data';
 import { useUpdate } from '../providers/update';
 import { pages } from '../../site';
 
+/**
+ *  A navigation bar for the application
+ * @returns  A navigation bar for the application
+ */
 const AppNavBar = () => {
   const { updateMessage } = useUpdate();
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  /**
+   * Handles the opening and closing of the drawer
+   */
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -46,7 +53,7 @@ const AppNavBar = () => {
         cursor: 'default'
       }}>
         <Container maxWidth="xl" sx={{ overflow: 'hidden', width: '100%' }}>
-        <Toolbar disableGutters sx={{ width: '100%', overflow: 'hidden' }}>
+          <Toolbar disableGutters sx={{ width: '100%', overflow: 'hidden' }}>
             <IconButton
               size="large"
               edge="start"
@@ -65,9 +72,9 @@ const AppNavBar = () => {
               flexGrow: 1,
               display: { xs: 'none', sm: 'flex' },
               overflowX: 'auto',
-              whiteSpace: 'nowrap', 
+              whiteSpace: 'nowrap',
               '&::-webkit-scrollbar': {
-                height: '4px' 
+                height: '4px'
               }
             }}>
               {pages.map((page) => (
@@ -75,24 +82,24 @@ const AppNavBar = () => {
                   key={page.href}
                   onClick={() => { window.location.href = page.href; }}
                   sx={{
-                    minWidth: 120, // Set a minimum width for consistency
-                    maxWidth: 160, // Maximum width after which text will be truncated
+                    minWidth: 120, 
+                    maxWidth: 250, 
                     my: 2, mx: 0.5, color: 'white', display: 'block',
-                    overflow: 'hidden',  // Hide overflowed text
-                    textOverflow: 'ellipsis',  // Add ellipsis to overflowed text
-                    whiteSpace: 'nowrap',  // Keep text on a single line
-                    '-webkit-app-region': 'no-drag'  // Ensure buttons are clickable
+                    overflow: 'hidden',  
+                    textOverflow: 'ellipsis',  
+                    whiteSpace: 'nowrap',  
+                    '-webkit-app-region': 'no-drag' 
                   }}
                 >
                   {page.name}
                 </Button>
               ))}
+              <Data />
               {updateMessage && (
                 <Typography sx={{ mt: 4, ml: 2, color: 'secondary.main', whiteSpace: 'nowrap' }}>
                   {updateMessage}
                 </Typography>
               )}
-              <Data />
             </Box>
           </Toolbar>
         </Container>
@@ -102,7 +109,7 @@ const AppNavBar = () => {
         open={mobileOpen}
         onClose={handleDrawerToggle}
         ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
+          keepMounted: true, 
         }}
         sx={{
           display: { xs: 'block', sm: 'none' },
