@@ -76,6 +76,7 @@
     "indexeddb-export-import": "^2.1.5",
     "jspdf": "^2.5.1",
     "lodash": "^4.17.21",
+    "next-auth": "^4.24.7",
     "npm": "^10.7.0",
     "react-hook-form": "^7.51.4",
     "structured-clone": "^0.2.2"
