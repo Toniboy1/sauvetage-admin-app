@@ -1,0 +1,9 @@
+{
+  "expo":{
+    "name": "sauvetage-admin-app",
+    "slug": "sauvetage-admin-app",
+    "privacy": "public",
+    "entryPoint": "alarmes"
+  }
+
+}
