@@ -54,7 +54,7 @@ const EditIntervention = () => {
   });
   const onSubmit: SubmitHandler<IInterventionFormData> = async (data) => {
     await Database.getInstance().updateFormIntervention(formId, data);
-    window.location.href = "/forms_interventions";
+    window.location.href = "/";
   };
   useEffect(() => {
     if (id) {

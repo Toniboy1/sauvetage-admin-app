@@ -64,7 +64,7 @@ export const pages = [
   },
   {
     name: "Rapports d'interventions",
-    href: "/forms_interventions",
+    href: "/",
     role: "unauthenticated",
   },
   {

@@ -15,7 +15,7 @@ const Disconnect = () => {
   const handleDisconnect = () => {
     localStorage.setItem("status", "unauthenticated");
     setStatus("unauthenticated");
-    document.location.href = "/forms_interventions";
+    document.location.href = "/";
   };
 
   return (

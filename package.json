@@ -21,7 +21,13 @@
     "cypress:open": "cypress open ",
     "next": "next dev ./renderer -p 8888",
     "next:build": "next build ./renderer",
-    "next:start": "next start ./renderer -p 8888"
+    "next:start": "next start ./renderer -p 8888",
+    "capacitor:build":"CAPACITOR=true next build ./renderer",
+    "capcitor:run:ios":"npx cap open ios",
+    "capcitor:run:android":"npx cap open android",
+    "capacitor:sync":"npx cap sync",
+    "capacitor:copy":"npx cap copy",
+    "xcode":"npx cap open ios"
   },
   "build": {
     "appId": "com.anthonyfasano.sauvetage-admin-app",
@@ -60,6 +66,9 @@
     }
   },
   "dependencies": {
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/core": "^6.0.0",
+    "@capacitor/ios": "^6.0.0",
     "@mui/x-date-pickers": "^7.3.2",
     "@react-input/mask": "^1.2.3",
     "bcryptjs": "^2.4.3",
@@ -85,6 +94,7 @@
     "@babel/core": "^7.24.5",
     "@babel/preset-env": "^7.24.5",
     "@babel/preset-typescript": "^7.24.1",
+    "@capacitor/cli": "^6.0.0",
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.4",
     "@emotion/server": "^11.11.0",
