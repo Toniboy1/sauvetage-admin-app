@@ -13,10 +13,11 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import { testAuth } from "../../hooks/auth";
-import { pages } from "../../site";
+import { pages, path } from "../../site";
 import Data from "../data";
 import Disconnect from "../disconnect";
 import { useUpdate } from "../providers/update";
+import Link from "next/link";
 
 /**
  *  A navigation bar for the application
@@ -40,16 +41,18 @@ const AppNavBar = () => {
           if (page.role == "authenticated" && status != "authenticated")
             return null;
           return (
-            <ListItem key={page.href} disablePadding>
-              <ListItemButton
-                sx={{ textAlign: "center" }}
-                onClick={() => {
-                  window.location.href = page.href;
-                }}
-              >
-                <ListItemText primary={page.name} />
-              </ListItemButton>
-            </ListItem>
+            <Link href={path(page.href)}>
+              <ListItem key={page.href} disablePadding>
+                <ListItemButton
+                  sx={{ textAlign: "center" }}
+                  onClick={() => {
+                    window.location.href = page.href;
+                  }}
+                >
+                  <ListItemText primary={page.name} />
+                </ListItemButton>
+              </ListItem>
+            </Link>
           );
         })}
         <Disconnect />

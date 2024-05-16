@@ -14,6 +14,9 @@ import { testAuth } from "../../../hooks/auth";
 import Database from "../../../model/db";
 import Intervention from "../../generation/pdf/intervention";
 import { IInterventionFormData } from "../../reports/intervention/types";
+import Link from "next/link";
+import { path } from "../../../site";
+import { hapticsImpactLight } from "../../../capacitor";
 
 /**
  * Represents a component that displays a list of forminterventions and allows adding, editing, and deleting forminterventions.
@@ -37,12 +40,6 @@ const FormInterventionsComponent = () => {
     setFormInterventions(allFormInterventions);
   };
 
-  /**
-   * Adds a new formintervention to the database and reloads the list of forminterventions.
-   */
-  const handleAddFormIntervention = async () => {
-    document.location.href = "/intervention";
-  };
 
   /**
    * Deletes a formintervention with the specified ID.
@@ -54,13 +51,6 @@ const FormInterventionsComponent = () => {
     loadFormInterventions();
   };
 
-  /**
-   * redirect to the edit formintervention page
-   * @param formintervention - The formintervention data.
-   */
-  function handleEdit(formintervention: IInterventionFormData): void {
-    document.location.href = "/intervention/" + formintervention.id;
-  }
 
   /**
    *  redirect to the view formintervention page
@@ -102,13 +92,15 @@ const FormInterventionsComponent = () => {
   return (
     <div>
       <h1>Liste des rapports d'interventions</h1>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleAddFormIntervention}
-      >
-        Ajouter un nouveau rapport d'intervention
-      </Button>
+      <Link href={path("/intervention")}>
+        <Button
+          variant="contained"
+          color="primary"
+          onProgress={hapticsImpactLight}
+        >
+          Ajouter un nouveau rapport d'intervention
+        </Button>
+      </Link>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -157,12 +149,13 @@ const FormInterventionsComponent = () => {
                     </Button>
                     {status == "authenticated" && (
                       <>
-                        <Button
-                          color="primary"
-                          onClick={() => handleEdit(formintervention)}
-                        >
-                          Modifier
-                        </Button>
+                        <Link href={path("/intervention/" + formintervention.id)}>
+                          <Button
+                            color="primary"
+                          >
+                            Modifier
+                          </Button>
+                        </Link>
                         <Button
                           color="error"
                           onClick={() =>

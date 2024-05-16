@@ -1,5 +1,7 @@
 // pages/auth/error.tsx
 import { Button, Container, Typography } from "@mui/material";
+import { path } from "../../site";
+import Link from "next/link";
 /**
  * Error page
  * @returns Error page
@@ -13,9 +15,11 @@ export default function ErrorPage() {
       <Typography variant="body1" style={{ margin: "20px 0" }}>
         There was an error logging you in.
       </Typography>
-      <Button variant="contained" color="primary" href="/">
-        Go to Home
-      </Button>
+      <Link href={path("/")}>
+        <Button variant="contained" color="primary">
+          Go to Home
+        </Button>
+      </Link>
     </Container>
   );
 }
