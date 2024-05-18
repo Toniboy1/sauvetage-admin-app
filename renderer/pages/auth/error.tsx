@@ -15,7 +15,7 @@ export default function ErrorPage() {
       <Typography variant="body1" style={{ margin: "20px 0" }}>
         There was an error logging you in.
       </Typography>
-      <Link href={path("/")}>
+      <Link href={path("")}>
         <Button variant="contained" color="primary">
           Go to Home
         </Button>

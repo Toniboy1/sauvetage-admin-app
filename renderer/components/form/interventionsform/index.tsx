@@ -96,7 +96,7 @@ const FormInterventionsComponent = () => {
         <Button
           variant="contained"
           color="primary"
-          onProgress={hapticsImpactLight}
+          onClick={hapticsImpactLight}
         >
           Ajouter un nouveau rapport d'intervention
         </Button>
