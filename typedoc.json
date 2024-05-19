@@ -6,6 +6,7 @@
   "exclude": [
     "./renderer/.next/**",
     "**/*.test.ts",
-    "./renderer/next.config.js"
+    "./renderer/next.config.js",
+    "./renderer/dist/**",
   ]
 }

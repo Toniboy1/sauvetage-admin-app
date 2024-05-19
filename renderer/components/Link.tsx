@@ -3,8 +3,7 @@ import { styled } from "@mui/material/styles";
 import clsx from "clsx";
 import NextLink, { LinkProps as NextLinkProps } from "next/link";
 import { useRouter } from "next/router";
-import * as React from "react";
-import { forwardRef } from "react";
+import { AnchorHTMLAttributes, forwardRef } from "react";
 
 // Add support for the sx prop for consistency with the other branches.
 const Anchor = styled("a")({});
@@ -13,26 +12,28 @@ const Anchor = styled("a")({});
  * Props for the NextLinkComposed component.
  */
 interface NextLinkComposedProps
-  extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">,
-    Omit<
-      NextLinkProps,
-      "href" | "as" | "passHref" | "onMouseEnter" | "onClick" | "onTouchStart"
-    > {
+  extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href">,
+  Omit<
+    NextLinkProps,
+    "href" | "as" | "passHref" | "onMouseEnter" | "onClick" | "onTouchStart"
+  > {
   to: NextLinkProps["href"];
   linkAs?: NextLinkProps["as"];
 }
 
 /**
  * A composed link component that wraps the NextLink component.
+ * @param props - The props for the NextLinkComposed component.
+ * @param ref - The ref for the NextLinkComposed component.
  * @example
  * ```tsx
- * <NextLinkComposed to="/about" prefetch>
+ * <NextLinkComposed to="/about" prefetch>LinkProps
  *   About
  * </NextLinkComposed>
  * ```
  * @returns The JSX element representing the composed link.
  */
-export const NextLinkComposed = React.forwardRef<
+export const NextLinkComposed = forwardRef<
   HTMLAnchorElement,
   NextLinkComposedProps
 >(function NextLinkComposed(props, ref) {
@@ -67,7 +68,6 @@ export const NextLinkComposed = React.forwardRef<
 
 /**
  * Props for the Link component.
- *
  */
 export type LinkProps = {
   activeClassName?: string;

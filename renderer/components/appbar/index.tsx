@@ -7,13 +7,13 @@ import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import { testAuth } from "../../hooks/auth";
-import { pages } from "../../site";
+import { pages, path } from "../../site";
+import { NextLinkComposed } from "../Link";
 import Data from "../data";
 import Disconnect from "../disconnect";
 import { useUpdate } from "../providers/update";
@@ -41,14 +41,13 @@ const AppNavBar = () => {
             return null;
           return (
             <ListItem key={page.href} disablePadding>
-              <ListItemButton
-                sx={{ textAlign: "center" }}
-                onClick={() => {
-                  window.location.href = page.href;
-                }}
+              <Button
+                component={NextLinkComposed}
+                to={path(page.href)}
+                sx={{ textAlign: "center", width: "100%" }}
               >
                 <ListItemText primary={page.name} />
-              </ListItemButton>
+              </Button>
             </ListItem>
           );
         })}
@@ -101,9 +100,7 @@ const AppNavBar = () => {
                 return (
                   <Button
                     key={page.href}
-                    onClick={() => {
-                      window.location.href = page.href;
-                    }}
+                    LinkComponent={NextLinkComposed}
                     sx={{
                       minWidth: 120,
                       maxWidth: 250,

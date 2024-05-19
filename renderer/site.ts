@@ -64,7 +64,7 @@ export const pages = [
   },
   {
     name: "Rapports d'interventions",
-    href: "/forms_interventions",
+    href: "/",
     role: "unauthenticated",
   },
   {
@@ -73,3 +73,17 @@ export const pages = [
     role: "unauthenticated",
   },
 ];
+
+/**
+ * Generate nav according env
+ * @param path context path
+ * @returns path
+ */
+export const path = (path: string) => {
+  let prefixPath = path;
+  if (process.env.CAPACITOR) {
+    prefixPath = `/Users/anthonyfasano/sauvetage-admin-app/renderer/dist/capacitor/${path}/index.html`;
+    prefixPath = prefixPath.replace("//", "/");
+  }
+  return prefixPath;
+};

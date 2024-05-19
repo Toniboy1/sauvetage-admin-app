@@ -49,7 +49,7 @@ export default function Intervention() {
   });
   const onSubmit: SubmitHandler<IInterventionFormData> = async (data) => {
     await Database.getInstance().addFormIntervention(data);
-    window.location.href = "/forms_interventions";
+    window.location.href = "/";
   };
   return (
     <React.Fragment>

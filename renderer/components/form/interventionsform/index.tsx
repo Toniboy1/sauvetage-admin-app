@@ -9,9 +9,12 @@ import {
   TableRow,
 } from "@mui/material";
 import jsPDF from "jspdf";
+import Link from "next/link";
 import { useEffect, useState } from "react";
+import { hapticsImpactLight } from "../../../capacitor";
 import { testAuth } from "../../../hooks/auth";
 import Database from "../../../model/db";
+import { path } from "../../../site";
 import Intervention from "../../generation/pdf/intervention";
 import { IInterventionFormData } from "../../reports/intervention/types";
 
@@ -38,13 +41,6 @@ const FormInterventionsComponent = () => {
   };
 
   /**
-   * Adds a new formintervention to the database and reloads the list of forminterventions.
-   */
-  const handleAddFormIntervention = async () => {
-    document.location.href = "/intervention";
-  };
-
-  /**
    * Deletes a formintervention with the specified ID.
    * @param id - The ID of the formintervention to delete.
    * @returns - A promise that resolves when the formintervention is deleted.
@@ -53,14 +49,6 @@ const FormInterventionsComponent = () => {
     await Database.getInstance().deleteFormIntervention(id);
     loadFormInterventions();
   };
-
-  /**
-   * redirect to the edit formintervention page
-   * @param formintervention - The formintervention data.
-   */
-  function handleEdit(formintervention: IInterventionFormData): void {
-    document.location.href = "/intervention/" + formintervention.id;
-  }
 
   /**
    *  redirect to the view formintervention page
@@ -102,13 +90,15 @@ const FormInterventionsComponent = () => {
   return (
     <div>
       <h1>Liste des rapports d'interventions</h1>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleAddFormIntervention}
-      >
-        Ajouter un nouveau rapport d'intervention
-      </Button>
+      <Link href={path("/intervention")}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={hapticsImpactLight}
+        >
+          Ajouter un nouveau rapport d'intervention
+        </Button>
+      </Link>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -157,12 +147,11 @@ const FormInterventionsComponent = () => {
                     </Button>
                     {status == "authenticated" && (
                       <>
-                        <Button
-                          color="primary"
-                          onClick={() => handleEdit(formintervention)}
+                        <Link
+                          href={path("/intervention/" + formintervention.id)}
                         >
-                          Modifier
-                        </Button>
+                          <Button color="primary">Modifier</Button>
+                        </Link>
                         <Button
                           color="error"
                           onClick={() =>

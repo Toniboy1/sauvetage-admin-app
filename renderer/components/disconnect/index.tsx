@@ -15,12 +15,12 @@ const Disconnect = () => {
   const handleDisconnect = () => {
     localStorage.setItem("status", "unauthenticated");
     setStatus("unauthenticated");
-    document.location.href = "/forms_interventions";
+    document.location.href = "/";
   };
 
   return (
     <Button
-    id="disconnect"
+      id="disconnect"
       onClick={handleDisconnect}
       sx={{
         minWidth: 120,

@@ -22,7 +22,7 @@ export default function SignIn() {
       )
     ) {
       localStorage.setItem("status", "authenticated");
-      window.location.href = "/forms_interventions";
+      window.location.href = "/";
     } else {
       alert("Nom d'utilisateur ou mot de passe incorrect");
     }
