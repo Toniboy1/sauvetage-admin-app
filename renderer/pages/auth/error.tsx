@@ -1,7 +1,7 @@
 // pages/auth/error.tsx
 import { Button, Container, Typography } from "@mui/material";
-import { path } from "../../site";
 import Link from "next/link";
+import { path } from "../../site";
 /**
  * Error page
  * @returns Error page

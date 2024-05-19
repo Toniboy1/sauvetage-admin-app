@@ -79,12 +79,11 @@ export const pages = [
  * @param path context path
  * @returns path
  */
-export const path = (path:string)=>{
+export const path = (path: string) => {
   let prefixPath = path;
   if (process.env.CAPACITOR) {
-    prefixPath = `/Users/anthonyfasano/sauvetage-admin-app/renderer/dist/capacitor/${path}/index.html`
-    prefixPath = prefixPath.replace('//', '/')
+    prefixPath = `/Users/anthonyfasano/sauvetage-admin-app/renderer/dist/capacitor/${path}/index.html`;
+    prefixPath = prefixPath.replace("//", "/");
   }
   return prefixPath;
-}
-
+};

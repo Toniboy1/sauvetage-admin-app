@@ -1,0 +1,15 @@
+# Ignore artifacts:
+build
+coverage
+android
+assets
+badges
+docs
+icons
+ios
+node_modules
+renderer/.next
+renderer/dist
+docs
+# Ignore all HTML files:
+**/*.html

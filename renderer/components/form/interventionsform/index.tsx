@@ -9,14 +9,14 @@ import {
   TableRow,
 } from "@mui/material";
 import jsPDF from "jspdf";
+import Link from "next/link";
 import { useEffect, useState } from "react";
+import { hapticsImpactLight } from "../../../capacitor";
 import { testAuth } from "../../../hooks/auth";
 import Database from "../../../model/db";
+import { path } from "../../../site";
 import Intervention from "../../generation/pdf/intervention";
 import { IInterventionFormData } from "../../reports/intervention/types";
-import Link from "next/link";
-import { path } from "../../../site";
-import { hapticsImpactLight } from "../../../capacitor";
 
 /**
  * Represents a component that displays a list of forminterventions and allows adding, editing, and deleting forminterventions.
@@ -40,7 +40,6 @@ const FormInterventionsComponent = () => {
     setFormInterventions(allFormInterventions);
   };
 
-
   /**
    * Deletes a formintervention with the specified ID.
    * @param id - The ID of the formintervention to delete.
@@ -50,7 +49,6 @@ const FormInterventionsComponent = () => {
     await Database.getInstance().deleteFormIntervention(id);
     loadFormInterventions();
   };
-
 
   /**
    *  redirect to the view formintervention page
@@ -149,12 +147,10 @@ const FormInterventionsComponent = () => {
                     </Button>
                     {status == "authenticated" && (
                       <>
-                        <Link href={path("/intervention/" + formintervention.id)}>
-                          <Button
-                            color="primary"
-                          >
-                            Modifier
-                          </Button>
+                        <Link
+                          href={path("/intervention/" + formintervention.id)}
+                        >
+                          <Button color="primary">Modifier</Button>
                         </Link>
                         <Button
                           color="error"

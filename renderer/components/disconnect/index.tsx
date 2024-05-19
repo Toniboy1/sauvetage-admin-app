@@ -20,7 +20,7 @@ const Disconnect = () => {
 
   return (
     <Button
-    id="disconnect"
+      id="disconnect"
       onClick={handleDisconnect}
       sx={{
         minWidth: 120,

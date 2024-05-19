@@ -27,7 +27,7 @@ export default function ErrorPage() {
       </Head>
       <Root>
         <Typography gutterBottom>
-        <Link href={path("/intervention")}>Go back to home</Link>
+          <Link href={path("/intervention")}>Go back to home</Link>
         </Typography>
       </Root>
     </React.Fragment>

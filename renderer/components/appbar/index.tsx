@@ -7,17 +7,16 @@ import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import { testAuth } from "../../hooks/auth";
 import { pages, path } from "../../site";
+import { NextLinkComposed } from "../Link";
 import Data from "../data";
 import Disconnect from "../disconnect";
 import { useUpdate } from "../providers/update";
-import { NextLinkComposed } from "../Link";
 
 /**
  *  A navigation bar for the application
